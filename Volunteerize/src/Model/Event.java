@@ -3,10 +3,11 @@ package Model;
 import java.util.ArrayList;
 
 /**
- * Created by Irene on 2017-10-10.
+ * Represents a volunteering event.
  */
 
 public class Event{
+
     private String eventId;
     private String name;
     private String startTime;

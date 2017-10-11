@@ -12,7 +12,7 @@ public class User {
     //Irene: Or we can use Enum type to do the case switch for the access
     public enum access{Volunteer, Staff};
 
-    public void example{
+    public void example(){
         switch (access){
             case Volunteer:
                 System.out.println("I'm volunteer");

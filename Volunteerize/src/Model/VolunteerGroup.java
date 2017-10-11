@@ -11,10 +11,10 @@ public class VolunteerGroup {
 
 
     VolunteerGroup(){
-
     }
 
     void addGroup(String groupName){
+
         groupList.add(groupName);
     }
 
