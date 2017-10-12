@@ -10,7 +10,9 @@ public class User {
 
     private boolean isStaff;
     //Irene: Or we can use Enum type to do the case switch for the access
-    public enum access{Volunteer, Staff};
+    public enum Access{Volunteer, Staff}
+    Access access;
+
 
     public void example(){
         switch (access){
