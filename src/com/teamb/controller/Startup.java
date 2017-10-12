@@ -54,7 +54,7 @@ public class Startup {
         EventController newEvent = new EventController();
 
         start.establishConnection();
-        newEvent.viewEvent(start, "1");
+        newEvent.viewEvent(start, "2");
         newEvent.viewAllEvents(start);
     }
 }
