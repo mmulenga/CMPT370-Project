@@ -5,6 +5,6 @@ public class LoginViewController {
     private String password;
 
     public boolean checkUsername() {
-
+        return false;
     }
 }

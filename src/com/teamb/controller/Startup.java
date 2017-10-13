@@ -1,5 +1,7 @@
 package com.teamb.controller;
 
+import com.teamb.model.Event;
+
 import java.sql.*;
 
 
@@ -11,7 +13,7 @@ public class Startup {
      * Pre: None
      * Post: Establishes a connection with the database on success.
      */
-    private void establishConnection() {
+    public void establishConnection() {
         /**
          * Attempt to establish a connection to the database.
          */
@@ -51,10 +53,11 @@ public class Startup {
 
     public static void main(String[] args) {
         Startup start = new Startup();
-        EventController newEvent = new EventController();
 
-        start.establishConnection();
-        newEvent.viewEvent(start, "2");
-        newEvent.viewAllEvents(start);
+        //EventController newEvent = new EventController();
+
+        //start.establishConnection();
+        //newEvent.viewEvent(start, "2");
+        //newEvent.viewAllEvents(start);
     }
 }

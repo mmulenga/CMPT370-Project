@@ -5,17 +5,20 @@
  */
 package com.teamb;
 
+import com.teamb.model.User;
+
 /**
  *
  * @author irene
  */
 public class loginController {
-    User user; 
+    User user;
     LoginView loginV;
     
     public boolean checkPassword(String username, String password){
         //connect database
-        //pull and compare password 
+        //pull and compare password
+        return false;
     }
     
     
