@@ -6,7 +6,8 @@ information.
 
 
 
-Doesnt run, good luck.
+Doesn't run, good luck.
+We will fix this soon
 
 
 
