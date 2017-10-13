@@ -15,7 +15,7 @@ public class EventView extends Pane {
     VBox outside;
     VBox eventList;
 
-    EventView(){
+    public EventView(){
         outside = new VBox(5);
         eventList = new VBox(5);
 

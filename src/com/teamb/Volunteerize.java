@@ -26,21 +26,31 @@ import javafx.stage.Stage;
  *
  * @author irene
  */
-public class Volunteerize extends Application {
-    
+public class Volunteerize extends Application{
+    Stage newStage;
+
     @Override
     public void start(Stage primaryStage) {
         LoginView lginView = new LoginView();
         EventView eventView = new EventView();
         EventController ec = new EventController(eventView);
+        newStage = primaryStage;
 
 
 
-        Scene scene = new Scene(eventView.outside, 400, 350);
+        Scene scene = new Scene(lginView.root, 400, 350);
         
         primaryStage.setTitle("Volunteerize");
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        if (lginView.loginOK) {
+            System.out.println("Scene.");
+            Scene scene2 = new Scene(eventView.outside, 400, 350);
+
+            newStage.setScene(scene2);
+            newStage.show();
+        }
     }
 
     /**

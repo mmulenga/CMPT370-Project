@@ -99,7 +99,7 @@ public class EventController {
     }
 
     /* ------- Methods ------- */
-    public EventController( EventView ev){
+    public EventController(EventView ev){
         this.eventModel = new ArrayList<Event>();
         this.eventView = ev;
         Startup start = new Startup();

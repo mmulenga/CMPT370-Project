@@ -22,17 +22,21 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import com.teamb.controller.LoginViewController;
+
 
 /**
  *
  * @author irene
  */
 public class LoginView extends Pane{
-    GridPane root; 
+    GridPane root;
+    boolean loginOK = false;
     
     LoginView(){
         root = new GridPane();   
         Text scenetitle = new Text("Welcome to Volunteerize!");
+        LoginViewController controller = new LoginViewController();
 
         Label userName = new Label("Username:");
         Label pw = new Label("Password:");
@@ -41,6 +45,15 @@ public class LoginView extends Pane{
         
         Button login = new Button("Login");
         Button Signup = new Button("Sign Up");
+
+        login.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(controller.checkCredentials(userNameField.getText(), pwField.getText())) {
+                    loginOK = true;
+                }
+            }
+        });
         
         root.setAlignment(Pos.CENTER);
         root.setHgap(10);
