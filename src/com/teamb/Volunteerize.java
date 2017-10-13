@@ -5,6 +5,8 @@
  */
 package com.teamb;
 
+import com.teamb.controller.EventController;
+import com.teamb.controller.Startup;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -29,8 +31,12 @@ public class Volunteerize extends Application {
     @Override
     public void start(Stage primaryStage) {
         LoginView lginView = new LoginView();
-        
-        Scene scene = new Scene(lginView.root, 400, 350);
+        EventView eventView = new EventView();
+        EventController ec = new EventController(eventView);
+
+
+
+        Scene scene = new Scene(eventView.outside, 400, 350);
         
         primaryStage.setTitle("Volunteerize");
         primaryStage.setScene(scene);
