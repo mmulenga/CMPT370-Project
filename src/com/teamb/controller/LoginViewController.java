@@ -1,11 +1,15 @@
 package com.teamb.controller;
 
-import com.teamb.EventView;
+import com.teamb.view.EventView;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 import java.sql.ResultSet;
 
 public class LoginViewController {
     private String username;
     private String password;
+
 
     public String getUsername() {
         return username;
@@ -31,7 +35,7 @@ public class LoginViewController {
              */
             Startup database = new Startup();
             database.establishConnection();
-            EventView eventView = new EventView();
+
 
             ResultSet result = database.createQuery("SELECT * FROM Users");
             setUsername(username);
@@ -44,6 +48,7 @@ public class LoginViewController {
                 if(getUsername().compareTo(result.getString("username")) == 0 &&
                         getPassword().compareTo(result.getString("password")) == 0) {
                     System.out.println("Credentials OK!");
+                    this.VolunteerEventView();
                     return true;
                 }
             }
@@ -53,5 +58,16 @@ public class LoginViewController {
         }
 
         return false;
+    }
+
+    private void VolunteerEventView(){
+        Stage s = new Stage();
+        EventView eventView = new EventView();
+        EventController ec = new EventController(eventView);
+
+        Scene scene = new Scene(eventView.outside, 300, 350);
+
+        s.setScene(scene);
+        s.show();
     }
 }

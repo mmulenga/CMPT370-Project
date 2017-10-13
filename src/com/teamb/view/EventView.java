@@ -1,4 +1,4 @@
-package com.teamb;
+package com.teamb.view;
 
 import com.teamb.model.Event;
 import javafx.scene.control.Label;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class EventView extends Pane {
 
     int eventCount;
-    VBox outside;
+    public VBox outside;
     VBox eventList;
 
     public EventView(){
