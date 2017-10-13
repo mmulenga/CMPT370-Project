@@ -6,6 +6,7 @@
 package com.teamb;
 
 import com.teamb.controller.EventController;
+import com.teamb.controller.LoginViewController;
 import com.teamb.view.EventView;
 import com.teamb.view.LoginView;
 import javafx.application.Application;
@@ -21,10 +22,11 @@ public class Volunteerize extends Application{
 
     @Override
     public void start(Stage primaryStage) {
-        LoginView lginView = new LoginView();
-        EventView eventView = new EventView();
-        EventController ec = new EventController(eventView);
+
         newStage = primaryStage;
+        LoginView lginView = new LoginView(newStage);
+
+
 
 
 
@@ -34,13 +36,6 @@ public class Volunteerize extends Application{
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        if (lginView.loginOK) {
-            System.out.println("Scene.");
-            Scene scene2 = new Scene(eventView.outside, 400, 350);
-
-            newStage.setScene(scene2);
-            newStage.show();
-        }
     }
 
     /**

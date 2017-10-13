@@ -33,10 +33,10 @@ public class LoginView extends Pane{
     public GridPane root;
     public boolean loginOK = false;
     
-    public LoginView(){
+    public LoginView(Stage s){
         root = new GridPane();   
         Text scenetitle = new Text("Welcome to Volunteerize!");
-        LoginViewController controller = new LoginViewController();
+        LoginViewController controller = new LoginViewController(s);
 
         Label userName = new Label("Username:");
         Label pw = new Label("Password:");
