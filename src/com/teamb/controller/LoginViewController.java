@@ -1,5 +1,6 @@
 package com.teamb.controller;
 
+import com.teamb.Volunteerize;
 import com.teamb.view.EventView;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -69,7 +70,9 @@ public class LoginViewController {
         EventView eventView = new EventView();
         EventController ec = new EventController(eventView);
 
-        Scene scene = new Scene(eventView.outside, 300, 350);
+        Scene scene = new Scene(eventView.outside, 720, 540);
+        scene.getStylesheets().add
+                (Volunteerize.class.getResource("LoginStyle.css").toExternalForm());
 
         s.setScene(scene);
         s.show();

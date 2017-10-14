@@ -26,12 +26,10 @@ public class Volunteerize extends Application{
         newStage = primaryStage;
         LoginView lginView = new LoginView(newStage);
 
+        Scene scene = new Scene(lginView.root, 720, 540);
+        scene.getStylesheets().add
+                (Volunteerize.class.getResource("LoginStyle.css").toExternalForm());
 
-
-
-
-        Scene scene = new Scene(lginView.root, 400, 350);
-        
         primaryStage.setTitle("Volunteerize");
         primaryStage.setScene(scene);
         primaryStage.show();

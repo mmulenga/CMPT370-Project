@@ -36,6 +36,7 @@ public class LoginView extends Pane{
     public LoginView(Stage s){
         root = new GridPane();   
         Text scenetitle = new Text("Welcome to Volunteerize!");
+        scenetitle.setId("scenetitle");
         LoginViewController controller = new LoginViewController(s);
 
         Label userName = new Label("Username:");

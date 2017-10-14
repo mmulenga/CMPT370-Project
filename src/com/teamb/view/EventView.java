@@ -20,6 +20,7 @@ public class EventView extends Pane {
         eventList = new VBox(5);
 
         Label title = new Label("Upcoming Events");
+        title.setId("scenetitle");
         outside.getChildren().add(title);
         outside.getChildren().add(eventList);
 
