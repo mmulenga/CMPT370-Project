@@ -51,6 +51,9 @@ public class LoginView extends Pane{
             public void handle(ActionEvent event) {
                 if(controller.checkCredentials(userNameField.getText(), pwField.getText())) {
                     loginOK = true;
+                }else{
+                    Label loginError = new Label("username or password is wrong. Please try again.");
+                    root.add(loginError,0,5,3,1);
                 }
             }
         });
