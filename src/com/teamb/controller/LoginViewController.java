@@ -15,7 +15,7 @@ public class LoginViewController extends BasicController {
     public LoginViewController(Stage s){
         super(s);
         loginView = new LoginView(this);
-        isStaff = true; //TODO: Actually check this
+        isStaff = false; //TODO: Actually check this
 
     }
 
@@ -83,7 +83,7 @@ public class LoginViewController extends BasicController {
 
 
     private void ChangeToLandingView(Stage s ){
-
+        //System.out.println(isStaff);
         if(isStaff){
 
             StaffLandingController slc = new StaffLandingController(s);
@@ -95,7 +95,13 @@ public class LoginViewController extends BasicController {
             s.show();
         }
         else{
-           //TODO: change to VolunteerLandingController
+            VolunteerLandingController vlc = new VolunteerLandingController(s);
+
+            Scene scene = new Scene(vlc.GetView().GetRootPane(), 720, 540);
+//        scene.getStylesheets().add
+//                (Volunteerize.class.getResource("LoginStyle.css").toExternalForm());
+            s.setScene(scene);
+            s.show();
         }
 
     }
