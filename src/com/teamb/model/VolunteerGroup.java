@@ -11,11 +11,15 @@ public class VolunteerGroup {
 
 
     VolunteerGroup(){
+    	groupList = new List<String>();
     }
 
-    void addGroup(String groupName){
 
         groupList.add(groupName);
+    }
+
+    public void removeGroup(String groupName){
+    	groupList.remove(groupName);
     }
 
 }
