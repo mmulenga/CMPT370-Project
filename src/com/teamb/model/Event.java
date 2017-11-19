@@ -27,7 +27,7 @@ public class Event{
 
     }
 
-    //TODO: IMPLEMENT GETNAME AND GETDESCIPTION
+    //TODO: IMPLEMENT GETNAME AND GETDESCIPTION (Sean is working on this currently)
     public String GetName(){
         return name;
     }

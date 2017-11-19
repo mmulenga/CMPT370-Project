@@ -18,10 +18,6 @@ public abstract class BasicController {
     }
 
 
-
-    //change view
-    protected abstract void ChangeView();
-
     //public abstract void HelpPopUp(); //not sure if this will go here
 
     protected abstract BasicView GetView();

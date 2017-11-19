@@ -20,12 +20,6 @@ public class MainLandingController extends BasicController{
 
     }
 
-    @Override
-    public void ChangeView() {
-        //creates appropriate view type
-        //changes the view
-        //changes to staff login page or volunteer login page
-    }
 
     @Override
     public BasicView GetView() {

@@ -16,11 +16,6 @@ public class VolunteerLandingController extends BasicController {
         view = new VolunteerLandingView(this);
     }
 
-    @Override
-    protected void ChangeView() {
-
-    }
-
     public void ChangeToEditProfileView(){
         //TODO
     }

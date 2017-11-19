@@ -17,11 +17,6 @@ public class StaffLandingController extends BasicController {
 
     }
 
-    @Override
-    protected void ChangeView() {
-
-    }
-
     public void ChangeToManageVolunteersView(){
         //TODO
     }

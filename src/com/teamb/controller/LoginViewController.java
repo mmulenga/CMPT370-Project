@@ -5,9 +5,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class LoginViewController extends BasicController {
+
     private String username;
     private String password;
-    //public Stage currentStage;
     LoginView loginView;
 
     private boolean isStaff;
@@ -16,12 +16,6 @@ public class LoginViewController extends BasicController {
         super(s);
         loginView = new LoginView(this);
         isStaff = false; //TODO: Actually check this
-
-    }
-
-    @Override
-    protected void ChangeView() {
-
     }
 
     public String getUsername() {
@@ -44,46 +38,15 @@ public class LoginViewController extends BasicController {
 
 
     public boolean checkCredentials(String username, String password) {
-//        try {
-            //For View and Controller test
+
             this.ChangeToLandingView(stage);
             return true;
-            /**
-             * Cheating here. Shouldn't create a new connnection on a per-function basis.
-             * Only need to create it once in the Startup class.
-             */
-//            Startup database = new Startup();
-//            database.establishConnection();
-//
-//
-//            ResultSet result = database.createQuery("SELECT * FROM Users");
-//            setUsername(username);
-//            setPassword(password);
-
-            /**
-             * Check entered username and password against each entry in the Users table.
-             */
-//            while(result.next()) {
-//                if(getUsername().compareTo(result.getString("username")) == 0 &&
-//                        getPassword().compareTo(result.getString("password")) == 0) {
-//                    System.out.println("Credentials OK!");
-//                    this.ChangeToLandingView(stage);
-//                    return true;
-//
-//                }
-//            }
-//            return false;
-//            //TODO: Notice the view to show error message;
-//        } catch(Exception e) {
-//            System.out.println("Event view failed.");
-//        }
-//        return false;
-//        //TODO: Notice the view to show error message;
+            //TODO: Currently, this always returns true, actually implement
     }
 
 
     private void ChangeToLandingView(Stage s ){
-        //System.out.println(isStaff);
+
         if(isStaff){
 
             StaffLandingController slc = new StaffLandingController(s);
