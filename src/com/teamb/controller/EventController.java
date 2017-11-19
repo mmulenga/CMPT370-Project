@@ -1,8 +1,15 @@
 package com.teamb.controller;
 
+import com.teamb.view.EventView;
+import com.teamb.model.Event;
+
 import java.sql.*;
+import java.util.ArrayList;
 
 public class EventController {
+    private ArrayList<Event> eventModel;
+    private EventView eventView;
+
     /* ------- Instance Variables ------- */
     private int id;
     private int startTime;
@@ -11,6 +18,7 @@ public class EventController {
     private int endDate;
     private int location;
     private int type;
+    private String imagePath;
 
     private String name;
     private String description;
@@ -91,6 +99,42 @@ public class EventController {
     }
 
     /* ------- Methods ------- */
+    public EventController(EventView ev){
+        this.eventModel = new ArrayList<Event>();
+        this.eventView = ev;
+        Startup start = new Startup();
+        start.establishConnection();
+        createEventList(start);
+        eventView.displayEventList(eventModel);
+
+    }
+
+    public void createEventList(Startup database) {
+        try {
+            ResultSet result = database.createQuery("SELECT * FROM Events e");
+
+            while(result.next()) {
+
+                setId(result.getInt("id"));
+                setName(result.getString("name"));
+                setDescription(result.getString("comments"));
+                setLocation(result.getInt("location_id"));
+                setType(result.getInt("type_id"));
+
+                Event temp = new Event(getId(),getName(),getDescription(),getLocation(),getType());
+                eventModel.add(temp);
+                System.out.println("ID: " + getId() +
+                        " Event Name: " + getName() +
+                        " Description: " + getDescription() +
+                        " Location ID: " + getLocation() +
+                        " Type ID: " + getType());
+            }
+        } catch(Exception e) {
+            System.out.println("Event view failed.");
+        }
+    }
+
+
     public void createEvent(int eventId, String eventName, String eventComments, int locationId, int typeId) {
 
     }

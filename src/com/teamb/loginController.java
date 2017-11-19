@@ -10,16 +10,16 @@ package com.teamb;
  * @author irene
  */
 public class loginController {
-    User user; 
-    LoginView loginV;
-    
-    public boolean checkPassword(String username, String password){
-        //connect database
-        //pull and compare password 
-    }
-    
-    
-    
+//    User user;
+//    LoginView loginV;
+//
+//    public boolean checkPassword(String username, String password){
+//        //connect database
+//        //pull and compare password
+//    }
+//
+//
+//
     
     
     //handle login button click, take Stage as paramiter
