@@ -7,16 +7,14 @@ import java.io.InputStream;
 import java.util.Properties;
 
 
-public class DBInterface {
-    protected Connection dbConnection;
-    protected Statement dbStatement;
+public class DatabaseInterface {
+    private Connection dbConnection;
+    private Statement dbStatement;
 
     /**
-     * Pre: None
-     * Post: Establishes a connection with the database on success.
+     * Establishes a connection with the database on success.
      */
-
-    public void establishConnection() {
+    private void connect() {
         Properties dbProperties = new Properties();
         InputStream input = null;
 
@@ -50,47 +48,110 @@ public class DBInterface {
         }
     }
 
-    public void select(String query) {
+    /**
+     * Closes a connection to the database.
+     */
+    private void disconnect() {
         try {
-            Connection con = establishConnection();
+            dbConnection.close();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
         }
-    }
-
-    public void insert(String query) {
-        try {
-
-        }
-    }
-
-    public void delete(String query) {
-
     }
 
     /**
-     * Pre: query - String containing your SQL query.
-     * @param query
-     * @return Returns the query results.
+     * Selects the given query from the database.
+     * @param query - A string containing the desired select target.
+     * @return result - A ResultSet object containing the query results.
      */
-    public ResultSet createQuery(String query) {
-        try {
-            dbStatement = dbConnection.createStatement();
-            ResultSet result = dbStatement.executeQuery(query);
+    public ResultSet select(String query) {
+        // Connect to the database.
+        connect();
 
-            return result;
+        try {
+            // Execute the select statement and return the result.
+            dbStatement = dbConnection.createStatement();
+
+            return dbStatement.executeQuery("SELECT " + query);
         } catch(SQLException exception) {
-            System.out.println("Query Failed.");
+            System.out.println("Select query failed.");
 
             exception.printStackTrace();
-
             return null;
+        } finally {
+            if(dbStatement != null) {
+                disconnect();
+            }
         }
     }
 
+    /**
+     * Inserts the given query into the database.
+     * @param query - A string containing the desired insert target.
+     */
+    public void insert(String query) {
+        // Connect to the database.
+        connect();
 
+        try {
+            // Execute the insert statement.
+            dbStatement = dbConnection.createStatement();
 
-    public static void main(String[] args) {
-        DBInterface database = new DBInterface();
+            dbStatement.execute("INSERT INTO " + query);
+        } catch(SQLException exception) {
+            System.out.println("Insert query failed.");
 
-        database.establishConnection();
+            exception.printStackTrace();
+        } finally {
+            if(dbStatement != null) {
+                disconnect();
+            }
+        }
+    }
+
+    /**
+     * Updates the database using the given query.
+     * @param query - A string containing the desired update target.
+     */
+    public void update(String query) {
+        // Connect to the database.
+        connect();
+
+        try {
+            dbStatement = dbConnection.createStatement();
+
+            dbStatement.execute("UPDATE " + query);
+        } catch(SQLException exception) {
+            System.out.println("Update query Failed.");
+
+            exception.printStackTrace();
+        } finally {
+            if(dbStatement != null) {
+                disconnect();
+            }
+        }
+    }
+
+    /**
+     * Deletes the given query from the database.
+     * @param query - A string containing the desired delete target.
+     */
+    public void delete(String query) {
+        // Connect to the database.
+        connect();
+
+        try {
+            dbStatement = dbConnection.createStatement();
+
+            dbStatement.execute("DELETE FROM " + query);
+        } catch(SQLException exception) {
+            System.out.println("Delete query failed.");
+
+            exception.printStackTrace();
+        } finally {
+            if(dbStatement != null) {
+                disconnect();
+            }
+        }
     }
 }
