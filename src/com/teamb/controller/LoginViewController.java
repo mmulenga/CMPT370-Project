@@ -1,14 +1,8 @@
 package com.teamb.controller;
 
-import com.teamb.Volunteerize;
-import com.teamb.view.EventView;
 import com.teamb.view.LoginView;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.awt.event.ActionEvent;
-import java.beans.EventHandler;
-import java.sql.ResultSet;
 
 public class LoginViewController extends BasicController {
     private String username;
@@ -16,10 +10,12 @@ public class LoginViewController extends BasicController {
     //public Stage currentStage;
     LoginView loginView;
 
+    private boolean isStaff;
+
     public LoginViewController(Stage s){
         super(s);
         loginView = new LoginView(this);
-
+        isStaff = true; //TODO: Actually check this
 
     }
 
@@ -50,7 +46,7 @@ public class LoginViewController extends BasicController {
     public boolean checkCredentials(String username, String password) {
 //        try {
             //For View and Controller test
-            this.VolunteerEventView(stage);
+            this.ChangeToLandingView(stage);
             return true;
             /**
              * Cheating here. Shouldn't create a new connnection on a per-function basis.
@@ -71,7 +67,7 @@ public class LoginViewController extends BasicController {
 //                if(getUsername().compareTo(result.getString("username")) == 0 &&
 //                        getPassword().compareTo(result.getString("password")) == 0) {
 //                    System.out.println("Credentials OK!");
-//                    this.VolunteerEventView(stage);
+//                    this.ChangeToLandingView(stage);
 //                    return true;
 //
 //                }
@@ -86,16 +82,22 @@ public class LoginViewController extends BasicController {
     }
 
 
-    private void VolunteerEventView(Stage s ){
+    private void ChangeToLandingView(Stage s ){
 
+        if(isStaff){
 
-        EventController ec = new EventController(s);
+            StaffLandingController slc = new StaffLandingController(s);
 
-        Scene scene = new Scene(ec.GetView().GetRootPane(), 720, 540);
+            Scene scene = new Scene(slc.GetView().GetRootPane(), 720, 540);
 //        scene.getStylesheets().add
 //                (Volunteerize.class.getResource("LoginStyle.css").toExternalForm());
-        s.setScene(scene);
-        s.show();
+            s.setScene(scene);
+            s.show();
+        }
+        else{
+           //TODO: change to VolunteerLandingController
+        }
+
     }
 
     public LoginView GetView(){

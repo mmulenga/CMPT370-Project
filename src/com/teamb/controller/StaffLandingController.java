@@ -22,6 +22,22 @@ public class StaffLandingController extends BasicController {
 
     }
 
+    public void ChangeToManageVolunteersView(){
+        //TODO
+    }
+
+    public void ChangeToManageEventsView(){
+        //TODO
+    }
+
+    public void ChangeToChangePasswordView(){
+        //TODO
+    }
+
+    public void HelpPopUp(){
+        //TODO
+    }
+
     @Override
     protected BasicView GetView() {
         return view;
