@@ -16,4 +16,27 @@ public class Event{
     private String location;
     private String description;
 
+    public Event(){
+        eventId = "1";
+        name = "name";
+        startTime = "StartTime";
+        endTime = "EndTime";
+        date = "date";
+        location = "location";
+        description = "description";
+
+    }
+
+    //TODO: IMPLEMENT GETNAME AND GETDESCIPTION
+    public String GetName(){
+        return name;
+    }
+
+    public String GetDescription(){
+        return description;
+    }
+
+
+
 }
+

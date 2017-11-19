@@ -9,15 +9,20 @@ import javafx.stage.Stage;
  */
 public abstract class BasicController {
 
-     public BasicController(){
+    Stage stage;
+    BasicView view;
 
+    public BasicController(Stage s){
+        stage = s;
     }
 
 
 
     //change view
-    protected abstract void ChangeView(Stage stage);
+    protected abstract void ChangeView();
 
     //public abstract void HelpPopUp(); //not sure if this will go here
+
+    protected abstract BasicView GetView();
 
 }

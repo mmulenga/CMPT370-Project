@@ -1,5 +1,6 @@
 package com.teamb.view;
 
+import com.teamb.controller.BasicController;
 import javafx.scene.layout.Pane;
 
 /**
@@ -10,14 +11,16 @@ public abstract class BasicView {
 
 
     protected Pane root;
+    BasicController controller;
 
     /**
      * Constructor.
      * Creates the root pane, and adds the children with the CreateChildren() method.
      * May have parameters based on what information is needed from the controller
      */
-    public BasicView(){
+    public BasicView(BasicController c){
         root = new Pane();
+        controller = c;
         this.CreateChildren();
     }
 

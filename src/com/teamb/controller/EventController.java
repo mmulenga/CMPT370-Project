@@ -2,11 +2,12 @@ package com.teamb.controller;
 
 import com.teamb.view.EventView;
 import com.teamb.model.Event;
+import javafx.stage.Stage;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-public class EventController {
+public class EventController extends BasicController {
     private ArrayList<Event> eventModel;
     private EventView eventView;
 
@@ -22,6 +23,7 @@ public class EventController {
 
     private String name;
     private String description;
+
 
 
     /* ------- Getters and Setters ------- */
@@ -99,96 +101,116 @@ public class EventController {
     }
 
     /* ------- Methods ------- */
-    public EventController(EventView ev){
+    EventController(Stage s) {
+        super(s);
+
         this.eventModel = new ArrayList<Event>();
-        this.eventView = ev;
-        Startup start = new Startup();
-        start.establishConnection();
-        createEventList(start);
-        eventView.displayEventList(eventModel);
+//        //TODO: CALL Method that gets event list from database
+
+        eventView = new EventView(this);
+
+//        this.eventView = ev;
+//        Startup start = new Startup();
+//        start.establishConnection();
+//        createEventList(start);
+//
+    }
+
+//    public void createEventList(Startup database) {
+//        try {
+//            ResultSet result = database.createQuery("SELECT * FROM Events e");
+//
+//            while(result.next()) {
+//
+//                setId(result.getInt("id"));
+//                setName(result.getString("name"));
+//                setDescription(result.getString("comments"));
+//                setLocation(result.getInt("location_id"));
+//                setType(result.getInt("type_id"));
+//
+//                Event temp = new Event(getId(),getName(),getDescription(),getLocation(),getType());
+//                eventModel.add(temp);
+//                System.out.println("ID: " + getId() +
+//                        " Event Name: " + getName() +
+//                        " Description: " + getDescription() +
+//                        " Location ID: " + getLocation() +
+//                        " Type ID: " + getType());
+//            }
+//        } catch(Exception e) {
+//            System.out.println("Event view failed.");
+//        }
+//    }
+
+
+//    public void createEvent(int eventId, String eventName, String eventComments, int locationId, int typeId) {
+//
+//    }
+
+    public void editEvent(Event event) {
+        //TODO: CAll method that changes event in database
+    }
+
+    public void deleteEvent(Event event) {
+        //TODO:Call method that deletes event from database
+    }
+
+
+//    public void viewEvent(Startup database, String eventId) {
+//        try {
+//            ResultSet result = database.createQuery("SELECT * FROM Events e WHERE e.id = " + eventId);
+//
+//            while(result.next()) {
+//                setId(result.getInt("id"));
+//                setName(result.getString("name"));
+//                setDescription(result.getString("comments"));
+//                setLocation(result.getInt("location_id"));
+//                setType(result.getInt("type_id"));
+//
+//                System.out.println("ID: " + getId() +
+//                        " Event Name: " + getName() +
+//                        " Description: " + getDescription() +
+//                        " Location ID: " + getLocation() +
+//                        " Type ID: " + getType());
+//            }
+//        } catch(Exception e) {
+//            System.out.println("Event view failed.");
+//        }
+//    }
+
+//    public void viewAllEvents(Startup database) {
+//        try {
+//            ResultSet result = database.createQuery("SELECT * FROM Events e");
+//
+//            while(result.next()) {
+//                setId(result.getInt("id"));
+//                setName(result.getString("name"));
+//                setDescription(result.getString("comments"));
+//                setLocation(result.getInt("location_id"));
+//                setType(result.getInt("type_id"));
+//
+//                System.out.println("ID: " + getId() +
+//                        " Event Name: " + getName() +
+//                        " Description: " + getDescription() +
+//                        " Location ID: " + getLocation() +
+//                        " Type ID: " + getType());
+//            }
+//        } catch(Exception e) {
+//            System.out.println("Event view failed.");
+//        }
+//    }
+
+    @Override
+    protected void ChangeView() {
 
     }
 
-    public void createEventList(Startup database) {
-        try {
-            ResultSet result = database.createQuery("SELECT * FROM Events e");
-
-            while(result.next()) {
-
-                setId(result.getInt("id"));
-                setName(result.getString("name"));
-                setDescription(result.getString("comments"));
-                setLocation(result.getInt("location_id"));
-                setType(result.getInt("type_id"));
-
-                Event temp = new Event(getId(),getName(),getDescription(),getLocation(),getType());
-                eventModel.add(temp);
-                System.out.println("ID: " + getId() +
-                        " Event Name: " + getName() +
-                        " Description: " + getDescription() +
-                        " Location ID: " + getLocation() +
-                        " Type ID: " + getType());
-            }
-        } catch(Exception e) {
-            System.out.println("Event view failed.");
-        }
-    }
-
-
-    public void createEvent(int eventId, String eventName, String eventComments, int locationId, int typeId) {
+    public ArrayList<Event> GetEventModel() {
+        return eventModel;
 
     }
 
-    public void editEvent() {
-
+    public EventView GetView(){
+        return eventView;
     }
 
-    public void deleteEvent() {
-
-    }
-
-
-    public void viewEvent(Startup database, String eventId) {
-        try {
-            ResultSet result = database.createQuery("SELECT * FROM Events e WHERE e.id = " + eventId);
-
-            while(result.next()) {
-                setId(result.getInt("id"));
-                setName(result.getString("name"));
-                setDescription(result.getString("comments"));
-                setLocation(result.getInt("location_id"));
-                setType(result.getInt("type_id"));
-
-                System.out.println("ID: " + getId() +
-                        " Event Name: " + getName() +
-                        " Description: " + getDescription() +
-                        " Location ID: " + getLocation() +
-                        " Type ID: " + getType());
-            }
-        } catch(Exception e) {
-            System.out.println("Event view failed.");
-        }
-    }
-
-    public void viewAllEvents(Startup database) {
-        try {
-            ResultSet result = database.createQuery("SELECT * FROM Events e");
-
-            while(result.next()) {
-                setId(result.getInt("id"));
-                setName(result.getString("name"));
-                setDescription(result.getString("comments"));
-                setLocation(result.getInt("location_id"));
-                setType(result.getInt("type_id"));
-
-                System.out.println("ID: " + getId() +
-                        " Event Name: " + getName() +
-                        " Description: " + getDescription() +
-                        " Location ID: " + getLocation() +
-                        " Type ID: " + getType());
-            }
-        } catch(Exception e) {
-            System.out.println("Event view failed.");
-        }
-    }
 }

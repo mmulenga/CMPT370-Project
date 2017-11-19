@@ -23,9 +23,7 @@ public class MainLandingView extends BasicView{
      * Constructs the MainLanding page.
      */
     public MainLandingView(MainLandingController c){
-        controller = c;
-        root = new Pane();
-        CreateChildren();
+        super(c);
     }
 
     @Override
