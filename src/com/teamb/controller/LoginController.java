@@ -36,9 +36,9 @@ public class LoginViewController {
         try {
             /**
              * Cheating here. Shouldn't create a new connnection on a per-function basis.
-             * Only need to create it once in the Startup class.
+             * Only need to create it once in the DBInterface class.
              */
-            Startup database = new Startup();
+            DBInterface database = new DBInterface();
             database.establishConnection();
 
 
