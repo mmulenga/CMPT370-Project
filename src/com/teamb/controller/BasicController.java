@@ -1,6 +1,7 @@
 package com.teamb.controller;
 
 import com.teamb.view.BasicView;
+import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
 /**
@@ -10,7 +11,7 @@ import javafx.stage.Stage;
 public abstract class BasicController {
 
     Stage stage;
-    BasicView view;
+
 
     public BasicController(Stage s){
         stage = s;
@@ -24,5 +25,7 @@ public abstract class BasicController {
     //public abstract void HelpPopUp(); //not sure if this will go here
 
     protected abstract BasicView GetView();
+
+
 
 }

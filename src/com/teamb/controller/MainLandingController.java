@@ -2,6 +2,8 @@ package com.teamb.controller;
 
 import com.teamb.view.BasicView;
 import com.teamb.view.MainLandingView;
+import javafx.event.ActionEvent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
@@ -11,8 +13,11 @@ import javafx.stage.Stage;
 public class MainLandingController extends BasicController{
 
     MainLandingView mainView;
-    MainLandingController(Stage s){
+
+    public MainLandingController(Stage s){
         super(s);
+        mainView = new MainLandingView(this);
+
     }
 
     @Override
@@ -23,9 +28,19 @@ public class MainLandingController extends BasicController{
     }
 
     @Override
-    protected BasicView GetView() {
+    public BasicView GetView() {
         return mainView;
     }
 
+    public void ChangeToLoginView(ActionEvent event){
+
+       LoginViewController lvc = new LoginViewController(stage);
+
+        Scene scene = new Scene(lvc.GetView().GetRootPane(), 720, 540);
+//        scene.getStylesheets().add
+//                (Volunteerize.class.getResource("LoginStyle.css").toExternalForm());
+        stage.setScene(scene);
+        stage.show();
+    }
 
 }

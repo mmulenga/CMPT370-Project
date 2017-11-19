@@ -2,6 +2,8 @@ package com.teamb.view;
 
 import com.sun.org.apache.bcel.internal.generic.NEW;
 import com.teamb.controller.MainLandingController;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -24,6 +26,7 @@ public class MainLandingView extends BasicView{
      */
     public MainLandingView(MainLandingController c){
         super(c);
+        controller = c;
     }
 
     @Override
@@ -32,11 +35,23 @@ public class MainLandingView extends BasicView{
         HBox buttonBox = new HBox();
 
         Button vButton = new Button("Volunteer Login");
+        vButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                controller.ChangeToLoginView(event);
+            }
+        });
         //when this button is pressed view changes to volunteer login page
-        controller.ChangeView(/*volunteer*/);
+        //controller.ChangeView(/*volunteer*/);
         Button sButton = new Button("Staff Login");
+        sButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                controller.ChangeToLoginView(event);
+            }
+        });
         //when this button is pressed view changes to staff login page
-        controller.ChangeView(/*staff*/);
+        //controller.ChangeView(/*staff*/);
         Button help = new Button("Help");
         //when this button is pressed a help document pop up appears.
         Label label = new Label("Welcome to Volunteerize");
