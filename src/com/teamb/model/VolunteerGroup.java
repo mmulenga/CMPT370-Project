@@ -14,6 +14,7 @@ public class VolunteerGroup {
     	groupList = new List<String>();
     }
 
+    public void addGroup(String groupName){
 
         groupList.add(groupName);
     }
