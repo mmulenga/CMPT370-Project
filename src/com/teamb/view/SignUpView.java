@@ -2,6 +2,7 @@ package com.teamb.view;
 
 import com.teamb.controller.SignUpController;
 import com.teamb.model.Availability;
+import com.teamb.model.Shift;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -131,30 +132,30 @@ public class SignUpView extends BasicView {
         final ComboBox volGroupBox = new ComboBox(volGrouplist);
 
         /************Create Availability Table************/
-        TableView<Availability> availabilityTable = new TableView<>();
+        TableView<Shift> availabilityTable = new TableView<>();
         availabilityTable.setEditable(true);
 
         availabilityTable.getColumns().add(createColumn("Shift","shift"));
 
-        TableColumn<Availability, Boolean>monCol = createColumn("Monday","mon");
+        TableColumn<Shift, Boolean>monCol = createColumn("Monday","mon");
         availabilityTable.getColumns().add(monCol);
-        TableColumn<Availability, Boolean>tueCol = createColumn("Tuesday","tue");
+        TableColumn<Shift, Boolean>tueCol = createColumn("Tuesday","tue");
         availabilityTable.getColumns().add(tueCol);
-        TableColumn<Availability, Boolean>wedCol = createColumn("Wednesday","wed");
+        TableColumn<Shift, Boolean>wedCol = createColumn("Wednesday","wed");
         availabilityTable.getColumns().add(wedCol);
-        TableColumn<Availability, Boolean>thurCol = createColumn("Thursday","thur");
+        TableColumn<Shift, Boolean>thurCol = createColumn("Thursday","thur");
         availabilityTable.getColumns().add(thurCol);
-        TableColumn<Availability, Boolean>friCol = createColumn("Friday","fri");
+        TableColumn<Shift, Boolean>friCol = createColumn("Friday","fri");
         availabilityTable.getColumns().add(friCol);
-        TableColumn<Availability, Boolean>satCol = createColumn("Saturday","sat");
+        TableColumn<Shift, Boolean>satCol = createColumn("Saturday","sat");
         availabilityTable.getColumns().add(satCol);
-        TableColumn<Availability, Boolean>sunCol = createColumn("Sunday","sun");
+        TableColumn<Shift, Boolean>sunCol = createColumn("Sunday","sun");
         availabilityTable.getColumns().add(sunCol);
         monCol.setCellFactory(col ->{
-            CheckBoxTableCell<Availability, Boolean> cell = new CheckBoxTableCell<>(index->{
+            CheckBoxTableCell<Shift, Boolean> cell = new CheckBoxTableCell<>(index->{
                 BooleanProperty mon = new SimpleBooleanProperty(availabilityTable.getItems().get(index).isMonAvailable());
                 mon.addListener((obs, wasActive, isnowactive)->{
-                    Availability a = availabilityTable.getItems().get(index);
+                    Shift a = availabilityTable.getItems().get(index);
                     a.mon = true;
                 });
                 return mon;
@@ -163,10 +164,10 @@ public class SignUpView extends BasicView {
         });
 
         tueCol.setCellFactory(col ->{
-            CheckBoxTableCell<Availability, Boolean> cell = new CheckBoxTableCell<>(index->{
+            CheckBoxTableCell<Shift, Boolean> cell = new CheckBoxTableCell<>(index->{
                 BooleanProperty tue = new SimpleBooleanProperty(availabilityTable.getItems().get(index).isTueAvailable());
                 tue.addListener((obs, wasActive, isnowactive)->{
-                    Availability a = availabilityTable.getItems().get(index);
+                    Shift a = availabilityTable.getItems().get(index);
                     a.tue = true;
                 });
                 return tue;
@@ -174,10 +175,10 @@ public class SignUpView extends BasicView {
             return cell;
         });
         wedCol.setCellFactory(col ->{
-            CheckBoxTableCell<Availability, Boolean> cell = new CheckBoxTableCell<>(index->{
+            CheckBoxTableCell<Shift, Boolean> cell = new CheckBoxTableCell<>(index->{
                 BooleanProperty wed = new SimpleBooleanProperty(availabilityTable.getItems().get(index).isWedAvailable());
                 wed.addListener((obs, wasActive, isnowactive)->{
-                    Availability a = availabilityTable.getItems().get(index);
+                    Shift a = availabilityTable.getItems().get(index);
                     a.wed = true;
                 });
                 return wed;
@@ -186,10 +187,10 @@ public class SignUpView extends BasicView {
         });
 
         thurCol.setCellFactory(col ->{
-            CheckBoxTableCell<Availability, Boolean> cell = new CheckBoxTableCell<>(index->{
+            CheckBoxTableCell<Shift, Boolean> cell = new CheckBoxTableCell<>(index->{
                 BooleanProperty thur = new SimpleBooleanProperty(availabilityTable.getItems().get(index).isThurAvailable());
                 thur.addListener((obs, wasActive, isnowactive)->{
-                    Availability a = availabilityTable.getItems().get(index);
+                    Shift a = availabilityTable.getItems().get(index);
                     a.thur = true;
                 });
                 return thur;
@@ -197,10 +198,10 @@ public class SignUpView extends BasicView {
             return cell;
         });
         friCol.setCellFactory(col ->{
-            CheckBoxTableCell<Availability, Boolean> cell = new CheckBoxTableCell<>(index->{
+            CheckBoxTableCell<Shift, Boolean> cell = new CheckBoxTableCell<>(index->{
                 BooleanProperty fri = new SimpleBooleanProperty(availabilityTable.getItems().get(index).isFriAvailable());
                 fri.addListener((obs, wasActive, isnowactive)->{
-                    Availability a = availabilityTable.getItems().get(index);
+                    Shift a = availabilityTable.getItems().get(index);
                     a.fri = true;
                 });
                 return fri;
@@ -208,10 +209,10 @@ public class SignUpView extends BasicView {
             return cell;
         });
         satCol.setCellFactory(col ->{
-            CheckBoxTableCell<Availability, Boolean> cell = new CheckBoxTableCell<>(index->{
+            CheckBoxTableCell<Shift, Boolean> cell = new CheckBoxTableCell<>(index->{
                 BooleanProperty sat = new SimpleBooleanProperty(availabilityTable.getItems().get(index).isSatAvailable());
                 sat.addListener((obs, wasActive, isnowactive)->{
-                    Availability a = availabilityTable.getItems().get(index);
+                    Shift a = availabilityTable.getItems().get(index);
                     a.sat = true;
                 });
                 return sat;
@@ -219,10 +220,10 @@ public class SignUpView extends BasicView {
             return cell;
         });
         sunCol.setCellFactory(col ->{
-            CheckBoxTableCell<Availability, Boolean> cell = new CheckBoxTableCell<>(index->{
+            CheckBoxTableCell<Shift, Boolean> cell = new CheckBoxTableCell<>(index->{
                 BooleanProperty sun = new SimpleBooleanProperty(availabilityTable.getItems().get(index).isSunAvailable());
 //                sun.addListener((obs, wasActive, isnowactive)->{
-//                    Availability a = availabilityTable.getItems().get(index);
+//                    Shift a = availabilityTable.getItems().get(index);
 //                    a.sun = true;
 //                });
                 return sun;
@@ -230,10 +231,15 @@ public class SignUpView extends BasicView {
             return cell;
         });
         //this fake availability data
-        Availability morningAva = new Availability("Morning",true,true,true,true,false,false,false);
-        Availability afternoonAva = new Availability("Afternoon",true,true,true,true,false,false,false);
+        Availability a = new Availability();
 
-        availabilityTable.getItems().addAll(morningAva,afternoonAva);
+        Shift morningAva = new Shift("Morning",true,true,true,true,false,false,false);
+        Shift afternoonAva = new Shift("Afternoon",true,true,true,true,false,false,false);
+        Shift a1 = a.fetchAvailabiliity().get(0);
+        Shift a2 = a.fetchAvailabiliity().get(1);
+        Shift a3 = a.fetchAvailabiliity().get(2);
+
+        availabilityTable.getItems().addAll(a1,a2,a3);
         availabilityTable.setPrefHeight(100);
        // availabilityTable.prefHeightProperty().bind(Bindings.size())
 
@@ -318,6 +324,9 @@ public class SignUpView extends BasicView {
                 phoneYes.setSelected(true);
                 emailYes.setSelected(true);
                 checked.setSelected(true);
+
+
+
             }
         });
 
