@@ -36,12 +36,7 @@ public class ManageVolunteersController extends BasicController{
         ObservableList<ProfileCheck> dummyList = FXCollections.observableArrayList();
 
         for (int i = 0; i < 10; i++) {
-           Profile profile = new Profile("Firstname" + i, "LastName" + i, "Address" + i,
-                                        "phone" + i, "Emergancy Contact #" + i,
-                                        "Emergancy Contact Name" + i, "Email" + i, true,
-                                        true, "MemberID" + i, true,
-                                        "Medical Info" + i, i, "PhotoPath" + i,
-                                        new Availability());
+           Profile profile = new Profile();
            ProfileCheck pc = new ProfileCheck(profile);
            pc.SetActive(false);
            dummyList.add(pc);

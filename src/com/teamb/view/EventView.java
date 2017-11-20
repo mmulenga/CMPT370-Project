@@ -53,10 +53,10 @@ public class EventView extends BasicView {
            gp.getColumnConstraints().addAll(column1, column1, column1);
            Label title = new Label();
 
-           title.setText(eventList.get(i).GetName());
+           title.setText(eventList.get(i).getEventName());
             Label description = new Label();
             description.setWrapText(true);
-            description.setText(eventList.get(i).GetDescription());
+            description.setText(eventList.get(i).getDescription());
             Button readMore = new Button("Read More");
             //TODO: Set on action for this button. It will redirect to the event page
             //TODO: Learn how to get images

@@ -16,8 +16,8 @@ public class ProfileCheck{
 
     public ProfileCheck(Profile p){
         profile = p;
-        wantsEmails.setValue(p.ContactByEmail());
-        wantsPhoneCalls.setValue(p.ContactByPhone());
+        wantsEmails.setValue(p.getContactByEmail());
+        wantsPhoneCalls.setValue(p.getContactByPhone());
     }
 
     public boolean isActive(){
@@ -34,7 +34,7 @@ public class ProfileCheck{
 
     public String GetName(){
         //TODO: This may change when the guys are done
-        return profile.GetName();
+        return profile.getFirstName() + " " + profile.getLastName();
     }
 
     public Profile GetProfile(){
@@ -42,11 +42,11 @@ public class ProfileCheck{
     }
 
     public boolean WantsEmails(){
-        return profile.ContactByEmail();
+        return profile.getContactByEmail();
     }
 
     public boolean WantsPhoneCalls(){
-        return profile.ContactByPhone();
+        return profile.getContactByPhone();
     }
 
     //TODO Change bools to boolean property
