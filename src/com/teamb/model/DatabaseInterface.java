@@ -90,6 +90,7 @@ public class DatabaseInterface {
      * @param query - A string containing the desired insert target.
      */
     public void insert(String query) {
+        System.out.println(query);
         // Connect to the database.
         connect();
 
