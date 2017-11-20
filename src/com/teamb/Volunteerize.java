@@ -27,13 +27,13 @@ import javafx.stage.Stage;
  * @author irene
  */
 public class Volunteerize extends Application {
-    
+
     @Override
     public void start(Stage primaryStage) {
         //LoginView loginView = new LoginView();
         MainLandingController mainController = new MainLandingController(primaryStage);
         Scene scene = new Scene(mainController.GetView().GetRootPane(), 400, 350);
-        
+
         primaryStage.setTitle("Volunteerize");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -45,5 +45,5 @@ public class Volunteerize extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

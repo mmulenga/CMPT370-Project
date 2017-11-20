@@ -1,8 +1,3 @@
-# Volunteerize
-# Group 03
-
-A repository for Team_B's project.
-
 1. Installation
   NOTE: This must be done on Windows, Linux is having a timezone issue with PostgreSQL Database.
   - Import Volunteerize into IntelliJ IDEA.
