@@ -35,7 +35,7 @@ public class Volunteerize extends Application {
         //LoginView loginView = new LoginView();
         SignUpController suc = new SignUpController(primaryStage);
         SignUpView suv = new SignUpView(suc);
-        Scene scene = new Scene(suv.GetRootPane(), 600, 700);
+        Scene scene = new Scene(suv.GetRootPane(), 600, 600);
         
         primaryStage.setTitle("Volunteerize");
         primaryStage.setScene(scene);

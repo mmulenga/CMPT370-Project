@@ -64,8 +64,8 @@ public class Profile {
         this.medicalInformation = medicalInformation;
         this.hoursWorked = hoursWorked;
         this.photoPath = photoPath;
-        this.availability = new Availability();
-        this.availability = availability;
+        //this.availability = new Availability();
+        //this.availability = availability;
     }
 
 

@@ -1,6 +1,10 @@
 package com.teamb.view;
 
 import com.teamb.controller.SignUpController;
+import com.teamb.model.Availability;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,12 +14,14 @@ import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import sun.security.x509.AVA;
 
 public class SignUpView extends BasicView {
     SignUpController controller;
@@ -33,7 +39,7 @@ public class SignUpView extends BasicView {
     protected void CreateChildren() {
         GridPane gp = new GridPane();
         gp.setAlignment(Pos.CENTER);
-        gp.setPadding(new Insets(40,40,40,40));
+        gp.setPadding(new Insets(30,30,30,30));
         gp.setHgap(10);
         gp.setVgap(10);
 
@@ -72,7 +78,7 @@ public class SignUpView extends BasicView {
         Label contactPreference = new Label("Contact Preference　：　");
         Label volunteerGroup = new Label("Volunteer Group　：　");
         Label criminalRecordCheck = new Label("Criminal Record Checked?　");
-        Label AvailabilityLabel = new Label("Availability : ");
+        Label availabilityLabel = new Label("Availability : ");
         Label registeredEventsLabel = new Label("Registered Events : ");
         Label phonePref = new Label("Prefer phone contact?");
         Label emailPref = new Label("Prefer email contact?");
@@ -88,7 +94,7 @@ public class SignUpView extends BasicView {
         TextField emergencyNameField  = new TextField();
         TextField emailField  = new TextField();
         TextField memberIDField  = new TextField();
-        TextField medicalInformationField = new TextField();
+        TextArea medicalInformationField = new TextArea();
 
         //Create Radio Buttons
         final ToggleGroup phonePrefer = new ToggleGroup();
@@ -103,11 +109,11 @@ public class SignUpView extends BasicView {
         emailYes.setToggleGroup(emailPrefer);
         emailNo.setToggleGroup(emailPrefer);
 
-        final ToggleGroup crimialCheckGroup = new ToggleGroup();
+        final ToggleGroup criminalCheckGroup = new ToggleGroup();
         RadioButton checked = new RadioButton("Yes");
         RadioButton uncheck = new RadioButton("No");
-        checked.setToggleGroup(crimialCheckGroup);
-        uncheck.setToggleGroup(crimialCheckGroup);
+        checked.setToggleGroup(criminalCheckGroup);
+        uncheck.setToggleGroup(criminalCheckGroup);
 
         //set select default
         phoneYes.setSelected(true);
@@ -123,6 +129,113 @@ public class SignUpView extends BasicView {
                         "Group4"
                 );
         final ComboBox volGroupBox = new ComboBox(volGrouplist);
+
+        /************Create Availability Table************/
+        TableView<Availability> availabilityTable = new TableView<>();
+        availabilityTable.setEditable(true);
+
+        availabilityTable.getColumns().add(createColumn("Shift","shift"));
+
+        TableColumn<Availability, Boolean>monCol = createColumn("Monday","mon");
+        availabilityTable.getColumns().add(monCol);
+        TableColumn<Availability, Boolean>tueCol = createColumn("Tuesday","tue");
+        availabilityTable.getColumns().add(tueCol);
+        TableColumn<Availability, Boolean>wedCol = createColumn("Wednesday","wed");
+        availabilityTable.getColumns().add(wedCol);
+        TableColumn<Availability, Boolean>thurCol = createColumn("Thursday","thur");
+        availabilityTable.getColumns().add(thurCol);
+        TableColumn<Availability, Boolean>friCol = createColumn("Friday","fri");
+        availabilityTable.getColumns().add(friCol);
+        TableColumn<Availability, Boolean>satCol = createColumn("Saturday","sat");
+        availabilityTable.getColumns().add(satCol);
+        TableColumn<Availability, Boolean>sunCol = createColumn("Sunday","sun");
+        availabilityTable.getColumns().add(sunCol);
+        monCol.setCellFactory(col ->{
+            CheckBoxTableCell<Availability, Boolean> cell = new CheckBoxTableCell<>(index->{
+                BooleanProperty mon = new SimpleBooleanProperty(availabilityTable.getItems().get(index).isMonAvailable());
+                mon.addListener((obs, wasActive, isnowactive)->{
+                    Availability a = availabilityTable.getItems().get(index);
+                    a.mon = true;
+                });
+                return mon;
+            });
+            return cell;
+        });
+
+        tueCol.setCellFactory(col ->{
+            CheckBoxTableCell<Availability, Boolean> cell = new CheckBoxTableCell<>(index->{
+                BooleanProperty tue = new SimpleBooleanProperty(availabilityTable.getItems().get(index).isTueAvailable());
+                tue.addListener((obs, wasActive, isnowactive)->{
+                    Availability a = availabilityTable.getItems().get(index);
+                    a.tue = true;
+                });
+                return tue;
+            });
+            return cell;
+        });
+        wedCol.setCellFactory(col ->{
+            CheckBoxTableCell<Availability, Boolean> cell = new CheckBoxTableCell<>(index->{
+                BooleanProperty wed = new SimpleBooleanProperty(availabilityTable.getItems().get(index).isWedAvailable());
+                wed.addListener((obs, wasActive, isnowactive)->{
+                    Availability a = availabilityTable.getItems().get(index);
+                    a.wed = true;
+                });
+                return wed;
+            });
+            return cell;
+        });
+
+        thurCol.setCellFactory(col ->{
+            CheckBoxTableCell<Availability, Boolean> cell = new CheckBoxTableCell<>(index->{
+                BooleanProperty thur = new SimpleBooleanProperty(availabilityTable.getItems().get(index).isThurAvailable());
+                thur.addListener((obs, wasActive, isnowactive)->{
+                    Availability a = availabilityTable.getItems().get(index);
+                    a.thur = true;
+                });
+                return thur;
+            });
+            return cell;
+        });
+        friCol.setCellFactory(col ->{
+            CheckBoxTableCell<Availability, Boolean> cell = new CheckBoxTableCell<>(index->{
+                BooleanProperty fri = new SimpleBooleanProperty(availabilityTable.getItems().get(index).isFriAvailable());
+                fri.addListener((obs, wasActive, isnowactive)->{
+                    Availability a = availabilityTable.getItems().get(index);
+                    a.fri = true;
+                });
+                return fri;
+            });
+            return cell;
+        });
+        satCol.setCellFactory(col ->{
+            CheckBoxTableCell<Availability, Boolean> cell = new CheckBoxTableCell<>(index->{
+                BooleanProperty sat = new SimpleBooleanProperty(availabilityTable.getItems().get(index).isSatAvailable());
+                sat.addListener((obs, wasActive, isnowactive)->{
+                    Availability a = availabilityTable.getItems().get(index);
+                    a.sat = true;
+                });
+                return sat;
+            });
+            return cell;
+        });
+        sunCol.setCellFactory(col ->{
+            CheckBoxTableCell<Availability, Boolean> cell = new CheckBoxTableCell<>(index->{
+                BooleanProperty sun = new SimpleBooleanProperty(availabilityTable.getItems().get(index).isSunAvailable());
+//                sun.addListener((obs, wasActive, isnowactive)->{
+//                    Availability a = availabilityTable.getItems().get(index);
+//                    a.sun = true;
+//                });
+                return sun;
+            });
+            return cell;
+        });
+        //this fake availability data
+        Availability morningAva = new Availability("Morning",true,true,true,true,false,false,false);
+        Availability afternoonAva = new Availability("Afternoon",true,true,true,true,false,false,false);
+
+        availabilityTable.getItems().addAll(morningAva,afternoonAva);
+        availabilityTable.setPrefHeight(100);
+       // availabilityTable.prefHeightProperty().bind(Bindings.size())
 
 
         //Create Buttons
@@ -181,9 +294,13 @@ public class SignUpView extends BasicView {
         gp.add(emergencyNumberLabel,0,16);
         gp.add(emergencyNumberField,1,16,2,1);
 
+        gp.add(availabilityLabel,0,17);
+        gp.add(availabilityTable,0,18,3,1);
 
-        gp.add(submit,1,18);
-        gp.add(clear,2,18);
+        gp.add(registeredEventsLabel,0,19);
+
+        gp.add(submit,1,20);
+        gp.add(clear,2,20);
 
         clear.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -205,16 +322,21 @@ public class SignUpView extends BasicView {
         });
 
         //Add Scroll Bar
-//        ScrollBar scb = new ScrollBar();
-//        scb.setLayoutX(600-scb.getWidth());
-//        scb.setMin(0);
-//        scb.setOrientation(Orientation.VERTICAL);
-//        scb.setPrefHeight(700);
-//        scb.setMax(1500);
-//
-//        gp.add(scb,3,0);
 
-        root.getChildren().add(gp);
+        ScrollPane sp = new ScrollPane();
+        sp.setContent(gp);
+
+        sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        sp.setPrefSize(600,600);
+
+
+        root.getChildren().add(sp);
+    }
+    private <S,T> TableColumn<S,T> createColumn(String title, String propertyName) {
+        TableColumn<S,T> col = new TableColumn<>(title);
+        col.setCellValueFactory(new PropertyValueFactory<>(propertyName));
+        return col;
     }
 
 
