@@ -22,32 +22,35 @@ public class ManageVolunteersController extends BasicController{
 
     ArrayList<Profile> allProfiles;
     ArrayList<Profile> filteredProfiles;
-    ObservableList<Profile> observableProfiles;
+    ObservableList<ProfileCheck> observableProfiles;
 
     ManageVolunteersView view;
 
     public ManageVolunteersController(Stage s) {
         super(s);
+        //observableProfiles = CreateDummyList();
         view = new ManageVolunteersView(this);
     }
 
-    public ObservableList<ProfileCheck> CreateDummyList(){
-        //TODO: Create observable list of ProfileChecks from a list of Profiles instead
-        ObservableList<ProfileCheck> dummyList = FXCollections.observableArrayList();
 
-        for (int i = 0; i < 10; i++) {
-           Profile profile = new Profile("Firstname" + i, "LastName" + i, "Address" + i,
-                                        "phone" + i, "Emergancy Contact #" + i,
-                                        "Emergancy Contact Name" + i, "Email" + i, true,
-                                        true, "MemberID" + i, true,
-                                        "Medical Info" + i, i, "PhotoPath" + i,
-                                        new Availability());
-           ProfileCheck pc = new ProfileCheck(profile);
-           pc.SetActive(false);
-           dummyList.add(pc);
-        }
-        return dummyList;
-    }
+
+//    public ObservableList<ProfileCheck> CreateDummyList(){
+        //TODO: Create observable list of ProfileChecks from a list of Profiles instead
+//        ObservableList<ProfileCheck> dummyList = FXCollections.observableArrayList();
+//
+//        for (int i = 0; i < 10; i++) {
+//           Profile profile = new Profile("Firstname" + i, "LastName" + i, "Address" + i,
+//                                        "phone" + i, "Emergancy Contact #" + i,
+//                                        "Emergancy Contact Name" + i, "Email" + i, true,
+//                                        true, "MemberID" + i, true,
+//                                        "Medical Info" + i, i, "PhotoPath" + i,
+//                                        new Availability());
+//           ProfileCheck pc = new ProfileCheck(profile);
+//           pc.SetActive(false);
+//           dummyList.add(pc);
+//        }
+//        return dummyList;
+//    }
 
 
     @Override

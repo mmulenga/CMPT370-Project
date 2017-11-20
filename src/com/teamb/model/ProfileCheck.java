@@ -10,22 +10,24 @@ import javafx.beans.property.BooleanProperty;
 //Class for using profiles with checkboxes.
 public class ProfileCheck{
     Profile profile;
-    private boolean active;
+    private BooleanProperty active;
     BooleanProperty wantsEmails;
     BooleanProperty wantsPhoneCalls;
 
+
     public ProfileCheck(Profile p){
         profile = p;
+
         wantsEmails.setValue(p.ContactByEmail());
         wantsPhoneCalls.setValue(p.ContactByPhone());
     }
 
-    public boolean isActive(){
+    public BooleanProperty isActive(){
         return active;
     }
 
     public void SetActive(boolean b){
-        active = b;
+        active.setValue(b); ;
     }
 
     public void SetProfile(Profile p){
@@ -41,12 +43,13 @@ public class ProfileCheck{
         return profile;
     }
 
-    public boolean WantsEmails(){
-        return profile.ContactByEmail();
+    public BooleanProperty WantsEmails(){
+
+        return wantsEmails;
     }
 
-    public boolean WantsPhoneCalls(){
-        return profile.ContactByPhone();
+    public BooleanProperty WantsPhoneCalls(){
+        return  wantsPhoneCalls;
     }
 
     //TODO Change bools to boolean property

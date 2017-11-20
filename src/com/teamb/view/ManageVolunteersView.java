@@ -37,7 +37,8 @@ public class ManageVolunteersView extends BasicView {
      */
     public ManageVolunteersView(ManageVolunteersController c) {
         super(c);
-        controller = c;
+
+
     }
 
     private <S,T> TableColumn<S,T> createColumn(String title, String propertyName) {
@@ -62,8 +63,34 @@ public class ManageVolunteersView extends BasicView {
     @Override
     protected void CreateChildren() {
         //Create the table
-        ObservableList<ProfileCheck> dummylist = controller.CreateDummyList();//TODO this will be the actual list
-        for(ProfileCheck p:dummylist){
+        TableView<ProfileCheck> table = new TableView<>();
+        TableColumn<ProfileCheck, String> nameCol = new TableColumn<>("Name");
+        TableColumn<ProfileCheck, Boolean> phoneCol = new TableColumn<>("Phone?");
+        TableColumn<ProfileCheck, Boolean> emailCol = new TableColumn<>("Email?");
+        TableColumn<ProfileCheck, Boolean> activeCol = new TableColumn<>("Select");
+
+        //Create observable list
+//        ObservableList<ProfileCheck> dummylist = controller.observableProfiles;//TODO this will be the actual list
+//        for(ProfileCheck p : dummylist){
+//            p.isActive().addListener((obs,old,now)->{
+//                System.out.print(obs);
+//
+//            });
+
+            root.getChildren().add(table);
+            table.getColumns().addAll(nameCol, phoneCol, emailCol, activeCol);
+//            table.setItems(dummylist);
+            table.setEditable(true);
+
+            phoneCol.setCellValueFactory(new PropertyValueFactory<>("wantsPhoneCall"));
+            phoneCol.setVisible(true);
+
+            emailCol.setCellValueFactory(new PropertyValueFactory<>("wantsEmails"));
+            emailCol.setVisible(true);
+
+            activeCol.setCellFactory(CheckBoxTableCell.forTableColumn(activeCol));
+            activeCol.setVisible(true);
+            activeCol.setEditable(true);
 
 
         }
@@ -102,5 +129,5 @@ public class ManageVolunteersView extends BasicView {
 //        BorderPane.setMargin(listActiveButton, new Insets(10));
 
         //root.getChildren().add(mainContainer);
-    }
+    //}
 }
