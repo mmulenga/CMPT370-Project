@@ -69,7 +69,17 @@ public class Profile {
     }
 
 
+    public String GetName(){
+        return firstName + " " + lastName;
+    }
 
+    public boolean ContactByPhone(){
+        return contactByPhone;
+    }
+
+    public boolean ContactByEmail(){
+        return contactByEmail;
+    }
 
 
 
