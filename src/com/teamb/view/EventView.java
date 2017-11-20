@@ -40,6 +40,7 @@ public class EventView extends BasicView {
         eventList = dummyList;
         //TODO: DELETE ABOVE
         //eventList = e;
+        //TODO Actually get the List of events from database. Currently using a Dummy list for testing
     }
     //gets list from database and formats it
     public void PopulateEventList(){
@@ -52,11 +53,12 @@ public class EventView extends BasicView {
            gp.getColumnConstraints().addAll(column1, column1, column1);
            Label title = new Label();
 
-           title.setText(eventList.get(i).GetName());
+           title.setText(eventList.get(i).getEventName());
             Label description = new Label();
             description.setWrapText(true);
-            description.setText(eventList.get(i).GetDescription());
+            description.setText(eventList.get(i).getDescription());
             Button readMore = new Button("Read More");
+            //TODO: Set on action for this button. It will redirect to the event page
             //TODO: Learn how to get images
 //            Image image = new Image(listFromDatabase.get(i).imagePath);
 //            ImageView iv = new ImageView(image);
