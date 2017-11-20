@@ -4,6 +4,13 @@ import com.teamb.view.BasicView;
 import com.teamb.view.VolunteerLandingView;
 import javafx.stage.Stage;
 
+/* CODE SMELLS
+    Very similar to StaffLandingController
+    Copied due to time constraints
+ */
+
+
+
 /**
  * Created by Sarah on 2017-11-19.
  */

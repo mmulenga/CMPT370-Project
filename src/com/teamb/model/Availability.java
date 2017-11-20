@@ -8,7 +8,7 @@ public class Availability {
     private boolean[][] availablility;
 
 
-    Availability(){
+    public Availability(){
         availablility = new boolean[7][2];
     }
 

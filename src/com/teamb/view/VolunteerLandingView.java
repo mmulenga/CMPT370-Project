@@ -8,6 +8,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
+
+/* CODE SMELLS
+    Very similar to StaffLandingView
+    Copied due to time constraints
+ */
+
 /**
  * Created by Sarah on 2017-11-19.
  */
