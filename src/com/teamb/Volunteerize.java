@@ -7,8 +7,6 @@ package com.teamb;
 
 import com.teamb.controller.LoginViewController;
 import com.teamb.controller.MainLandingController;
-import com.teamb.controller.SignUpController;
-import com.teamb.view.SignUpView;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -29,14 +27,13 @@ import javafx.stage.Stage;
  * @author irene
  */
 public class Volunteerize extends Application {
-    
+
     @Override
     public void start(Stage primaryStage) {
         //LoginView loginView = new LoginView();
-        SignUpController suc = new SignUpController(primaryStage);
-        SignUpView suv = new SignUpView(suc);
-        Scene scene = new Scene(suv.GetRootPane(), 600, 600);
-        
+        MainLandingController mainController = new MainLandingController(primaryStage);
+        Scene scene = new Scene(mainController.GetView().GetRootPane(), 400, 350);
+
         primaryStage.setTitle("Volunteerize");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -48,5 +45,5 @@ public class Volunteerize extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

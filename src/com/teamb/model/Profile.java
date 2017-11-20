@@ -35,9 +35,8 @@ public class Profile {
 
 
 
-    Profile(){
+    public Profile(){
         this.volunteerGroups = new VolunteerGroup();
-        this.availability = new Availability();
         this.registeredEventIDs = new ArrayList<Integer>(); //defaults to size 10
     }
 
@@ -233,6 +232,9 @@ public class Profile {
     }
     public boolean getContactByEmail(){
         return this.contactByEmail;
+    }
+    public boolean getContactByPhone() {
+        return this.contactByPhone;
     }
     public int getMemberID(){
         return this.memberID;
