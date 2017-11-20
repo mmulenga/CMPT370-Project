@@ -46,7 +46,7 @@ public class Profile {
      * @param photoPath file path to the volunteer photo
      * @param availability availability in the morning and afternoon of each weekday
      */
-    Profile(String firstName, String lastName, String address, String phoneNumber, String emergancyContactNumber, String emergancyContactName, String email,
+    public Profile(String firstName, String lastName, String address, String phoneNumber, String emergancyContactNumber, String emergancyContactName, String email,
             boolean contactByPhone, boolean contactByEmail, String memberID, boolean criminalRecordCheck, String medicalInformation, int hoursWorked, String photoPath,
             Availability availability){
 
