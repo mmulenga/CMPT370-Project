@@ -39,8 +39,21 @@ public class VolunteerizeModel {
                 ", " + "'YES'" +
                 ");");
 
+        // Insert all emergency contact information.
+        database.insert("emergency_contact (id, first_name, middle_name, last_name," +
+                " phone_number, address, postal_code, volunteer_id)\n " +
+                "VALUES(" + volunteer.getEmergencyContactID() +
+                ", " + wrap(volunteer.getEmergencyContactFirst()) +
+                ", " + wrap(volunteer.getEmergencyContactMiddle()) +
+                ", " + wrap(volunteer.getEmergencyContactLast()) +
+                ", " + wrap(volunteer.getEmergencyContactPhoneNumber()) +
+                ", " + wrap(volunteer.getEmergencyContactAddress()) +
+                ", " + wrap(volunteer.getEmergencyContactPostalCode()) +
+                ", " + volunteer.getMemberID() +
+                ");");
+
         // Insert all contact information.
-        database.update("contact_information (prefer_phone, prefer_email, phone_number, address, postal_code, " +
+        database.insert("contact_information (prefer_phone, prefer_email, phone_number, address, postal_code, " +
                 "volunteer_id, emergency_contact_id)\n " +
                 "VALUES(" +
                 volunteer.getContactByPhone() +
@@ -50,17 +63,6 @@ public class VolunteerizeModel {
                 ", " + wrap(volunteer.getPostalCode()) +
                 ", " + volunteer.getMemberID() +
                 ", " + volunteer.getEmergencyContactID() +
-                ");");
-
-        // Insert all emergency contact information.
-        database.update("emergency_contact (id, first_name, middle_name, last_name, phone_number, address, postal_code)\n " +
-                "VAlUES(" + volunteer.getEmergencyContactID() +
-                ". " + wrap(volunteer.getEmergencyContactFirst()) +
-                ", " + wrap(volunteer.getEmergencyContactMiddle()) +
-                ", " + wrap(volunteer.getEmergencyContactLast()) +
-                ", " + wrap(volunteer.getEmergencyContactPhoneNumber()) +
-                ", " + wrap(volunteer.getEmergencyContactAddress()) +
-                ", " + wrap(volunteer.getEmergencyContactPostalCode()) +
                 ");");
     }
 
@@ -77,27 +79,29 @@ public class VolunteerizeModel {
                 ", \n" + "email = " + wrap(volunteer.getEmail()) +
                 ", \n" + "hours_worked = " + volunteer.getHoursWorked() +
                 ", \n" + "criminal_check = " + "'YES'" +
-                "\n WHERE id = " + volunteer.getMemberID());
+                "\n WHERE id = " + volunteer.getMemberID() + ";");
 
         // Insert all contact information.
-        database.insert("contact_information SET \n " +
+        database.update("contact_information SET \n " +
                 "prefer_phone = " + volunteer.getContactByPhone() +
                 ", \n" + "prefer_email = " + volunteer.getContactByEmail() +
                 ", \n" + "phone_number = " + volunteer.getPhoneNumber() +
                 ", \n" + "address = " + wrap(volunteer.getAddress()) +
                 ", \n" + "postal_code = " + wrap(volunteer.getPostalCode()) +
                 ", \n" + "volunteer_id = " + volunteer.getMemberID() +
-                ", \n" + "emergency_contact_id = " + volunteer.getEmergencyContactID());
+                ", \n" + "emergency_contact_id = " + volunteer.getEmergencyContactID() +
+                "\n WHERE volunteer_id = " + volunteer.getMemberID() + ";");
 
         // Insert all emergency contact information.
-        database.insert("emergency_contact SET \n " +
+        database.update("emergency_contact SET \n " +
                 "id = " + volunteer.getEmergencyContactID() +
                 ", \n" + "first_name = " + wrap(volunteer.getEmergencyContactFirst()) +
                 ", \n" + "middle_name = " + wrap(volunteer.getEmergencyContactMiddle()) +
                 ", \n" + "last_name = " + wrap(volunteer.getEmergencyContactLast()) +
                 ", \n" + "phone_number = " + wrap(volunteer.getEmergencyContactPhoneNumber()) +
                 ", \n" + "address = " + wrap(volunteer.getEmergencyContactAddress()) +
-                ", \n" + "postal_code = " + wrap(volunteer.getEmergencyContactPostalCode()) + "\n WHERE ");
+                ", \n" + "postal_code = " + wrap(volunteer.getEmergencyContactPostalCode()) +
+                "\n WHERE volunteer_id = " + volunteer.getMemberID() + ";");
     }
 
 
@@ -109,10 +113,10 @@ public class VolunteerizeModel {
                 null,
                 "Mulenga",
                 "1 Evergreen Blvd",
-                "3065551234",
+                "5551234",
                 "S7S 7S7",
-                "3065551234",
-                "Bert",
+                "5551234",
+                "Ernie",
                 "B.",
                 "Bond",
                 100001,
@@ -128,6 +132,6 @@ public class VolunteerizeModel {
                 "C:/Photos",
                 null);
 
-        model.addProfile(newProfile);
+        model.editProfile(newProfile);
     }
 }

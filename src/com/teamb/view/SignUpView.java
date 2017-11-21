@@ -1,5 +1,6 @@
 package com.teamb.view;
 
+import com.teamb.controller.BasicController;
 import com.teamb.controller.SignUpController;
 import com.teamb.model.Availability;
 import com.teamb.model.Shift;
@@ -25,10 +26,10 @@ import javafx.scene.text.FontWeight;
 import sun.security.x509.AVA;
 
 public class SignUpView extends BasicView {
-    SignUpController controller;
-    public SignUpView(SignUpController c){
+
+    public SignUpView(BasicController c){
         super(c);
-        controller = c;
+
     }
 
     @Override
@@ -350,4 +351,4 @@ public class SignUpView extends BasicView {
 
 
 }
->>>>>>> origin/IreneViewController
+

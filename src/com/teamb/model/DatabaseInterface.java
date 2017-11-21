@@ -40,10 +40,9 @@ public class DatabaseInterface {
                     dbProperties.getProperty("database"),
                     dbProperties.getProperty("username"),
                     dbProperties.getProperty("password"));
-
-            System.out.println("Connected to database.");
-
         } catch(SQLException exception) {
+            System.out.println("Failed to connect to the database.");
+
             exception.printStackTrace();
         }
     }
