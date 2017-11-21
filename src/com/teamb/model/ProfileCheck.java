@@ -1,6 +1,10 @@
 package com.teamb.model;
 
+import com.sun.xml.internal.ws.api.ha.StickyFeature;
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 /**
  * Created by Sarah on 2017-11-20.
@@ -10,44 +14,62 @@ import javafx.beans.property.BooleanProperty;
 //Class for using profiles with checkboxes.
 public class ProfileCheck{
     Profile profile;
-    private boolean active;
+    private BooleanProperty active;
     BooleanProperty wantsEmails;
     BooleanProperty wantsPhoneCalls;
+    StringProperty firstName;
+    StringProperty lastName;
+
 
     public ProfileCheck(Profile p){
         profile = p;
+        active = new SimpleBooleanProperty();
+        wantsEmails = new SimpleBooleanProperty();
+        wantsPhoneCalls = new SimpleBooleanProperty();
+        firstName = new SimpleStringProperty();
+        lastName = new SimpleStringProperty();
         wantsEmails.setValue(p.getContactByEmail());
         wantsPhoneCalls.setValue(p.getContactByPhone());
+        firstName.setValue(p.getFirstName());
+        lastName.setValue(p.getLastName());
+
     }
 
-    public boolean isActive(){
+    public BooleanProperty isActive(){
         return active;
     }
 
     public void SetActive(boolean b){
-        active = b;
+        active.setValue(b);
     }
 
     public void SetProfile(Profile p){
         profile = p;
     }
 
-    public String GetName(){
+    public StringProperty GetFirstName(){
         //TODO: This may change when the guys are done
-        return profile.getFirstName() + " " + profile.getLastName();
+        return firstName;
+    }
+
+    public StringProperty GetLastName(){
+        return lastName;
     }
 
     public Profile GetProfile(){
         return profile;
     }
 
-    public boolean WantsEmails(){
-        return profile.getContactByEmail();
+    public BooleanProperty WantsEmails(){
+
+        return wantsEmails;
     }
 
-    public boolean WantsPhoneCalls(){
-        return profile.getContactByPhone();
+    public BooleanProperty WantsPhoneCalls(){
+        return  wantsPhoneCalls;
     }
+
+
 
     //TODO Change bools to boolean property
 
