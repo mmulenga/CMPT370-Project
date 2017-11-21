@@ -115,6 +115,7 @@ public class DatabaseInterface {
      * @param query - A string containing the desired update target.
      */
     public void update(String query) {
+        System.out.println(query);
         // Connect to the database.
         connect();
 

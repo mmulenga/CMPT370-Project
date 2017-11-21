@@ -55,9 +55,9 @@ public class VolunteerizeModel {
         // Insert all emergency contact information.
         database.update("emergency_contact (id, first_name, middle_name, last_name, phone_number, address, postal_code)\n " +
                 "VAlUES(" + volunteer.getEmergencyContactID() +
-                ". " + wrap(volunteer.getEmergencyFirst()) +
-                ", " + wrap(volunteer.getEmergencyMiddle()) +
-                ", " + wrap(volunteer.getEmergencyLast()) +
+                ". " + wrap(volunteer.getEmergencyContactFirst()) +
+                ", " + wrap(volunteer.getEmergencyContactMiddle()) +
+                ", " + wrap(volunteer.getEmergencyContactLast()) +
                 ", " + wrap(volunteer.getEmergencyContactPhoneNumber()) +
                 ", " + wrap(volunteer.getEmergencyContactAddress()) +
                 ", " + wrap(volunteer.getEmergencyContactPostalCode()) +
@@ -92,12 +92,12 @@ public class VolunteerizeModel {
         // Insert all emergency contact information.
         database.insert("emergency_contact SET \n " +
                 "id = " + volunteer.getEmergencyContactID() +
-                ", \n" + "first_name = " + wrap(volunteer.getEmergencyFirst()) +
-                ", \n" + "middle_name = " + wrap(volunteer.getEmergencyMiddle()) +
-                ", \n" + "last_name = " + wrap(volunteer.getEmergencyLast()) +
+                ", \n" + "first_name = " + wrap(volunteer.getEmergencyContactFirst()) +
+                ", \n" + "middle_name = " + wrap(volunteer.getEmergencyContactMiddle()) +
+                ", \n" + "last_name = " + wrap(volunteer.getEmergencyContactLast()) +
                 ", \n" + "phone_number = " + wrap(volunteer.getEmergencyContactPhoneNumber()) +
                 ", \n" + "address = " + wrap(volunteer.getEmergencyContactAddress()) +
-                ", \n" + "postal_code = " + wrap(volunteer.getEmergencyContactPostalCode()) + " ]\n WHERE ");
+                ", \n" + "postal_code = " + wrap(volunteer.getEmergencyContactPostalCode()) + "\n WHERE ");
     }
 
 
@@ -106,11 +106,18 @@ public class VolunteerizeModel {
         Profile newProfile = new Profile();
 
         newProfile.setAllBaseInformation("Matt",
+                null,
                 "Mulenga",
                 "1 Evergreen Blvd",
                 "3065551234",
+                "S7S 7S7",
                 "3065551234",
                 "Bert",
+                "B.",
+                "Bond",
+                100001,
+                "SES AME",
+                "1 Sesame Street",
                 "bert@sesamestreet.com",
                 true,
                 true,
