@@ -32,8 +32,7 @@ public class VolunteerizeModel {
     public void addProfile(Profile volunteer) {
         // Insert all relevant volunteer table information.
         database.insert("volunteers (id, first_name, last_name, email, hours_worked, criminal_check)\n" +
-                "VALUES (" +
-                volunteer.getMemberID() + ", " +
+                "VALUES (DEFAULT, " +
                 wrap(volunteer.getFirstName()) + ", " +
                 wrap(volunteer.getLastName()) + ", " +
                 wrap(volunteer.getEmail()) + ", " +
@@ -44,7 +43,7 @@ public class VolunteerizeModel {
         // Insert all emergency contact information.
         database.insert("emergency_contact (id, first_name, middle_name, last_name," +
                 " phone_number, address, postal_code, volunteer_id)\n " +
-                "VALUES (" + volunteer.getEmergencyContactID() + ", " +
+                "VALUES (DEFAULT, " +
                 wrap(volunteer.getEmergencyContactFirst()) + ", " +
                 wrap(volunteer.getEmergencyContactMiddle()) + ", " +
                 wrap(volunteer.getEmergencyContactLast()) + ", " +
@@ -56,15 +55,14 @@ public class VolunteerizeModel {
 
         // Insert all contact information.
         database.insert("contact_information (prefer_phone, prefer_email, phone_number, address, postal_code, " +
-                "volunteer_id, emergency_contact_id)\n " +
+                "volunteer_id)\n " +
                 "VALUES (" +
                 volunteer.getContactByPhone() + ", " +
                 volunteer.getContactByEmail() + ", " +
                 volunteer.getPhoneNumber() + ", " +
                 wrap(volunteer.getAddress()) + ", " +
                 wrap(volunteer.getPostalCode()) + ", " +
-                volunteer.getMemberID() + ", " +
-                volunteer.getEmergencyContactID() +
+                volunteer.getMemberID() +
                 ");");
     }
 

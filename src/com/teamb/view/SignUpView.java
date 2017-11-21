@@ -29,6 +29,27 @@ import java.util.Objects;
 
 public class SignUpView extends BasicView {
 
+    public Button submit;
+    public Button clear;
+    public Availability a;
+    public TableView<Shift> availabilityTable;
+    public TextField firstNameField;
+    public TextField lastNameField;
+    public TextField passwordField;
+    public TextField addressField;
+    public TextField phoneNumberField;
+    public TextField emergencyNumberField;
+    public TextField emergencyNameField;
+    public TextField emailField;
+    public TextField memberIDField;
+    public TextArea medicalInformationField;
+    public RadioButton phoneYes;
+    public RadioButton emailYes;
+    public RadioButton checked;
+
+
+
+
     public SignUpView(BasicController c){
         super(c);
 
@@ -89,32 +110,32 @@ public class SignUpView extends BasicView {
 
 
         //Create textFields
-        TextField firstNameField = new TextField();
-        TextField lastNameField  = new TextField();
-        TextField passwordField = new TextField();
-        TextField addressField  = new TextField();
-        TextField phoneNumberField = new TextField();
-        TextField emergencyNumberField  = new TextField();
-        TextField emergencyNameField  = new TextField();
-        TextField emailField  = new TextField();
-        TextField memberIDField  = new TextField();
-        TextArea medicalInformationField = new TextArea();
+        firstNameField = new TextField();
+        lastNameField  = new TextField();
+        passwordField = new TextField();
+        addressField  = new TextField();
+        phoneNumberField = new TextField();
+        emergencyNumberField  = new TextField();
+        emergencyNameField  = new TextField();
+        emailField  = new TextField();
+        memberIDField  = new TextField();
+        medicalInformationField = new TextArea();
 
         //Create Radio Buttons
         final ToggleGroup phonePrefer = new ToggleGroup();
-        RadioButton phoneYes = new RadioButton("Yes");
+        phoneYes = new RadioButton("Yes");
         RadioButton phoneNo = new RadioButton("No");
         phoneYes.setToggleGroup(phonePrefer);
         phoneNo.setToggleGroup(phonePrefer);
 
         final ToggleGroup emailPrefer = new ToggleGroup();
-        RadioButton emailYes = new RadioButton("Yes");
+        emailYes = new RadioButton("Yes");
         RadioButton emailNo = new RadioButton("No");
         emailYes.setToggleGroup(emailPrefer);
         emailNo.setToggleGroup(emailPrefer);
 
         final ToggleGroup criminalCheckGroup = new ToggleGroup();
-        RadioButton checked = new RadioButton("Yes");
+        checked = new RadioButton("Yes");
         RadioButton uncheck = new RadioButton("No");
         checked.setToggleGroup(criminalCheckGroup);
         uncheck.setToggleGroup(criminalCheckGroup);
@@ -135,7 +156,7 @@ public class SignUpView extends BasicView {
         final ComboBox volGroupBox = new ComboBox(volGrouplist);
 
         /************Create Availability Table************/
-        TableView<Shift> availabilityTable = new TableView<>();
+        availabilityTable = new TableView<>();
         availabilityTable.setEditable(true);
 
         availabilityTable.getColumns().add(createColumn("Shift","shift"));
@@ -234,7 +255,7 @@ public class SignUpView extends BasicView {
             return cell;
         });
         //this fake availability data
-        Availability a = new Availability();
+         a = new Availability();
 
         Shift a1 = a.fetchAvailabiliity().get(0);
         Shift a2 = a.fetchAvailabiliity().get(1);
@@ -246,29 +267,17 @@ public class SignUpView extends BasicView {
 
 
         //Create Buttons
-        Button submit = new Button("Submit");
-        Button clear = new Button("Clear");
+         submit = new Button("Submit");
+         clear = new Button("Clear");
+
+
 
         submit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                for (Shift shift: availabilityTable.getItems()) {
-                    for(int i=0;i<7;i++){
-                        if(shift.getWeekdayAvailability(i)){
-                            if(Objects.equals(shift.getShift(), "Morning")){
-                                a.ChangeAvailability(i,0,true);
-                                System.out.println("Day "+ i +" morning is available");
-                            }else if(Objects.equals(shift.getShift(), "Afternoon")){
-                                a.ChangeAvailability(i,1,true);
-                                System.out.println("Day "+ i +" afternoon is available");
-                            }else{
-                                a.ChangeAvailability(i,2,true);
-                                System.out.println("Day "+ i +" evening is available");
-                            }
-                        }
-                    }
-                }
-                System.out.print(a);
+                ((SignUpController) controller).createNewProfile();
+               // ((SignUpController) controller).actionPerformed();
+                ((SignUpController) controller).completePopUP();
             }
         });
 
