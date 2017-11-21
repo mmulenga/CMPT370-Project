@@ -204,9 +204,8 @@ public class VolunteerizeModel {
      * @param query - String with the data that is being looked for.
      * @param dataType - String with data type of query.
      */
-    public Profile searchVolunteer(String query, String dataType ) {
+    public ResultSet getVolunteer(String query, String dataType ) {
 
-        String dbDataType = getVolunteerDataType(dataType);
         Profile p = new Profile();
 
         ResultSet rs = database.select( "v.id, " +
@@ -243,7 +242,7 @@ public class VolunteerizeModel {
                     "and c.emergency_contact_id = e.id " +
                     "and m.volunteer_id = v.id " +
                     "and m.group_id = g.id " +
-                    "and " + dbDataType + " = " + query);
+                    "and " + dataType + " = " + query);
 
         try {
 
@@ -277,7 +276,7 @@ public class VolunteerizeModel {
 
                 exception.printStackTrace();
         }
-        return p;
+        return rs;
 
 
 
@@ -289,42 +288,25 @@ public class VolunteerizeModel {
      * @param query - String with the data that is being looked for.
      * @param dataType - String with data type of query.
      */
-    public Event searchEvent(String query, String dataType ) {
+    public ResultSet getEvent(String query, String dataType ) {
 
         Event e = new Event();
-        String dbDataType = getEventDataType(dataType);
+
+        ResultSet rs = database.select( "e.id, " +
+                "e.name, " +
+                "e.start_time, " +
+                "e.end_time, " +
+                "e.description, " +
+                "l.name as location_name, " +
+                "l.address, " +
+                "l.postal_code " +
+                "FROM events e, locations l " +
+                "WHERE l.id = e.location.id " +
+                "and " + dataType + " = " + query);
 
 
-        try{
 
-            ResultSet rs = database.select( "e.id, " +
-                    "e.name, " +
-                    "e.start_time, " +
-                    "e.end_time, " +
-                    "e.description, " +
-                    "l.name as location_name, " +
-                    "l.address, " +
-                    "l.postal_code " +
-                    "FROM events e, locations l " +
-                    "WHERE l.id = e.location.id " +
-                    "and " + dbDataType + " = " + query);
-
-
-            e.setEventName( rs.getString("name"));
-            e.setDescription( rs.getString("description"));
-            e.setStartDate( rs.getDate("start_date"));   // in database is a timestamp, so date and time are together
-            e.setEndDate( rs.getDate("end_date"));
-            e.setStartTime( rs.getInt ("start_time"));
-            e.setEndTime( rs.getInt ("end_time"));
-            e.setLocation(rs.getString( "location_name")); // do we need address?
-
-        }catch(SQLException exception) {
-            System.out.println("Search query failed.");
-
-            exception.printStackTrace();
-        }
-
-        return e;
+        return rs;
     }
 
     public Event[] searchEvents(String query, String dataType ) {
@@ -346,8 +328,9 @@ public class VolunteerizeModel {
         }
 
         Event [] eventsSearched = new Event[numOfValues];
+        ResultSet eventsSought = getEvent(query,dbDataType);
 
-        
+
 
         return eventsSearched;
     }
