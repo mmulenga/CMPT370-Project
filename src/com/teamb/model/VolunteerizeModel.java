@@ -233,8 +233,8 @@ public class VolunteerizeModel {
 
             e.setEventName( rs.getString("name"));
             e.setDescription( rs.getString("description"));
-            e.setStartDate( rs.getInt("start_date"));   // in database is a timestamp, so date and time are together
-            e.setEndDate( rs.getInt("end_date"));
+            e.setStartDate( rs.getDate("start_date"));   // in database is a timestamp, so date and time are together
+            e.setEndDate( rs.getDate("end_date"));
             e.setStartTime( rs.getInt ("start_time"));
             e.setEndTime( rs.getInt ("end_time"));
             e.setLocation(rs.getString( "location_name")); // do we need address?

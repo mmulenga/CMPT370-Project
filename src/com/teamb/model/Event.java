@@ -11,7 +11,7 @@ public class Event {
 
 	private int eventID;
 	private int startTime;    // 24 hour clock
-	private String endTime;        // 24 hour clock
+	private int endTime;        // 24 hour clock
 	private Date startDate;        
 	private Date endDate;
 
@@ -53,7 +53,7 @@ public class Event {
 	 * post          all values are initialized
 	 * return 		void - nothing
 	 */
-	public void setEventFeilds(int ID, String name, int sTime, int eTime, Date sDate, Date eDate, String location, String description) {
+	public void setEventFields(int ID, String name, int sTime, int eTime, Date sDate, Date eDate, String location, String description) {
 		setEventID(ID);
 		setEventName(name);
 		setStartTime(sTime);
