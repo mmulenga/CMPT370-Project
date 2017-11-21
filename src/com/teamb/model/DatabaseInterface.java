@@ -145,7 +145,7 @@ public class DatabaseInterface {
         try {
             dbStatement = dbConnection.createStatement();
 
-            dbStatement.execute("DELETE FROM " + query);
+            dbStatement.execute("DELETE FROM " + query); // should the FROM be there?? -Sascha
         } catch(SQLException exception) {
             System.out.println("Delete query failed.");
 
@@ -155,6 +155,27 @@ public class DatabaseInterface {
                 disconnect();
             }
         }
+    }
+
+    public ResultSet count(String query) {
+        System.out.println(query);
+        connect();
+
+        try {
+            dbStatement = dbConnection.createStatement();
+
+            return dbStatement.executeQuery("COUNT (*) FROM " + query);
+        } catch(SQLException exception) {
+            System.out.println("Count query failed.");
+
+            exception.printStackTrace();
+            return null;
+        } finally {
+            if(dbStatement != null) {
+                disconnect();
+            }
+        }
+
     }
 
     public static void main(String[] args) {

@@ -165,8 +165,8 @@ public class VolunteerizeModel {
             dbDataType = "v.first_name  ";
         else if (dataType.equals("Last Name"))
             dbDataType = "v.last_name";
-        else if (dataType.equals(" STUFF")) // Place holder while we wait for more options
-            dbDataType = "stuff";  // What else can be searched by?
+        else if (dataType.equals("Availability")) // Place holder while we wait for more options
+            dbDataType = "LIST ";  // What else can be searched by?
         else
             dbDataType = "fail"; // meaning you can't search by this data type
 
@@ -294,8 +294,42 @@ public class VolunteerizeModel {
         return e;
     }
 
+    public Event searchEvents(String query, String dataType ) {
+        Event e = new Event();
+        String dbDataType;
 
-    public static void main(String args[]) {
+
+        if (dataType.equals("Id"))
+            dbDataType = "e.id  ";
+        else if (dataType.equals("Name"))
+            dbDataType = "e.name  ";
+        else if (dataType.equals("StartTime"))
+            dbDataType = "e.start_time";
+        else if (dataType.equals("End Time"))
+            dbDataType = "e.end_time";  // What else can be searched by?
+        else
+            dbDataType = "fail"; // meaning you can't search by this data type
+
+        try{
+        ResultSet rs = database.count( "events e, locations l " +
+                "WHERE l.id = e.location.id " +
+                "and " + dbDataType + " = " + query);
+
+
+        }catch(SQLException exception) {
+            System.out.println("Insert query failed.");
+
+            exception.printStackTrace();
+        }
+
+
+        return e;
+
+
+    }
+
+
+        public static void main(String args[]) {
         VolunteerizeModel model = new VolunteerizeModel();
         Profile newProfile = new Profile();
 
