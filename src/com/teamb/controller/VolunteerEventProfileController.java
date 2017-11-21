@@ -11,12 +11,10 @@ import com.teamb.view.VolunteerEventProfileView;
 
 public class VolunteerEventProfileController extends BasicController {
     VolunteerEventProfileView volunteerView;
-    Event event;
 
-    public VolunteerEventProfileController(Stage s, Event e){
+    public VolunteerEventProfileController(Stage s){
         super(s);
-        event = e;
-        volunteerView = new VolunteerEventProfileView(this, event);
+        volunteerView = new VolunteerEventProfileView(this);
 
     }
 

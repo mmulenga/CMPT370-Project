@@ -11,22 +11,20 @@ import com.teamb.model.Event;
 /**
  * Created by David on 2017-11-20
  */
-public class StaffEventProfileController{
+public class StaffEventProfileController extends BasicController{
     StaffEventProfileView staffView;
-    Event event;
     Stage stage;
 
-    public StaffEventProfileController(Stage s, Event e){
-       // super(s);
-        stage = s;
-        event = e;
-        staffView = new StaffEventProfileView(this, event);
+    public StaffEventProfileController(Stage s){
+        super(s);
+        staffView = new StaffEventProfileView(this);
 
     }
 
-    //StaffEventProfileView staffView = new StaffEventProfileView(this, event);
 
-    //@Override
+
+
+    @Override
     public StaffEventProfileView GetView() {
         return staffView;
     }
@@ -38,6 +36,8 @@ public class StaffEventProfileController{
     public void ChangeToEditEventView(){
         //TODO
     }
+
+
 
 
 
