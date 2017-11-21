@@ -25,6 +25,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import sun.security.x509.AVA;
 
+import java.util.Objects;
+
 public class SignUpView extends BasicView {
 
     public SignUpView(BasicController c){
@@ -157,7 +159,7 @@ public class SignUpView extends BasicView {
                 BooleanProperty mon = new SimpleBooleanProperty(availabilityTable.getItems().get(index).isMonAvailable());
                 mon.addListener((obs, wasActive, isnowactive)->{
                     Shift a = availabilityTable.getItems().get(index);
-                    a.mon = true;
+                    a.mon = isnowactive;
                 });
                 return mon;
             });
@@ -169,7 +171,7 @@ public class SignUpView extends BasicView {
                 BooleanProperty tue = new SimpleBooleanProperty(availabilityTable.getItems().get(index).isTueAvailable());
                 tue.addListener((obs, wasActive, isnowactive)->{
                     Shift a = availabilityTable.getItems().get(index);
-                    a.tue = true;
+                    a.tue = isnowactive;
                 });
                 return tue;
             });
@@ -180,7 +182,7 @@ public class SignUpView extends BasicView {
                 BooleanProperty wed = new SimpleBooleanProperty(availabilityTable.getItems().get(index).isWedAvailable());
                 wed.addListener((obs, wasActive, isnowactive)->{
                     Shift a = availabilityTable.getItems().get(index);
-                    a.wed = true;
+                    a.wed = isnowactive;
                 });
                 return wed;
             });
@@ -192,7 +194,7 @@ public class SignUpView extends BasicView {
                 BooleanProperty thur = new SimpleBooleanProperty(availabilityTable.getItems().get(index).isThurAvailable());
                 thur.addListener((obs, wasActive, isnowactive)->{
                     Shift a = availabilityTable.getItems().get(index);
-                    a.thur = true;
+                    a.thur = isnowactive;
                 });
                 return thur;
             });
@@ -203,7 +205,7 @@ public class SignUpView extends BasicView {
                 BooleanProperty fri = new SimpleBooleanProperty(availabilityTable.getItems().get(index).isFriAvailable());
                 fri.addListener((obs, wasActive, isnowactive)->{
                     Shift a = availabilityTable.getItems().get(index);
-                    a.fri = true;
+                    a.fri = isnowactive;
                 });
                 return fri;
             });
@@ -214,7 +216,7 @@ public class SignUpView extends BasicView {
                 BooleanProperty sat = new SimpleBooleanProperty(availabilityTable.getItems().get(index).isSatAvailable());
                 sat.addListener((obs, wasActive, isnowactive)->{
                     Shift a = availabilityTable.getItems().get(index);
-                    a.sat = true;
+                    a.sat = isnowactive;
                 });
                 return sat;
             });
@@ -223,10 +225,10 @@ public class SignUpView extends BasicView {
         sunCol.setCellFactory(col ->{
             CheckBoxTableCell<Shift, Boolean> cell = new CheckBoxTableCell<>(index->{
                 BooleanProperty sun = new SimpleBooleanProperty(availabilityTable.getItems().get(index).isSunAvailable());
-//                sun.addListener((obs, wasActive, isnowactive)->{
-//                    Shift a = availabilityTable.getItems().get(index);
-//                    a.sun = true;
-//                });
+                sun.addListener((obs, wasActive, isnowactive)->{
+                    Shift a = availabilityTable.getItems().get(index);
+                    a.sun = isnowactive;
+                });
                 return sun;
             });
             return cell;
@@ -234,20 +236,41 @@ public class SignUpView extends BasicView {
         //this fake availability data
         Availability a = new Availability();
 
-        Shift morningAva = new Shift("Morning",true,true,true,true,false,false,false);
-        Shift afternoonAva = new Shift("Afternoon",true,true,true,true,false,false,false);
         Shift a1 = a.fetchAvailabiliity().get(0);
         Shift a2 = a.fetchAvailabiliity().get(1);
         Shift a3 = a.fetchAvailabiliity().get(2);
 
         availabilityTable.getItems().addAll(a1,a2,a3);
-        availabilityTable.setPrefHeight(100);
+        availabilityTable.setPrefHeight(150);
        // availabilityTable.prefHeightProperty().bind(Bindings.size())
 
 
         //Create Buttons
         Button submit = new Button("Submit");
         Button clear = new Button("Clear");
+
+        submit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                for (Shift shift: availabilityTable.getItems()) {
+                    for(int i=0;i<6;i++){
+                        if(shift.getWeekdayAvailability(i)){
+                            if(Objects.equals(shift.getShift(), "Morning")){
+                                a.ChangeAvailability(i,0,true);
+                                System.out.println("Day "+ i +" morning is available");
+                            }else if(Objects.equals(shift.getShift(), "Afternoon")){
+                                a.ChangeAvailability(i,1,true);
+                                System.out.println("Day "+ i +" afternoon is available");
+                            }else{
+                                a.ChangeAvailability(i,2,true);
+                                System.out.println("Day "+ i +" evening is available");
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
 
         //Add widgets onto gridPane
         gp.add(memberIDLabel,0,1);
@@ -325,9 +348,10 @@ public class SignUpView extends BasicView {
                 phoneYes.setSelected(true);
                 emailYes.setSelected(true);
                 checked.setSelected(true);
-
-
-
+//                for (Shift shift: availabilityTable.getItems()
+//                     ) {
+//                    shift.reset();
+//                }
             }
         });
 

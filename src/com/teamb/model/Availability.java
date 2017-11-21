@@ -20,10 +20,10 @@ public class Availability {
         }
     }
 
-    //0 = sunday, 1 = monday etc
+    //0 = monday, 1 = tuesday etc
     //0 = morning, 1 = afternoon
-    void ChangeAvailability(int day, int shift, boolean isAvailable){
-        availablility[day - 1][shift] = isAvailable;
+    public void ChangeAvailability(int day, int shift, boolean isAvailable){
+        availablility[day][shift] = isAvailable;
     }
 
     public Boolean GetAvailablity(int day, int  shift){
@@ -46,7 +46,6 @@ public class Availability {
        sList.add(eveningShift);
        return sList;
     }
-
 
 
 
