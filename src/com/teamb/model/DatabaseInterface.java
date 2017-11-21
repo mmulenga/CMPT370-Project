@@ -156,4 +156,34 @@ public class DatabaseInterface {
             }
         }
     }
+
+    /**
+     * returns ResultSet containing Count of the number of rows the query provides.
+     * @param query - A string containing the desired delete target.
+     */
+    public ResultSet count(String query) {
+        System.out.println(query);
+        // Connect to the databse.
+        connect();
+
+        try {
+            dbStatement = dbConnection.createStatement();
+
+            return dbStatement.executeQuery("COUNT (*) FROM " + query);
+        } catch(SQLException exception) {
+            System.out.println("Count query failed.");
+
+            exception.printStackTrace();
+            return null;
+        } finally {
+            if(dbStatement != null) {
+                disconnect();
+            }
+        }
+
+    }
+
+    public static void main(String[] args) {
+
+    }
 }
