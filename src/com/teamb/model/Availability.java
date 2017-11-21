@@ -20,10 +20,10 @@ public class Availability {
         }
     }
 
-    //0 = sunday, 1 = monday etc
+    //0 = monday, 1 = tuesday etc
     //0 = morning, 1 = afternoon
-    void ChangeAvailability(int day, int shift, boolean isAvailable){
-        availablility[day - 1][shift] = isAvailable;
+    public void ChangeAvailability(int day, int shift, boolean isAvailable){
+        availablility[day][shift] = isAvailable;
     }
 
     public Boolean GetAvailablity(int day, int  shift){
@@ -47,7 +47,31 @@ public class Availability {
        return sList;
     }
 
-
+    public String toString(){
+       String temp = "";
+       System.out.println("Day  |  Morning  |  Afternon  |  Evening");
+       for(int i=0; i<7;i++){
+           temp += i + "          ";
+           if(availablility[i][0]){
+               temp += "ture       ";
+           }else{
+               temp += "false       ";
+           }
+           if(availablility[i][1]){
+               temp += "ture       ";
+           }else{
+               temp += "false       ";
+           }
+           if(availablility[i][2]){
+               temp += "ture       ";
+           }else{
+               temp += "false       ";
+           }
+           System.out.println(temp);
+           temp = "";
+       }
+       return temp;
+    }
 
 
 }
