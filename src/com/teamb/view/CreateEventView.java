@@ -21,7 +21,10 @@ import java.time.LocalDate;
 import java.util.Locale;
 
 public class CreateEventView extends BasicView {
-
+    //Create textFields
+    public TextField eventTitleField = new TextField();
+    public TextField locationField = new TextField();
+    public TextArea descriptionArea = new TextArea();
     /**
      * Constructor.
      * Creates the root pane, and adds the children with the CreateChildren() method.
@@ -86,10 +89,7 @@ public class CreateEventView extends BasicView {
         Label locationLabel = new Label("Location : ");
         Label description = new Label("Description : ");
 
-        //Create textFields
-        TextField eventTitleField = new TextField();
-        TextField locationField = new TextField();
-        TextArea descriptionArea = new TextArea();
+
 
         //Create Dorpdown box
         ObservableList<String> startTimeList =

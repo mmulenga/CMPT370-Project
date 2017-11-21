@@ -36,6 +36,7 @@ public class Volunteerize extends Application {
         primaryStage.setTitle("Volunteerize");
         primaryStage.setScene(scene);
         primaryStage.show();
+
     }
 
     /**
