@@ -1,6 +1,7 @@
 package com.teamb.view;
 
 import com.teamb.controller.BasicController;
+import com.teamb.controller.MainLandingController;
 import com.teamb.controller.ManageVolunteersController;
 import com.teamb.model.Event;
 import com.teamb.model.Profile;
@@ -26,7 +27,7 @@ import java.util.ArrayList;
  */
 public class ManageVolunteersView extends BasicView {
 
-    ManageVolunteersController controller;
+    //ManageVolunteersController controller;
 
     /**
      * Constructor.
@@ -37,8 +38,8 @@ public class ManageVolunteersView extends BasicView {
      */
     public ManageVolunteersView(ManageVolunteersController c) {
         super(c);
-
-
+        controller = c;
+        CreateChildren();
     }
 
     private <S,T> TableColumn<S,T> createColumn(String title, String propertyName) {
@@ -63,37 +64,49 @@ public class ManageVolunteersView extends BasicView {
     @Override
     protected void CreateChildren() {
         //Create the table
+
         TableView<ProfileCheck> table = new TableView<>();
-        TableColumn<ProfileCheck, String> nameCol = new TableColumn<>("Name");
-        TableColumn<ProfileCheck, Boolean> phoneCol = new TableColumn<>("Phone?");
-        TableColumn<ProfileCheck, Boolean> emailCol = new TableColumn<>("Email?");
-        TableColumn<ProfileCheck, Boolean> activeCol = new TableColumn<>("Select");
+
+        ObservableList<ProfileCheck> dummylist = ((ManageVolunteersController) controller).GetObservableProfiles();//TODO this will be the actual list
+
+        table.setItems(dummylist);
+
+        TableColumn<ProfileCheck,String> firstNameCol = new TableColumn<ProfileCheck,String>("First Name");
+        firstNameCol.setCellValueFactory(new PropertyValueFactory("firstName"));
+
+        for (ProfileCheck p : dummylist) {
+            p.isActive().addListener((obs, old, now) -> {
+                System.out.print(obs);
+
+            });
+        }
+
+//        TableColumn<ProfileCheck, String> nameCol = new TableColumn<>("Name");
+//        TableColumn<ProfileCheck, Boolean> phoneCol = new TableColumn<>("Phone?");
+//        TableColumn<ProfileCheck, Boolean> emailCol = new TableColumn<>("Email?");
+//        TableColumn<ProfileCheck, Boolean> activeCol = new TableColumn<>("Select");
 
         //Create observable list
-//        ObservableList<ProfileCheck> dummylist = controller.observableProfiles;//TODO this will be the actual list
-//        for(ProfileCheck p : dummylist){
-//            p.isActive().addListener((obs,old,now)->{
-//                System.out.print(obs);
-//
-//            });
 
-            root.getChildren().add(table);
-            table.getColumns().addAll(nameCol, phoneCol, emailCol, activeCol);
-//            table.setItems(dummylist);
+
+
+            //System.out.println(controller.toString());
+
+            //table.getColumns().addAll(nameCol, phoneCol, emailCol, activeCol);
+
             table.setEditable(true);
 
-            phoneCol.setCellValueFactory(new PropertyValueFactory<>("wantsPhoneCall"));
-            phoneCol.setVisible(true);
-
-            emailCol.setCellValueFactory(new PropertyValueFactory<>("wantsEmails"));
-            emailCol.setVisible(true);
-
-            activeCol.setCellFactory(CheckBoxTableCell.forTableColumn(activeCol));
-            activeCol.setVisible(true);
-            activeCol.setEditable(true);
-
-
-        }
+//            phoneCol.setCellValueFactory(new PropertyValueFactory<>("wantsPhoneCall"));
+//            phoneCol.setVisible(true);
+//
+//            emailCol.setCellValueFactory(new PropertyValueFactory<>("wantsEmails"));
+//            emailCol.setVisible(true);
+//
+//            activeCol.setCellFactory(CheckBoxTableCell.forTableColumn(activeCol));
+//            activeCol.setVisible(true);
+//            activeCol.setEditable(true);
+            root.getChildren().add(table);
+    }
 
 
 
