@@ -1,6 +1,7 @@
 package com.teamb.view;
 
 import com.sun.org.apache.bcel.internal.generic.NEW;
+import com.teamb.controller.BasicController;
 import com.teamb.controller.MainLandingController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,14 +20,14 @@ import javafx.stage.Stage;
  */
 public class MainLandingView extends BasicView{
 
-    private MainLandingController controller;
+    //private MainLandingController controller;
 
     /**
      * Constructs the MainLanding page.
      */
-    public MainLandingView(MainLandingController c){
+    public MainLandingView(BasicController c){
         super(c);
-        controller = c;
+
     }
 
     @Override
@@ -37,8 +38,7 @@ public class MainLandingView extends BasicView{
         Button vButton = new Button("Volunteer Login");
         vButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event) {
-                controller.ChangeToLoginView(event);
+            public void handle(ActionEvent event) {((MainLandingController)controller).ChangeToLoginView(event);
             }
         });
         //when this button is pressed view changes to volunteer login page
@@ -47,7 +47,7 @@ public class MainLandingView extends BasicView{
         sButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                controller.ChangeToLoginView(event);
+                ((MainLandingController)controller).ChangeToLoginView(event);
             }
         });
         //when this button is pressed view changes to staff login page

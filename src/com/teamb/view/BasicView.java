@@ -20,7 +20,7 @@ public abstract class BasicView {
 
 
     protected Pane root;
-    BasicController controller;
+    public BasicController controller;
 
     /**
      * Constructor.
@@ -29,7 +29,7 @@ public abstract class BasicView {
      */
     public BasicView(BasicController c){
         root = new Pane();
-        controller = c;
+        this.controller = c;
         this.CreateChildren();
     }
 
