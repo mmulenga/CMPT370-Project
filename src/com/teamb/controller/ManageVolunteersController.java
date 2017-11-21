@@ -45,12 +45,13 @@ public class ManageVolunteersController extends BasicController{
 
         for (int i = 0; i < 10; i++) {
            Profile profile = new Profile();
-           profile.setAllBaseInformation("Firstname" + i, "LastName" + i, "Address" + i,
-                   "phone" + i, "Emergancy Contact #" + i,
-                   "Emergancy Contact Name" + i, "Email" + i, true,
+           profile.setAllBaseInformation("Firstname" + i, "middleName" + i, "LastName" + i, "Address" + i,
+                   "phone" + i, "postalCode" + i, "Emergancy Contact Phone #" + i,
+                   "emergencyContactFirstName" + i, "emergencyContactMiddleName" + i, "emergencyContactLastName" + i, 100001 + i,
+                   "emergencyContactPostalCode" + i, "emergencyContactAddress" + i, "Email" + i, true,
                    true,  i, true,
                    "Medical Info" + i, i, "PhotoPath" + i,
-                   new Availability("availability", true, true, true, true, true, true, true));
+                   new Availability());
            ProfileCheck pc = new ProfileCheck(profile);
            pc.SetActive(false);
            dummyList.add(pc);

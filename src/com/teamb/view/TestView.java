@@ -1,4 +1,4 @@
-package com.teamb;
+package com.teamb.view;
 
 import com.teamb.controller.EventController;
 import com.teamb.controller.LoginViewController;
@@ -19,8 +19,8 @@ public class TestView extends Application{
 
         newStage = primaryStage;
         //LoginView lginView = new LoginView(newStage);
-        Event event = new Event(19844930, "Call of duty", "Blah blh", 8, 67);
-        StaffEventProfileController sc =  new StaffEventProfileController(newStage, event);
+        Event event = new Event();
+        StaffEventProfileController sc =  new StaffEventProfileController(newStage);
 
         Scene scene = new Scene(sc.GetView().GetRootPane(), 720, 540);
 
