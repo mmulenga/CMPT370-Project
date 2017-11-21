@@ -138,8 +138,8 @@ public class Availability {
 //    public BooleanProperty monProperty() {
 //        return Mon;
 //    }
-
-    //    private boolean[][] availablility;
+//
+//        private boolean[][] availablility;
 //
 //
 //    public Availability()

@@ -1,5 +1,6 @@
 //package com.teamb.view;
 //
+//
 //import com.teamb.controller.SignUpController;
 //import com.teamb.model.Availability;
 //import javafx.beans.binding.Bindings;

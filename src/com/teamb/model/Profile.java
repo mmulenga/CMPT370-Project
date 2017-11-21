@@ -261,4 +261,8 @@ public class Profile {
     public void removeFromGroup(String groupName){
         volunteerGroups.removeGroup(groupName);
     }
+    public static void main(String args[]){
+
+
+    }
 }
