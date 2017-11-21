@@ -25,6 +25,7 @@ public abstract class BasicController {
     }
 
 
+
     //public abstract void HelpPopUp(); //not sure if this will go here
 
     protected abstract BasicView GetView();
