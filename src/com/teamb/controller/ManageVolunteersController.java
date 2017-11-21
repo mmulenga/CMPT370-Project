@@ -1,18 +1,11 @@
 package com.teamb.controller;
 
-import com.teamb.model.Availability;
-import com.teamb.model.Profile;
-import com.teamb.model.ProfileCheck;
-import com.teamb.model.VolunteerGroup;
+
 import com.teamb.view.BasicView;
 import com.teamb.view.ManageVolunteersView;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
-import javafx.collections.ObservableList;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-import java.util.Observable;
 
 /**
  * Created by Sarah on 2017-11-19.
@@ -20,47 +13,37 @@ import java.util.Observable;
 public class ManageVolunteersController extends BasicController{
 
 
-//    ArrayList<Profile> allProfiles;
-//    ArrayList<Profile> filteredProfiles;
-    ObservableList<ProfileCheck> observableProfiles;
 
     ManageVolunteersView view;
 
     public ManageVolunteersController(Stage s) {
         super(s);
-        observableProfiles = CreateDummyList();
         view = new ManageVolunteersView(this);
     }
 
     @Override
-    protected BasicView GetView() {
+    public BasicView GetView() {
         return view;
     }
 
 
+    public void ChangeToSignUpView(){
+        SignUpController c = new SignUpController(stage);
+        Scene scene = new Scene(c.GetView().GetRootPane(),600,600);
+        stage.setScene(scene);
+        stage.show();
 
-    public ObservableList<ProfileCheck> CreateDummyList(){
-        //TODO: Create observable list of ProfileChecks from a list of Profiles instead
-        ObservableList<ProfileCheck> dummyList = FXCollections.observableArrayList();
-
-        for (int i = 0; i < 10; i++) {
-           Profile profile = new Profile();
-           profile.setAllBaseInformation("Firstname" + i, "middleName" + i, "LastName" + i, "Address" + i,
-                   "phone" + i, "postalCode" + i, "Emergancy Contact Phone #" + i,
-                   "emergencyContactFirstName" + i, "emergencyContactMiddleName" + i, "emergencyContactLastName" + i, 100001 + i,
-                   "emergencyContactPostalCode" + i, "emergencyContactAddress" + i, "Email" + i, true,
-                   true,  i, true,
-                   "Medical Info" + i, i, "PhotoPath" + i,
-                   new Availability());
-           ProfileCheck pc = new ProfileCheck(profile);
-           pc.SetActive(false);
-           dummyList.add(pc);
-        }
-        return dummyList;
     }
 
-    public ObservableList<ProfileCheck> GetObservableProfiles(){
-        return observableProfiles;
+    public void SendEmails(/*TODO*/){
+        //TODO will send Emails to given Volunteers (use volunteer id)
     }
 
+    public void PrintPhoneList(/*TODO*/){
+        //TODO will get phone numbers of given Volunteers (use volunteer id)
+    }
+
+    public void DeleteProfiles(/*TODO*/){
+        //TODO will delete given profiles
+    }
 }
