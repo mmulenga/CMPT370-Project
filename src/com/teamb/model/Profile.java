@@ -10,6 +10,7 @@ public class Profile {
 
 
     private String firstName;
+    private String middleName;
     private String lastName;
     private String address;
     private String phoneNumber;
@@ -91,6 +92,9 @@ public class Profile {
     public void setFirstName(String name){
         this.firstName = name;
     }
+    /**
+     * setMiddleName(name)
+     */
     /**
      * 
      * @param last - last name
@@ -261,4 +265,10 @@ public class Profile {
     public void removeFromGroup(String groupName){
         volunteerGroups.removeGroup(groupName);
     }
+
+    public static void main(String args[]){
+        System.out.println("Profile.java");
+    }
+
+
 }
