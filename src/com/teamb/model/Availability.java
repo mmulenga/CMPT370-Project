@@ -47,6 +47,31 @@ public class Availability {
        return sList;
     }
 
+    public String toString(){
+       String temp = "";
+       System.out.println("Day  |  Morning  |  Afternon  |  Evening");
+       for(int i=0; i<7;i++){
+           temp += i + "          ";
+           if(availablility[i][0]){
+               temp += "ture       ";
+           }else{
+               temp += "false       ";
+           }
+           if(availablility[i][1]){
+               temp += "ture       ";
+           }else{
+               temp += "false       ";
+           }
+           if(availablility[i][2]){
+               temp += "ture       ";
+           }else{
+               temp += "false       ";
+           }
+           System.out.println(temp);
+           temp = "";
+       }
+       return temp;
+    }
 
 
 }

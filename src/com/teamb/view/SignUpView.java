@@ -253,7 +253,7 @@ public class SignUpView extends BasicView {
             @Override
             public void handle(ActionEvent event) {
                 for (Shift shift: availabilityTable.getItems()) {
-                    for(int i=0;i<6;i++){
+                    for(int i=0;i<7;i++){
                         if(shift.getWeekdayAvailability(i)){
                             if(Objects.equals(shift.getShift(), "Morning")){
                                 a.ChangeAvailability(i,0,true);
@@ -268,8 +268,10 @@ public class SignUpView extends BasicView {
                         }
                     }
                 }
+                System.out.print(a);
             }
         });
+
 
 
         //Add widgets onto gridPane
