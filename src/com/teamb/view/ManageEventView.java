@@ -88,7 +88,7 @@ public class ManageEventView extends BasicView {
             }
         });
 
-        //fake event data
+        //fake event data TODO get real data instead
         for(int i = 0; i<5;i++){
             Event e = new Event();
             e.setEventName("Event "+i);
