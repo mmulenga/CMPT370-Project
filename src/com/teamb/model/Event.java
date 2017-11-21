@@ -53,7 +53,7 @@ public class Event {
 	 * post          all values are initialized
 	 * return 		void - nothing
 	 */
-	public void setEventFeilds(int ID, String name, int sTime, int eTime, int sDate, int eDate, String location, String description) {
+	public void setEventFields(int ID, String name, int sTime, int eTime, int sDate, int eDate, String location, String description) {
 		setEventID(ID);
 		setEventName(name);
 		setStartTime(sTime);
