@@ -89,7 +89,6 @@ public class VolunteerizeModel {
                 ", \n" + "address = " + wrap(volunteer.getAddress()) +
                 ", \n" + "postal_code = " + wrap(volunteer.getPostalCode()) +
                 ", \n" + "volunteer_id = " + volunteer.getMemberID() +
-                ", \n" + "emergency_contact_id = " + volunteer.getEmergencyContactID() +
                 "\n WHERE volunteer_id = " + volunteer.getMemberID() + ";");
 
         // Insert all emergency contact information.

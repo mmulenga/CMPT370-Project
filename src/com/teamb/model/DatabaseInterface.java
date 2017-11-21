@@ -155,8 +155,4 @@ public class DatabaseInterface {
             }
         }
     }
-
-    public static void main(String[] args) {
-
-    }
 }
