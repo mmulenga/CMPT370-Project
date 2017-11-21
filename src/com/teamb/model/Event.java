@@ -12,8 +12,8 @@ public class Event {
 	private int eventID;
 	private int startTime;    // 24 hour clock
 	private String endTime;        // 24 hour clock
-	private Date startDate;        // ddmmyy
-	private Date endDate;        //ddmmyy
+	private Date startDate;        
+	private Date endDate;
 
 	private String eventName;
 	private String location;
