@@ -50,23 +50,23 @@ public class VolunteerizeModel {
         return profile;
     }
 
-    public void deleteProfile() {
-
+    public void deleteProfile(Profile volunteer) {
+        database.delete( "volunteers WHERE id =" + volunteer.getMemberID() + "CASCADE;");
     }
 
-    public Profile GetVolunteer(String query, String dataType ) {
+    public Profile searchVolunteer(String query, String dataType ) {
 
         String dbDataType;
-        Profile p;
+        Profile p = new Profile();
 
 
-        if (dataType == "Id")
+        if (dataType.equals("Id"))
             dbDataType = "v.id  ";
-        else if (dataType == "First Name")
+        else if (dataType.equals("First Name"))
             dbDataType = "v.first_name  ";
-        else if (dataType == "Last Name")
+        else if (dataType.equals("Last Name"))
             dbDataType = "v.last_name";
-        else if (dataType == " STUFF")
+        else if (dataType.equals(" STUFF")) // Place holder while we wait for more options
             dbDataType = "stuff";  // What else can be searched by?
         else
             dbDataType = "fail"; // meaning you can't search by this data type
@@ -109,9 +109,10 @@ public class VolunteerizeModel {
 
             try {
 
-                p.setAllBaseInformation(rs.getString("first_name"),
-                        rs.getString("last_name"),
-                        rs.getString("address"),
+/*
+                String firstName = rs.getString("first_name"),
+                String lastName = rs.getString("last_name"),
+                String Address = rs.getString("address"),
                         rs.getInt("phone_number"),
                         rs.getInt("emergency_contact_phone_number"),
                         rs.getString("emergency_contact_first_name"),
@@ -123,8 +124,26 @@ public class VolunteerizeModel {
                         rs.getString("medical_info"),
                         rs.getInt("hours_worked"),
                         rs.getString("photo_path")//,
-                        //rs.getString(avail)
+                //rs.getString(avail)
+  */
+                p.setAllBaseInformation(rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("address"),
+                        rs.getString("phone_number"),
+                        rs.getString("emergency_contact_phone_number"),
+                        rs.getString("emergency_contact_first_name"),
+                        rs.getString("email"),
+                        rs.getBoolean("prefer_phone"),
+                        rs.getBoolean("prefer_email"),
+                        rs.getInt("id"),
+                        rs.getBoolean("criminal_check"),
+                        rs.getString("medical_info"),
+                        rs.getInt("hours_worked"),
+                        rs.getString("photo_path"),
+                        null
                 );
+
+
             }catch(SQLException exception) {
                 System.out.println("Insert query failed.");
 
@@ -133,22 +152,22 @@ public class VolunteerizeModel {
             return p;
 
 
-        return p;
+
     }
 
 
-    public Event GetEvent(String query, String dataType ) {
+    public Event searchEvent(String query, String dataType ) {
 
-        Event e;
+        Event e = new Event();
         String dbDataType;
 
-        if (dataType == "Id")
+        if (dataType.equals("Id"))
             dbDataType = "e.id  ";
-        else if (dataType == "Name")
+        else if (dataType.equals("Name"))
             dbDataType = "e.name  ";
-        else if (dataType == "StartTime")
+        else if (dataType.equals("StartTime"))
             dbDataType = "e.start_time";
-        else if (dataType == "End Time")
+        else if (dataType.equals("End Time"))
             dbDataType = "e.end_time";  // What else can be searched by?
         else
             dbDataType = "fail"; // meaning you can't search by this data type
@@ -156,10 +175,25 @@ public class VolunteerizeModel {
         try{
 
             ResultSet rs = database.select( "e.id, " +
-                    "e.name, ");
+                    "e.name, " +
+                    "e.start_time, " +
+                    "e.end_time, " +
+                    "e.description, " +
+                    "l.name as location_name, " +
+                    "l.address, " +
+                    "l.postal_code " +
+                    "FROM events e, locations l " +
+                    "WHERE l.id = e.location.id " +
+                    "and " + dbDataType + " = " + query);
 
-            // NEED DATA BASE ACCESS
-            e.setEventName(rs.getString("name"));
+
+            e.setEventName( rs.getString("name"));
+            e.setDescription( rs.getString("description"));
+            e.setStartDate( rs.getInt("start_date"));   // in database is a timestamp, so date and time are together
+            e.setEndDate( rs.getInt("end_date"));
+            e.setStartTime( rs.getInt ("start_time"));
+            e.setEndTime( rs.getInt ("end_time"));
+            e.setLocation(rs.getString( "location_name")); // do we need address?
 
         }catch(SQLException exception) {
             System.out.println("Insert query failed.");
