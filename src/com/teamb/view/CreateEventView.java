@@ -3,6 +3,8 @@ package com.teamb.view;
 import com.teamb.controller.BasicController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -78,8 +80,8 @@ public class CreateEventView extends BasicView {
         //Create Labels
         Label startDateLabel = new Label("Start Date : ");
         Label endDateLabel = new Label("End Date : ");
-        Label startTimeLabel = new Label("Password : ");
-        Label endTimeLabel = new Label("Password : ");
+        Label startTimeLabel = new Label("Start Time : ");
+        Label endTimeLabel = new Label("End Time : ");
         Label eventTitleLabel = new Label("Event Title : ");
         Label locationLabel = new Label("Location : ");
         Label description = new Label("Description : ");
@@ -96,12 +98,18 @@ public class CreateEventView extends BasicView {
                         "10:00","11:00","12:00","13:00", "14:00","15:00","16:00","17:00","18:00","19:00",
                         "20:00","21:00","22:00","23:00");
         final ComboBox startTimeBox = new ComboBox(startTimeList);
+        startTimeBox.getSelectionModel().select(0);
         ObservableList<String> endTimeList =
                 FXCollections.observableArrayList(
                         "00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00",
                         "10:00","11:00","12:00","13:00", "14:00","15:00","16:00","17:00","18:00","19:00",
                         "20:00","21:00","22:00","23:00");
         final ComboBox endTimeBox = new ComboBox(endTimeList);
+        endTimeBox.getSelectionModel().select(0);
+        //Create Buttons
+        Button submit = new Button("Submit");
+        Button clear = new Button("Clear");
+        Button home = new Button("Homepage");
 
         gp.add(eventTitleLabel,0,1);
         gp.add(eventTitleField,1,1,2,1);
@@ -109,18 +117,51 @@ public class CreateEventView extends BasicView {
         gp.add(locationLabel,0,2);
         gp.add(locationField,1,2,2,1);
 
-        gp.add(startDateLabel,0,3);
-        gp.add(endDateLabel,1,3);
+        gp.add(startTimeLabel,0,3);
+        gp.add(startTimeBox,1,3);
 
-        gp.add(startDatePicker,0,4);
-        gp.add(endDatePicker,1,4);
+        gp.add(endTimeLabel,0,4);
+        gp.add(endTimeBox,1,4);
 
+        gp.add(startDateLabel,0,5);
+        gp.add(endDateLabel,1,5);
 
-        gp.add(description,0,5);
-        gp.add(descriptionArea,1,5,2,1);
+        gp.add(startDatePicker,0,6);
+        gp.add(endDatePicker,1,6);
 
+        gp.add(description,0,7);
+        gp.add(descriptionArea,1,7,2,1);
+
+        gp.add(home,0,9);
+        gp.add(submit,1,9);
+        gp.setHalignment(submit,HPos.RIGHT);
+        gp.add(clear,2,9);
         //How to convert localDate into Timestamp here.
         //System.out.println(Timestamp.valueOf(startDatePicker.getValue().atStartOfDay()));
-        root.getChildren().add(gp);
+
+
+        clear.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                eventTitleField.clear();
+                locationField.clear();
+                descriptionArea.clear();
+                startTimeBox.getSelectionModel().select(0);
+                endTimeBox.getSelectionModel().select(0);
+                startDatePicker.setValue(LocalDate.now());
+                endDatePicker.setValue(startDatePicker.getValue().plusDays(1));
+            }
+        });
+
+        //Add Scroll Bar
+
+        ScrollPane sp = new ScrollPane();
+        sp.setContent(gp);
+
+        sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        sp.setPrefSize(600,600);
+
+        root.getChildren().add(sp);
     }
 }

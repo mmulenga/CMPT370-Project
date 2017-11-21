@@ -20,16 +20,24 @@ import java.util.Observable;
 public class ManageVolunteersController extends BasicController{
 
 
-    ArrayList<Profile> allProfiles;
-    ArrayList<Profile> filteredProfiles;
-    ObservableList<Profile> observableProfiles;
+//    ArrayList<Profile> allProfiles;
+//    ArrayList<Profile> filteredProfiles;
+    ObservableList<ProfileCheck> observableProfiles;
 
     ManageVolunteersView view;
 
     public ManageVolunteersController(Stage s) {
         super(s);
+        observableProfiles = CreateDummyList();
         view = new ManageVolunteersView(this);
     }
+
+    @Override
+    protected BasicView GetView() {
+        return view;
+    }
+
+
 
     public ObservableList<ProfileCheck> CreateDummyList(){
         //TODO: Create observable list of ProfileChecks from a list of Profiles instead
@@ -37,6 +45,13 @@ public class ManageVolunteersController extends BasicController{
 
         for (int i = 0; i < 10; i++) {
            Profile profile = new Profile();
+           profile.setAllBaseInformation("Firstname" + i, "middleName" + i, "LastName" + i, "Address" + i,
+                   "phone" + i, "postalCode" + i, "Emergancy Contact Phone #" + i,
+                   "emergencyContactFirstName" + i, "emergencyContactMiddleName" + i, "emergencyContactLastName" + i, 100001 + i,
+                   "emergencyContactPostalCode" + i, "emergencyContactAddress" + i, "Email" + i, true,
+                   true,  i, true,
+                   "Medical Info" + i, i, "PhotoPath" + i,
+                   new Availability());
            ProfileCheck pc = new ProfileCheck(profile);
            pc.SetActive(false);
            dummyList.add(pc);
@@ -44,9 +59,8 @@ public class ManageVolunteersController extends BasicController{
         return dummyList;
     }
 
-
-    @Override
-    protected BasicView GetView() {
-        return view;
+    public ObservableList<ProfileCheck> GetObservableProfiles(){
+        return observableProfiles;
     }
+
 }

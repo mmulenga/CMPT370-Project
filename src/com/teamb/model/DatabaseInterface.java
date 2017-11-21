@@ -40,10 +40,9 @@ public class DatabaseInterface {
                     dbProperties.getProperty("database"),
                     dbProperties.getProperty("username"),
                     dbProperties.getProperty("password"));
-
-            System.out.println("Connected to database.");
-
         } catch(SQLException exception) {
+            System.out.println("Failed to connect to the database.");
+
             exception.printStackTrace();
         }
     }
@@ -115,6 +114,7 @@ public class DatabaseInterface {
      * @param query - A string containing the desired update target.
      */
     public void update(String query) {
+        System.out.println(query);
         // Connect to the database.
         connect();
 
@@ -138,6 +138,7 @@ public class DatabaseInterface {
      * @param query - A string containing the desired delete target.
      */
     public void delete(String query) {
+        System.out.println(query);
         // Connect to the database.
         connect();
 

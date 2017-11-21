@@ -17,6 +17,25 @@ public class Shift {
         sun = su;
     }
 
+    public boolean getWeekdayAvailability(int day){
+        if(day == 0 ){
+            return isMonAvailable();
+        }else if(day == 1){
+            return isTueAvailable();
+        }else if(day == 2){
+            return isWedAvailable();
+        }else if(day == 3){
+            return isThurAvailable();
+        }else if(day == 4){
+            return isFriAvailable();
+        }else if(day == 5){
+            return isSatAvailable();
+        }else if(day == 6){
+            return isSunAvailable();
+        }else{
+            return false;
+        }
+    }
 
     public boolean isMonAvailable() {
         return mon;
@@ -50,6 +69,15 @@ public class Shift {
         return shift;
     }
 
+    public void reset(){
+        mon = false;
+        tue = false;
+        wed = false;
+        thur = false;
+        fri = false;
+        sat = false;
+        sun = false;
+    }
 
 
 }
