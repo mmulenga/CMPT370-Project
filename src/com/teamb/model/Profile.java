@@ -10,6 +10,7 @@ public class Profile {
 
 
     private String firstName;
+    private String middleName;
     private String lastName;
     private String address;
     private String phoneNumber;
@@ -60,10 +61,11 @@ public class Profile {
      * @param photoPath file path to the volunteer photo
      * @param availability availability in the morning and afternoon of each weekday
      */
-    public void setAllBaseInformation(String firstName, String lastName, String address, String phoneNumber, String emergancyContactNumber, String emergancyContactName, String email,
+    public void setAllBaseInformation(String firstName,String middleName, String lastName, String address, String phoneNumber, String emergancyContactNumber, String emergancyContactName, String email,
             boolean contactByPhone, boolean contactByEmail, int memberID, boolean criminalRecordCheck, String medicalInformation, int hoursWorked, String photoPath,
             Availability availability){
         this.firstName = firstName;
+        this.middleName = middleName;
         this.lastName = lastName;
         this.address = address;
         this.phoneNumber = phoneNumber;
@@ -86,28 +88,32 @@ public class Profile {
 
     /**
     * setFirstName(name)
-    * @param name - first name
+    * @param name - string, first name
     */
     public void setFirstName(String name){
         this.firstName = name;
     }
     /**
+    * setMiddleName(name)
+    * @param name - string, middle name
+    */
+    /**
      * 
-     * @param last - last name
+     * @param last - string, last name
      */
     public void setLastName(String last){
         this.lastName = last;
     }
     /**
      * 
-     * @param streetAddress (eg. 1234 Albert.Ave)
+     * @param streetAddress string, (eg. 1234 Albert.Ave)
      */
     public void setAddress(String streetAddress){
         this.address = streetAddress;
     }
     /**
      * 
-     * @param number - phone number
+     * @param number - string, phone number
      */
     public void setPhoneNumber(String number){
         this.phoneNumber = number;
@@ -208,6 +214,9 @@ public class Profile {
 
     public String getFirstName(){
         return this.firstName;
+    }
+    public String getMiddleName(){
+        return this.middleName;
     }
     public String getLastName(){
         return this.lastName;
