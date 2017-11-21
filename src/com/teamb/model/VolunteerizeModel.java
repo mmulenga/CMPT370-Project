@@ -91,6 +91,7 @@ public class VolunteerizeModel {
                     "e.first_name as emergency_contact_first_name, " +
                     "e.middle_name as emergency_contact_middle_name," +
                     "e.last_name as emergency_contact_last_name, " +
+                    "e.id as emergency_contact_id, " +
                     "e.phone_number as emergency_contact_phone_number, " +
                     "e.address as emergency_contact_address, " +
                     "e.postal_code as emergency_contact_postal_code " +
@@ -109,29 +110,19 @@ public class VolunteerizeModel {
 
             try {
 
-/*
-                String firstName = rs.getString("first_name"),
-                String lastName = rs.getString("last_name"),
-                String Address = rs.getString("address"),
-                        rs.getInt("phone_number"),
-                        rs.getInt("emergency_contact_phone_number"),
-                        rs.getString("emergency_contact_first_name"),
-                        rs.getString("email"),
-                        rs.getBoolean("prefer_phone"),
-                        rs.getBoolean("prefer_email"),
-                        rs.getInt("id"),
-                        rs.getBoolean("criminal_check"),
-                        rs.getString("medical_info"),
-                        rs.getInt("hours_worked"),
-                        rs.getString("photo_path")//,
-                //rs.getString(avail)
-  */
                 p.setAllBaseInformation(rs.getString("first_name"),
+                        rs.getString( "middle_name"),
                         rs.getString("last_name"),
                         rs.getString("address"),
                         rs.getString("phone_number"),
+                        rs.getString( "postal_code"),
                         rs.getString("emergency_contact_phone_number"),
                         rs.getString("emergency_contact_first_name"),
+                        rs.getString("emergency_contact_middle_name"),
+                        rs.getString("emergency_contact_last_name"),
+                        rs.getInt("emergency_contact_id"),
+                        rs.getString("emergency_contact_adress"),
+                        rs.getString("emergency_contact_postal_code"),
                         rs.getString("email"),
                         rs.getBoolean("prefer_phone"),
                         rs.getBoolean("prefer_email"),
@@ -140,7 +131,7 @@ public class VolunteerizeModel {
                         rs.getString("medical_info"),
                         rs.getInt("hours_worked"),
                         rs.getString("photo_path"),
-                        null
+                        null  // availability is not clearly defined
                 );
 
 
@@ -209,7 +200,7 @@ public class VolunteerizeModel {
     public static void main(String args[]) {
         VolunteerizeModel model = new VolunteerizeModel();
         Profile newProfile = new Profile();
-
+/*
         newProfile.setAllBaseInformation("Matt",
                 "Mulenga",
                 "1 Evergreen Blvd",
@@ -225,7 +216,7 @@ public class VolunteerizeModel {
                 40,
                 "C:/Photos",
                 null);
-
+*/
         model.addProfile(newProfile);
     }
 }
