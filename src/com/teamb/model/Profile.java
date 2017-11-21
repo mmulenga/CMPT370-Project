@@ -65,6 +65,7 @@ public class Profile {
             boolean contactByPhone, boolean contactByEmail, int memberID, boolean criminalRecordCheck, String medicalInformation, int hoursWorked, String photoPath,
             Availability availability){
         this.firstName = firstName;
+        this.middleName = middleName;
         this.lastName = lastName;
         this.address = address;
         this.phoneNumber = phoneNumber;
@@ -97,6 +98,7 @@ public class Profile {
      */
     /**
      * 
+     * 
      * @param last - last name
      */
     public void setLastName(String last){
@@ -104,14 +106,14 @@ public class Profile {
     }
     /**
      * 
-     * @param streetAddress (eg. 1234 Albert.Ave)
+     * @param streetAddress string, (eg. 1234 Albert.Ave)
      */
     public void setAddress(String streetAddress){
         this.address = streetAddress;
     }
     /**
      * 
-     * @param number - phone number
+     * @param number - string, phone number
      */
     public void setPhoneNumber(String number){
         this.phoneNumber = number;
@@ -212,6 +214,9 @@ public class Profile {
 
     public String getFirstName(){
         return this.firstName;
+    }
+    public String getMiddleName(){
+        return this.middleName;
     }
     public String getLastName(){
         return this.lastName;
