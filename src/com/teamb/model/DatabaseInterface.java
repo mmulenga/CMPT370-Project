@@ -145,7 +145,7 @@ public class DatabaseInterface {
         try {
             dbStatement = dbConnection.createStatement();
 
-            dbStatement.execute("DELETE FROM " + query); // should the FROM be there?? -Sascha
+            dbStatement.execute("DELETE FROM " + query);
         } catch(SQLException exception) {
             System.out.println("Delete query failed.");
 
@@ -157,8 +157,13 @@ public class DatabaseInterface {
         }
     }
 
+    /**
+     * returns ResultSet containing Count of the number of rows the query provides.
+     * @param query - A string containing the desired delete target.
+     */
     public ResultSet count(String query) {
         System.out.println(query);
+        // Connect to the databse.
         connect();
 
         try {

@@ -153,6 +153,10 @@ public class VolunteerizeModel {
         database.delete("events WHERE id = " + newEvent.getEventID() + ";");
     }
 
+    /**
+     * Discovers type of data sought, and returns a formatted type for PostgreSQL.
+     * @param choice - String with data type of query.
+     */
     public String getVolunteerDataType (String choice) {
 
         String dataType;
@@ -172,6 +176,10 @@ public class VolunteerizeModel {
         return dataType;
     }
 
+    /**
+     * Discovers type of data sought, and returns a formatted type for PostgreSQL.
+     * @param choice - String with data type of query.
+     */
     public String getEventDataType (String choice) {
 
         String dataType;
@@ -191,6 +199,11 @@ public class VolunteerizeModel {
 
     }
 
+    /**
+     * Finds the requested profile from the database and returns it.
+     * @param query - String with the data that is being looked for.
+     * @param dataType - String with data type of query.
+     */
     public Profile searchVolunteer(String query, String dataType ) {
 
         String dbDataType = getVolunteerDataType(dataType);
@@ -271,6 +284,11 @@ public class VolunteerizeModel {
     }
 
 
+    /**
+     * Finds the requested event from the database and returns it.
+     * @param query - String with the data that is being looked for.
+     * @param dataType - String with data type of query.
+     */
     public Event searchEvent(String query, String dataType ) {
 
         Event e = new Event();
@@ -309,9 +327,9 @@ public class VolunteerizeModel {
         return e;
     }
 
-    public Event searchEvents(String query, String dataType ) {
+    public Event[] searchEvents(String query, String dataType ) {
         Event e = new Event();
-        String dbDataType = getEventDataType();
+        String dbDataType = getEventDataType(dataType);
         int numOfValues = 0;
 
         try{
@@ -322,15 +340,16 @@ public class VolunteerizeModel {
 
 
         }catch(SQLException exception) {
-            System.out.println("Search query failed.");
+            System.out.println("Count query failed.");
 
             exception.printStackTrace();
         }
 
         Event [] eventsSearched = new Event[numOfValues];
 
+        
 
-        return e;
+        return eventsSearched;
     }
 
 
