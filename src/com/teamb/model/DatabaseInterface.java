@@ -138,6 +138,7 @@ public class DatabaseInterface {
      * @param query - A string containing the desired delete target.
      */
     public void delete(String query) {
+        System.out.println(query);
         // Connect to the database.
         connect();
 

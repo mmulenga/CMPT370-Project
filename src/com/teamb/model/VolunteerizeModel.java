@@ -13,8 +13,10 @@ public class VolunteerizeModel {
     }
 
     /**
-     * Wraps the given string in single quotes (needed for database queries).
-     * @param value - Attribute that from either Profile or Event.
+     * Wraps the given string in single quotes (needed for database queries,
+     * specifically strings within queries).
+     * @param value - String to be wrapped in single quotes
+     *              - eg. John -> 'John'
      * @return - Returns the wrapped string.
      */
     private String wrap(String value) {
@@ -25,86 +27,130 @@ public class VolunteerizeModel {
     /**
      * Creates a query which takes the attributes from the given profile and inserts them
      * into the appropriate tables within the database.
-     * @param volunteer - Profile of a volunteer.
+     * @param volunteer - Profile with insert information.
      */
     public void addProfile(Profile volunteer) {
         // Insert all relevant volunteer table information.
         database.insert("volunteers (id, first_name, last_name, email, hours_worked, criminal_check)\n" +
-                "VALUES(" +
-                volunteer.getMemberID() +
-                ", " + wrap(volunteer.getFirstName()) +
-                ", " + wrap(volunteer.getLastName()) +
-                ", " + wrap(volunteer.getEmail()) +
-                ", " + volunteer.getHoursWorked() +
-                ", " + "'YES'" +
+                "VALUES (" +
+                volunteer.getMemberID() + ", " +
+                wrap(volunteer.getFirstName()) + ", " +
+                wrap(volunteer.getLastName()) + ", " +
+                wrap(volunteer.getEmail()) + ", " +
+                volunteer.getHoursWorked() + ", " +
+                "'YES'" +
                 ");");
 
         // Insert all emergency contact information.
         database.insert("emergency_contact (id, first_name, middle_name, last_name," +
                 " phone_number, address, postal_code, volunteer_id)\n " +
-                "VALUES(" + volunteer.getEmergencyContactID() +
-                ", " + wrap(volunteer.getEmergencyContactFirst()) +
-                ", " + wrap(volunteer.getEmergencyContactMiddle()) +
-                ", " + wrap(volunteer.getEmergencyContactLast()) +
-                ", " + wrap(volunteer.getEmergencyContactPhoneNumber()) +
-                ", " + wrap(volunteer.getEmergencyContactAddress()) +
-                ", " + wrap(volunteer.getEmergencyContactPostalCode()) +
-                ", " + volunteer.getMemberID() +
+                "VALUES (" + volunteer.getEmergencyContactID() + ", " +
+                wrap(volunteer.getEmergencyContactFirst()) + ", " +
+                wrap(volunteer.getEmergencyContactMiddle()) + ", " +
+                wrap(volunteer.getEmergencyContactLast()) + ", " +
+                wrap(volunteer.getEmergencyContactPhoneNumber()) + ", " +
+                wrap(volunteer.getEmergencyContactAddress()) + ", " +
+                wrap(volunteer.getEmergencyContactPostalCode()) + ", " +
+                volunteer.getMemberID() +
                 ");");
 
         // Insert all contact information.
         database.insert("contact_information (prefer_phone, prefer_email, phone_number, address, postal_code, " +
                 "volunteer_id, emergency_contact_id)\n " +
-                "VALUES(" +
-                volunteer.getContactByPhone() +
-                ", " + volunteer.getContactByEmail() +
-                ", " + volunteer.getPhoneNumber() +
-                ", " + wrap(volunteer.getAddress()) +
-                ", " + wrap(volunteer.getPostalCode()) +
-                ", " + volunteer.getMemberID() +
-                ", " + volunteer.getEmergencyContactID() +
+                "VALUES (" +
+                volunteer.getContactByPhone() + ", " +
+                volunteer.getContactByEmail() + ", " +
+                volunteer.getPhoneNumber() + ", " +
+                wrap(volunteer.getAddress()) + ", " +
+                wrap(volunteer.getPostalCode()) + ", " +
+                volunteer.getMemberID() + ", " +
+                volunteer.getEmergencyContactID() +
                 ");");
     }
 
     /**
      * Updates the database entry for the given profile.
      * PROFILE ID MUST MATCH
-     * @param volunteer - Profile with update volunteer information.
+     * @param volunteer - Profile with update information.
      */
     public void editProfile(Profile volunteer) {
         // Insert all relevant volunteer table information.
         database.update("volunteers SET \n" +
-                "first_name = " + wrap(volunteer.getFirstName()) +
-                ", \n" + "last_name = " + wrap(volunteer.getLastName()) +
-                ", \n" + "email = " + wrap(volunteer.getEmail()) +
-                ", \n" + "hours_worked = " + volunteer.getHoursWorked() +
-                ", \n" + "criminal_check = " + "'YES'" +
-                "\n WHERE id = " + volunteer.getMemberID() + ";");
+                "first_name = " + wrap(volunteer.getFirstName()) + ", \n" +
+                "last_name = " + wrap(volunteer.getLastName()) + ", \n" +
+                "email = " + wrap(volunteer.getEmail()) + ", \n" +
+                "hours_worked = " + volunteer.getHoursWorked() + ", \n" +
+                "criminal_check = " + "'YES'" + " \n" +
+                "WHERE id = " + volunteer.getMemberID() + ";");
 
         // Insert all contact information.
         database.update("contact_information SET \n " +
-                "prefer_phone = " + volunteer.getContactByPhone() +
-                ", \n" + "prefer_email = " + volunteer.getContactByEmail() +
-                ", \n" + "phone_number = " + volunteer.getPhoneNumber() +
-                ", \n" + "address = " + wrap(volunteer.getAddress()) +
-                ", \n" + "postal_code = " + wrap(volunteer.getPostalCode()) +
-                ", \n" + "volunteer_id = " + volunteer.getMemberID() +
-                "\n WHERE volunteer_id = " + volunteer.getMemberID() + ";");
+                "prefer_phone = " + volunteer.getContactByPhone() + ", \n" +
+                "prefer_email = " + volunteer.getContactByEmail() + ", \n" +
+                "phone_number = " + volunteer.getPhoneNumber() + ", \n" +
+                "address = " + wrap(volunteer.getAddress()) + ", \n" +
+                "postal_code = " + wrap(volunteer.getPostalCode()) + ", \n" +
+                "volunteer_id = " + volunteer.getMemberID() + " \n" +
+                "WHERE volunteer_id = " + volunteer.getMemberID() + ";");
 
         // Insert all emergency contact information.
         database.update("emergency_contact SET \n " +
-                "id = " + volunteer.getEmergencyContactID() +
-                ", \n" + "first_name = " + wrap(volunteer.getEmergencyContactFirst()) +
-                ", \n" + "middle_name = " + wrap(volunteer.getEmergencyContactMiddle()) +
-                ", \n" + "last_name = " + wrap(volunteer.getEmergencyContactLast()) +
-                ", \n" + "phone_number = " + wrap(volunteer.getEmergencyContactPhoneNumber()) +
-                ", \n" + "address = " + wrap(volunteer.getEmergencyContactAddress()) +
-                ", \n" + "postal_code = " + wrap(volunteer.getEmergencyContactPostalCode()) +
-                "\n WHERE volunteer_id = " + volunteer.getMemberID() + ";");
+                "id = " + volunteer.getEmergencyContactID() + ", \n" +
+                "first_name = " + wrap(volunteer.getEmergencyContactFirst()) + ", \n" +
+                "middle_name = " + wrap(volunteer.getEmergencyContactMiddle()) + ", \n" +
+                "last_name = " + wrap(volunteer.getEmergencyContactLast()) + ", \n" +
+                "phone_number = " + wrap(volunteer.getEmergencyContactPhoneNumber()) + ", \n" +
+                "address = " + wrap(volunteer.getEmergencyContactAddress()) + ", \n" +
+                "postal_code = " + wrap(volunteer.getEmergencyContactPostalCode()) + "\n " +
+                "WHERE volunteer_id = " + volunteer.getMemberID() + ";");
     }
 
+    /**
+     * Deletes the all relevant entries for the given profile.
+     * @param volunteer - Profile with delete information.
+     */
     public void deleteProfile(Profile volunteer) {
-        database.delete( "volunteers WHERE id =" + volunteer.getMemberID() + "CASCADE;");
+        // TODO - Fix cascade, currently does not delete contact_information.
+        database.delete("volunteers WHERE id = " + volunteer.getMemberID() + ";");
+    }
+
+    /**
+     * Creates a query which takes the attributes from the given event and inserts them
+     * into the appropriate tables within the database.
+     * @param newEvent - Event with insert information.
+     */
+    public void addEvent(Event newEvent) {
+        // TODO - Figure out how we're storing locations application-side.
+        database.insert("events (name, start_time, end_time, description, location_id)\n " +
+                "VALUES (" +
+                wrap(newEvent.getEventName()) + ", " +
+                newEvent.getStartTime() + ", " +
+                newEvent.getEndTime() + ", " +
+                wrap(newEvent.getDescription()) + ", " +
+                newEvent.getLocation() +
+                ");");
+    }
+
+    /**
+     * Updates the database entry for the given event.
+     * EVENT ID MUST MATCH
+     * @param newEvent - Event with update information.
+     */
+    public void editEvent(Event newEvent) {
+        database.update("events SET\n " +
+                "name = " + wrap(newEvent.getEventName()) + ", \n" +
+                "start_time = " + newEvent.getStartTime() + ", \n" +
+                "end_time = " + newEvent.getEndTime() + ", \n" +
+                "description = " + wrap(newEvent.getDescription()) + ", \n" +
+                "location_id = " + newEvent.getLocation() + " \n");
+    }
+
+    /**
+     * Deletes the all relevant entries for the given profile.
+     * @param newEvent - Event with delete information.
+     */
+    public void deleteEvent(Event newEvent) {
+        database.delete("events WHERE id = " + newEvent.getEventID() + ";");
     }
 
     public Profile searchVolunteer(String query, String dataType ) {
@@ -276,6 +322,6 @@ public class VolunteerizeModel {
                 "C:/Photos",
                 null);
 
-        model.editProfile(newProfile);
+        model.deleteProfile(newProfile);
     }
 }
