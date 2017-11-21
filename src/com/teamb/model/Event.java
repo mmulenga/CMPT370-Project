@@ -1,7 +1,7 @@
 package com.teamb.model;
 
 import java.util.ArrayList;
-
+import java.util.Date;
 /**
  * Represents a volunteering event.
  */
@@ -12,8 +12,8 @@ public class Event {
 	private int eventID;
 	private int startTime;    // 24 hour clock
 	private int endTime;        // 24 hour clock
-	private int startDate;        // ddmmyy
-	private int endDate;        //ddmmyy
+	private Date startDate;        
+	private Date endDate;
 
 	private String eventName;
 	private String location;
@@ -28,8 +28,8 @@ public class Event {
 		eventName = "void";
 		startTime = 1200;
 		endTime = 1300;
-		startDate = 010101;
-		endDate = 020101;
+		startDate = new Date(0001,01,01);
+		endDate = new Date(0001,01,01);
 
 		location = "void";
 		description = "void";
@@ -45,15 +45,15 @@ public class Event {
 	 * @param            name - String eventName
 	 * @param            sTime - int start time
 	 * @param            eTime - int end time
-	 * @param            sDate - int start Date
-	 * @param            eDate - int end date
+	 * @param            sDate - Date start Date
+	 * @param            eDate - Date end date
 	 * @param            location - String location of event
 	 * @param            description - description of event
 	 * <p>
 	 * post          all values are initialized
 	 * return 		void - nothing
 	 */
-	public void setEventFeilds(int ID, String name, int sTime, int eTime, int sDate, int eDate, String location, String description) {
+	public void setEventFields(int ID, String name, int sTime, int eTime, Date sDate, Date eDate, String location, String description) {
 		setEventID(ID);
 		setEventName(name);
 		setStartTime(sTime);
@@ -105,7 +105,7 @@ public class Event {
 	 *
 	 * @param date - int event start date (ddmmyy)
 	 */
-	public void setStartDate(int date) {
+	public void setStartDate(Date date) {
 		this.startDate = date;
 	}
 
@@ -114,7 +114,7 @@ public class Event {
 	 *
 	 * @param date - int event end date (ddmmyy)
 	 */
-	public void setEndDate(int date) {
+	public void setEndDate(Date date) {
 		this.endDate = date;
 	}
 
@@ -155,11 +155,11 @@ public class Event {
 		return this.endTime;
 	}
 
-	public int getStartDate() {
+	public Date getStartDate() {
 		return this.startDate;
 	}
 
-	public int getEndDate() {
+	public Date getEndDate() {
 		return this.endDate;
 	}
 
