@@ -138,7 +138,7 @@ public class CreateEventView extends BasicView {
         gp.add(clear,2,9);
         //How to convert localDate into Timestamp here.
         //System.out.println(Timestamp.valueOf(startDatePicker.getValue().atStartOfDay()));
-        root.getChildren().add(gp);
+
 
         clear.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -152,5 +152,16 @@ public class CreateEventView extends BasicView {
                 endDatePicker.setValue(startDatePicker.getValue().plusDays(1));
             }
         });
+
+        //Add Scroll Bar
+
+        ScrollPane sp = new ScrollPane();
+        sp.setContent(gp);
+
+        sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        sp.setPrefSize(600,600);
+
+        root.getChildren().add(sp);
     }
 }
