@@ -70,7 +70,7 @@ public class SignUpView extends BasicView {
         gp.setVgap(10);
 
         // columnOneConstraints will be applied to all the nodes placed in column one.
-        ColumnConstraints columnOneConstraints = new ColumnConstraints(100, 150, Double.MAX_VALUE);
+        ColumnConstraints columnOneConstraints = new ColumnConstraints(100, 180, Double.MAX_VALUE);
         columnOneConstraints.setHalignment(HPos.LEFT);
 
         // columnTwoConstraints will be applied to all the nodes placed in column two.
@@ -90,22 +90,22 @@ public class SignUpView extends BasicView {
         gp.setMargin(header, new Insets(20,0,20,0));
 
         //Create Labels
-        Label firstNameLabel = new Label("First Name : ");
-        Label lastNameLabel = new Label("Last Name : ");
-        Label passwordLabel = new Label("Password : ");
-        Label addressLabel = new Label("Home Address : ");
-        Label phoneNumberLabel = new Label("Phone Number : ");
-        Label emergencyContact = new Label("Emergency Contact Information : ");
-        Label emergencyNumberLabel = new Label("Emergency Contact Number : ");
-        Label emergencyNameLabel = new Label("Emergency Contact Name : ");
-        Label emailLabel = new Label("Email : ");
-        Label memberIDLabel = new Label("Membership Number : ");
-        Label medicalInformationLabel = new Label("Medical Information : ");
-        Label contactPreference = new Label("Contact Preference　：　");
-        Label volunteerGroup = new Label("Volunteer Group　：　");
-        Label criminalRecordCheck = new Label("Criminal Record Checked?　");
-        Label availabilityLabel = new Label("Availability : ");
-        Label registeredEventsLabel = new Label("Registered Events : ");
+        Label firstNameLabel = new Label("First Name:");
+        Label lastNameLabel = new Label("Last Name:");
+        Label passwordLabel = new Label("Password:");
+        Label addressLabel = new Label("Home Address:");
+        Label phoneNumberLabel = new Label("Phone Number:");
+        Label emergencyContact = new Label("Emergency Contact Information:");
+        Label emergencyNumberLabel = new Label("Emergency Contact Number:");
+        Label emergencyNameLabel = new Label("Emergency Contact Name:");
+        Label emailLabel = new Label("Email:");
+        Label memberIDLabel = new Label("Membership Number:");
+        Label medicalInformationLabel = new Label("Medical Information:");
+        Label contactPreference = new Label("Contact Preference:");
+        Label volunteerGroup = new Label("Volunteer Group:");
+        Label criminalRecordCheck = new Label("Criminal Record Checked?");
+        Label availabilityLabel = new Label("Availability:");
+        Label registeredEventsLabel = new Label("Registered Events:");
         Label phonePref = new Label("Prefer phone contact?");
         Label emailPref = new Label("Prefer email contact?");
 
@@ -236,8 +236,6 @@ public class SignUpView extends BasicView {
 
         gp.add(availabilityLabel,0,17);
         gp.add(availabilityTable,0,18,3,1);
-
-        gp.add(registeredEventsLabel,0,19);
 
         gp.add(submit,1,20);
         gp.add(clear,2,20);

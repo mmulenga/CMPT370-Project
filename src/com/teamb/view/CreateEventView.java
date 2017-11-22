@@ -150,6 +150,7 @@ public class CreateEventView extends BasicView {
         gp.add(submit,1,9);
         gp.setHalignment(submit,HPos.RIGHT);
         gp.add(clear,2,9);
+
         //How to convert localDate into Timestamp here.
         System.out.println(Timestamp.valueOf(startDatePicker.getValue().atStartOfDay()));
 

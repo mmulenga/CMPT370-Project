@@ -112,6 +112,7 @@ public class VolunteerizeModel {
         database.delete("volunteers WHERE id = " + volunteer.getMemberID() + ";");
     }
 
+
     /**
      * Creates a query which takes the attributes from the given event and inserts them
      * into the appropriate tables within the database.
@@ -122,8 +123,8 @@ public class VolunteerizeModel {
         database.insert("events (name, start_time, end_time, description, location_id)\n " +
                 "VALUES (" +
                 wrap(newEvent.getEventName()) + ", " +
-                newEvent.getStartTime() + ", " +
-                newEvent.getEndTime() + ", " +
+                newEvent.getStartDate() + " " + newEvent.getStartTime() + "00, " +
+                newEvent.getEndDate() + " " + newEvent.getEndTime() + "00, " +
                 wrap(newEvent.getDescription()) + ", " +
                 newEvent.getLocation() +
                 ");");
@@ -150,6 +151,23 @@ public class VolunteerizeModel {
     public void deleteEvent(Event newEvent) {
         database.delete("events WHERE id = " + newEvent.getEventID() + ";");
     }
+
+    /**
+     * Adds event Participants to table in Database
+     * @param e - Event that participant will go to.
+     * @param p - Profile of participant.
+     * @param j - Job that they will do.
+     */
+    public void addEventParticipants( Event e, Profile p, Jobs j) {
+        database.insert("event_participants (id, volunteer_id, event_id, job_id)\n " +
+                "VALUES (DEFAULT" +
+                e.getEventID() + ", " +
+                p.getMemberID() + ", " +
+                "0);");
+
+    }
+
+
 
     /**
      * Discovers type of data sought, and returns a formatted type for PostgreSQL.
@@ -308,7 +326,7 @@ public class VolunteerizeModel {
     }
 
     public Event[] searchEvents(String query, String dataType ) {
-        Event e = new Event();
+
         String dbDataType = getEventDataType(dataType);
         int numOfValues = 0;
 
@@ -317,6 +335,8 @@ public class VolunteerizeModel {
                 "WHERE l.id = e.location.id " +
                 "and " + dbDataType + " = " + query);
                 numOfValues = rs.getInt("count");
+
+
 
 
         }catch(SQLException exception) {
@@ -328,6 +348,27 @@ public class VolunteerizeModel {
         Event [] eventsSearched = new Event[numOfValues];
         ResultSet eventsSought = getEvent(query,dbDataType);
 
+        try {
+
+            for(int i = 0; i < numOfValues; i++){
+                Event e = new Event();
+
+                eventsSearched[i].setEventFields(eventsSought.getInt("id"),
+                eventsSought.getString("name"),
+                        eventsSought.getInt( "start_time"),
+                        eventsSought.getInt( "end_time"), // may need to format times properly.
+                        eventsSought.getString( "start_date"),
+                        eventsSought.getString( "end_date"),
+                        eventsSought.getString( "location_name"),
+                        eventsSought.getString("description"));
+
+            }
+
+        }catch(SQLException exception) {
+            System.out.println("Count query failed.");
+
+            exception.printStackTrace();
+        }
 
 
         return eventsSearched;
