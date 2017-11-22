@@ -161,6 +161,8 @@ public class VolunteerizeModel {
 
     }
 
+
+
     /**
      * Discovers type of data sought, and returns a formatted type for PostgreSQL.
      * @param choice - String with data type of query.
