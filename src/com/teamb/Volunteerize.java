@@ -33,9 +33,7 @@ public class Volunteerize extends Application {
     @Override
     public void start(Stage primaryStage) {
         //LoginView loginView = new LoginView();
-<<<<<<< HEAD
-        MainLandingController mainController = new MainLandingController(primaryStage);
-=======
+    //    MainLandingController mainController = new MainLandingController(primaryStage);
 
         VolunteerProfileController mainController = new VolunteerProfileController(primaryStage);
         Scene scene = new Scene(mainController.GetView().GetRootPane(), 600, 600);

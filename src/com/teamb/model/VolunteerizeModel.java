@@ -357,8 +357,8 @@ public class VolunteerizeModel {
                 eventsSought.getString("name"),
                         eventsSought.getInt( "start_time"),
                         eventsSought.getInt( "end_time"), // may need to format times properly.
-                        eventsSought.getDate( "start_date"),
-                        eventsSought.getDate( "end_date"),
+                        eventsSought.getString( "start_date"),
+                        eventsSought.getString( "end_date"),
                         eventsSought.getString( "location_name"),
                         eventsSought.getString("description"));
 
