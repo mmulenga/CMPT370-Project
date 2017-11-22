@@ -13,6 +13,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+
 /**
  * Created by Sarah on 2017-11-03.
  * This class creates the main landing page that is seen first when the program is started.
@@ -55,7 +57,6 @@ public class MainLandingView extends BasicView{
         Button help = new Button("Help");
         //when this button is pressed a help document pop up appears.
         Label label = new Label("Welcome to Volunteerize");
-
 
         buttonBox.getChildren().addAll(vButton, sButton);
         v.getChildren().addAll(label, buttonBox, help);

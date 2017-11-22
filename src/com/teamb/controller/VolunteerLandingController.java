@@ -29,15 +29,15 @@ public class VolunteerLandingController extends BasicController {
     }
 
     public void ChangeToBrowseEventsView(){
-        //TODO
+        EventController ec = new EventController(stage);
+        Scene scene = new Scene(ec.GetView().GetRootPane(), 600, 600);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void ChangeToProfileView(){
         VolunteerProfileController vlc = new VolunteerProfileController(stage);
-
-        Scene scene = new Scene(vlc.GetView().GetRootPane(), 720, 540);
-//        scene.getStylesheets().add
-//                (Volunteerize.class.getResource("LoginStyle.css").toExternalForm());
+        Scene scene = new Scene(vlc.GetView().GetRootPane(), 600, 600);
         stage.setScene(scene);
         stage.show();
     }
