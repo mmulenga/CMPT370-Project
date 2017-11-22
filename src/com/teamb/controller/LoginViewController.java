@@ -15,7 +15,7 @@ public class LoginViewController extends BasicController {
     public LoginViewController(Stage s){
         super(s);
         loginView = new LoginView(this);
-        isStaff = true; //TODO: Actually check this
+        isStaff = false; //TODO: Actually check this
     }
 
     public String getUsername() {

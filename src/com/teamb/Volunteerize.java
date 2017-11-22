@@ -33,7 +33,10 @@ public class Volunteerize extends Application {
     @Override
     public void start(Stage primaryStage) {
         //LoginView loginView = new LoginView();
+<<<<<<< HEAD
         MainLandingController mainController = new MainLandingController(primaryStage);
+=======
+>>>>>>> 7c7f08fb22cae1bf3fc17961f0b355e400623ec7
 
 
 //        VolunteerProfileController mainController = new VolunteerProfileController(primaryStage);

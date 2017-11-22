@@ -15,6 +15,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+
 /**
  * Created by Sarah on 2017-11-03.
  * This class creates the main landing page that is seen first when the program is started.
@@ -65,8 +67,11 @@ public class MainLandingView extends BasicView{
         Label label = new Label("Welcome to Volunteerize");
         label.setFont(Font.font("Arial", FontWeight.BOLD, 40));
 
+<<<<<<< HEAD
 
         //v.setPadding(new Insets(100));
+=======
+>>>>>>> 7c7f08fb22cae1bf3fc17961f0b355e400623ec7
         buttonBox.getChildren().addAll(vButton, sButton);
         buttonBox.setAlignment(Pos.CENTER);
         buttonBox.setMargin(vButton,new Insets(30));
