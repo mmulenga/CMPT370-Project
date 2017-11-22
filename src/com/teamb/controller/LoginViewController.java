@@ -15,7 +15,7 @@ public class LoginViewController extends BasicController {
     public LoginViewController(Stage s){
         super(s);
         loginView = new LoginView(this);
-        isStaff = true; //TODO: Actually check this
+        isStaff = false; //TODO: Actually check this
     }
 
     public String getUsername() {
@@ -67,6 +67,13 @@ public class LoginViewController extends BasicController {
             s.show();
         }
 
+    }
+
+    public void ChangeToSignUpView(){
+        SignUpController suc = new SignUpController(stage);
+        Scene scene = new Scene(suc.GetView().GetRootPane(), 600, 600);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public LoginView GetView(){
