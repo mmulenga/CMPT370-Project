@@ -120,10 +120,9 @@ public class VolunteerizeModel {
      */
     public void addEvent(Event newEvent) {
         // TODO - Figure out how we're storing locations application-side.
-        String startTime = null;
-        startTime.valueOf(newEvent.getStartTime());
-        String endTime = null;
-        endTime.valueOf(newEvent.getEndTime());
+        String startTime = Integer.toString(newEvent.getStartTime());
+        String endTime = Integer.toString(newEvent.getEndTime());
+
 
         database.insert("events (name, start_time, end_time, description, location_id)\n " +
                 "VALUES (" +
