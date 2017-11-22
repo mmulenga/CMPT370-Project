@@ -22,7 +22,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import com.teamb.controller.LoginViewController;
 
 
 /**
@@ -34,13 +33,16 @@ import com.teamb.controller.LoginViewController;
 public class LoginView extends BasicView{
 
     public boolean loginOK = false; //what does this do?
-    LoginViewController controller;
+
+    public Button login;
+    public Button Signup;
+    public TextField userNameField;
+    public PasswordField pwField;
+    public GridPane gp;
 
 
-
-    public LoginView(LoginViewController c){
-        super(c);
-        controller = c;
+    public LoginView(){
+        super();
     }
 
     @Override
@@ -50,37 +52,19 @@ public class LoginView extends BasicView{
 
     @Override
     protected void CreateChildren() {
-        GridPane gp = new GridPane();
+        gp = new GridPane();
         Text scenetitle = new Text("Welcome, Volunteer!");
         scenetitle.setId("scenetitle");
-        Button login = new Button("Login");
-        Button Signup = new Button("Sign Up");
+        login = new Button("Login");
+        Signup = new Button("Sign Up");
         String username;
         String password;
-        TextField userNameField = new TextField();
-        PasswordField pwField = new PasswordField();
+        userNameField = new TextField();
+        pwField = new PasswordField();
         Label userName = new Label("Username:");
         Label pw = new Label("Password:");
 
-        login.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if (controller.checkCredentials(userNameField.getText(), pwField.getText())) {
-                    loginOK = true;
-                } else {
-                    Label loginError = new Label("username or password is wrong. Please try again.");
-                    gp.add(loginError, 0, 5, 3, 1);
-                }
-            }
-        });
 
-        Signup.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                //TODO: check if staff
-                controller.ChangeToSignUpView();
-            }
-        });
 
         gp.setAlignment(Pos.CENTER);
         gp.setHgap(10);

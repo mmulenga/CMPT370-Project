@@ -23,7 +23,7 @@ public class VolunteerLandingController extends BasicController {
 
     public VolunteerLandingController(Stage s){
         super(s);
-        view = new VolunteerLandingView(this);
+        view = new VolunteerLandingView();
         view.epButton.setOnAction(new epButtonEventHandler());
         view.ueButton.setOnAction(new ueButtonEventHandler());
         view.cpassButton.setOnAction(new cpassButtonEventHandler());
@@ -71,7 +71,11 @@ public class VolunteerLandingController extends BasicController {
 
 
     public void ChangeToEditProfileView(){
-        //TODO
+        SignUpController editlc = new SignUpController(stage);
+
+        Scene scene = new Scene(editlc.GetView().GetRootPane(), 720, 540);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void ChangeToBrowseEventsView(){

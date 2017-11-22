@@ -1,10 +1,7 @@
 package com.teamb.view;
 
 
-import com.teamb.controller.BasicController;
-import com.teamb.controller.StaffEventProfileController;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+
 import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -26,7 +23,6 @@ import javafx.scene.text.FontWeight;
  */
 
 public class StaffEventProfileView extends BasicView {
-    protected BasicController controller;
 
     public Button addButton;
     public Button editButton;
@@ -34,8 +30,8 @@ public class StaffEventProfileView extends BasicView {
     /**
      * Constructs the StaffEventProfile page.
      */
-    public StaffEventProfileView(BasicController c){
-        super(c);
+    public StaffEventProfileView(){
+        super();
     }
 
     //@Override

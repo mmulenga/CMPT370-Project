@@ -1,7 +1,6 @@
 package com.teamb.view;
 
-import com.teamb.controller.BasicController;
-import com.teamb.controller.SignUpController;
+
 import com.teamb.model.Availability;
 import com.teamb.model.Profile;
 import com.teamb.model.Shift;
@@ -10,8 +9,6 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -51,8 +48,8 @@ public class SignUpView extends BasicView {
 
 
 
-    public SignUpView(BasicController c){
-        super(c);
+    public SignUpView(){
+        super();
 
     }
 

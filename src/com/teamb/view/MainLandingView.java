@@ -1,10 +1,6 @@
 package com.teamb.view;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
-import com.teamb.controller.BasicController;
-import com.teamb.controller.MainLandingController;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -24,7 +20,6 @@ import javax.swing.*;
  */
 public class MainLandingView extends BasicView{
 
-    //private MainLandingController controller;
 
 
     public Button vButton;
@@ -36,8 +31,8 @@ public class MainLandingView extends BasicView{
 
 
 
-    public MainLandingView(BasicController c){
-        super(c);
+    public MainLandingView(){
+        super();
 
     }
 

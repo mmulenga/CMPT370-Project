@@ -30,7 +30,7 @@ public class CreateEventController extends BasicController {
 
     public CreateEventController(Stage s) {
         super(s);
-        view = new CreateEventView(this);
+        view = new CreateEventView();
         view.submit.setOnAction(new submitEventHandler());
         view.clear.setOnAction(new clearEventHandler());
         view.home.setOnAction(new homeEventHandler());

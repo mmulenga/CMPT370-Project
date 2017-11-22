@@ -1,13 +1,10 @@
 package com.teamb.view;
 
-import com.teamb.controller.ManageVolunteersController;
 
 import com.teamb.model.Profile;
 import com.teamb.model.ProfileSelection;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -45,8 +42,8 @@ public class ManageVolunteersView extends BasicView {
      *
      * @param c
      */
-    public ManageVolunteersView(ManageVolunteersController c) {
-        super(c);
+    public ManageVolunteersView() {
+        super();
     }
 
     /**

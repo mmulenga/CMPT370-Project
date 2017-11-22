@@ -1,13 +1,10 @@
 package com.teamb.view;
 
-import com.teamb.controller.BasicController;
-import com.teamb.controller.ManageEventController;
+
 import com.teamb.model.Event;
 import com.teamb.model.EventSelection;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -34,8 +31,8 @@ public class ManageEventView extends BasicView {
      *
      * @param c
      */
-    public ManageEventView(ManageEventController c) {
-        super(c);
+    public ManageEventView() {
+        super();
     }
 
     @Override
