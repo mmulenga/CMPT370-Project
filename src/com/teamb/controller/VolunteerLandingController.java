@@ -71,7 +71,11 @@ public class VolunteerLandingController extends BasicController {
 
 
     public void ChangeToEditProfileView(){
-        //TODO
+        SignUpController editlc = new SignUpController(stage);
+
+        Scene scene = new Scene(editlc.GetView().GetRootPane(), 720, 540);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void ChangeToBrowseEventsView(){
