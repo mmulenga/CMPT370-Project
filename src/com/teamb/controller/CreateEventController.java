@@ -17,6 +17,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+import java.time.LocalDate;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -64,6 +66,29 @@ public class CreateEventController extends BasicController {
         }
     }
 
+    class clearEventHandler implements EventHandler<ActionEvent>{
+        @Override
+        public void handle(ActionEvent event) {
+            view.eventTitleField.clear();
+            view.locationField.clear();
+            view.descriptionArea.clear();
+            view.startTimeBox.getSelectionModel().select(0);
+            view.endTimeBox.getSelectionModel().select(0);
+            view.startDatePicker.setValue(LocalDate.now());
+            view.endDatePicker.setValue(view.startDatePicker.getValue().plusDays(1));
+        }
+    }
+
+    class submitEventHandler implements EventHandler<ActionEvent>{
+        @Override
+        public void handle(ActionEvent event) {
+            createNewEvent();
+            completePopUP();
+        }
+    }
+
+
+
     @Override
     public BasicView GetView() {
         return view;
@@ -91,6 +116,7 @@ public class CreateEventController extends BasicController {
         System.out.println(startTime);
         System.out.println(endTime);
        // System.out.println (CreateDate((view.startDatePicker.getEditor().getText())));
+
 
         event = new Event();
         model = new VolunteerizeModel();

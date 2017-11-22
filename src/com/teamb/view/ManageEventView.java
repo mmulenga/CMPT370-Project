@@ -23,6 +23,10 @@ import javafx.scene.text.FontWeight;
 
 public class ManageEventView extends BasicView {
 
+    public Button deleteEventsBtn;
+    public TableView<EventSelection> table;
+    public Button createNewEventBtn;
+
     /**
      * Constructor.
      * Creates the root pane, and adds the children with the CreateChildren() method.
@@ -68,24 +72,6 @@ public class ManageEventView extends BasicView {
         Button createNewEventBtn = new Button("Create New Event");
         Button deleteEventsBtn = new Button("Delete Events");
         Button searchBtn = new Button("Search");
-
-        deleteEventsBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                for (EventSelection es:table.getItems()) {
-                    if(es.isActive()){
-                        System.out.println(es.getEventTitle()+" is deleted.");
-                    }
-                }
-            }
-        });
-
-        createNewEventBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                ((ManageEventController)controller).handleCreateNewEventButtonClick();
-            }
-        });
 
         //fake event data TODO get real data instead
         for(int i = 0; i<5;i++){

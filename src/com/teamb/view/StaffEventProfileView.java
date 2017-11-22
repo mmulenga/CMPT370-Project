@@ -28,6 +28,9 @@ import javafx.scene.text.FontWeight;
 public class StaffEventProfileView extends BasicView {
     protected BasicController controller;
 
+    public Button addButton;
+    public Button editButton;
+
     /**
      * Constructs the StaffEventProfile page.
      */
@@ -37,22 +40,10 @@ public class StaffEventProfileView extends BasicView {
 
     //@Override
     protected void CreateChildren() {
-        Button addButton = new Button("Add Volunteers");
-        addButton.setOnAction(new EventHandler<ActionEvent>(){
-            @Override
-            public void handle(ActionEvent event){
-                ((StaffEventProfileController)controller).ChangeToSearchReturnView(/*searchResultView*/);
-            }
-        });
+        addButton = new Button("Add Volunteers");
 
         //when this button is pressed the view changes to search result page
-        Button editButton = new Button("Edit Event");
-        editButton.setOnAction(new EventHandler<ActionEvent>(){
-            @Override
-            public void handle(ActionEvent event){
-                ((StaffEventProfileController)controller).ChangeToEditEventView(/*editEventView*/);
-            }
-        });
+        editButton = new Button("Edit Event");
 
 
         /** Labels for Staff Event Profile view
