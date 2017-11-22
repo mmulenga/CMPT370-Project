@@ -232,28 +232,6 @@ public class SignUpView extends BasicView {
         gp.add(submit,1,20);
         gp.add(clear,2,20);
 
-        clear.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                firstNameField.clear();
-                lastNameField.clear();
-                passwordField.clear();
-                addressField.clear();
-                phoneNumberField.clear();
-                emergencyNumberField.clear();
-                emergencyNameField.clear();
-                emailField.clear();
-                memberIDField.clear();
-                medicalInformationField.clear();
-                phoneYes.setSelected(true);
-                emailYes.setSelected(true);
-                checked.setSelected(true);
-//                for (Shift shift: availabilityTable.getItems()
-//                     ) {
-//                    shift.reset();
-//                }
-            }
-        });
 
         //Add Scroll Bar
 

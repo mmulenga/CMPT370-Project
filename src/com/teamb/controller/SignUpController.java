@@ -30,6 +30,8 @@ import sun.security.x509.AVA;
 import java.util.Objects;
 import com.teamb.model.VolunteerizeModel;
 
+import javax.swing.*;
+
 public class SignUpController extends BasicController{
 
     SignUpView view;
@@ -40,6 +42,7 @@ public class SignUpController extends BasicController{
         super(s);
         view = new SignUpView(this);
         view.submit.setOnAction(new submitEventHandler());
+        view.clear.setOnAction(new clearEventHandler());
     }
     @Override
     public BasicView GetView() {
@@ -55,6 +58,29 @@ public class SignUpController extends BasicController{
         }
     }
 
+    class clearEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            view.firstNameField.clear();
+            view.lastNameField.clear();
+            view.passwordField.clear();
+            view.addressField.clear();
+            view.phoneNumberField.clear();
+            view.emergencyNumberField.clear();
+            view.emergencyNameField.clear();
+            view.emailField.clear();
+            view.memberIDField.clear();
+            view.medicalInformationField.clear();
+            view.phoneYes.setSelected(true);
+            view.emailYes.setSelected(true);
+            view.checked.setSelected(true);
+//                for (Shift shift: availabilityTable.getItems()
+//                     ) {
+//                    shift.reset();
+//                }
+        }
+
+    }
 
 
 
