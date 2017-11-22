@@ -151,6 +151,16 @@ public class VolunteerizeModel {
         database.delete("events WHERE id = " + newEvent.getEventID() + ";");
     }
 
+    // need jobs class for this to work completely
+    public void addEventParticipants( Event e, Profile p) {
+        database.insert("event_participants (id, volunteer_id, event_id, job_id)\n " +
+                "VALUES (DEFAULT" +
+                e.getEventID() + ", " +
+                p.getMemberID() + ", " +
+                "0" + ");");
+
+    }
+
     /**
      * Discovers type of data sought, and returns a formatted type for PostgreSQL.
      * @param choice - String with data type of query.
