@@ -21,6 +21,12 @@ public class StaffLandingView extends BasicView {
 
     public StaffLandingController controller;
 
+    public Button mvButton;
+    public Button meButton;
+    public Button cpassButton;
+    public Button helpButton;
+
+
     public StaffLandingView(StaffLandingController c){
         super(c);
         controller = c;
@@ -40,34 +46,13 @@ public class StaffLandingView extends BasicView {
     protected void CreateChildren() {
         Label welcome = new Label("Welcome!");
         Label prompt = new Label("What would you like to do?");
-        Button mvButton = new Button("Manage Volunteers");
-        mvButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                controller.ChangeToManageVolunteersView();
-            }
-        });
-        Button meButton = new Button("Manage Events");
-        meButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                controller.ChangeToManageEventsView();
-            }
-        });
-        Button cpassButton = new Button("Change Password");
-        cpassButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                controller.ChangeToChangePasswordView();
-            }
-        });
-        Button helpButton = new Button ("Help");
-        helpButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                controller.HelpPopUp();
-            }
-        });
+        mvButton = new Button("Manage Volunteers");
+
+        meButton = new Button("Manage Events");
+
+        cpassButton = new Button("Change Password");
+
+        helpButton = new Button ("Help");
 
         VBox mainContainer = new VBox();
 
