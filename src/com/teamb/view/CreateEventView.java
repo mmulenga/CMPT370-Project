@@ -154,6 +154,7 @@ public class CreateEventView extends BasicView {
         //How to convert localDate into Timestamp here.
         System.out.println(Timestamp.valueOf(startDatePicker.getValue().atStartOfDay()));
 
+
         //Add Scroll Bar
 
         ScrollPane sp = new ScrollPane();
