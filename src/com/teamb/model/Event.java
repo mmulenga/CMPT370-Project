@@ -11,9 +11,9 @@ public class Event {
 
 	private int eventID;
 	private int startTime;    // 24 hour clock
-	private String endTime;        // 24 hour clock
-	private Date startDate;        
-	private Date endDate;
+	private int endTime;        // 24 hour clock
+	private String startDate;        
+	private String endDate;
 
 	private String eventName;
 	private String location;
@@ -28,8 +28,8 @@ public class Event {
 		eventName = "void";
 		startTime = 1200;
 		endTime = 1300;
-		startDate = new Date(0001,01,01);
-		endDate = new Date(0001,01,01);
+		startDate = "void";
+		endDate = "void";
 
 		location = "void";
 		description = "void";
@@ -45,15 +45,15 @@ public class Event {
 	 * @param            name - String eventName
 	 * @param            sTime - int start time
 	 * @param            eTime - int end time
-	 * @param            sDate - Date start Date
-	 * @param            eDate - Date end date
+	 * @param            sDate - String, start Date
+	 * @param            eDate - String end date
 	 * @param            location - String location of event
 	 * @param            description - description of event
 	 * <p>
 	 * post          all values are initialized
 	 * return 		void - nothing
 	 */
-	public void setEventFeilds(int ID, String name, int sTime, int eTime, Date sDate, Date eDate, String location, String description) {
+	public void setEventFeilds(int ID, String name, int sTime, int eTime, String sDate, String eDate, String location, String description) {
 		setEventID(ID);
 		setEventName(name);
 		setStartTime(sTime);
@@ -103,25 +103,25 @@ public class Event {
 	/**
 	 * setStartDate(date)
 	 *
-	 * @param date - int event start date (ddmmyy)
+	 * @param date - String, event start date (ddmmyy)
 	 */
-	public void setStartDate(Date date) {
+	public void setStartDate(String date) {
 		this.startDate = date;
 	}
 
 	/**
 	 * steEndDate(date)
 	 *
-	 * @param date - int event end date (ddmmyy)
+	 * @param date - String, event end date (ddmmyy)
 	 */
-	public void setEndDate(Date date) {
+	public void setEndDate(String date) {
 		this.endDate = date;
 	}
 
 	/**
 	 * setLocation(local)
 	 *
-	 * @param local - String event location
+	 * @param local - String, event location
 	 */
 	public void setLocation(String local) {
 		this.location = local;
@@ -130,7 +130,7 @@ public class Event {
 	/**
 	 * setDescription(describe)
 	 *
-	 * @param describe - String event description
+	 * @param describe - String, event description
 	 */
 	public void setDescription(String describe) {
 		this.description = describe;
@@ -155,11 +155,11 @@ public class Event {
 		return this.endTime;
 	}
 
-	public Date getStartDate() {
+	public String getStartDate() {
 		return this.startDate;
 	}
 
-	public Date getEndDate() {
+	public String getEndDate() {
 		return this.endDate;
 	}
 
@@ -171,15 +171,5 @@ public class Event {
 		return this.description;
 	}
 
-
-	/////////////////////////////////////////////////////
-	// delete a profile
-	public boolean deleteEvent() {
-		// call dataBase function 
-
-		// delete(this)
-
-		return true;
-	}
 }
 
