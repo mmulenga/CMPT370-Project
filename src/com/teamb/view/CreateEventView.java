@@ -155,27 +155,6 @@ public class CreateEventView extends BasicView {
         System.out.println(Timestamp.valueOf(startDatePicker.getValue().atStartOfDay()));
 
 
-        clear.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                eventTitleField.clear();
-                locationField.clear();
-                descriptionArea.clear();
-                startTimeBox.getSelectionModel().select(0);
-                endTimeBox.getSelectionModel().select(0);
-                startDatePicker.setValue(LocalDate.now());
-                endDatePicker.setValue(startDatePicker.getValue().plusDays(1));
-            }
-        });
-
-        submit.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                ((CreateEventController) controller).createNewEvent();
-                ((CreateEventController) controller).completePopUP();
-            }
-        });
-
         //Add Scroll Bar
 
         ScrollPane sp = new ScrollPane();
