@@ -170,14 +170,6 @@ public class SignUpView extends BasicView {
 
 
         TableView<Shift> finalAvailabilityTable = availabilityTable;
-        submit.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                ((SignUpController) controller).createNewProfile();
-                // ((SignUpController) controller).actionPerformed();
-                ((SignUpController) controller).completePopUP();
-            }
-        });
 
 
 

@@ -39,11 +39,26 @@ public class SignUpController extends BasicController{
     public SignUpController(Stage s){
         super(s);
         view = new SignUpView(this);
+        view.submit.setOnAction(new submitEventHandler());
     }
     @Override
     public BasicView GetView() {
         return view;
     }
+
+    class submitEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            createNewProfile();
+            // ((SignUpController) controller).actionPerformed();
+            completePopUP();
+        }
+    }
+
+
+
+
+
 
 
     /*public void actionPerformed() {
