@@ -310,7 +310,7 @@ public class VolunteerizeModel {
     }
 
     public Event[] searchEvents(String query, String dataType ) {
-        Event e = new Event();
+
         String dbDataType = getEventDataType(dataType);
         int numOfValues = 0;
 
@@ -319,6 +319,8 @@ public class VolunteerizeModel {
                 "WHERE l.id = e.location.id " +
                 "and " + dbDataType + " = " + query);
                 numOfValues = rs.getInt("count");
+
+
 
 
         }catch(SQLException exception) {
@@ -330,6 +332,27 @@ public class VolunteerizeModel {
         Event [] eventsSearched = new Event[numOfValues];
         ResultSet eventsSought = getEvent(query,dbDataType);
 
+        try {
+
+            for(int i = 0; i < numOfValues; i++){
+                Event e = new Event();
+
+                eventsSearched[i].setEventFields(eventsSought.getInt("id"),
+                eventsSought.getString("name"),
+                        eventsSought.getInt( "start_time"),
+                        eventsSought.getInt( "end_time"), // may need to format times properly.
+                        eventsSought.getDate( "start_date"),
+                        eventsSought.getDate( "end_date"),
+                        eventsSought.getString( "location_name"),
+                        eventsSought.getString("description"));
+
+            }
+
+        }catch(SQLException exception) {
+            System.out.println("Count query failed.");
+
+            exception.printStackTrace();
+        }
 
 
         return eventsSearched;
