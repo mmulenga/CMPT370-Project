@@ -44,8 +44,8 @@ public class CreateEventView extends BasicView {
      *
      * @param c
      */
-    public CreateEventView(BasicController c) {
-        super(c);
+    public CreateEventView() {
+        super();
     }
 
     @Override

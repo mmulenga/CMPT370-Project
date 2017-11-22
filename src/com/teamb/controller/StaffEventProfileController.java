@@ -18,7 +18,7 @@ public class StaffEventProfileController extends BasicController{
 
     public StaffEventProfileController(Stage s){
         super(s);
-        staffView = new StaffEventProfileView(this);
+        staffView = new StaffEventProfileView();
         staffView.addButton.setOnAction(new addButtonEventHandler());
         staffView.editButton.setOnAction(new editButtonEventHandler());
 

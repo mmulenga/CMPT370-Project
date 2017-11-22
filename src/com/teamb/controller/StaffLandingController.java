@@ -21,7 +21,7 @@ public class StaffLandingController extends BasicController {
 
     public StaffLandingController(Stage s){
         super(s);
-        view = new StaffLandingView(this);
+        view = new StaffLandingView();
         view.mvButton.setOnAction(new mvButtonEventHandler());
         view.meButton.setOnAction(new meButtonEventHandler());
         view.cpassButton.setOnAction(new cpassButtonEventHandler());
