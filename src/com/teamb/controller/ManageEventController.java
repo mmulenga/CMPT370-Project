@@ -13,7 +13,7 @@ public class ManageEventController extends BasicController {
     ManageEventView view;
     public ManageEventController(Stage s) {
         super(s);
-        view = new ManageEventView(this);
+        view = new ManageEventView();
         view.deleteEventsBtn.setOnAction(new deleteEventsBtnEventHandler());
         view.createNewEventBtn.setOnAction(new createNewEventBtnEventHandler());
     }

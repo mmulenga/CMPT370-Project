@@ -22,9 +22,9 @@ public class EventView extends BasicView {
     //EventController controller;
     ArrayList<Event> eventList; //TODO:LIST OF EVENTS FROM DATABASE
 
-    public EventView(EventController c){
+    public EventView(){
 
-        super(c);
+        super();
         //eventList = c.GetEventModel();
 
 

@@ -20,7 +20,7 @@ public class EventController extends BasicController {
         this.eventModel = new ArrayList<Event>();
         //TODO: CALL Method that gets event list from database
 
-        eventView = new EventView(this);
+        eventView = new EventView();
 
     }
 

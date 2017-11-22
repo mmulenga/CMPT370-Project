@@ -1,6 +1,5 @@
 package com.teamb.view;
 
-import com.teamb.controller.BasicController;
 import com.teamb.model.Profile;
 import com.teamb.model.Shift;
 import javafx.geometry.HPos;
@@ -20,6 +19,9 @@ import javafx.scene.text.FontWeight;
 
 public class VolunteerProfileView extends BasicView {
 
+    public Button home;
+    public Button editProfile;
+
     protected GridPane gp;
     /**
      * Constructor.
@@ -28,8 +30,8 @@ public class VolunteerProfileView extends BasicView {
      *
      * @param c
      */
-    public VolunteerProfileView(BasicController c) {
-        super(c);
+    public VolunteerProfileView() {
+        super();
 
     }
 
@@ -62,8 +64,8 @@ public class VolunteerProfileView extends BasicView {
         gp.getColumnConstraints().addAll(columnOneConstraints, columnTwoConstrains,columnThreeConstrains);
 
         //Buttons
-        Button home = new Button("Homepage");
-        Button editProfile = new Button("Edit Profile");
+        home = new Button("Homepage");
+        editProfile = new Button("Edit Profile");
 
         //Create Labels
         Label firstNameLabel = new Label("First Name:");

@@ -1,8 +1,5 @@
 package com.teamb.view;
 
-import com.teamb.controller.StaffLandingController;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -19,7 +16,6 @@ import javafx.scene.layout.VBox;
  */
 public class StaffLandingView extends BasicView {
 
-    public StaffLandingController controller;
 
     public Button mvButton;
     public Button meButton;
@@ -27,9 +23,8 @@ public class StaffLandingView extends BasicView {
     public Button helpButton;
 
 
-    public StaffLandingView(StaffLandingController c){
-        super(c);
-        controller = c;
+    public StaffLandingView(){
+        super();
     }
 
     /**

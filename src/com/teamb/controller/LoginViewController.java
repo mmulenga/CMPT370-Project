@@ -1,7 +1,10 @@
 package com.teamb.controller;
 
 import com.teamb.view.LoginView;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class LoginViewController extends BasicController {
@@ -14,8 +17,30 @@ public class LoginViewController extends BasicController {
 
     public LoginViewController(Stage s){
         super(s);
-        loginView = new LoginView(this);
+        loginView = new LoginView();
         isStaff = false; //TODO: Actually check this
+        loginView.login.setOnAction(new loginEventHandler());
+        loginView.Signup.setOnAction(new SignupEventHandler());
+    }
+
+    class loginEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            if (checkCredentials(loginView.userNameField.getText(), loginView.pwField.getText())) {
+                loginView.loginOK = true;
+            } else {
+                Label loginError = new Label("username or password is wrong. Please try again.");
+                loginView.gp.add(loginError, 0, 5, 3, 1);
+            }
+        }
+    }
+
+    class SignupEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            //TODO: check if staff
+            ChangeToSignUpView();
+        }
     }
 
     public String getUsername() {

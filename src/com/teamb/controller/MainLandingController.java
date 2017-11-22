@@ -17,7 +17,7 @@ public class MainLandingController extends BasicController{
 
     public MainLandingController(Stage s){
         super(s);
-        mainView = new MainLandingView(this);
+        mainView = new MainLandingView();
         mainView.vButton.setOnAction(new vButtonEventHandler());
         mainView.sButton.setOnAction(new sButtonEventHandler());
     }
