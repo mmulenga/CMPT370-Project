@@ -84,11 +84,12 @@ public class VolunteerProfileView extends BasicView {
         Label phonePref = new Label("Prefer phone contact?");
         Label emailPref = new Label("Prefer email contact?");
         Label workedHourLabel = new Label("Hours worked:");
+        Label basicInfoLabel = new Label("Basic Information:");
 
         //Add Header
         Label header = new Label("Profile");
         header.setFont(Font.font("Arial", FontWeight.BOLD, 24));
-        gp.add(header, 0,1,3,1);
+        gp.add(header, 1,0);
         gp.setHalignment(header, HPos.CENTER);
         gp.setMargin(header, new Insets(20,0,20,0));
 
@@ -97,24 +98,43 @@ public class VolunteerProfileView extends BasicView {
         gp.add(editProfile,2,0);
 
 
+        gp.add(basicInfoLabel,0,1);
+        gp.setHalignment(basicInfoLabel,HPos.LEFT);
+
         gp.add(memberIDLabel,0,2);
         gp.add(firstNameLabel,0,3);
         gp.add(lastNameLabel,0,4);
         gp.add(addressLabel,0,5);
         gp.add(phoneNumberLabel,0,6);
         gp.add(emailLabel,0,7);
-        gp.add(contactPreference,0,8);
+
+        gp.add(contactPreference,0,8,3,1);
+        gp.setHalignment(contactPreference,HPos.LEFT);
+
         gp.add(phonePref,0,9);
         gp.add(emailPref,0,10);
         gp.add(criminalRecordCheck,0,11);
         gp.add(volunteerGroup,0,12);
         gp.add(medicalInformationLabel,0,13);
-        gp.add(emergencyContact,0,14);
+
+        gp.add(emergencyContact,0,14,3,1);
+        gp.setHalignment(emergencyContact,HPos.LEFT);
+
         gp.add(emergencyNameLabel,0,15);
         gp.add(emergencyNumberLabel,0,16);
-        gp.add(availabilityLabel,0,17);
+        gp.add(availabilityLabel,0,17,3,1);
         gp.setHalignment(availabilityLabel,HPos.LEFT);
         gp.add(workedHourLabel,0,19);
+
+        //Styling
+        availabilityLabel.setPadding(new Insets(5,0,5,0));
+        contactPreference.setPadding(new Insets(5,0,5,0));
+        emergencyContact.setPadding(new Insets(5,0,5,0));
+        basicInfoLabel.setPadding(new Insets(5,0,5,0));
+        availabilityLabel.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+        contactPreference.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+        emergencyContact.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+        basicInfoLabel.setFont(Font.font("Arial", FontWeight.BOLD, 18));
 
 
         ScrollPane sp = new ScrollPane();
