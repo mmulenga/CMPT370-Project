@@ -30,6 +30,14 @@ import java.util.ArrayList;
 public class ManageVolunteersView extends BasicView {
 
 
+
+    public Button createNewVolButton;
+    public Button sendEmailButton;
+    public Button printPhoneListButton;
+    public Button deleteProfilesButton;
+    public Button searchBtn;
+    public TextField searchKeyField;
+
     /**
      * Constructor.
      * Creates the root pane, and adds the children with the CreateChildren() method.
@@ -77,49 +85,15 @@ public class ManageVolunteersView extends BasicView {
             return cell;
         });
 
-        TextField searchKeyField = new TextField();
+        searchKeyField = new TextField();
         searchKeyField.setPromptText("Search Volunteers. Enter name or number");
 
-        Button createNewVolButton = new Button("Add new volunteer");
-        Button sendEmailButton = new Button("Send Email to selected");
-        Button printPhoneListButton = new Button("Print phone list for selected");
-        Button deleteProfilesButton = new Button("Delete selected profiles");
-        Button searchBtn = new Button("Search");
+        createNewVolButton = new Button("Add new volunteer");
+        sendEmailButton = new Button("Send Email to selected");
+        printPhoneListButton = new Button("Print phone list for selected");
+        deleteProfilesButton = new Button("Delete selected profiles");
+        searchBtn = new Button("Search");
 
-        createNewVolButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                ((ManageVolunteersController)controller).ChangeToSignUpView();
-            }
-        });
-
-        sendEmailButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                ((ManageVolunteersController)controller).SendEmails(/* TODO selected vol id's*/);
-            }
-        });
-
-        printPhoneListButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                ((ManageVolunteersController)controller).PrintPhoneList();
-            }
-        });
-
-        deleteProfilesButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                ((ManageVolunteersController)controller).DeleteProfiles();
-            }
-        });
-
-        searchBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                ((ManageVolunteersController)controller).Search(searchKeyField.getText());
-            }
-        });
 
         //TODO GET REAL DATA
         for(int i = 0; i < 5; i++){

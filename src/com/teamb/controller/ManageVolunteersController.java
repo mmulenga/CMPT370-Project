@@ -3,8 +3,12 @@ package com.teamb.controller;
 
 import com.teamb.view.BasicView;
 import com.teamb.view.ManageVolunteersView;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import javax.swing.*;
 
 
 /**
@@ -19,7 +23,51 @@ public class ManageVolunteersController extends BasicController{
     public ManageVolunteersController(Stage s) {
         super(s);
         view = new ManageVolunteersView(this);
+        view.createNewVolButton.setOnAction(new createNewVolButtonEventHandler());
+        view.sendEmailButton.setOnAction(new sendEmailButtonEventHandler());
+        view.printPhoneListButton.setOnAction(new printPhoneListButtonEventHandler());
+        view.deleteProfilesButton.setOnAction(new deleteProfilesButtonEventHandler());
+        view.searchBtn.setOnAction(new searchBtnEventHandler());
     }
+
+    class createNewVolButtonEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            ChangeToSignUpView();
+        }
+    }
+
+    class sendEmailButtonEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            SendEmails(/* TODO selected vol id's*/);
+        }
+    }
+
+    class printPhoneListButtonEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            PrintPhoneList();
+        }
+    }
+
+    class deleteProfilesButtonEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            DeleteProfiles();
+        }
+
+    }
+
+    class searchBtnEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            Search(view.searchKeyField.getText());
+        }
+
+    }
+
+
 
     @Override
     public BasicView GetView() {
