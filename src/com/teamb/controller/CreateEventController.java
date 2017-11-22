@@ -17,6 +17,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class CreateEventController extends BasicController {
@@ -28,7 +30,32 @@ public class CreateEventController extends BasicController {
     public CreateEventController(Stage s) {
         super(s);
         view = new CreateEventView(this);
+        view.clear.setOnAction(new clearEventHandler());
+        view.submit.setOnAction(new submitEventHandler());
     }
+
+    class clearEventHandler implements EventHandler<ActionEvent>{
+        @Override
+        public void handle(ActionEvent event) {
+            view.eventTitleField.clear();
+            view.locationField.clear();
+            view.descriptionArea.clear();
+            view.startTimeBox.getSelectionModel().select(0);
+            view.endTimeBox.getSelectionModel().select(0);
+            view.startDatePicker.setValue(LocalDate.now());
+            view.endDatePicker.setValue(view.startDatePicker.getValue().plusDays(1));
+        }
+    }
+
+    class submitEventHandler implements EventHandler<ActionEvent>{
+        @Override
+        public void handle(ActionEvent event) {
+            createNewEvent();
+            completePopUP();
+        }
+    }
+
+
 
     @Override
     public BasicView GetView() {
