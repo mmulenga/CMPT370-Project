@@ -11,16 +11,15 @@ import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 
 import java.util.ArrayList;
@@ -131,6 +130,9 @@ public class ManageVolunteersView extends BasicView {
             table.getItems().add(ps);
         }
 
+        Label label = new Label("Manage Volunteers");
+        label.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+
         GridPane gp = new GridPane();
         gp.setAlignment(Pos.CENTER);
         gp.setPadding(new Insets(30,30,30,30));
@@ -150,8 +152,9 @@ public class ManageVolunteersView extends BasicView {
 
         gp.getColumnConstraints().addAll(columnOneConstraints, columnTwoConstrains, columnThreeConstrains);
 
-        gp.add(table, 0, 1, 2,2);
-        gp.add(searchKeyField, 2, 0);
+        gp.add(label, 0,0, 3, 1);
+        gp.add(table, 0, 1, 2,1);
+        gp.add(searchKeyField, 0, 2);
         gp.add(searchBtn, 0, 3);
         gp.add(createNewVolButton, 0, 4);
         gp.add(deleteProfilesButton, 0, 5);

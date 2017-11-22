@@ -37,6 +37,6 @@ public class MainLandingController extends BasicController{
         stage.show();
     }
 
-    
+
 
 }
