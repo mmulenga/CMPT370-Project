@@ -29,6 +29,10 @@ public class MainLandingView extends BasicView{
     /**
      * Constructs the MainLanding page.
      */
+
+    public Button vButton;
+    public Button sButton;
+
     public MainLandingView(BasicController c){
         super(c);
 
@@ -43,20 +47,10 @@ public class MainLandingView extends BasicView{
 
         Button vButton = new Button("Volunteer Login");
 
-        vButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {((MainLandingController)controller).ChangeToLoginView(event);
-            }
-        });
         //when this button is pressed view changes to volunteer login page
         //controller.ChangeView(/*volunteer*/);
         Button sButton = new Button("Staff Login");
-        sButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                ((MainLandingController)controller).ChangeToLoginView(event);
-            }
-        });
+
         //when this button is pressed view changes to staff login page
         //controller.ChangeView(/*staff*/);
         vButton.setPrefSize(200,100);
