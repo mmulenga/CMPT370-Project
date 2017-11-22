@@ -1,5 +1,6 @@
 package com.teamb.controller;
 
+import com.teamb.model.VolunteerizeModel;
 import com.teamb.view.EventView;
 import com.teamb.model.Event;
 import javafx.stage.Stage;
@@ -25,10 +26,19 @@ public class EventController extends BasicController {
 
     public void editEvent(Event event) {
         //TODO: CAll method that changes event in database
+
+        VolunteerizeModel model = new VolunteerizeModel();
+        //event passed in must already be altered.
+        model.editEvent(event);
+
     }
 
     public void deleteEvent(Event event) {
         //TODO:Call method that deletes event from database
+
+        VolunteerizeModel model = new VolunteerizeModel();
+        //event passed in is one to be deleted.
+        model.deleteEvent(event);
     }
 
     public ArrayList<Event> GetEventModel() {

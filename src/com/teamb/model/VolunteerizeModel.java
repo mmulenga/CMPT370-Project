@@ -120,11 +120,16 @@ public class VolunteerizeModel {
      */
     public void addEvent(Event newEvent) {
         // TODO - Figure out how we're storing locations application-side.
+        String startTime = null;
+        startTime.valueOf(newEvent.getStartTime());
+        String endTime = null;
+        endTime.valueOf(newEvent.getEndTime());
+
         database.insert("events (name, start_time, end_time, description, location_id)\n " +
                 "VALUES (" +
                 wrap(newEvent.getEventName()) + ", " +
-                newEvent.getStartDate() + " " + newEvent.getStartTime() + "00, " +
-                newEvent.getEndDate() + " " + newEvent.getEndTime() + "00, " +
+                newEvent.getStartDate() + " " + endTime + "00, " +
+                newEvent.getEndDate() + " " + startTime + "00, " +
                 wrap(newEvent.getDescription()) + ", " +
                 newEvent.getLocation() +
                 ");");
@@ -298,6 +303,81 @@ public class VolunteerizeModel {
 
     }
 
+    public Profile[] searchProfiles(String query, String dataType ) {
+        String dbDataType = getEventDataType(dataType);
+        int numOfValues = 0;
+
+        try{
+            ResultSet rs = database.count( "FROM users u, " +
+                            "volunteers v, " +
+                            "contact_information c, " +
+                            "emergency_contact e, " +
+                            "volunteer_group g, " +
+                            "volunteer_group_members m " +
+                            "where u.volunteer_id = v.id " +
+                            "and c.volunteer_id = v.id " +
+                            "and c.emergency_contact_id = e.id " +
+                            "and m.volunteer_id = v.id " +
+                            "and m.group_id = g.id " +
+                            "and " + dataType + " = " + query);
+            numOfValues = rs.getInt("count");
+
+
+
+
+        }catch(SQLException exception) {
+            System.out.println("Count query failed.");
+
+            exception.printStackTrace();
+        }
+
+        Profile [] profilesSearched = new Profile[numOfValues];
+        ResultSet profilesSought = getEvent(query,dbDataType);
+
+        try {
+
+            for(int i = 0; i < numOfValues; i++){
+                Event e = new Event();
+
+                profilesSearched[i].setAllBaseInformation(profilesSought.getString("first_name"),
+                        profilesSought.getString( "middle_name"),
+                        profilesSought.getString("last_name"),
+                        profilesSought.getString("address"),
+                        profilesSought.getString("phone_number"),
+                        profilesSought.getString( "postal_code"),
+                        profilesSought.getString("emergency_contact_phone_number"),
+                        profilesSought.getString("emergency_contact_first_name"),
+                        profilesSought.getString("emergency_contact_middle_name"),
+                        profilesSought.getString("emergency_contact_last_name"),
+                        profilesSought.getInt("emergency_contact_id"),
+                        profilesSought.getString("emergency_contact_adress"),
+                        profilesSought.getString("emergency_contact_postal_code"),
+                        profilesSought.getString("email"),
+                        profilesSought.getBoolean("prefer_phone"),
+                        profilesSought.getBoolean("prefer_email"),
+                        profilesSought.getInt("id"),
+                        profilesSought.getBoolean("criminal_check"),
+                        profilesSought.getString("medical_info"),
+                        profilesSought.getInt("hours_worked"),
+                        profilesSought.getString("photo_path"),
+                        null  // availability is not clearly defined
+                );
+
+                profilesSought.next();
+
+            }
+
+        }catch(SQLException exception) {
+            System.out.println("Count query failed.");
+
+            exception.printStackTrace();
+        }
+
+
+
+        return profilesSearched;
+
+    }
 
     /**
      * Finds the requested event from the database and returns it.
@@ -354,13 +434,15 @@ public class VolunteerizeModel {
                 Event e = new Event();
 
                 eventsSearched[i].setEventFields(eventsSought.getInt("id"),
-                eventsSought.getString("name"),
+                        eventsSought.getString("name"),
                         eventsSought.getInt( "start_time"),
                         eventsSought.getInt( "end_time"), // may need to format times properly.
-                        eventsSought.getDate( "start_date"),
-                        eventsSought.getDate( "end_date"),
+                        eventsSought.getString( "start_date"),
+                        eventsSought.getString( "end_date"),
                         eventsSought.getString( "location_name"),
                         eventsSought.getString("description"));
+
+                eventsSought.next();
 
             }
 
