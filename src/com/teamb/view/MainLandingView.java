@@ -67,11 +67,10 @@ public class MainLandingView extends BasicView{
         Label label = new Label("Welcome to Volunteerize");
         label.setFont(Font.font("Arial", FontWeight.BOLD, 40));
 
-<<<<<<< HEAD
+
 
         //v.setPadding(new Insets(100));
-=======
->>>>>>> 7c7f08fb22cae1bf3fc17961f0b355e400623ec7
+
         buttonBox.getChildren().addAll(vButton, sButton);
         buttonBox.setAlignment(Pos.CENTER);
         buttonBox.setMargin(vButton,new Insets(30));
