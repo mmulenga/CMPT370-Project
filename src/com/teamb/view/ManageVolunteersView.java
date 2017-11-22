@@ -8,14 +8,19 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 
 
 import java.util.ArrayList;
@@ -80,6 +85,7 @@ public class ManageVolunteersView extends BasicView {
         Button sendEmailButton = new Button("Send Email to selected");
         Button printPhoneListButton = new Button("Print phone list for selected");
         Button deleteProfilesButton = new Button("Delete selected profiles");
+        Button searchBtn = new Button("Search");
 
         createNewVolButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -109,6 +115,13 @@ public class ManageVolunteersView extends BasicView {
             }
         });
 
+        searchBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                ((ManageVolunteersController)controller).Search(searchKeyField.getText());
+            }
+        });
+
         //TODO GET REAL DATA
         for(int i = 0; i < 5; i++){
             Profile p = new Profile();
@@ -119,10 +132,29 @@ public class ManageVolunteersView extends BasicView {
         }
 
         GridPane gp = new GridPane();
+        gp.setAlignment(Pos.CENTER);
+        gp.setPadding(new Insets(30,30,30,30));
+        gp.setHgap(10);
+        gp.setVgap(10);
 
+        // columnOneConstraints will be applied to all the nodes placed in column one.
+        ColumnConstraints columnOneConstraints = new ColumnConstraints(100, 200, Double.MAX_VALUE);
+        columnOneConstraints.setHalignment(HPos.LEFT);
 
-        gp.getChildren().addAll(table, sendEmailButton, printPhoneListButton,
-                createNewVolButton, deleteProfilesButton);
+        // columnTwoConstraints will be applied to all the nodes placed in column two.
+        ColumnConstraints columnTwoConstrains = new ColumnConstraints(100,150, Double.MAX_VALUE);
+        columnTwoConstrains.setHgrow(Priority.ALWAYS);
+
+        ColumnConstraints columnThreeConstrains = new ColumnConstraints(100,150, Double.MAX_VALUE);
+        columnTwoConstrains.setHgrow(Priority.ALWAYS);
+
+        gp.getColumnConstraints().addAll(columnOneConstraints, columnTwoConstrains, columnThreeConstrains);
+
+        gp.add(table, 0, 1, 2,2);
+        gp.add(searchKeyField, 2, 0);
+        gp.add(searchBtn, 0, 3);
+        gp.add(createNewVolButton, 0, 4);
+        gp.add(deleteProfilesButton, 0, 5);
 
         root.getChildren().add(gp);
 
