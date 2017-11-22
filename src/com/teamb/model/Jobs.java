@@ -1,5 +1,8 @@
 package com.teamb.model;
 
+/**
+ * Represents all the information and functions of the Jobs that participants do at events.
+ */
 public class Jobs {
 
     private String name;
