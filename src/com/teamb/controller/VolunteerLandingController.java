@@ -2,6 +2,8 @@ package com.teamb.controller;
 
 import com.teamb.view.BasicView;
 import com.teamb.view.VolunteerLandingView;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -22,7 +24,51 @@ public class VolunteerLandingController extends BasicController {
     public VolunteerLandingController(Stage s){
         super(s);
         view = new VolunteerLandingView(this);
+        view.epButton.setOnAction(new epButtonEventHandler());
+        view.ueButton.setOnAction(new ueButtonEventHandler());
+        view.cpassButton.setOnAction(new cpassButtonEventHandler());
+        view.helpButton.setOnAction(new helpButtonEventHandler());
+        view.pButton.setOnAction(new pButtonEventHandler());
     }
+
+    class epButtonEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            ChangeToEditProfileView();
+        }
+    }
+
+
+    class ueButtonEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            ChangeToBrowseEventsView();
+        }
+    }
+
+    class cpassButtonEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            ChangeToChangePasswordView();
+        }
+
+    }
+
+    class helpButtonEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            HelpPopUp();
+        }
+    }
+
+    class pButtonEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            ChangeToProfileView();
+        }
+    }
+
+
 
     public void ChangeToEditProfileView(){
         //TODO

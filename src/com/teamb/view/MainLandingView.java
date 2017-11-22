@@ -26,12 +26,15 @@ public class MainLandingView extends BasicView{
 
     //private MainLandingController controller;
 
+
+    public Button vButton;
+    public Button sButton;
+
     /**
      * Constructs the MainLanding page.
      */
 
-    public Button vButton;
-    public Button sButton;
+
 
     public MainLandingView(BasicController c){
         super(c);
@@ -45,11 +48,11 @@ public class MainLandingView extends BasicView{
 
         HBox buttonBox = new HBox();
 
-        Button vButton = new Button("Volunteer Login");
+        vButton = new Button("Volunteer Login");
 
         //when this button is pressed view changes to volunteer login page
         //controller.ChangeView(/*volunteer*/);
-        Button sButton = new Button("Staff Login");
+        sButton = new Button("Staff Login");
 
         //when this button is pressed view changes to staff login page
         //controller.ChangeView(/*staff*/);

@@ -3,7 +3,6 @@ import java.sql.*;
 
 public class VolunteerizeModel {
     private DatabaseInterface database;
-    private ResultSet result;
 
     /**
      * Constructor for VolunteerizeModel.
@@ -23,6 +22,39 @@ public class VolunteerizeModel {
         return "'" + value + "'";
     }
 
+    /**
+     *
+     * @param username
+     * @param password
+     * @return
+     */
+    public Profile login(String username, String password) {
+        int profileID;
+
+        ResultSet result = database.select("* FROM users u WHERE u.username = " +
+                wrap(username) + " AND password = " + wrap(password) + ";");
+
+        try {
+            result.next();
+            profileID = result.getInt("volunteer_id");
+        } catch(SQLException exception) {
+            exception.printStackTrace();
+
+            return null;
+        }
+
+        return getProfile(profileID);
+    }
+
+    public void addUser(Users user) {
+        database.insert("users (username, password, is_staff, volunteer_id)\n " +
+                "VALUES (" +
+                wrap(user.getUsername()) + ", " +
+                wrap(user.getPassword()) + ", " +
+                user.getIsStaff() + ", " +
+                user.getProfileID() +
+                ");");
+    }
 
     /**
      * Creates a query which takes the attributes from the given profile and inserts them
@@ -112,6 +144,57 @@ public class VolunteerizeModel {
         database.delete("volunteers WHERE id = " + volunteer.getMemberID() + ";");
     }
 
+
+    /**
+     * Retrieves the profile associated with the given ID.
+     * @param id - An integer referring to the profile we want.
+     * @return Returns the profile associated with the given ID.
+     */
+    public Profile getProfile(int id) {
+        ResultSet volunteer;
+        ResultSet contactInformation;
+        ResultSet emergencyContact;
+
+        Profile newProfile = new Profile();
+
+        volunteer = database.select(" * FROM volunteers WHERE id = " + id + ";");
+        contactInformation = database.select(" * FROM contact_information WHERE volunteer_id = " + id + ";");
+        emergencyContact = database.select(" * FROM emergency_contact WHERE volunteer_id = " + id + ";");
+
+        try {
+            volunteer.next();
+            contactInformation.next();
+            emergencyContact.next();
+
+            newProfile.setAllBaseInformation(volunteer.getString("first_name"),
+                    volunteer.getString("middle_name"),
+                    volunteer.getString("last_name"),
+                    contactInformation.getString("address"),
+                    contactInformation.getString("phone_number"),
+                    contactInformation.getString("postal_code"),
+                    emergencyContact.getString("phone_number"),
+                    emergencyContact.getString("first_name"),
+                    emergencyContact.getString("middle_name"),
+                    emergencyContact.getString("last_name"),
+                    emergencyContact.getInt("id"),
+                    emergencyContact.getString("postal_code"),
+                    emergencyContact.getString("address"),
+                    volunteer.getString("email"),
+                    contactInformation.getBoolean("prefer_phone"),
+                    contactInformation.getBoolean("prefer_email"),
+                    volunteer.getInt("id"),
+                    volunteer.getBoolean("criminal_check"),
+                    volunteer.getString("medical_info"),
+                    volunteer.getInt("hours_worked"),
+                    volunteer.getString("photo_path"),
+                    null
+            );
+        } catch(SQLException exception) {
+            exception.printStackTrace();
+        }
+
+        return newProfile;
+    }
 
     /**
      * Creates a query which takes the attributes from the given event and inserts them
@@ -404,6 +487,12 @@ public class VolunteerizeModel {
         public static void main(String args[]) {
         VolunteerizeModel model = new VolunteerizeModel();
         Profile newProfile = new Profile();
+        Users newUser = new Users();
+
+        newUser.setProfileID(1);
+        newUser.setUsername("Jimmy");
+        newUser.setPassword("jam");
+        newUser.setIsStaff(false);
 
         newProfile.setAllBaseInformation("Matt",
                 null,
@@ -427,6 +516,9 @@ public class VolunteerizeModel {
                 40,
                 "C:/Photos",
                 null);
+
+        model.addUser(newUser);
+        model.login("Matt", "beans");
 
         model.deleteProfile(newProfile);
     }
