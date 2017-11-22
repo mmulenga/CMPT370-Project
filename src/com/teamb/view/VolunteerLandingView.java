@@ -3,6 +3,7 @@ package com.teamb.view;
 import com.teamb.controller.VolunteerLandingController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -82,6 +83,8 @@ public class VolunteerLandingView extends BasicView {
         });
 
         VBox mainContainer = new VBox();
+        mainContainer.setAlignment(Pos.CENTER);
+
 
         mainContainer.getChildren().addAll(welcome, prompt, pButton, epButton, ueButton, cpassButton, helpButton);
         root.getChildren().add(mainContainer);

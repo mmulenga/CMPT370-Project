@@ -64,8 +64,7 @@ public class VolunteerizeModel {
     public void addProfile(Profile volunteer) {
         // Insert all relevant volunteer table information.
         database.insert("volunteers (id, first_name, last_name, email, hours_worked, criminal_check)\n" +
-                "VALUES (" +
-                volunteer.getMemberID() + ", " +
+                "VALUES (DEFAULT, " +
                 wrap(volunteer.getFirstName()) + ", " +
                 wrap(volunteer.getLastName()) + ", " +
                 wrap(volunteer.getEmail()) + ", " +
@@ -76,7 +75,7 @@ public class VolunteerizeModel {
         // Insert all emergency contact information.
         database.insert("emergency_contact (id, first_name, middle_name, last_name," +
                 " phone_number, address, postal_code, volunteer_id)\n " +
-                "VALUES (" + volunteer.getEmergencyContactID() + ", " +
+                "VALUES (DEFAULT, " +
                 wrap(volunteer.getEmergencyContactFirst()) + ", " +
                 wrap(volunteer.getEmergencyContactMiddle()) + ", " +
                 wrap(volunteer.getEmergencyContactLast()) + ", " +
@@ -88,15 +87,14 @@ public class VolunteerizeModel {
 
         // Insert all contact information.
         database.insert("contact_information (prefer_phone, prefer_email, phone_number, address, postal_code, " +
-                "volunteer_id, emergency_contact_id)\n " +
+                "volunteer_id)\n " +
                 "VALUES (" +
                 volunteer.getContactByPhone() + ", " +
                 volunteer.getContactByEmail() + ", " +
                 volunteer.getPhoneNumber() + ", " +
                 wrap(volunteer.getAddress()) + ", " +
                 wrap(volunteer.getPostalCode()) + ", " +
-                volunteer.getMemberID() + ", " +
-                volunteer.getEmergencyContactID() +
+                volunteer.getMemberID() +
                 ");");
     }
 
@@ -145,6 +143,7 @@ public class VolunteerizeModel {
         // TODO - Fix cascade, currently does not delete contact_information.
         database.delete("volunteers WHERE id = " + volunteer.getMemberID() + ";");
     }
+
 
     /**
      * Retrieves the profile associated with the given ID.
@@ -204,13 +203,26 @@ public class VolunteerizeModel {
      */
     public void addEvent(Event newEvent) {
         // TODO - Figure out how we're storing locations application-side.
+
+
+
+        String startTime = "0" + Integer.toString(newEvent.getStartTime());
+        if (newEvent.getStartTime() < 1000)
+            startTime = "0" + startTime;
+
+        String endTime = Integer.toString(newEvent.getEndTime());
+        if (newEvent.getEndTime() < 1000)
+            endTime = "0" + endTime;
+
+
+
         database.insert("events (name, start_time, end_time, description, location_id)\n " +
                 "VALUES (" +
                 wrap(newEvent.getEventName()) + ", " +
-                newEvent.getStartTime() + ", " +
-                newEvent.getEndTime() + ", " +
+                 "to_timestamp('" + newEvent.getStartDate() +" " + startTime + "', 'DD/MM/YYYY HH24MI'), " +
+                "to_timestamp('" + newEvent.getEndDate() +" " + endTime + "', 'DD/MM/YYYY HH24MI'), " +
                 wrap(newEvent.getDescription()) + ", " +
-                newEvent.getLocation() +
+                0 +
                 ");");
     }
 
@@ -237,30 +249,78 @@ public class VolunteerizeModel {
     }
 
     /**
-     *
-     * @param query
-     * @param dataType
-     * @return
+     * Adds event Participants to table in Database
+     * @param e - Event that participant will go to.
+     * @param p - Profile of participant.
+     * @param j - Job that they will do.
      */
-    public Profile searchVolunteer(String query, String dataType ) {
+    public void addEventParticipants( Event e, Profile p, Jobs j) {
+        database.insert("event_participants (id, volunteer_id, event_id, job_id)\n " +
+                "VALUES (DEFAULT" +
+                e.getEventID() + ", " +
+                p.getMemberID() + ", " +
+                "0);");
 
-        String dbDataType;
+    }
+
+
+
+    /**
+     * Discovers type of data sought, and returns a formatted type for PostgreSQL.
+     * @param choice - String with data type of query.
+     */
+    public String getVolunteerDataType (String choice) {
+
+        String dataType;
+
+
+        if (choice.equals("Id"))
+            dataType = "v.id  ";
+        else if (choice.equals("First Name"))
+            dataType = "v.first_name  ";
+        else if (choice.equals("Last Name"))
+            dataType = "v.last_name";
+        else if (choice.equals("Availability")) // Place holder while we wait for more options
+            dataType = "LIST ";  // What else can be searched by?
+        else
+            dataType = "fail"; // meaning you can't search by this data type
+
+        return dataType;
+    }
+
+    /**
+     * Discovers type of data sought, and returns a formatted type for PostgreSQL.
+     * @param choice - String with data type of query.
+     */
+    public String getEventDataType (String choice) {
+
+        String dataType;
+
+        if (choice.equals("Id"))
+            dataType = "e.id  ";
+        else if (choice.equals("Name"))
+            dataType = "e.name  ";
+        else if (choice.equals("StartTime"))
+            dataType = "e.start_time";
+        else if (choice.equals("End Time"))
+            dataType = "e.end_time";  // What else can be searched by?
+        else
+            dataType = "fail"; // meaning you can't search by this data type
+
+        return dataType;
+
+    }
+
+    /**
+     * Finds the requested profile from the database and returns it.
+     * @param query - String with the data that is being looked for.
+     * @param dataType - String with data type of query.
+     */
+    public ResultSet getVolunteer(String query, String dataType ) {
+
         Profile p = new Profile();
 
-
-        if (dataType.equals("Id"))
-            dbDataType = "v.id  ";
-        else if (dataType.equals("First Name"))
-            dbDataType = "v.first_name  ";
-        else if (dataType.equals("Last Name"))
-            dbDataType = "v.last_name";
-        else if (dataType.equals(" STUFF")) // Place holder while we wait for more options
-            dbDataType = "stuff";  // What else can be searched by?
-        else
-            dbDataType = "fail"; // meaning you can't search by this data type
-
-
-            ResultSet rs = database.select( "v.id, " +
+        ResultSet rs = database.select( "v.id, " +
                     "u.type, " +
                     "v.first_name, " +
                     "v.middle_name, " +
@@ -294,9 +354,9 @@ public class VolunteerizeModel {
                     "and c.emergency_contact_id = e.id " +
                     "and m.volunteer_id = v.id " +
                     "and m.group_id = g.id " +
-                    "and " + dbDataType + " = " + query);
+                    "and " + dataType + " = " + query);
 
-            try {
+        try {
 
                 p.setAllBaseInformation(rs.getString("first_name"),
                         rs.getString( "middle_name"),
@@ -320,71 +380,175 @@ public class VolunteerizeModel {
                         rs.getInt("hours_worked"),
                         rs.getString("photo_path"),
                         null  // availability is not clearly defined
-                );
+                        );
 
 
-            }catch(SQLException exception) {
-                System.out.println("Insert query failed.");
+        }catch(SQLException exception) {
+                System.out.println("Search query failed.");
 
                 exception.printStackTrace();
-            }
-            return p;
+        }
+        return rs;
 
 
 
     }
 
-
-    public Event searchEvent(String query, String dataType ) {
-
-        Event e = new Event();
-        String dbDataType;
-
-        if (dataType.equals("Id"))
-            dbDataType = "e.id  ";
-        else if (dataType.equals("Name"))
-            dbDataType = "e.name  ";
-        else if (dataType.equals("StartTime"))
-            dbDataType = "e.start_time";
-        else if (dataType.equals("End Time"))
-            dbDataType = "e.end_time";  // What else can be searched by?
-        else
-            dbDataType = "fail"; // meaning you can't search by this data type
+    public Profile[] searchProfiles(String query, String dataType ) {
+        String dbDataType = getEventDataType(dataType);
+        int numOfValues = 0;
 
         try{
+            ResultSet rs = database.count( "FROM users u, " +
+                            "volunteers v, " +
+                            "contact_information c, " +
+                            "emergency_contact e, " +
+                            "volunteer_group g, " +
+                            "volunteer_group_members m " +
+                            "where u.volunteer_id = v.id " +
+                            "and c.volunteer_id = v.id " +
+                            "and c.emergency_contact_id = e.id " +
+                            "and m.volunteer_id = v.id " +
+                            "and m.group_id = g.id " +
+                            "and " + dataType + " = " + query);
+            numOfValues = rs.getInt("count");
 
-            ResultSet rs = database.select( "e.id, " +
-                    "e.name, " +
-                    "e.start_time, " +
-                    "e.end_time, " +
-                    "e.description, " +
-                    "l.name as location_name, " +
-                    "l.address, " +
-                    "l.postal_code " +
-                    "FROM events e, locations l " +
-                    "WHERE l.id = e.location.id " +
-                    "and " + dbDataType + " = " + query);
 
 
-            e.setEventName( rs.getString("name"));
-            e.setDescription( rs.getString("description"));
-            e.setStartDate( rs.getDate("start_date"));   // in database is a timestamp, so date and time are together
-            e.setEndDate( rs.getDate("end_date"));
-            e.setStartTime( rs.getInt ("start_time"));
-            e.setEndTime( rs.getInt ("end_time"));
-            e.setLocation(rs.getString( "location_name")); // do we need address?
 
         }catch(SQLException exception) {
-            System.out.println("Insert query failed.");
+            System.out.println("Count query failed.");
 
             exception.printStackTrace();
         }
 
-        return e;
+        Profile [] profilesSearched = new Profile[numOfValues];
+        ResultSet profilesSought = getEvent(query,dbDataType);
+
+        try {
+
+            for(int i = 0; i < numOfValues; i++){
+                Event e = new Event();
+
+                profilesSearched[i].setAllBaseInformation(profilesSought.getString("first_name"),
+                        profilesSought.getString( "middle_name"),
+                        profilesSought.getString("last_name"),
+                        profilesSought.getString("address"),
+                        profilesSought.getString("phone_number"),
+                        profilesSought.getString( "postal_code"),
+                        profilesSought.getString("emergency_contact_phone_number"),
+                        profilesSought.getString("emergency_contact_first_name"),
+                        profilesSought.getString("emergency_contact_middle_name"),
+                        profilesSought.getString("emergency_contact_last_name"),
+                        profilesSought.getInt("emergency_contact_id"),
+                        profilesSought.getString("emergency_contact_adress"),
+                        profilesSought.getString("emergency_contact_postal_code"),
+                        profilesSought.getString("email"),
+                        profilesSought.getBoolean("prefer_phone"),
+                        profilesSought.getBoolean("prefer_email"),
+                        profilesSought.getInt("id"),
+                        profilesSought.getBoolean("criminal_check"),
+                        profilesSought.getString("medical_info"),
+                        profilesSought.getInt("hours_worked"),
+                        profilesSought.getString("photo_path"),
+                        null  // availability is not clearly defined
+                );
+
+                profilesSought.next();
+
+            }
+
+        }catch(SQLException exception) {
+            System.out.println("Count query failed.");
+
+            exception.printStackTrace();
+        }
+
+
+
+        return profilesSearched;
+
+    }
+
+    /**
+     * Finds the requested event from the database and returns it.
+     * @param query - String with the data that is being looked for.
+     * @param dataType - String with data type of query.
+     */
+    public ResultSet getEvent(String query, String dataType ) {
+
+        Event e = new Event();
+
+        ResultSet rs = database.select( "e.id, " +
+                "e.name, " +
+                "e.start_time, " +
+                "e.end_time, " +
+                "e.description, " +
+                "l.name as location_name, " +
+                "l.address, " +
+                "l.postal_code " +
+                "FROM events e, locations l " +
+                "WHERE l.id = e.location.id " +
+                "and " + dataType + " = " + query);
+
+
+
+        return rs;
+    }
+
+    public Event[] searchEvents(String query, String dataType ) {
+
+        String dbDataType = getEventDataType(dataType);
+        int numOfValues = 0;
+
+        try{
+            ResultSet rs = database.count( "events e, locations l " +
+                "WHERE l.id = e.location.id " +
+                "and " + dbDataType + " = " + query);
+                numOfValues = rs.getInt("count");
+
+
+
+
+        }catch(SQLException exception) {
+            System.out.println("Count query failed.");
+
+            exception.printStackTrace();
+        }
+
+        Event [] eventsSearched = new Event[numOfValues];
+        ResultSet eventsSought = getEvent(query,dbDataType);
+
+        try {
+
+            for(int i = 0; i < numOfValues; i++){
+                Event e = new Event();
+
+                eventsSearched[i].setEventFields(eventsSought.getInt("id"),
+                        eventsSought.getString("name"),
+                        eventsSought.getInt( "start_time"),
+                        eventsSought.getInt( "end_time"), // may need to format times properly.
+                        eventsSought.getString( "start_date"),
+                        eventsSought.getString( "end_date"),
+                        eventsSought.getString( "location_name"),
+                        eventsSought.getString("description"));
+
+                eventsSought.next();
+
+            }
+
+        }catch(SQLException exception) {
+            System.out.println("Count query failed.");
+
+            exception.printStackTrace();
+        }
+
+
+        return eventsSearched;
     }
 
 
-    public static void main(String args[]) {
+        public static void main(String args[]) {
         VolunteerizeModel model = new VolunteerizeModel();
         Profile newProfile = new Profile();
         Users newUser = new Users();

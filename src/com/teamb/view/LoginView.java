@@ -51,9 +51,8 @@ public class LoginView extends BasicView{
     @Override
     protected void CreateChildren() {
         GridPane gp = new GridPane();
-        Text scenetitle = new Text("Welcome to Volunteerize!");
+        Text scenetitle = new Text("Welcome, Volunteer!");
         scenetitle.setId("scenetitle");
-        // why does this create it's controller? Why does it need the stage s?
         Button login = new Button("Login");
         Button Signup = new Button("Sign Up");
         String username;
@@ -75,10 +74,18 @@ public class LoginView extends BasicView{
             }
         });
 
+        Signup.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                //TODO: check if staff
+                controller.ChangeToSignUpView();
+            }
+        });
+
         gp.setAlignment(Pos.CENTER);
         gp.setHgap(10);
         gp.setVgap(10);
-        gp.setPadding(new Insets(25, 25, 25, 25));
+        gp.setPadding(new Insets(200));
 
         gp.add(scenetitle, 0, 0, 2, 1);
         gp.add(userName, 0, 1);
@@ -87,6 +94,8 @@ public class LoginView extends BasicView{
         gp.add(pwField, 1, 2);
         gp.add(login, 1, 3);
         gp.add(Signup, 1, 4);
+
+
         root.getChildren().add(gp);
     }
 

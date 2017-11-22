@@ -23,6 +23,8 @@ import javafx.scene.text.FontWeight;
 public class VolunteerEventProfileView extends BasicView{
     protected BasicController controller;
 
+    public Button addButton;
+
     /**
      * Constructs the StaffEventProfile page.
      */
@@ -35,14 +37,6 @@ public class VolunteerEventProfileView extends BasicView{
 
         //when this button is pressed view changes to event sign up page
         Button addButton = new Button("Sign Up For Event");
-        addButton.setOnAction(new EventHandler<ActionEvent>(){
-            @Override
-            public void handle(ActionEvent event){
-                ((VolunteerEventProfileController)controller).AddToEvent(/*editEventView*/);
-            }
-        });
-
-
 
         /**
          * Labels for Volunteer Event Profile view

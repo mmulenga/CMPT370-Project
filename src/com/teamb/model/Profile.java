@@ -104,8 +104,8 @@ public class Profile {
         this.medicalInformation = medicalInformation;
         this.hoursWorked = hoursWorked;
         this.photoPath = photoPath;
-        //this.availability = new Availability();
-        //this.availability = availability;
+        this.availability = new Availability();
+
     }
 
     //////////////////////////////////////////////////////////
@@ -331,9 +331,6 @@ public class Profile {
         volunteerGroups.removeGroup(groupName);
     }
 
-    public static void main(String args[]){
-        System.out.println("Profile.java");
-    }
 
 
 }

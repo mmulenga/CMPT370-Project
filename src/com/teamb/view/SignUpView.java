@@ -3,6 +3,7 @@ package com.teamb.view;
 import com.teamb.controller.BasicController;
 import com.teamb.controller.SignUpController;
 import com.teamb.model.Availability;
+import com.teamb.model.Profile;
 import com.teamb.model.Shift;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
@@ -29,6 +30,27 @@ import java.util.Objects;
 
 public class SignUpView extends BasicView {
 
+    public Button submit;
+    public Button clear;
+    public Availability a;
+    public TableView<Shift> availabilityTable;
+    public TextField firstNameField;
+    public TextField lastNameField;
+    public TextField passwordField;
+    public TextField addressField;
+    public TextField phoneNumberField;
+    public TextField emergencyNumberField;
+    public TextField emergencyNameField;
+    public TextField emailField;
+    public TextField memberIDField;
+    public TextArea medicalInformationField;
+    public RadioButton phoneYes;
+    public RadioButton emailYes;
+    public RadioButton checked;
+
+
+
+
     public SignUpView(BasicController c){
         super(c);
 
@@ -48,14 +70,14 @@ public class SignUpView extends BasicView {
         gp.setVgap(10);
 
         // columnOneConstraints will be applied to all the nodes placed in column one.
-        ColumnConstraints columnOneConstraints = new ColumnConstraints(100, 200, Double.MAX_VALUE);
+        ColumnConstraints columnOneConstraints = new ColumnConstraints(100, 180, Double.MAX_VALUE);
         columnOneConstraints.setHalignment(HPos.LEFT);
 
         // columnTwoConstraints will be applied to all the nodes placed in column two.
-        ColumnConstraints columnTwoConstrains = new ColumnConstraints(100,150, Double.MAX_VALUE);
+        ColumnConstraints columnTwoConstrains = new ColumnConstraints(100,170, Double.MAX_VALUE);
         columnTwoConstrains.setHgrow(Priority.ALWAYS);
 
-        ColumnConstraints columnThreeConstrains = new ColumnConstraints(100,150, Double.MAX_VALUE);
+        ColumnConstraints columnThreeConstrains = new ColumnConstraints(100,170, Double.MAX_VALUE);
         columnTwoConstrains.setHgrow(Priority.ALWAYS);
 
         gp.getColumnConstraints().addAll(columnOneConstraints, columnTwoConstrains, columnThreeConstrains);
@@ -68,60 +90,60 @@ public class SignUpView extends BasicView {
         gp.setMargin(header, new Insets(20,0,20,0));
 
         //Create Labels
-        Label firstNameLabel = new Label("First Name : ");
-        Label lastNameLabel = new Label("Last Name : ");
-        Label passwordLabel = new Label("Password : ");
-        Label addressLabel = new Label("Home Address : ");
-        Label phoneNumberLabel = new Label("Phone Number : ");
-        Label emergencyContact = new Label("Emergency Contact Information : ");
-        Label emergencyNumberLabel = new Label("Emergency Contact Number : ");
-        Label emergencyNameLabel = new Label("Emergency Contact Name : ");
-        Label emailLabel = new Label("Email : ");
-        Label memberIDLabel = new Label("Membership Number : ");
-        Label medicalInformationLabel = new Label("Medical Information : ");
-        Label contactPreference = new Label("Contact Preference　：　");
-        Label volunteerGroup = new Label("Volunteer Group　：　");
-        Label criminalRecordCheck = new Label("Criminal Record Checked?　");
-        Label availabilityLabel = new Label("Availability : ");
-        Label registeredEventsLabel = new Label("Registered Events : ");
+        Label firstNameLabel = new Label("First Name:");
+        Label lastNameLabel = new Label("Last Name:");
+        Label passwordLabel = new Label("Password:");
+        Label addressLabel = new Label("Home Address:");
+        Label phoneNumberLabel = new Label("Phone Number:");
+        Label emergencyContact = new Label("Emergency Contact Information:");
+        Label emergencyNumberLabel = new Label("Emergency Contact Number:");
+        Label emergencyNameLabel = new Label("Emergency Contact Name:");
+        Label emailLabel = new Label("Email:");
+        Label memberIDLabel = new Label("Membership Number:");
+        Label medicalInformationLabel = new Label("Medical Information:");
+        Label contactPreference = new Label("Contact Preference:");
+        Label volunteerGroup = new Label("Volunteer Group:");
+        Label criminalRecordCheck = new Label("Criminal Record Checked?");
+        Label availabilityLabel = new Label("Availability:");
+        Label registeredEventsLabel = new Label("Registered Events:");
         Label phonePref = new Label("Prefer phone contact?");
         Label emailPref = new Label("Prefer email contact?");
 
 
         //Create textFields
-        TextField firstNameField = new TextField();
-        TextField lastNameField  = new TextField();
-        TextField passwordField = new TextField();
-        TextField addressField  = new TextField();
-        TextField phoneNumberField = new TextField();
-        TextField emergencyNumberField  = new TextField();
-        TextField emergencyNameField  = new TextField();
-        TextField emailField  = new TextField();
-        TextField memberIDField  = new TextField();
-        TextArea medicalInformationField = new TextArea();
+        firstNameField = new TextField();
+        lastNameField  = new TextField();
+        passwordField = new TextField();
+        addressField  = new TextField();
+        phoneNumberField = new TextField();
+        emergencyNumberField  = new TextField();
+        emergencyNameField  = new TextField();
+        emailField  = new TextField();
+        memberIDField  = new TextField();
+        medicalInformationField = new TextArea();
 
         //Create Radio Buttons
         final ToggleGroup phonePrefer = new ToggleGroup();
-        RadioButton phoneYes = new RadioButton("Yes");
+        phoneYes = new RadioButton("Yes");
         RadioButton phoneNo = new RadioButton("No");
         phoneYes.setToggleGroup(phonePrefer);
         phoneNo.setToggleGroup(phonePrefer);
 
         final ToggleGroup emailPrefer = new ToggleGroup();
-        RadioButton emailYes = new RadioButton("Yes");
+        emailYes = new RadioButton("Yes");
         RadioButton emailNo = new RadioButton("No");
         emailYes.setToggleGroup(emailPrefer);
         emailNo.setToggleGroup(emailPrefer);
 
         final ToggleGroup criminalCheckGroup = new ToggleGroup();
-        RadioButton checked = new RadioButton("Yes");
+        checked = new RadioButton("Yes");
         RadioButton uncheck = new RadioButton("No");
         checked.setToggleGroup(criminalCheckGroup);
         uncheck.setToggleGroup(criminalCheckGroup);
 
         //set select default
         phoneYes.setSelected(true);
-        emailYes.setSelected(true);
+        emailNo.setSelected(true);
         checked.setSelected(true);
 
         //Create Dorpdown box
@@ -134,143 +156,21 @@ public class SignUpView extends BasicView {
                 );
         final ComboBox volGroupBox = new ComboBox(volGrouplist);
 
+
         /************Create Availability Table************/
         TableView<Shift> availabilityTable = new TableView<>();
-        availabilityTable.setEditable(true);
-
-        availabilityTable.getColumns().add(createColumn("Shift","shift"));
-
-        TableColumn<Shift, Boolean>monCol = createColumn("Monday","mon");
-        availabilityTable.getColumns().add(monCol);
-        TableColumn<Shift, Boolean>tueCol = createColumn("Tuesday","tue");
-        availabilityTable.getColumns().add(tueCol);
-        TableColumn<Shift, Boolean>wedCol = createColumn("Wednesday","wed");
-        availabilityTable.getColumns().add(wedCol);
-        TableColumn<Shift, Boolean>thurCol = createColumn("Thursday","thur");
-        availabilityTable.getColumns().add(thurCol);
-        TableColumn<Shift, Boolean>friCol = createColumn("Friday","fri");
-        availabilityTable.getColumns().add(friCol);
-        TableColumn<Shift, Boolean>satCol = createColumn("Saturday","sat");
-        availabilityTable.getColumns().add(satCol);
-        TableColumn<Shift, Boolean>sunCol = createColumn("Sunday","sun");
-        availabilityTable.getColumns().add(sunCol);
-        monCol.setCellFactory(col ->{
-            CheckBoxTableCell<Shift, Boolean> cell = new CheckBoxTableCell<>(index->{
-                BooleanProperty mon = new SimpleBooleanProperty(availabilityTable.getItems().get(index).isMonAvailable());
-                mon.addListener((obs, wasActive, isnowactive)->{
-                    Shift a = availabilityTable.getItems().get(index);
-                    a.mon = isnowactive;
-                });
-                return mon;
-            });
-            return cell;
-        });
-
-        tueCol.setCellFactory(col ->{
-            CheckBoxTableCell<Shift, Boolean> cell = new CheckBoxTableCell<>(index->{
-                BooleanProperty tue = new SimpleBooleanProperty(availabilityTable.getItems().get(index).isTueAvailable());
-                tue.addListener((obs, wasActive, isnowactive)->{
-                    Shift a = availabilityTable.getItems().get(index);
-                    a.tue = isnowactive;
-                });
-                return tue;
-            });
-            return cell;
-        });
-        wedCol.setCellFactory(col ->{
-            CheckBoxTableCell<Shift, Boolean> cell = new CheckBoxTableCell<>(index->{
-                BooleanProperty wed = new SimpleBooleanProperty(availabilityTable.getItems().get(index).isWedAvailable());
-                wed.addListener((obs, wasActive, isnowactive)->{
-                    Shift a = availabilityTable.getItems().get(index);
-                    a.wed = isnowactive;
-                });
-                return wed;
-            });
-            return cell;
-        });
-
-        thurCol.setCellFactory(col ->{
-            CheckBoxTableCell<Shift, Boolean> cell = new CheckBoxTableCell<>(index->{
-                BooleanProperty thur = new SimpleBooleanProperty(availabilityTable.getItems().get(index).isThurAvailable());
-                thur.addListener((obs, wasActive, isnowactive)->{
-                    Shift a = availabilityTable.getItems().get(index);
-                    a.thur = isnowactive;
-                });
-                return thur;
-            });
-            return cell;
-        });
-        friCol.setCellFactory(col ->{
-            CheckBoxTableCell<Shift, Boolean> cell = new CheckBoxTableCell<>(index->{
-                BooleanProperty fri = new SimpleBooleanProperty(availabilityTable.getItems().get(index).isFriAvailable());
-                fri.addListener((obs, wasActive, isnowactive)->{
-                    Shift a = availabilityTable.getItems().get(index);
-                    a.fri = isnowactive;
-                });
-                return fri;
-            });
-            return cell;
-        });
-        satCol.setCellFactory(col ->{
-            CheckBoxTableCell<Shift, Boolean> cell = new CheckBoxTableCell<>(index->{
-                BooleanProperty sat = new SimpleBooleanProperty(availabilityTable.getItems().get(index).isSatAvailable());
-                sat.addListener((obs, wasActive, isnowactive)->{
-                    Shift a = availabilityTable.getItems().get(index);
-                    a.sat = isnowactive;
-                });
-                return sat;
-            });
-            return cell;
-        });
-        sunCol.setCellFactory(col ->{
-            CheckBoxTableCell<Shift, Boolean> cell = new CheckBoxTableCell<>(index->{
-                BooleanProperty sun = new SimpleBooleanProperty(availabilityTable.getItems().get(index).isSunAvailable());
-                sun.addListener((obs, wasActive, isnowactive)->{
-                    Shift a = availabilityTable.getItems().get(index);
-                    a.sun = isnowactive;
-                });
-                return sun;
-            });
-            return cell;
-        });
-        //this fake availability data
         Availability a = new Availability();
-
-        Shift a1 = a.fetchAvailabiliity().get(0);
-        Shift a2 = a.fetchAvailabiliity().get(1);
-        Shift a3 = a.fetchAvailabiliity().get(2);
-
-        availabilityTable.getItems().addAll(a1,a2,a3);
-        availabilityTable.setPrefHeight(150);
-       // availabilityTable.prefHeightProperty().bind(Bindings.size())
+        availabilityTable = a.getAvailabilityTable(true);
 
 
         //Create Buttons
-        Button submit = new Button("Submit");
-        Button clear = new Button("Clear");
+         submit = new Button("Submit");
+         clear = new Button("Clear");
 
-        submit.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                for (Shift shift: availabilityTable.getItems()) {
-                    for(int i=0;i<7;i++){
-                        if(shift.getWeekdayAvailability(i)){
-                            if(Objects.equals(shift.getShift(), "Morning")){
-                                a.ChangeAvailability(i,0,true);
-                                System.out.println("Day "+ i +" morning is available");
-                            }else if(Objects.equals(shift.getShift(), "Afternoon")){
-                                a.ChangeAvailability(i,1,true);
-                                System.out.println("Day "+ i +" afternoon is available");
-                            }else{
-                                a.ChangeAvailability(i,2,true);
-                                System.out.println("Day "+ i +" evening is available");
-                            }
-                        }
-                    }
-                }
-                System.out.print(a);
-            }
-        });
+
+
+        TableView<Shift> finalAvailabilityTable = availabilityTable;
+
 
 
 
@@ -329,33 +229,9 @@ public class SignUpView extends BasicView {
         gp.add(availabilityLabel,0,17);
         gp.add(availabilityTable,0,18,3,1);
 
-        gp.add(registeredEventsLabel,0,19);
-
         gp.add(submit,1,20);
         gp.add(clear,2,20);
 
-        clear.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                firstNameField.clear();
-                lastNameField.clear();
-                passwordField.clear();
-                addressField.clear();
-                phoneNumberField.clear();
-                emergencyNumberField.clear();
-                emergencyNameField.clear();
-                emailField.clear();
-                memberIDField.clear();
-                medicalInformationField.clear();
-                phoneYes.setSelected(true);
-                emailYes.setSelected(true);
-                checked.setSelected(true);
-//                for (Shift shift: availabilityTable.getItems()
-//                     ) {
-//                    shift.reset();
-//                }
-            }
-        });
 
         //Add Scroll Bar
 

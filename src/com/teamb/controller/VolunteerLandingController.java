@@ -2,6 +2,7 @@ package com.teamb.controller;
 
 import com.teamb.view.BasicView;
 import com.teamb.view.VolunteerLandingView;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /* CODE SMELLS
@@ -28,11 +29,17 @@ public class VolunteerLandingController extends BasicController {
     }
 
     public void ChangeToBrowseEventsView(){
-        //TODO
+        EventController ec = new EventController(stage);
+        Scene scene = new Scene(ec.GetView().GetRootPane(), 600, 600);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void ChangeToProfileView(){
-        //TODO
+        VolunteerProfileController vlc = new VolunteerProfileController(stage);
+        Scene scene = new Scene(vlc.GetView().GetRootPane(), 600, 600);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void ChangeToChangePasswordView(){

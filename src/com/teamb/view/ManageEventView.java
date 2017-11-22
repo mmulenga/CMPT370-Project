@@ -11,18 +11,21 @@ import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class ManageEventView extends BasicView {
+
+    public Button deleteEventsBtn;
+    public TableView<EventSelection> table;
+    public Button createNewEventBtn;
 
     /**
      * Constructor.
@@ -70,25 +73,7 @@ public class ManageEventView extends BasicView {
         Button deleteEventsBtn = new Button("Delete Events");
         Button searchBtn = new Button("Search");
 
-        deleteEventsBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                for (EventSelection es:table.getItems()) {
-                    if(es.isActive()){
-                        System.out.println(es.getEventTitle()+" is deleted.");
-                    }
-                }
-            }
-        });
-
-        createNewEventBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                ((ManageEventController)controller).handleCreateNewEventButtonClick();
-            }
-        });
-
-        //fake event data
+        //fake event data TODO get real data instead
         for(int i = 0; i<5;i++){
             Event e = new Event();
             e.setEventName("Event "+i);
@@ -96,6 +81,8 @@ public class ManageEventView extends BasicView {
             table.getItems().add(es);
         }
 
+        Label label = new Label("Manage Events");
+        label.setFont(Font.font("Arial", FontWeight.BOLD, 24));
 
         GridPane gp = new GridPane();
         gp.setAlignment(Pos.CENTER);
@@ -115,7 +102,7 @@ public class ManageEventView extends BasicView {
         columnTwoConstrains.setHgrow(Priority.ALWAYS);
 
         gp.getColumnConstraints().addAll(columnOneConstraints, columnTwoConstrains, columnThreeConstrains);
-
+        gp.add(label, 0, 0,3,1);
         gp.add(table,0,1,2,1);
         gp.add(searchKeyField,0,2);
         gp.add(searchBtn,0,3);

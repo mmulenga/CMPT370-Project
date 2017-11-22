@@ -1,6 +1,8 @@
 package com.teamb.view;
 
 import com.teamb.controller.BasicController;
+import com.teamb.controller.CreateEventController;
+import com.teamb.controller.SignUpController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,6 +23,19 @@ import java.time.LocalDate;
 import java.util.Locale;
 
 public class CreateEventView extends BasicView {
+
+
+    //Instance Variables
+    public TextField eventTitleField;
+    public TextField locationField;
+    public TextArea descriptionArea;
+    public Button submit;
+    public Button clear;
+    public Button home;
+    public ObservableList<String> startTimeList;
+    public ObservableList<String> endTimeList;
+    public DatePicker startDatePicker, endDatePicker;
+    public ComboBox  endTimeBox, startTimeBox;
 
     /**
      * Constructor.
@@ -60,7 +75,6 @@ public class CreateEventView extends BasicView {
         gp.getColumnConstraints().addAll(columnOneConstraints, columnTwoConstrains, columnThreeConstrains);
 
         //Date
-        DatePicker startDatePicker, endDatePicker;
         startDatePicker = new DatePicker();
         endDatePicker = new DatePicker();
         Locale.setDefault(Locale.CANADA);
@@ -87,29 +101,29 @@ public class CreateEventView extends BasicView {
         Label description = new Label("Description : ");
 
         //Create textFields
-        TextField eventTitleField = new TextField();
-        TextField locationField = new TextField();
-        TextArea descriptionArea = new TextArea();
+        eventTitleField = new TextField();
+        locationField = new TextField();
+        descriptionArea = new TextArea();
 
         //Create Dorpdown box
-        ObservableList<String> startTimeList =
+        startTimeList =
                 FXCollections.observableArrayList(
                         "00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00",
                         "10:00","11:00","12:00","13:00", "14:00","15:00","16:00","17:00","18:00","19:00",
                         "20:00","21:00","22:00","23:00");
-        final ComboBox startTimeBox = new ComboBox(startTimeList);
+        startTimeBox = new ComboBox(startTimeList);
         startTimeBox.getSelectionModel().select(0);
-        ObservableList<String> endTimeList =
+        endTimeList =
                 FXCollections.observableArrayList(
                         "00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00",
                         "10:00","11:00","12:00","13:00", "14:00","15:00","16:00","17:00","18:00","19:00",
                         "20:00","21:00","22:00","23:00");
-        final ComboBox endTimeBox = new ComboBox(endTimeList);
+        endTimeBox = new ComboBox(endTimeList);
         endTimeBox.getSelectionModel().select(0);
         //Create Buttons
-        Button submit = new Button("Submit");
-        Button clear = new Button("Clear");
-        Button home = new Button("Homepage");
+        submit = new Button("Submit");
+        clear = new Button("Clear");
+        home = new Button("Homepage");
 
         gp.add(eventTitleLabel,0,1);
         gp.add(eventTitleField,1,1,2,1);
@@ -136,22 +150,10 @@ public class CreateEventView extends BasicView {
         gp.add(submit,1,9);
         gp.setHalignment(submit,HPos.RIGHT);
         gp.add(clear,2,9);
+
         //How to convert localDate into Timestamp here.
-        //System.out.println(Timestamp.valueOf(startDatePicker.getValue().atStartOfDay()));
+        System.out.println(Timestamp.valueOf(startDatePicker.getValue().atStartOfDay()));
 
-
-        clear.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                eventTitleField.clear();
-                locationField.clear();
-                descriptionArea.clear();
-                startTimeBox.getSelectionModel().select(0);
-                endTimeBox.getSelectionModel().select(0);
-                startDatePicker.setValue(LocalDate.now());
-                endDatePicker.setValue(startDatePicker.getValue().plusDays(1));
-            }
-        });
 
         //Add Scroll Bar
 
