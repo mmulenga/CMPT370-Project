@@ -44,19 +44,6 @@ public class CreateEventController extends BasicController {
         }
     }
 
-    class clearEventHandler implements EventHandler<ActionEvent> {
-        @Override
-        public void handle(ActionEvent event) {
-            view.eventTitleField.clear();
-            view.locationField.clear();
-            view.descriptionArea.clear();
-            view.startTimeBox.getSelectionModel().select(0);
-            view.endTimeBox.getSelectionModel().select(0);
-            view.startDatePicker.setValue(LocalDate.now());
-            view.endDatePicker.setValue(view.startDatePicker.getValue().plusDays(1));
-        }
-
-    }
 
     class homeEventHandler implements EventHandler<ActionEvent> {
         @Override
@@ -78,15 +65,6 @@ public class CreateEventController extends BasicController {
             view.endDatePicker.setValue(view.startDatePicker.getValue().plusDays(1));
         }
     }
-
-    class submitEventHandler implements EventHandler<ActionEvent>{
-        @Override
-        public void handle(ActionEvent event) {
-            createNewEvent();
-            completePopUP();
-        }
-    }
-
 
 
     @Override
