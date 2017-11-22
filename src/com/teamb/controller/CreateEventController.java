@@ -44,7 +44,16 @@ public class CreateEventController extends BasicController {
         }
     }
 
-    class clearEventHandler implements EventHandler<ActionEvent> {
+
+    class homeEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            changeToHomePageView(stage);
+
+        }
+    }
+
+    class clearEventHandler implements EventHandler<ActionEvent>{
         @Override
         public void handle(ActionEvent event) {
             view.eventTitleField.clear();
@@ -55,19 +64,7 @@ public class CreateEventController extends BasicController {
             view.startDatePicker.setValue(LocalDate.now());
             view.endDatePicker.setValue(view.startDatePicker.getValue().plusDays(1));
         }
-
     }
-
-    class homeEventHandler implements EventHandler<ActionEvent> {
-        @Override
-        public void handle(ActionEvent event) {
-            changeToHomePageView(stage);
-
-        }
-    }
-
-
-
 
 
     @Override
@@ -114,9 +111,9 @@ public class CreateEventController extends BasicController {
     }
 
     /**
-     * Pop up box to alert user of newly created Profile
-     * and a button that goes to the new user's profile
-     * landing page.
+     * Pop up box to alert user of newly created Event
+     * and a button that goes to the upcoming events
+     *
      */
     public void completePopUP(){
         Stage popupwindow=new Stage();
@@ -131,7 +128,7 @@ public class CreateEventController extends BasicController {
             @Override
             public void handle(ActionEvent event) {
                 popupwindow.close();
-                changeToHomePageView(stage);
+                changeToUpcomingEventPageView(stage);
 
             }
         });
@@ -166,13 +163,13 @@ public class CreateEventController extends BasicController {
         return tempDate;
     }*/
 
-    /*public void ChangeToUpcomingEventView(Stage s){
-        VolunteerLandingController vlc = new VolunteerLandingController(s);
+    public void changeToUpcomingEventPageView(Stage s){
+        EventController evPageView = new EventController(s);
 
-        Scene scene = new Scene(vlc.GetView().GetRootPane(), 720, 540);
+        Scene scene = new Scene(evPageView.GetView().GetRootPane(), 720, 540);
         s.setScene(scene);
         s.show();
 
-    }*/
+    }
 
 }
