@@ -30,7 +30,7 @@ public class MainLandingController extends BasicController{
 
        LoginViewController lvc = new LoginViewController(stage);
 
-        Scene scene = new Scene(lvc.GetView().GetRootPane(), 720, 540);
+        Scene scene = new Scene(lvc.GetView().GetRootPane(), 600, 600);
 //        scene.getStylesheets().add
 //                (Volunteerize.class.getResource("LoginStyle.css").toExternalForm());
         stage.setScene(scene);

@@ -5,13 +5,17 @@ import com.teamb.controller.BasicController;
 import com.teamb.controller.MainLandingController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+
+import javax.swing.*;
 
 /**
  * Created by Sarah on 2017-11-03.
@@ -32,10 +36,13 @@ public class MainLandingView extends BasicView{
 
     @Override
     protected void CreateChildren() {
-        VBox v = new VBox();
+        BorderPane bp = new BorderPane();
+
+
         HBox buttonBox = new HBox();
 
         Button vButton = new Button("Volunteer Login");
+
         vButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {((MainLandingController)controller).ChangeToLoginView(event);
@@ -52,15 +59,35 @@ public class MainLandingView extends BasicView{
         });
         //when this button is pressed view changes to staff login page
         //controller.ChangeView(/*staff*/);
+        vButton.setPrefSize(200,100);
+        sButton.setPrefSize(200,100);
+
         Button help = new Button("Help");
         //when this button is pressed a help document pop up appears.
         Label label = new Label("Welcome to Volunteerize");
+        label.setFont(Font.font("Arial", FontWeight.BOLD, 40));
 
+
+
+        //v.setPadding(new Insets(100));
 
         buttonBox.getChildren().addAll(vButton, sButton);
-        v.getChildren().addAll(label, buttonBox, help);
+        buttonBox.setAlignment(Pos.CENTER);
+        buttonBox.setMargin(vButton,new Insets(30));
+        buttonBox.setMargin(sButton,new Insets(30));
 
-        root.getChildren().add(v);
+        bp.setTop(label);
+        bp.setCenter(buttonBox);
+        bp.setBottom(help);
+        bp.setAlignment(bp.getTop(),Pos.CENTER);
+        bp.setAlignment(bp.getCenter(),Pos.CENTER);
+        bp.setAlignment(bp.getBottom(),Pos.CENTER);
+        bp.setMargin(bp.getTop(),new Insets(100,60,100,60));
+        bp.setMargin(bp.getCenter(),new Insets(20));
+
+
+
+        root.getChildren().add(bp);
     }
 
     @Override
