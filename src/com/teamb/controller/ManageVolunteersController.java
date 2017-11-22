@@ -46,4 +46,10 @@ public class ManageVolunteersController extends BasicController{
     public void DeleteProfiles(/*TODO*/){
         //TODO will delete given profiles
     }
+
+    public void Search(String s){
+        //TODO Given a string, search for volunteers
+        //TODO Display new list of volunteers in view (create new view?)
+        //Get input from input field
+    }
 }
