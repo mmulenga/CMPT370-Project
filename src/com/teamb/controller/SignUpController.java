@@ -40,7 +40,7 @@ public class SignUpController extends BasicController{
 
     public SignUpController(Stage s){
         super(s);
-        view = new SignUpView(this);
+        view = new SignUpView();
         view.submit.setOnAction(new submitEventHandler());
         view.clear.setOnAction(new clearEventHandler());
     }

@@ -1,6 +1,5 @@
 package com.teamb.view;
 
-import com.teamb.controller.BasicController;
 import com.teamb.model.Profile;
 import com.teamb.model.Shift;
 import javafx.geometry.HPos;
@@ -31,8 +30,8 @@ public class VolunteerProfileView extends BasicView {
      *
      * @param c
      */
-    public VolunteerProfileView(BasicController c) {
-        super(c);
+    public VolunteerProfileView() {
+        super();
 
     }
 

@@ -1,8 +1,6 @@
 package com.teamb.view;
 
-import com.teamb.controller.VolunteerLandingController;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,7 +18,6 @@ import javafx.scene.layout.VBox;
  */
 public class VolunteerLandingView extends BasicView {
 
-    VolunteerLandingController controller;
 
     public Button epButton;
     public Button ueButton;
@@ -28,9 +25,8 @@ public class VolunteerLandingView extends BasicView {
     public Button helpButton;
     public Button pButton;
 
-    public VolunteerLandingView(VolunteerLandingController c){
-        super(c);
-        controller = c;
+    public VolunteerLandingView(){
+        super();
     }
 
     /**

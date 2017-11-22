@@ -1,11 +1,6 @@
 package com.teamb.view;
 
-import com.teamb.controller.BasicController;
-import com.teamb.controller.StaffEventProfileController;
-import com.teamb.controller.VolunteerEventProfileController;
-import com.teamb.model.Event;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -21,15 +16,14 @@ import javafx.scene.text.FontWeight;
  */
 
 public class VolunteerEventProfileView extends BasicView{
-    protected BasicController controller;
 
     public Button addButton;
 
     /**
      * Constructs the StaffEventProfile page.
      */
-    public VolunteerEventProfileView(BasicController c){
-        super(c);
+    public VolunteerEventProfileView(){
+        super();
     }
 
     @Override

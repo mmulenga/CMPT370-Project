@@ -14,7 +14,7 @@ public class VolunteerProfileController extends BasicController {
     VolunteerProfileView view;
     public VolunteerProfileController(Stage s) {
         super(s);
-        view = new VolunteerProfileView(this);
+        view = new VolunteerProfileView();
         Profile profile=new Profile();
         profile.setAllBaseInformation("Wang","","Mengjia","35 Agar pl","306","S7H"
                 ,"306","cici","",""

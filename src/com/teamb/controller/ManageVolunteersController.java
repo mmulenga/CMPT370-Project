@@ -22,7 +22,7 @@ public class ManageVolunteersController extends BasicController{
 
     public ManageVolunteersController(Stage s) {
         super(s);
-        view = new ManageVolunteersView(this);
+        view = new ManageVolunteersView();
         view.createNewVolButton.setOnAction(new createNewVolButtonEventHandler());
         view.sendEmailButton.setOnAction(new sendEmailButtonEventHandler());
         view.printPhoneListButton.setOnAction(new printPhoneListButtonEventHandler());

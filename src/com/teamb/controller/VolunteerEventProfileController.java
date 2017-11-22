@@ -16,7 +16,7 @@ public class VolunteerEventProfileController extends BasicController {
 
     public VolunteerEventProfileController(Stage s){
         super(s);
-        volunteerView = new VolunteerEventProfileView(this);
+        volunteerView = new VolunteerEventProfileView();
         volunteerView.addButton.setOnAction(new addButtonEventHandler());
 
     }
