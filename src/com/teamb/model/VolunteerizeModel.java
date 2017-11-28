@@ -274,7 +274,7 @@ public class VolunteerizeModel {
         else if (choice.equals("First Name"))
             dataType = "v.first_name  ";
         else if (choice.equals("Last Name"))
-            dataType = "v.last_name";
+            dataType = "v.last_name ";
         else if (choice.equals("Availability")) // Place holder while we wait for more options
             dataType = "LIST ";  // What else can be searched by?
         else
@@ -295,9 +295,9 @@ public class VolunteerizeModel {
         else if (choice.equals("Name"))
             dataType = "e.name  ";
         else if (choice.equals("StartTime"))
-            dataType = "e.start_time";
+            dataType = "e.start_time ";
         else if (choice.equals("End Time"))
-            dataType = "e.end_time";  // What else can be searched by?
+            dataType = "e.end_time ";  // What else can be searched by?
         else
             dataType = "fail"; // meaning you can't search by this data type
         return dataType;
@@ -324,12 +324,12 @@ public class VolunteerizeModel {
                     "v.photo_path, " +
                     "g.name as volunteer_group, " +
                     "c.prefer_phone, " +
-                    "c.prefer_email," +
+                    "c.prefer_email, " +
                     "c.phone_number, " +
                     "c.address, " +
                     "c.postal_code, " +
                     "e.first_name as emergency_contact_first_name, " +
-                    "e.middle_name as emergency_contact_middle_name," +
+                    "e.middle_name as emergency_contact_middle_name, " +
                     "e.last_name as emergency_contact_last_name, " +
                     "e.id as emergency_contact_id, " +
                     "e.phone_number as emergency_contact_phone_number, " +
