@@ -1,8 +1,6 @@
 package com.teamb.controller;
 
-import com.teamb.model.Availability;
 import com.teamb.model.Profile;
-import com.teamb.model.Shift;
 import com.teamb.view.BasicView;
 import com.teamb.view.SignUpView;
 import javafx.event.EventHandler;
@@ -140,27 +138,30 @@ public class SignUpController extends BasicController{
      * buttons.
      */
     public void createNewProfile() {
-        model.getProfile().setFirstName(view.firstNameField.getText());
-        model.getProfile().setLastName(view.lastNameField.getText());
-        model.getProfile().setMiddleName("Strawberry"); //Temporary
-        model.getProfile().setAddress(view.addressField.getText());
-        model.getProfile().setPhoneNumber(view.phoneNumberField.getText());
-        model.getProfile().setEmail(view.emailField.getText());
-        model.getProfile().setcontactByEmail (convertStringToBoolean(
+        Profile newProfile = new Profile();
+        
+        newProfile.setFirstName(view.firstNameField.getText());
+        newProfile.setLastName(view.lastNameField.getText());
+        newProfile.setMiddleName("Strawberry"); //Temporary
+        newProfile.setAddress(view.addressField.getText());
+        newProfile.setPhoneNumber(view.phoneNumberField.getText());
+        newProfile.setEmail(view.emailField.getText());
+        newProfile.setcontactByEmail (convertStringToBoolean(
         (((RadioButton)(view.emailYes.getToggleGroup().getSelectedToggle())).getText())));
-       model.getProfile().setCriminalReccordCheck(convertStringToBoolean(
+        newProfile.setCriminalReccordCheck(convertStringToBoolean(
                (((RadioButton)(view.checked.getToggleGroup().getSelectedToggle())).getText())));
-        model.getProfile().setEmergencyContactFirstName(view.emergencyNameField.getText());
-       model.getProfile().setEmergencyContactMiddleName("Jack"); //Temporary
-        model.getProfile().setEmergencyContactLastName("Jonees"); // Temporary
-        model.getProfile().setEmergencyContactPhoneNumber(view.emergencyNumberField.getText());
-      // model.getProfile().setEmergencyContactID();
-       model.getProfile().setEmergencyContactPostalCode("S4S 4R5");//Temporary
-        model.getProfile().setEmergencyContactAddress("167 SUNDRIVRE AVENUE");//Temporary
-        model.getProfile().setMedicalInformation("ASTHMA");//Temporary
-        model.getProfile().setHoursWorked(92);//Temporary
-        //model.getProfile().setAvailability();
-        //model.getProfile().setPhotoPath();
+        newProfile.setEmergencyContactFirstName(view.emergencyNameField.getText());
+        newProfile.setEmergencyContactMiddleName("Jack"); //Temporary
+        newProfile.setEmergencyContactLastName("Jonees"); // Temporary
+        newProfile.setEmergencyContactPhoneNumber(view.emergencyNumberField.getText());
+        //newProfile.setEmergencyContactID();
+        newProfile.setEmergencyContactPostalCode("S4S 4R5");//Temporary
+        newProfile.setEmergencyContactAddress("167 SUNDRIVRE AVENUE");//Temporary
+        newProfile.setMedicalInformation("ASTHMA");//Temporary
+        newProfile.setHoursWorked(92);//Temporary
+        //newProfile.setAvailability();
+        //newProfile.setPhotoPath();
+        model.addProfile(newProfile);
     }
 
 

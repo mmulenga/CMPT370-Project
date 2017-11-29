@@ -3,8 +3,8 @@ import java.sql.*;
 
 public class VolunteerizeModel {
     private DatabaseInterface database;
-    private Profile profile;
     private Users user;
+    private Profile profile;
 
     public Profile getProfile() {
         return profile;
