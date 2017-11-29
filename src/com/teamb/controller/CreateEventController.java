@@ -26,10 +26,9 @@ public class CreateEventController extends BasicController {
 
     CreateEventView view;
     Event event;
-    VolunteerizeModel model;
 
-    public CreateEventController(Stage s) {
-        super(s);
+    public CreateEventController(Stage s, VolunteerizeModel m) {
+        super(s, m);
         view = new CreateEventView();
         view.submit.setOnAction(new submitEventHandler());
         view.clear.setOnAction(new clearEventHandler());
@@ -144,7 +143,7 @@ public class CreateEventController extends BasicController {
 
 
     public void changeToHomePageView(Stage s){
-        StaffLandingController slc = new StaffLandingController(s);
+        StaffLandingController slc = new StaffLandingController(s, model);
 
         Scene scene = new Scene(slc.GetView().GetRootPane(), 720, 540);
         s.setScene(scene);
@@ -164,7 +163,7 @@ public class CreateEventController extends BasicController {
     }*/
 
     public void changeToUpcomingEventPageView(Stage s){
-        EventController evPageView = new EventController(s);
+        EventController evPageView = new EventController(s, model);
 
         Scene scene = new Scene(evPageView.GetView().GetRootPane(), 720, 540);
         s.setScene(scene);

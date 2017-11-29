@@ -1,6 +1,7 @@
 package com.teamb.controller;
 
 import com.teamb.model.EventSelection;
+import com.teamb.model.VolunteerizeModel;
 import com.teamb.view.BasicView;
 import com.teamb.view.ManageEventView;
 import javafx.event.ActionEvent;
@@ -11,8 +12,8 @@ import javafx.stage.Stage;
 
 public class ManageEventController extends BasicController {
     ManageEventView view;
-    public ManageEventController(Stage s) {
-        super(s);
+    public ManageEventController(Stage s, VolunteerizeModel m) {
+        super(s, m);
         view = new ManageEventView();
         view.deleteEventsBtn.setOnAction(new deleteEventsBtnEventHandler());
         view.createNewEventBtn.setOnAction(new createNewEventBtnEventHandler());
@@ -43,7 +44,7 @@ public class ManageEventController extends BasicController {
     }
 
     public void handleCreateNewEventButtonClick(){
-        CreateEventController createEventController = new CreateEventController(stage);
+        CreateEventController createEventController = new CreateEventController(stage, model);
         Scene scene = new Scene(createEventController.GetView().GetRootPane(),600,600);
         stage.setScene(scene);
         stage.show();

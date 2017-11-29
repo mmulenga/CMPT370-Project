@@ -1,6 +1,7 @@
 package com.teamb.controller;
 
 
+import com.teamb.model.VolunteerizeModel;
 import com.teamb.view.BasicView;
 import com.teamb.view.ManageVolunteersView;
 import javafx.event.ActionEvent;
@@ -20,8 +21,8 @@ public class ManageVolunteersController extends BasicController{
 
     ManageVolunteersView view;
 
-    public ManageVolunteersController(Stage s) {
-        super(s);
+    public ManageVolunteersController(Stage s, VolunteerizeModel m) {
+        super(s, m);
         view = new ManageVolunteersView();
         view.createNewVolButton.setOnAction(new createNewVolButtonEventHandler());
         view.sendEmailButton.setOnAction(new sendEmailButtonEventHandler());
@@ -76,7 +77,7 @@ public class ManageVolunteersController extends BasicController{
 
 
     public void ChangeToSignUpView(){
-        SignUpController c = new SignUpController(stage);
+        SignUpController c = new SignUpController(stage, model);
         Scene scene = new Scene(c.GetView().GetRootPane(),600,600);
         stage.setScene(scene);
         stage.show();

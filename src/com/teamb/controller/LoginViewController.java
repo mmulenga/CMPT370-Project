@@ -10,18 +10,10 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class LoginViewController extends BasicController {
-
-    private String username;
-    private String password;
-
     LoginView loginView;
-    VolunteerizeModel model;
-    Users user;
 
-
-    public LoginViewController(Stage s){
-        super(s);
-        model = new VolunteerizeModel();
+    public LoginViewController(Stage s, VolunteerizeModel m){
+        super(s, m);
         loginView = new LoginView();
         loginView.login.setOnAction(new loginEventHandler());
         loginView.Signup.setOnAction(new SignupEventHandler());
@@ -49,25 +41,24 @@ public class LoginViewController extends BasicController {
 
 
     public boolean checkCredentials(String username, String password) {
-            user = model.login(username, password);
+            model.login(username, password);
 
             // Check to see if a user was returned, if so, credentials were
             // OK, return true.
-            if(user != null) {
+            if(model.getUser().getUsername() != null) {
                 this.ChangeToLandingView(stage);
                 return true;
             } else {
                 return false;
             }
-
     }
 
 
     private void ChangeToLandingView(Stage s){
 
-        if(user.getIsStaff()){
+        if(model.getUser().getIsStaff()){
 
-            StaffLandingController slc = new StaffLandingController(s);
+            StaffLandingController slc = new StaffLandingController(s, model);
 
             Scene scene = new Scene(slc.GetView().GetRootPane(), 720, 540);
 //        scene.getStylesheets().add
@@ -76,7 +67,7 @@ public class LoginViewController extends BasicController {
             s.show();
         }
         else{
-            VolunteerLandingController vlc = new VolunteerLandingController(s);
+            VolunteerLandingController vlc = new VolunteerLandingController(s, model);
 
             Scene scene = new Scene(vlc.GetView().GetRootPane(), 720, 540);
 //        scene.getStylesheets().add
@@ -88,7 +79,7 @@ public class LoginViewController extends BasicController {
     }
 
     public void ChangeToSignUpView() {
-        SignUpController suc = new SignUpController(stage);
+        SignUpController suc = new SignUpController(stage, model);
         Scene scene = new Scene(suc.GetView().GetRootPane(), 600, 600);
         stage.setScene(scene);
         stage.show();

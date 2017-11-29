@@ -35,11 +35,9 @@ import javax.swing.*;
 public class SignUpController extends BasicController{
 
     SignUpView view;
-    Profile profile;
-    VolunteerizeModel model;
 
-    public SignUpController(Stage s){
-        super(s);
+    public SignUpController(Stage s, VolunteerizeModel m){
+        super(s, m);
         view = new SignUpView();
         view.submit.setOnAction(new submitEventHandler());
         view.clear.setOnAction(new clearEventHandler());
@@ -141,31 +139,28 @@ public class SignUpController extends BasicController{
      * with the information gotten from textfields and radio
      * buttons.
      */
-    public void createNewProfile(){
-        profile = new Profile();
-        model = new VolunteerizeModel();
-        profile.setFirstName(view.firstNameField.getText());
-        profile.setLastName(view.lastNameField.getText());
-        profile.setMiddleName("Strawberry"); //Temporary
-        profile.setAddress(view.addressField.getText());
-        profile.setPhoneNumber(view.phoneNumberField.getText());
-        profile.setEmail(view.emailField.getText());
-        profile.setcontactByEmail (convertStringToBoolean(
+    public void createNewProfile() {
+        model.getProfile().setFirstName(view.firstNameField.getText());
+        model.getProfile().setLastName(view.lastNameField.getText());
+        model.getProfile().setMiddleName("Strawberry"); //Temporary
+        model.getProfile().setAddress(view.addressField.getText());
+        model.getProfile().setPhoneNumber(view.phoneNumberField.getText());
+        model.getProfile().setEmail(view.emailField.getText());
+        model.getProfile().setcontactByEmail (convertStringToBoolean(
         (((RadioButton)(view.emailYes.getToggleGroup().getSelectedToggle())).getText())));
-       profile.setCriminalReccordCheck(convertStringToBoolean(
+       model.getProfile().setCriminalReccordCheck(convertStringToBoolean(
                (((RadioButton)(view.checked.getToggleGroup().getSelectedToggle())).getText())));
-        profile.setEmergencyContactFirstName(view.emergencyNameField.getText());
-       profile.setEmergencyContactMiddleName("Jack"); //Temporary
-        profile.setEmergencyContactLastName("Jonees"); // Temporary
-        profile.setEmergencyContactPhoneNumber(view.emergencyNumberField.getText());
-      // profile.setEmergencyContactID();
-       profile.setEmergencyContactPostalCode("S4S 4R5");//Temporary
-        profile.setEmergencyContactAddress("167 SUNDRIVRE AVENUE");//Temporary
-        profile.setMedicalInformation("ASTHMA");//Temporary
-        profile.setHoursWorked(92);//Temporary
-        //profile.setAvailability();
-        //profile.setPhotoPath();
-         model.addProfile(profile);
+        model.getProfile().setEmergencyContactFirstName(view.emergencyNameField.getText());
+       model.getProfile().setEmergencyContactMiddleName("Jack"); //Temporary
+        model.getProfile().setEmergencyContactLastName("Jonees"); // Temporary
+        model.getProfile().setEmergencyContactPhoneNumber(view.emergencyNumberField.getText());
+      // model.getProfile().setEmergencyContactID();
+       model.getProfile().setEmergencyContactPostalCode("S4S 4R5");//Temporary
+        model.getProfile().setEmergencyContactAddress("167 SUNDRIVRE AVENUE");//Temporary
+        model.getProfile().setMedicalInformation("ASTHMA");//Temporary
+        model.getProfile().setHoursWorked(92);//Temporary
+        //model.getProfile().setAvailability();
+        //model.getProfile().setPhotoPath();
     }
 
 
@@ -181,8 +176,8 @@ public class SignUpController extends BasicController{
         popupwindow.setTitle("Volunteerize");
 
 
-        Label completeInformationLabel= new Label(profile.getFirstName() + "'s Profile Information Now Complete");
-        Button profileButton= new Button("Go to " + profile.getFirstName() + "'s profile");
+        Label completeInformationLabel= new Label(model.getProfile().getFirstName() + "'s Profile Information Now Complete");
+        Button profileButton= new Button("Go to " + model.getProfile().getFirstName() + "'s profile");
         profileButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -203,7 +198,7 @@ public class SignUpController extends BasicController{
 
 
     public void ChangeToProfileView(Stage s){
-        VolunteerLandingController vlc = new VolunteerLandingController(s);
+        VolunteerLandingController vlc = new VolunteerLandingController(s, model);
 
         Scene scene = new Scene(vlc.GetView().GetRootPane(), 720, 540);
         s.setScene(scene);

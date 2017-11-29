@@ -1,5 +1,7 @@
 package com.teamb.controller;
 
+import com.teamb.Volunteerize;
+import com.teamb.model.VolunteerizeModel;
 import com.teamb.view.BasicView;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
@@ -18,10 +20,12 @@ import javafx.stage.Stage;
 public abstract class BasicController {
 
     Stage stage;
+    VolunteerizeModel model;
 
 
-    public BasicController(Stage s){
+    public BasicController(Stage s, VolunteerizeModel model){
         stage = s;
+        this.model = model;
     }
 
 
@@ -29,7 +33,4 @@ public abstract class BasicController {
     //public abstract void HelpPopUp(); //not sure if this will go here
 
     protected abstract BasicView GetView();
-
-
-
 }

@@ -3,12 +3,32 @@ import java.sql.*;
 
 public class VolunteerizeModel {
     private DatabaseInterface database;
+    private Profile profile;
+    private Users user;
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
 
     /**
      * Constructor for VolunteerizeModel.
      */
     public VolunteerizeModel() {
         database = new DatabaseInterface();
+        profile = new Profile();
+        user = new Users();
     }
 
     /**
@@ -28,23 +48,19 @@ public class VolunteerizeModel {
      * @param password
      * @return
      */
-    public Users login(String username, String password) {
-        Users user = new Users();
-
+    public void login(String username, String password) {
         ResultSet result = database.select("* FROM users u WHERE u.username = " +
                 wrap(username) + " AND password = " + wrap(password) + ";");
 
         try {
             result.next();
+            user.setUsername("username");
             user.setProfileID(result.getInt("volunteer_id"));
             user.setIsStaff(result.getBoolean("is_staff"));
+            profile = getProfile(user.getProfileID());
         } catch(SQLException exception) {
             exception.printStackTrace();
-
-            return null;
         }
-
-        return user;
     }
 
     public void addUser(Users user) {

@@ -1,5 +1,6 @@
 package com.teamb.controller;
 
+import com.teamb.model.VolunteerizeModel;
 import com.teamb.view.BasicView;
 import com.teamb.view.VolunteerLandingView;
 import javafx.event.ActionEvent;
@@ -26,8 +27,8 @@ public class VolunteerLandingController extends BasicController {
 
     VolunteerLandingView view;
 
-    public VolunteerLandingController(Stage s){
-        super(s);
+    public VolunteerLandingController(Stage s, VolunteerizeModel m){
+        super(s, m);
         view = new VolunteerLandingView();
         view.epButton.setOnAction(new epButtonEventHandler());
         view.ueButton.setOnAction(new ueButtonEventHandler());
@@ -84,7 +85,7 @@ public class VolunteerLandingController extends BasicController {
 
 
     public void ChangeToEditProfileView(){
-        SignUpController editlc = new SignUpController(stage);
+        SignUpController editlc = new SignUpController(stage, model);
 
         Scene scene = new Scene(editlc.GetView().GetRootPane(), 720, 540);
         stage.setScene(scene);
@@ -92,14 +93,14 @@ public class VolunteerLandingController extends BasicController {
     }
 
     public void ChangeToBrowseEventsView(){
-        EventController ec = new EventController(stage);
+        EventController ec = new EventController(stage, model);
         Scene scene = new Scene(ec.GetView().GetRootPane(), 600, 600);
         stage.setScene(scene);
         stage.show();
     }
 
     public void ChangeToProfileView(){
-        VolunteerProfileController vlc = new VolunteerProfileController(stage);
+        VolunteerProfileController vlc = new VolunteerProfileController(stage, model);
         Scene scene = new Scene(vlc.GetView().GetRootPane(), 600, 600);
         stage.setScene(scene);
         stage.show();
@@ -143,7 +144,7 @@ public class VolunteerLandingController extends BasicController {
     }
 
     public void ChangeToMainLandingView(){
-        MainLandingController mlc = new MainLandingController(stage);
+        MainLandingController mlc = new MainLandingController(stage, model);
         Scene scene = new Scene(mlc.GetView().GetRootPane(), 600, 600);
         stage.setScene(scene);
         stage.show();

@@ -5,6 +5,7 @@ package com.teamb.controller;
  */
 
 import com.teamb.model.Event;
+import com.teamb.model.VolunteerizeModel;
 import com.teamb.view.BasicView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,8 +15,8 @@ import com.teamb.view.VolunteerEventProfileView;
 public class VolunteerEventProfileController extends BasicController {
     VolunteerEventProfileView volunteerView;
 
-    public VolunteerEventProfileController(Stage s){
-        super(s);
+    public VolunteerEventProfileController(Stage s, VolunteerizeModel m){
+        super(s, m);
         volunteerView = new VolunteerEventProfileView();
         volunteerView.addButton.setOnAction(new addButtonEventHandler());
 

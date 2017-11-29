@@ -1,5 +1,6 @@
 package com.teamb.controller;
 
+import com.teamb.model.VolunteerizeModel;
 import com.teamb.view.BasicView;
 import com.teamb.view.MainLandingView;
 import javafx.event.ActionEvent;
@@ -15,8 +16,8 @@ public class MainLandingController extends BasicController{
 
     MainLandingView mainView;
 
-    public MainLandingController(Stage s){
-        super(s);
+    public MainLandingController(Stage s, VolunteerizeModel m){
+        super(s, m);
         mainView = new MainLandingView();
         mainView.vButton.setOnAction(new vButtonEventHandler());
         mainView.sButton.setOnAction(new sButtonEventHandler());
@@ -39,7 +40,7 @@ public class MainLandingController extends BasicController{
 
     public void ChangeToLoginView(ActionEvent event){
 
-       LoginViewController lvc = new LoginViewController(stage);
+       LoginViewController lvc = new LoginViewController(stage, model);
 
         Scene scene = new Scene(lvc.GetView().GetRootPane(), 600, 600);
 //        scene.getStylesheets().add

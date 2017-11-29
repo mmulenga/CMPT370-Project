@@ -1,5 +1,6 @@
 package com.teamb.controller;
 
+import com.teamb.model.VolunteerizeModel;
 import com.teamb.view.BasicView;
 import com.teamb.view.MainLandingView;
 import com.teamb.view.StaffEventProfileView;
@@ -16,8 +17,8 @@ public class StaffEventProfileController extends BasicController{
     StaffEventProfileView staffView;
     Stage stage;
 
-    public StaffEventProfileController(Stage s){
-        super(s);
+    public StaffEventProfileController(Stage s, VolunteerizeModel m){
+        super(s, m);
         staffView = new StaffEventProfileView();
         staffView.addButton.setOnAction(new addButtonEventHandler());
         staffView.editButton.setOnAction(new editButtonEventHandler());

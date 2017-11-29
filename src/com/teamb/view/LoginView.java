@@ -57,8 +57,6 @@ public class LoginView extends BasicView{
         scenetitle.setId("scenetitle");
         login = new Button("Login");
         Signup = new Button("Sign Up");
-        String username;
-        String password;
         userNameField = new TextField();
         pwField = new PasswordField();
         Label userName = new Label("Username:");

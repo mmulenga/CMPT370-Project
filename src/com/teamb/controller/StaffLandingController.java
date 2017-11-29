@@ -1,5 +1,6 @@
 package com.teamb.controller;
 
+import com.teamb.model.VolunteerizeModel;
 import com.teamb.view.BasicView;
 import com.teamb.view.StaffLandingView;
 import javafx.scene.Scene;
@@ -19,8 +20,8 @@ public class StaffLandingController extends BasicController {
 
     StaffLandingView view;
 
-    public StaffLandingController(Stage s){
-        super(s);
+    public StaffLandingController(Stage s, VolunteerizeModel m){
+        super(s, m);
         view = new StaffLandingView();
         view.mvButton.setOnAction(new mvButtonEventHandler());
         view.meButton.setOnAction(new meButtonEventHandler());
@@ -61,7 +62,7 @@ public class StaffLandingController extends BasicController {
 
 
     public void ChangeToManageVolunteersView(){
-        ManageVolunteersController mvc = new ManageVolunteersController(stage);
+        ManageVolunteersController mvc = new ManageVolunteersController(stage, model);
 
         Scene scene = new Scene(mvc.GetView().GetRootPane(), 800, 600);
 //        scene.getStylesheets().add
@@ -71,7 +72,7 @@ public class StaffLandingController extends BasicController {
     }
 
     public void ChangeToManageEventsView(){
-        ManageEventController mvc = new ManageEventController(stage);
+        ManageEventController mvc = new ManageEventController(stage, model);
 
         Scene scene = new Scene(mvc.GetView().GetRootPane(), 800, 600);
 //        scene.getStylesheets().add

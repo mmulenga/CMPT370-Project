@@ -1,5 +1,6 @@
 package com.teamb.controller;
 
+import com.teamb.Volunteerize;
 import com.teamb.model.VolunteerizeModel;
 import com.teamb.view.EventView;
 import com.teamb.model.Event;
@@ -17,8 +18,8 @@ public class EventController extends BasicController {
     private EventView eventView;
 
 
-    EventController(Stage s) {
-        super(s);
+    EventController(Stage s, VolunteerizeModel m) {
+        super(s, m);
 
         this.eventModel = new ArrayList<Event>();
         //TODO: CALL Method that gets event list from database
@@ -58,7 +59,7 @@ public class EventController extends BasicController {
     }
 
     public void ChangeToProfileView(Stage s){
-        VolunteerLandingController vlc = new VolunteerLandingController(s);
+        VolunteerLandingController vlc = new VolunteerLandingController(s, model);
 
         Scene scene = new Scene(vlc.GetView().GetRootPane(), 720, 540);
         s.setScene(scene);
