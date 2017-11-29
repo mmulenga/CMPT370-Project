@@ -24,6 +24,7 @@ public class VolunteerLandingView extends BasicView {
     public Button cpassButton;
     public Button helpButton;
     public Button pButton;
+    public Button logOutButton;
 
     public VolunteerLandingView(){
         super();
@@ -57,12 +58,14 @@ public class VolunteerLandingView extends BasicView {
 
         pButton = new Button("Look at my profile");
 
+        logOutButton = new Button ("LOG OUT");
+
 
         VBox mainContainer = new VBox();
         mainContainer.setAlignment(Pos.CENTER);
 
 
-        mainContainer.getChildren().addAll(welcome, prompt, pButton, epButton, ueButton, cpassButton, helpButton);
+        mainContainer.getChildren().addAll(welcome, prompt, pButton, epButton, ueButton, cpassButton, helpButton, logOutButton);
         root.getChildren().add(mainContainer);
 
     }

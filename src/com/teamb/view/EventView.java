@@ -17,6 +17,7 @@ public class EventView extends BasicView {
     int eventCount;
     public VBox outside;
     VBox eventListBox;
+    public Button backButton;
 
     //Pane root;
     //EventController controller;
@@ -72,14 +73,17 @@ public class EventView extends BasicView {
 
     @Override
     protected void CreateChildren() {
+        backButton = new Button("<-Back");
         outside = new VBox(5);
 
         eventListBox = new VBox(5);
         PopulateEventList();
         Label title = new Label("Upcoming Events");
         title.setId("scenetitle");
+        outside.getChildren().add(backButton);
         outside.getChildren().add(title);
         outside.getChildren().add(eventListBox);
+
 
         root.getChildren().add(outside);
     }

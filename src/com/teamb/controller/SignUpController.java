@@ -43,7 +43,9 @@ public class SignUpController extends BasicController{
         view = new SignUpView();
         view.submit.setOnAction(new submitEventHandler());
         view.clear.setOnAction(new clearEventHandler());
+        view.backButton.setOnAction(new backButtonEventHandler());
     }
+
     @Override
     public BasicView GetView() {
         return view;
@@ -80,6 +82,13 @@ public class SignUpController extends BasicController{
 //                }
         }
 
+    }
+
+    class backButtonEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            ChangeToProfileView(stage);
+        }
     }
 
 
