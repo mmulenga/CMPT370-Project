@@ -82,8 +82,4 @@ public class LoginView extends BasicView{
 
         root.getChildren().add(gp);
     }
-
-
-
-
 }

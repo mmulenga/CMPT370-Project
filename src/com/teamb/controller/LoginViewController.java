@@ -1,5 +1,7 @@
 package com.teamb.controller;
 
+import com.teamb.model.VolunteerizeModel;
+import com.teamb.model.Users;
 import com.teamb.view.LoginView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -11,14 +13,16 @@ public class LoginViewController extends BasicController {
 
     private String username;
     private String password;
-    LoginView loginView;
 
-    private boolean isStaff;
+    LoginView loginView;
+    VolunteerizeModel model;
+    Users user;
+
 
     public LoginViewController(Stage s){
         super(s);
+        model = new VolunteerizeModel();
         loginView = new LoginView();
-        isStaff = false; //TODO: Actually check this
         loginView.login.setOnAction(new loginEventHandler());
         loginView.Signup.setOnAction(new SignupEventHandler());
     }
@@ -43,36 +47,25 @@ public class LoginViewController extends BasicController {
         }
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-
 
     public boolean checkCredentials(String username, String password) {
+            user = model.login(username, password);
 
-            this.ChangeToLandingView(stage);
-            return true;
-            //TODO: Currently, this always returns true, actually implement
+            // Check to see if a user was returned, if so, credentials were
+            // OK, return true.
+            if(user != null) {
+                this.ChangeToLandingView(stage);
+                return true;
+            } else {
+                return false;
+            }
+
     }
 
 
-    private void ChangeToLandingView(Stage s ){
+    private void ChangeToLandingView(Stage s){
 
-        if(isStaff){
+        if(user.getIsStaff()){
 
             StaffLandingController slc = new StaffLandingController(s);
 
@@ -94,14 +87,14 @@ public class LoginViewController extends BasicController {
 
     }
 
-    public void ChangeToSignUpView(){
+    public void ChangeToSignUpView() {
         SignUpController suc = new SignUpController(stage);
         Scene scene = new Scene(suc.GetView().GetRootPane(), 600, 600);
         stage.setScene(scene);
         stage.show();
     }
 
-    public LoginView GetView(){
+    public LoginView GetView() {
         return loginView;
     }
 }
