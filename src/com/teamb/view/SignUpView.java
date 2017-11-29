@@ -29,6 +29,7 @@ public class SignUpView extends BasicView {
 
     public Button submit;
     public Button clear;
+    public Button backButton;
     public Availability a;
     public TableView<Shift> availabilityTable;
     public TextField firstNameField;
@@ -163,6 +164,7 @@ public class SignUpView extends BasicView {
         //Create Buttons
          submit = new Button("Submit");
          clear = new Button("Clear");
+         backButton = new Button("<-Back");
 
 
 
@@ -228,6 +230,9 @@ public class SignUpView extends BasicView {
 
         gp.add(submit,1,20);
         gp.add(clear,2,20);
+        gp.add(backButton, 0,0 );
+        //gp.setHalignment(backButton, HPos.LEFT);
+        //gp.setMargin(backButton, new Insets(20,0,20,0));
 
 
         //Add Scroll Bar

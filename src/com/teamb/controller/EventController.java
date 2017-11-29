@@ -3,6 +3,9 @@ package com.teamb.controller;
 import com.teamb.model.VolunteerizeModel;
 import com.teamb.view.EventView;
 import com.teamb.model.Event;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.sql.*;
@@ -21,6 +24,7 @@ public class EventController extends BasicController {
         //TODO: CALL Method that gets event list from database
 
         eventView = new EventView();
+        eventView.backButton.setOnAction(new EventController.backButtonEventHandler());
 
     }
 
@@ -43,6 +47,22 @@ public class EventController extends BasicController {
 
     public ArrayList<Event> GetEventModel() {
         return eventModel;
+
+    }
+
+    class backButtonEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            ChangeToProfileView(stage);
+        }
+    }
+
+    public void ChangeToProfileView(Stage s){
+        VolunteerLandingController vlc = new VolunteerLandingController(s);
+
+        Scene scene = new Scene(vlc.GetView().GetRootPane(), 720, 540);
+        s.setScene(scene);
+        s.show();
 
     }
 

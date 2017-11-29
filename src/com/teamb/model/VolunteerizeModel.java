@@ -28,22 +28,23 @@ public class VolunteerizeModel {
      * @param password
      * @return
      */
-    public Profile login(String username, String password) {
-        int profileID;
+    public Users login(String username, String password) {
+        Users user = new Users();
 
         ResultSet result = database.select("* FROM users u WHERE u.username = " +
                 wrap(username) + " AND password = " + wrap(password) + ";");
 
         try {
             result.next();
-            profileID = result.getInt("volunteer_id");
+            user.setProfileID(result.getInt("volunteer_id"));
+            user.setIsStaff(result.getBoolean("is_staff"));
         } catch(SQLException exception) {
             exception.printStackTrace();
 
             return null;
         }
 
-        return getProfile(profileID);
+        return user;
     }
 
     public void addUser(Users user) {
@@ -538,7 +539,7 @@ public class VolunteerizeModel {
         newUser.setProfileID(1);
         newUser.setUsername("Jimmy");
         newUser.setPassword("jam");
-        newUser.setIsStaff(false);
+        newUser.setIsStaff(true);
 
         newProfile.setAllBaseInformation("Matt",
                 null,

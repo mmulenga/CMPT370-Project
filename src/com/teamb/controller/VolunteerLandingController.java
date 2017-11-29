@@ -4,7 +4,12 @@ import com.teamb.view.BasicView;
 import com.teamb.view.VolunteerLandingView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /* CODE SMELLS
@@ -29,6 +34,7 @@ public class VolunteerLandingController extends BasicController {
         view.cpassButton.setOnAction(new cpassButtonEventHandler());
         view.helpButton.setOnAction(new helpButtonEventHandler());
         view.pButton.setOnAction(new pButtonEventHandler());
+        view.logOutButton.setOnAction(new logOutButtonEventHandler());
     }
 
     class epButtonEventHandler implements EventHandler<ActionEvent> {
@@ -68,6 +74,13 @@ public class VolunteerLandingController extends BasicController {
         }
     }
 
+    class logOutButtonEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            LogOutPopBox();
+        }
+    }
+
 
 
     public void ChangeToEditProfileView(){
@@ -91,6 +104,51 @@ public class VolunteerLandingController extends BasicController {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void LogOutPopBox(){
+        Stage popupwindow=new Stage();
+
+        popupwindow.initModality(Modality.APPLICATION_MODAL);
+        popupwindow.setTitle("Log Out");
+
+
+        Label logOutLabel= new Label("Are you sure you want to Log Out");
+        Button yesButton= new Button("YES");
+        Button noButton= new Button("NO");
+
+        yesButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                popupwindow.close();
+                ChangeToMainLandingView();
+
+            }
+        });
+
+        noButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                popupwindow.close();
+
+            }
+        });
+
+        VBox layout= new VBox(10);
+        layout.getChildren().addAll(logOutLabel, yesButton, noButton);
+        layout.setAlignment(Pos.CENTER);
+        Scene scene1= new Scene(layout, 300, 250);
+        popupwindow.setScene(scene1);
+        popupwindow.showAndWait();
+
+    }
+
+    public void ChangeToMainLandingView(){
+        MainLandingController mlc = new MainLandingController(stage);
+        Scene scene = new Scene(mlc.GetView().GetRootPane(), 600, 600);
+        stage.setScene(scene);
+        stage.show();
+    }
+
 
     public void ChangeToChangePasswordView(){
         //TODO

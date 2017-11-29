@@ -6,9 +6,6 @@ import java.util.ArrayList;
  * Represents all the information and functions of the volunteer profile.
  */
 public class Profile {
-
-
-
     private String firstName;
     private String middleName;
     private String lastName;
