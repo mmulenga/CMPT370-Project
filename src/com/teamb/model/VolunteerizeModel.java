@@ -227,9 +227,25 @@ public class VolunteerizeModel {
         if (newEvent.getStartTime() < 1000)
             startTime = "0" + startTime;
 
+        //adds zero if start tiem is before 1 am (00:30)
+        if (newEvent.getStartTime() < 100)
+            startTime = "0" + startTime;
+
+        // adds zero if start time is midnight (00:00)
+        if (newEvent.getStartTime() < 10)
+            startTime = "0" + startTime;
+
         String endTime = Integer.toString(newEvent.getEndTime());
         if (newEvent.getEndTime() < 1000)
             endTime = "0" + endTime;
+
+        if (newEvent.getEndTime() < 100)
+            endTime = "0" + endTime;
+
+        if (newEvent.getEndTime() < 10)
+            endTime = "0" + endTime;
+
+
 
         database.insert("events (name, start_time, end_time, description, location_id)\n " +
                 "VALUES (" +
@@ -327,8 +343,7 @@ public class VolunteerizeModel {
      */
     public ResultSet getVolunteerSet(String query, String dataType ) {
 
-        Profile p = new Profile();
-
+        // Generates a result set from the database using the dataType and query
         ResultSet rs = database.select( "v.id, " +
                     "u.type, " +
                     "v.first_name, " +
@@ -368,11 +383,15 @@ public class VolunteerizeModel {
     }
 
     public Profile[] searchProfiles(String query, String dataType ) {
+
+        // Converts desired data type to Postgres terminology
         String dbDataType = getProfileDataType(dataType);
+        // Will be the number of results from the query
         int numOfValues = 0;
 
+        // Counts the number of results from the database    //redoing work ?
         try{
-            ResultSet rs = database.count( "FROM users u, " +
+            ResultSet rs = database.count( "FROM users u, " +   // can this be just users u?
                             "volunteers v, " +
                             "contact_information c, " +
                             "emergency_contact e, " +
@@ -384,6 +403,8 @@ public class VolunteerizeModel {
                             "and m.volunteer_id = v.id " +
                             "and m.group_id = g.id " +
                             "and " + dataType + " = " + query);
+
+            //sets the number of results so we can create an array of necessary length
             numOfValues = rs.getInt("count");
 
         }catch(SQLException exception) {
@@ -391,10 +412,12 @@ public class VolunteerizeModel {
 
             exception.printStackTrace();
         }
-        Profile [] profilesSearched = new Profile[numOfValues];
-        ResultSet profilesSought = getVolunteerSet(query,dbDataType);
+        // create array of profiles to hold all results
+        Profile [] profilesSearched = new Profile[numOfValues]; // terrible names
+        ResultSet profilesSought = getVolunteerSet(query,dbDataType); // terrible names
 
         try {
+            // goes through array created and assigns values to each profile
             for(int i = 0; i < numOfValues; i++){
                 Event e = new Event();
                 profilesSearched[i].setAllBaseInformation(profilesSought.getString("first_name"),
@@ -420,7 +443,8 @@ public class VolunteerizeModel {
                         profilesSought.getString("photo_path"),
                         null  // availability is not clearly defined
                 );
-                profilesSought.next();
+                //moves result set to next value
+                profilesSought.next();  // could use while??
             }
 
         }catch(SQLException exception) {
@@ -460,9 +484,12 @@ public class VolunteerizeModel {
      */
     public Event[] searchEvents(String query, String dataType ) {
 
+        // converts dataType to Postgres friendly data Type
         String dbDataType = getEventDataType(dataType);
+        //will be number of values in array
         int numOfValues = 0;
 
+        //counts number of values in result set. // repeated work?
         try{
             ResultSet rs = database.count( "events e, locations l " +
                 "WHERE l.id = e.location.id " +
@@ -474,11 +501,13 @@ public class VolunteerizeModel {
             exception.printStackTrace();
         }
 
+        // new array of Events the size of NumOfValues
         Event [] eventsSearched = new Event[numOfValues];
+        //generate result set with query
         ResultSet eventsSought = getEventSet(query,dbDataType);
 
         try {
-
+            // assigns values to all the events in the array.
             for(int i = 0; i < numOfValues; i++){
                 Event e = new Event();
 
@@ -491,6 +520,7 @@ public class VolunteerizeModel {
                         eventsSought.getString( "location_name"),
                         eventsSought.getString("description"));
                 eventsSought.next();
+
             }
 
         }catch(SQLException exception) {
@@ -500,7 +530,23 @@ public class VolunteerizeModel {
         return eventsSearched;
     }
 
+/*
+    public Event[] searchMultipleEventValues (String query, String dataType, ResultSet rs ) {
 
+        do {
+
+        }
+        while( rs.next())
+
+    }
+*/
+
+/*
+    public Event[] searchMultipleVolunteerValues (String query, String dataType, ResultSet rs ) {
+
+
+    }
+*/
         public static void main(String args[]) {
         VolunteerizeModel model = new VolunteerizeModel();
         Profile newProfile = new Profile();
