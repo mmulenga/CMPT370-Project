@@ -139,10 +139,10 @@ public class SignUpController extends BasicController{
      */
     public void createNewProfile() {
         Profile newProfile = new Profile();
-        
+
         newProfile.setFirstName(view.firstNameField.getText());
+        newProfile.setMiddleName("Strawberry"); // TODO: Add field to signup page
         newProfile.setLastName(view.lastNameField.getText());
-        newProfile.setMiddleName("Strawberry"); //Temporary
         newProfile.setAddress(view.addressField.getText());
         newProfile.setPhoneNumber(view.phoneNumberField.getText());
         newProfile.setEmail(view.emailField.getText());
@@ -151,16 +151,16 @@ public class SignUpController extends BasicController{
         newProfile.setCriminalReccordCheck(convertStringToBoolean(
                (((RadioButton)(view.checked.getToggleGroup().getSelectedToggle())).getText())));
         newProfile.setEmergencyContactFirstName(view.emergencyNameField.getText());
-        newProfile.setEmergencyContactMiddleName("Jack"); //Temporary
-        newProfile.setEmergencyContactLastName("Jonees"); // Temporary
+        newProfile.setEmergencyContactMiddleName("Jack"); // TODO: Add field to signup page
+        newProfile.setEmergencyContactLastName("Jonees"); // TODO: Add field to signup page
         newProfile.setEmergencyContactPhoneNumber(view.emergencyNumberField.getText());
-        //newProfile.setEmergencyContactID();
-        newProfile.setEmergencyContactPostalCode("S4S 4R5");//Temporary
-        newProfile.setEmergencyContactAddress("167 SUNDRIVRE AVENUE");//Temporary
-        newProfile.setMedicalInformation("ASTHMA");//Temporary
-        newProfile.setHoursWorked(92);//Temporary
-        //newProfile.setAvailability();
-        //newProfile.setPhotoPath();
+        newProfile.setEmergencyContactPostalCode("S4S 4R5"); // TODO: Add field to signup page
+        newProfile.setEmergencyContactAddress("167 SUNDRIVRE AVENUE"); // TODO: Add field to signup page
+        newProfile.setMedicalInformation("ASTHMA"); // TODO: Add field to signup page
+        newProfile.setHoursWorked(92); // TODO: Add field to signup page
+        //newProfile.setAvailability(); // TODO: Add field to signup page
+        //newProfile.setPhotoPath(); // TODO: Add field to signup page
+
         model.addProfile(newProfile);
     }
 
