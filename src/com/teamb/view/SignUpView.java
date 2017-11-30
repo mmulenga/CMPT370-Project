@@ -33,18 +33,26 @@ public class SignUpView extends BasicView {
     public Availability a;
     public TableView<Shift> availabilityTable;
     public TextField firstNameField;
+    public TextField middleNameField;
     public TextField lastNameField;
-    public TextField passwordField;
+    //public TextField passwordField;
     public TextField addressField;
     public TextField phoneNumberField;
     public TextField emergencyNumberField;
-    public TextField emergencyNameField;
+    public TextField emergencyFirstNameField;
+    public TextField emergencyMiddleNameField;
+    public TextField emergencyLastNameField;
+    public TextField emergencyPostalCodeField;
+    public TextField emergencyAddressField;
+    public Spinner<Integer> workingHours;
     public TextField emailField;
     public TextField memberIDField;
     public TextArea medicalInformationField;
     public RadioButton phoneYes;
     public RadioButton emailYes;
     public RadioButton checked;
+    public Availability availability;
+
 
 
 
@@ -90,12 +98,16 @@ public class SignUpView extends BasicView {
         //Create Labels
         Label firstNameLabel = new Label("First Name:");
         Label lastNameLabel = new Label("Last Name:");
-        Label passwordLabel = new Label("Password:");
+        Label middleNameLabel = new Label("Middle Name:");
         Label addressLabel = new Label("Home Address:");
         Label phoneNumberLabel = new Label("Phone Number:");
         Label emergencyContact = new Label("Emergency Contact Information:");
         Label emergencyNumberLabel = new Label("Emergency Contact Number:");
-        Label emergencyNameLabel = new Label("Emergency Contact Name:");
+        Label emergencyNameLabel = new Label("Fiest Name:");
+        Label emergencyMiddleNameLabel = new Label("Middle Name:");
+        Label emergencyLastNameLabel = new Label("Last Name:");
+        Label emergencyPostalCodeLabel= new Label("Postal Code:");
+        Label emergencyAddressLabel = new Label("Address:");
         Label emailLabel = new Label("Email:");
         Label memberIDLabel = new Label("Membership Number:");
         Label medicalInformationLabel = new Label("Medical Information:");
@@ -106,16 +118,21 @@ public class SignUpView extends BasicView {
         Label registeredEventsLabel = new Label("Registered Events:");
         Label phonePref = new Label("Prefer phone contact?");
         Label emailPref = new Label("Prefer email contact?");
-
+        Label workingHourLabel = new Label("Working hours:");
 
         //Create textFields
         firstNameField = new TextField();
+        middleNameField = new TextField();
         lastNameField  = new TextField();
-        passwordField = new TextField();
+        //passwordField = new TextField();
         addressField  = new TextField();
         phoneNumberField = new TextField();
         emergencyNumberField  = new TextField();
-        emergencyNameField  = new TextField();
+        emergencyFirstNameField  = new TextField();
+        emergencyMiddleNameField = new TextField();
+        emergencyLastNameField = new TextField();
+        emergencyPostalCodeField = new TextField();
+        emergencyAddressField = new TextField();
         emailField  = new TextField();
         memberIDField  = new TextField();
         medicalInformationField = new TextArea();
@@ -156,10 +173,10 @@ public class SignUpView extends BasicView {
 
 
         /************Create Availability Table************/
-        TableView<Shift> availabilityTable = new TableView<>();
-        Availability a = new Availability();
-        availabilityTable = a.getAvailabilityTable(true);
 
+        TableView<Shift> availabilityTable = new TableView<>();
+        availability = new Availability();
+        availabilityTable = availability.getAvailabilityTable(true);
 
         //Create Buttons
          submit = new Button("Submit");
@@ -167,22 +184,18 @@ public class SignUpView extends BasicView {
          backButton = new Button("<-Back");
 
 
-
-        TableView<Shift> finalAvailabilityTable = availabilityTable;
-
-
+        workingHours = new Spinner<>(0,100,1);
 
 
         //Add widgets onto gridPane
         gp.add(memberIDLabel,0,1);
         gp.add(memberIDField,1,1,2,1);
 
+        gp.add(firstNameLabel, 0,2);
+        gp.add(firstNameField, 1,2,2,1);
 
-        gp.add(passwordLabel, 0,2);
-        gp.add(passwordField,1,2,2,1);
-
-        gp.add(firstNameLabel, 0,3);
-        gp.add(firstNameField, 1,3,2,1);
+        gp.add(middleNameLabel, 0,3);
+        gp.add(middleNameField, 1,3,2,1);
 
         gp.add(lastNameLabel, 0,4);
         gp.add(lastNameField, 1,4,2,1);
@@ -220,16 +233,31 @@ public class SignUpView extends BasicView {
         gp.add(emergencyContact,0,14);
 
         gp.add(emergencyNameLabel,0,15);
-        gp.add(emergencyNameField,1,15,2,1);
+        gp.add(emergencyFirstNameField,1,15,2,1);
 
-        gp.add(emergencyNumberLabel,0,16);
-        gp.add(emergencyNumberField,1,16,2,1);
+        gp.add(emergencyMiddleNameLabel,0,16);
+        gp.add(emergencyMiddleNameField,1,16,2,1);
 
-        gp.add(availabilityLabel,0,17);
-        gp.add(availabilityTable,0,18,3,1);
+        gp.add(emergencyLastNameLabel,0,17);
+        gp.add(emergencyLastNameField,1,17,2,1);
 
-        gp.add(submit,1,20);
-        gp.add(clear,2,20);
+        gp.add(emergencyAddressLabel,0,18);
+        gp.add(emergencyAddressField,1,18,2,1);
+
+        gp.add(emergencyPostalCodeLabel,0,19);
+        gp.add(emergencyPostalCodeField,1,19,2,1);
+
+        gp.add(emergencyNumberLabel,0,20);
+        gp.add(emergencyNumberField,1,20,2,1);
+
+        gp.add(availabilityLabel,0,21);
+        gp.add(availabilityTable,0,22,3,1);
+
+        gp.add(workingHourLabel,0,23);
+        gp.add(workingHours,1,23);
+
+        gp.add(submit,1,25);
+        gp.add(clear,2,25);
         gp.add(backButton, 0,0 );
         //gp.setHalignment(backButton, HPos.LEFT);
         //gp.setMargin(backButton, new Insets(20,0,20,0));
