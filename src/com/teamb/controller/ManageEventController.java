@@ -57,13 +57,4 @@ public class ManageEventController extends BasicController {
         stage.show();
     }
 
-    public void ChangeToMainLandingView(Stage s){
-        StaffLandingController vlc = new StaffLandingController(s, model);
-
-        Scene scene = new Scene(vlc.GetView().GetRootPane(), 720, 540);
-        s.setScene(scene);
-        s.show();
-
-    }
-
 }

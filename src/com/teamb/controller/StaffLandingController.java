@@ -61,28 +61,7 @@ public class StaffLandingController extends BasicController {
     }
 
 
-    public void ChangeToManageVolunteersView(){
-        ManageVolunteersController mvc = new ManageVolunteersController(stage, model);
 
-        Scene scene = new Scene(mvc.GetView().GetRootPane(), 800, 600);
-//        scene.getStylesheets().add
-//                (Volunteerize.class.getResource("LoginStyle.css").toExternalForm());
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void ChangeToManageEventsView(){
-        ManageEventController mvc = new ManageEventController(stage, model);
-
-        Scene scene = new Scene(mvc.GetView().GetRootPane(), 800, 600);
-        //scene.getStylesheets().add(Volunteerize.class.getResource("LoginStyle.css").toExternalForm());
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void ChangeToChangePasswordView(){
-        //TODO
-    }
 
     public void HelpPopUp(){
         //TODO

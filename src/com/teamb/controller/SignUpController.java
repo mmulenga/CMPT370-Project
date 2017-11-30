@@ -226,12 +226,4 @@ public class SignUpController extends BasicController{
     }
 
 
-    public void ChangeToProfileView(Stage s){
-        VolunteerLandingController vlc = new VolunteerLandingController(s, model);
-
-        Scene scene = new Scene(vlc.GetView().GetRootPane(), 720, 540);
-        s.setScene(scene);
-        s.show();
-
-    }
 }
