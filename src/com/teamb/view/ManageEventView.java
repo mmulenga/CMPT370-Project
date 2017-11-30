@@ -23,13 +23,15 @@ public class ManageEventView extends BasicView {
     public Button deleteEventsBtn;
     public TableView<EventSelection> table;
     public Button createNewEventBtn;
+    public Button searchBtn;
+    public Button backButton;
 
     /**
      * Constructor.
      * Creates the root pane, and adds the children with the CreateChildren() method.
      * May have parameters based on what information is needed from the controller
      *
-     * @param c
+     * @param
      */
     public ManageEventView() {
         super();
@@ -66,9 +68,10 @@ public class ManageEventView extends BasicView {
         TextField searchKeyField = new TextField();
         searchKeyField.setPromptText("Enter keyword here");
 
-        Button createNewEventBtn = new Button("Create New Event");
-        Button deleteEventsBtn = new Button("Delete Events");
-        Button searchBtn = new Button("Search");
+        createNewEventBtn = new Button("Create New Event");
+        deleteEventsBtn = new Button("Delete Events");
+        searchBtn = new Button("Search");
+        backButton = new Button("<- BACK");
 
         //fake event data TODO get real data instead
         for(int i = 0; i<5;i++){
@@ -99,12 +102,13 @@ public class ManageEventView extends BasicView {
         columnTwoConstrains.setHgrow(Priority.ALWAYS);
 
         gp.getColumnConstraints().addAll(columnOneConstraints, columnTwoConstrains, columnThreeConstrains);
-        gp.add(label, 0, 0,3,1);
-        gp.add(table,0,1,2,1);
-        gp.add(searchKeyField,0,2);
-        gp.add(searchBtn,0,3);
-        gp.add(createNewEventBtn, 0,4);
-        gp.add(deleteEventsBtn,0,5);
+        gp.add(label, 0, 1,3,1);
+        gp.add(table,0,2,2,1);
+        gp.add(searchKeyField,0,3);
+        gp.add(searchBtn,0,4);
+        gp.add(createNewEventBtn, 0,5);
+        gp.add(deleteEventsBtn,0,6);
+        gp.add(backButton, 0,0 );
 
         root.getChildren().add(gp);
 
