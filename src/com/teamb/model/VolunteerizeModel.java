@@ -223,7 +223,7 @@ public class VolunteerizeModel {
 
         // Converts int values to string, and if necessary adds a zero so that is will be
         // properly formatted in the SQL query
-        String startTime = "0" + Integer.toString(newEvent.getStartTime());
+        String startTime = Integer.toString(newEvent.getStartTime());
         if (newEvent.getStartTime() < 1000)
             startTime = "0" + startTime;
 
@@ -413,38 +413,38 @@ public class VolunteerizeModel {
             exception.printStackTrace();
         }
         // create array of profiles to hold all results
-        Profile [] profilesSearched = new Profile[numOfValues]; // terrible names
-        ResultSet profilesSought = getVolunteerSet(query,dbDataType); // terrible names
+        Profile [] profilesToReturn = new Profile[numOfValues]; // terrible names
+        ResultSet profilesSearched = getVolunteerSet(query,dbDataType); // terrible names
 
         try {
             // goes through array created and assigns values to each profile
             for(int i = 0; i < numOfValues; i++){
                 Event e = new Event();
-                profilesSearched[i].setAllBaseInformation(profilesSought.getString("first_name"),
-                        profilesSought.getString( "middle_name"),
-                        profilesSought.getString("last_name"),
-                        profilesSought.getString("address"),
-                        profilesSought.getString("phone_number"),
-                        profilesSought.getString( "postal_code"),
-                        profilesSought.getString("emergency_contact_phone_number"),
-                        profilesSought.getString("emergency_contact_first_name"),
-                        profilesSought.getString("emergency_contact_middle_name"),
-                        profilesSought.getString("emergency_contact_last_name"),
-                        profilesSought.getInt("emergency_contact_id"),
-                        profilesSought.getString("emergency_contact_adress"),
-                        profilesSought.getString("emergency_contact_postal_code"),
-                        profilesSought.getString("email"),
-                        profilesSought.getBoolean("prefer_phone"),
-                        profilesSought.getBoolean("prefer_email"),
-                        profilesSought.getInt("id"),
-                        profilesSought.getBoolean("criminal_check"),
-                        profilesSought.getString("medical_info"),
-                        profilesSought.getInt("hours_worked"),
-                        profilesSought.getString("photo_path"),
+                profilesToReturn[i].setAllBaseInformation(profilesSearched.getString("first_name"),
+                        profilesSearched.getString( "middle_name"),
+                        profilesSearched.getString("last_name"),
+                        profilesSearched.getString("address"),
+                        profilesSearched.getString("phone_number"),
+                        profilesSearched.getString( "postal_code"),
+                        profilesSearched.getString("emergency_contact_phone_number"),
+                        profilesSearched.getString("emergency_contact_first_name"),
+                        profilesSearched.getString("emergency_contact_middle_name"),
+                        profilesSearched.getString("emergency_contact_last_name"),
+                        profilesSearched.getInt("emergency_contact_id"),
+                        profilesSearched.getString("emergency_contact_adress"),
+                        profilesSearched.getString("emergency_contact_postal_code"),
+                        profilesSearched.getString("email"),
+                        profilesSearched.getBoolean("prefer_phone"),
+                        profilesSearched.getBoolean("prefer_email"),
+                        profilesSearched.getInt("id"),
+                        profilesSearched.getBoolean("criminal_check"),
+                        profilesSearched.getString("medical_info"),
+                        profilesSearched.getInt("hours_worked"),
+                        profilesSearched.getString("photo_path"),
                         null  // availability is not clearly defined
                 );
                 //moves result set to next value
-                profilesSought.next();  // could use while??
+                profilesSearched.next();  // could use while??
             }
 
         }catch(SQLException exception) {
@@ -453,7 +453,7 @@ public class VolunteerizeModel {
             exception.printStackTrace();
         }
 
-        return profilesSearched;
+        return profilesToReturn;
     }
 
     /**
@@ -476,6 +476,8 @@ public class VolunteerizeModel {
                 "and " + dataType + " = " + query);
         return rs;
     }
+
+
 
     /**
      * returns an array of events containing all matching instances
@@ -502,24 +504,24 @@ public class VolunteerizeModel {
         }
 
         // new array of Events the size of NumOfValues
-        Event [] eventsSearched = new Event[numOfValues];
+        Event [] eventsToReturn = new Event[numOfValues];
         //generate result set with query
-        ResultSet eventsSought = getEventSet(query,dbDataType);
+        ResultSet eventsSearched = getEventSet(query,dbDataType);
 
         try {
             // assigns values to all the events in the array.
             for(int i = 0; i < numOfValues; i++){
                 Event e = new Event();
 
-                eventsSearched[i].setEventFields(eventsSought.getInt("id"),
-                        eventsSought.getString("name"),
-                        eventsSought.getInt( "start_time"),
-                        eventsSought.getInt( "end_time"), // may need to format times properly.
-                        eventsSought.getString( "start_date"),
-                        eventsSought.getString( "end_date"),
-                        eventsSought.getString( "location_name"),
-                        eventsSought.getString("description"));
-                eventsSought.next();
+                eventsToReturn[i].setEventFields(eventsSearched.getInt("id"),
+                        eventsSearched.getString("name"),
+                        eventsSearched.getInt( "start_time"),
+                        eventsSearched.getInt( "end_time"), // may need to format times properly.
+                        eventsSearched.getString( "start_date"),
+                        eventsSearched.getString( "end_date"),
+                        eventsSearched.getString( "location_name"),
+                        eventsSearched.getString("description"));
+                eventsSearched.next();
 
             }
 
@@ -527,7 +529,7 @@ public class VolunteerizeModel {
             System.out.println("Count query failed.");
             exception.printStackTrace();
         }
-        return eventsSearched;
+        return eventsToReturn;
     }
 
 /*
@@ -539,6 +541,10 @@ public class VolunteerizeModel {
         while( rs.next())
 
     }
+
+
+   Maybe better to have string concact operations? that way the query is run once rather than several times...
+
 */
 
 /*
