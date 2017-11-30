@@ -22,30 +22,6 @@ public class Profile {
     private String medicalInformation;
     private String postalCode;
 
-    /* Are we using the array of booleans? probably cleaner, but not sure how to DB that. =/ Sascha
-    private boolean mondayMorning;
-    private boolean mondayAfternoon;
-    private boolean mondayEvening;
-    private boolean tuesdayMorning;
-    private boolean tuesdayAfternoon;
-    private boolean tuesdayEvening;
-    private boolean wednesdayMorning;
-    private boolean wednesdayAfternoon;
-    private boolean wednesdayEvening;
-    private boolean thursdayMorning;
-    private boolean thursdayAfternoon;
-    private boolean thursdayEvening;
-    private boolean fridayMorning;
-    private boolean fridayAfternoon;
-    private boolean fridayEvening;
-    private boolean saturdayMorning;
-    private boolean saturdayAfternoon;
-    private boolean saturdayEvening;
-    private boolean sundayMorning;
-    private boolean sundayAfternoon;
-    private boolean sundayEvening;
-    */
-
 
     private int emergencyContactID;
     private int memberNumber; // set by WDM
