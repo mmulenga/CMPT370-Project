@@ -31,7 +31,7 @@ public class VolunteerProfileController extends BasicController {
 
 
     @Override
-    public BasicView GetView() {
+    public VolunteerProfileView GetView() {
         return view;
     }
 

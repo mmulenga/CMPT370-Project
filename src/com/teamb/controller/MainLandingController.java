@@ -34,7 +34,7 @@ public class MainLandingController extends BasicController{
     }
 
     @Override
-    public BasicView GetView() {
+    public MainLandingView GetView() {
         return mainView;
     }
 

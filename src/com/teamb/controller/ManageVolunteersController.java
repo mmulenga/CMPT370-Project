@@ -71,7 +71,7 @@ public class ManageVolunteersController extends BasicController{
 
 
     @Override
-    public BasicView GetView() {
+    public ManageVolunteersView GetView() {
         return view;
     }
 

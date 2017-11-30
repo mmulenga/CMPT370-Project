@@ -68,7 +68,7 @@ public class StaffLandingController extends BasicController {
     }
 
     @Override
-    protected BasicView GetView() {
+    protected StaffLandingView GetView() {
         return view;
     }
 }

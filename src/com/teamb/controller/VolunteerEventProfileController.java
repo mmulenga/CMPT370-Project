@@ -30,7 +30,7 @@ public class VolunteerEventProfileController extends BasicController {
     }
 
     @Override
-    public BasicView GetView() {
+    public VolunteerEventProfileView GetView() {
         return volunteerView;
     }
 
