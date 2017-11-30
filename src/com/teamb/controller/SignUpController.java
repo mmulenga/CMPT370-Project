@@ -180,7 +180,6 @@ public class SignUpController extends BasicController{
     public void createNewProfile() {
 
         newProfile = new Profile();
-
         newProfile.setFirstName(view.firstNameField.getText());
         newProfile.setMiddleName(view.middleNameField.getText()); // TODO: Add field to signup page
         newProfile.setLastName(view.lastNameField.getText());
