@@ -22,6 +22,7 @@ public class Profile {
     private String medicalInformation;
     private String postalCode;
 
+
     private int emergencyContactID;
     private int memberNumber; // set by WDM
     private int memberID; // set by dataBase
@@ -241,7 +242,7 @@ public class Profile {
 
     /**
      *
-     * @param ID - int, event ID
+     * @param ID - int, event IDl
      */
     public void addEventID(int ID){
         this.registeredEventIDs.add(ID);
