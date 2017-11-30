@@ -142,7 +142,7 @@ public class SignUpController extends BasicController{
         newProfile = new Profile();
 
         newProfile.setFirstName(view.firstNameField.getText());
-        newProfile.setMiddleName(view.middleNameField.getText()); // TODO: Add field to signup page
+        newProfile.setMiddleName(view.middleNameField.getText());
         newProfile.setLastName(view.lastNameField.getText());
         newProfile.setAddress(view.addressField.getText());
         newProfile.setPhoneNumber(view.phoneNumberField.getText());
@@ -152,16 +152,16 @@ public class SignUpController extends BasicController{
         newProfile.setCriminalReccordCheck(convertStringToBoolean(
                (((RadioButton)(view.checked.getToggleGroup().getSelectedToggle())).getText())));
         newProfile.setEmergencyContactFirstName(view.emergencyFirstNameField.getText());
-        newProfile.setEmergencyContactMiddleName(view.emergencyMiddleNameField.getText()); // TODO: Add field to signup page
-        newProfile.setEmergencyContactLastName(view.emergencyLastNameField.getText()); // TODO: Add field to signup page
+        newProfile.setEmergencyContactMiddleName(view.emergencyMiddleNameField.getText());
+        newProfile.setEmergencyContactLastName(view.emergencyLastNameField.getText());
         newProfile.setEmergencyContactPhoneNumber(view.emergencyNumberField.getText());
-        newProfile.setEmergencyContactPostalCode(view.emergencyPostalCodeField.getText()); // TODO: Add field to signup page
-        newProfile.setEmergencyContactAddress(view.emergencyAddressField.getText()); // TODO: Add field to signup page
-        newProfile.setMedicalInformation(view.medicalInformationField.getText()); // TODO: Add field to signup page
-        newProfile.setHoursWorked(view.workingHours.getValue()); // TODO: Add field to signup page
+        newProfile.setEmergencyContactPostalCode(view.emergencyPostalCodeField.getText());
+        newProfile.setEmergencyContactAddress(view.emergencyAddressField.getText());
+        newProfile.setMedicalInformation(view.medicalInformationField.getText());
+        newProfile.setHoursWorked(view.workingHours.getValue());
         System.out.print(view.workingHours.getValue());
-        newProfile.setAvailability(view.availability); // TODO: Add field to signup page
-        //newProfile.setPhotoPath(); // TODO: Add field to signup page
+        newProfile.setAvailability(view.availability);
+        //newProfile.setPhotoPath();
 
         // If the profile stored within the model doesn't exist we know that
         // the volunteer is signing up on their own, so we update the model

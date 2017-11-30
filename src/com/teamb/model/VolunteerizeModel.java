@@ -54,7 +54,7 @@ public class VolunteerizeModel {
 
         try {
             result.next();
-            user.setUsername(username);
+            user.setUsername(result.getString("username"));
             user.setProfileID(result.getInt("volunteer_id"));
             user.setIsStaff(result.getBoolean("is_staff"));
             profile = getProfile(result.getInt("volunteer_id"));
@@ -293,6 +293,50 @@ public class VolunteerizeModel {
                 "0);");
     }
 
+    public Profile[] retrieveAllProfiles() {
+        int count;
+
+        Profile[] profileList;
+
+        ResultSet volunteer;
+        ResultSet contactInformation;
+        ResultSet emergencyContact;
+        ResultSet volunteerCount;
+
+        volunteer = database.select(" * FROM volunteers;");
+        contactInformation = database.select(" * FROM contact_information;");
+        emergencyContact = database.select(" * FROM emergency_contact;");
+        volunteerCount = database.select(" COUNT(*) FROM volunteers");
+        try {
+            // Retrieve the count of all the volunteers.
+            volunteerCount.next();
+            count = volunteerCount.getInt("count");
+        } catch(SQLException exception) {
+            exception.printStackTrace();
+
+            return null;
+        }
+
+        profileList = new Profile[count];
+
+        try {
+            for(int i = 0; i < count; i++) {
+                volunteer.next();
+                contactInformation.next();
+                emergencyContact.next();
+
+                profileList[i] = getProfile(i);
+            }
+        } catch(SQLException exception) {
+            exception.printStackTrace();
+        } 
+
+        return profileList;
+    }
+
+//    public Event[] retrieveAllEvents() {
+//
+//    }
 
 
     /**
