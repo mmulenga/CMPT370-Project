@@ -84,30 +84,7 @@ public class VolunteerLandingController extends BasicController {
 
 
 
-<<<<<<< HEAD
-=======
-    public void ChangeToEditProfileView(){
-        SignUpController editlc = new SignUpController(stage, model, model.getProfile());
 
-        Scene scene = new Scene(editlc.GetView().GetRootPane(), 720, 540);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void ChangeToBrowseEventsView(){
-        EventController ec = new EventController(stage, model);
-        Scene scene = new Scene(ec.GetView().GetRootPane(), 600, 600);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void ChangeToProfileView(){
-        VolunteerProfileController vlc = new VolunteerProfileController(stage, model);
-        Scene scene = new Scene(vlc.GetView().GetRootPane(), 600, 600);
-        stage.setScene(scene);
-        stage.show();
-    }
->>>>>>> d824cdaf5a70fcb4eaf8fd28966033f220280d71
 
     public void LogOutPopBox(){
         Stage popupwindow=new Stage();
