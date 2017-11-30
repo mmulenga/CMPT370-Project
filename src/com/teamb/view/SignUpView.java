@@ -174,7 +174,7 @@ public class SignUpView extends BasicView {
 
         /************Create Availability Table************/
 
-        TableView<Shift> availabilityTable = new TableView<>();
+        availabilityTable = new TableView<>();
         availability = new Availability();
         availabilityTable = availability.getAvailabilityTable(true);
 

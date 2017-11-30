@@ -1,6 +1,7 @@
 package com.teamb.controller;
 
 import com.teamb.model.Profile;
+import com.teamb.model.Shift;
 import com.teamb.view.BasicView;
 import com.teamb.view.SignUpView;
 import javafx.event.EventHandler;
@@ -51,6 +52,22 @@ public class SignUpController extends BasicController{
     class submitEventHandler implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
+            for (Shift shift: view.availabilityTable.getItems()) {
+                for (int i = 0; i < 7; i++) {
+                    if (shift.getWeekdayAvailability(i)) {
+                        if (Objects.equals(shift.getShift(), "Morning")) {
+                            view.availability.ChangeAvailability(i, 0, true);
+                            System.out.println("Day " + i + " morning is available");
+                        } else if (Objects.equals(shift.getShift(), "Afternoon")) {
+                            view.availability.ChangeAvailability(i, 1, true);
+                            System.out.println("Day " + i + " afternoon is available");
+                        } else {
+                            view.availability.ChangeAvailability(i, 2, true);
+                            System.out.println("Day " + i + " evening is available");
+                        }
+                    }
+                }
+            }
             createNewProfile();
             // ((SignUpController) controller).actionPerformed();
             completePopUP();
@@ -163,6 +180,7 @@ public class SignUpController extends BasicController{
         newProfile.setAvailability(view.availability); // TODO: Add field to signup page
         //newProfile.setPhotoPath(); // TODO: Add field to signup page
 
+        System.out.print(view.availability);
         // If the profile stored within the model doesn't exist we know that
         // the volunteer is signing up on their own, so we update the model
         // profile to the newly created one.

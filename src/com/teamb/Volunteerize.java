@@ -39,7 +39,7 @@ public class Volunteerize extends Application {
         //VolunteerProfileController mainController = new VolunteerProfileController(primaryStage);
        //CreateEventController mainController = new CreateEventController(primaryStage);
         VolunteerizeModel model = new VolunteerizeModel();
-        CreateEventController mainController = new CreateEventController(primaryStage, model);
+        SignUpController mainController = new SignUpController(primaryStage, model);
         Scene scene = new Scene(mainController.GetView().GetRootPane(), 600, 600);
 
         primaryStage.setTitle("Volunteerize");
