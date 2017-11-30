@@ -17,6 +17,7 @@ public class ManageEventController extends BasicController {
         view = new ManageEventView();
         view.deleteEventsBtn.setOnAction(new deleteEventsBtnEventHandler());
         view.createNewEventBtn.setOnAction(new createNewEventBtnEventHandler());
+        view.backButton.setOnAction(new backButtonEventHandler());
     }
 
     class deleteEventsBtnEventHandler implements EventHandler<ActionEvent> {
@@ -37,6 +38,12 @@ public class ManageEventController extends BasicController {
         }
     }
 
+    class backButtonEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            ChangeToMainLandingView(stage);
+        }
+    }
 
     @Override
     public BasicView GetView() {
@@ -48,6 +55,15 @@ public class ManageEventController extends BasicController {
         Scene scene = new Scene(createEventController.GetView().GetRootPane(),600,600);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void ChangeToMainLandingView(Stage s){
+        StaffLandingController vlc = new StaffLandingController(s, model);
+
+        Scene scene = new Scene(vlc.GetView().GetRootPane(), 720, 540);
+        s.setScene(scene);
+        s.show();
+
     }
 
 }
