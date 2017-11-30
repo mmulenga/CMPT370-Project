@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -58,8 +59,8 @@ public class CreateEventController extends BasicController {
             view.eventTitleField.clear();
             view.locationField.clear();
             view.descriptionArea.clear();
-            view.startTimeBox.getSelectionModel().select(0);
-            view.endTimeBox.getSelectionModel().select(0);
+
+
             view.startDatePicker.setValue(LocalDate.now());
             view.endDatePicker.setValue(view.startDatePicker.getValue().plusDays(1));
         }
@@ -73,27 +74,23 @@ public class CreateEventController extends BasicController {
 
 
     public void createNewEvent() {
-        /**
-         * Converting string values from
-         * ComboBox to integer values.
-         */
-        String[] hourMin = (view.startTimeBox.getValue().toString()).split(":");
-        int endHour = Integer.parseInt(hourMin[0]);
-        endHour = endHour*100;
-        int endMin = Integer.valueOf(hourMin[1]);
-        int endTime = endHour + endMin;
+        if(view.startHour.getValue()>23){
+            view.startHour.getValueFactory().setValue(23);
+        }
+        if(view.endHour.getValue()>23){
+            view.endHour.getValueFactory().setValue(23);
+        }
+        if(view.startMin.getValue()>59){
+            view.startMin.getValueFactory().setValue(59);
+        }
+        if(view.endMin.getValue()>59){
+            view.endMin.getValueFactory().setValue(59);
+        }
 
-        String[] hourMin1 = (view.endTimeBox.getValue().toString()).split(":");
-        int startHour = Integer.parseInt(hourMin1[0]);
-        startHour = startHour*100;
-        int startMin = Integer.valueOf(hourMin1[1]);
-        int startTime = startHour + startMin;
-
-
+        int startTime = (view.startHour.getValue()*100)+view.startMin.getValue();
+        int endTime = (view.endHour.getValue()*100)+view.endMin.getValue();
         System.out.println(startTime);
         System.out.println(endTime);
-       // System.out.println (CreateDate((view.startDatePicker.getEditor().getText())));
-
 
         event = new Event();
         model = new VolunteerizeModel();
@@ -104,7 +101,6 @@ public class CreateEventController extends BasicController {
         event.setStartDate( view.startDatePicker.getEditor().getText());
         event.setEndDate( view.endDatePicker.getEditor().getText());
         event.setLocation(view.locationField.getText());
-        view.endTimeBox.getValue().toString();
         event.setDescription(view.descriptionArea.getText());
         model.addEvent(event);
     }
