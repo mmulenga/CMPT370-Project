@@ -223,7 +223,7 @@ public class VolunteerizeModel {
 
         // Converts int values to string, and if necessary adds a zero so that is will be
         // properly formatted in the SQL query
-        String startTime = "0" + Integer.toString(newEvent.getStartTime());
+        String startTime = Integer.toString(newEvent.getStartTime());
         if (newEvent.getStartTime() < 1000)
             startTime = "0" + startTime;
 
