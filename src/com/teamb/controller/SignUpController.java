@@ -33,6 +33,7 @@ import javax.swing.*;
 public class SignUpController extends BasicController{
 
     SignUpView view;
+    Profile newProfile;
 
     public SignUpController(Stage s, VolunteerizeModel m){
         super(s, m);
@@ -138,7 +139,7 @@ public class SignUpController extends BasicController{
      * buttons.
      */
     public void createNewProfile() {
-        Profile newProfile = new Profile();
+        newProfile = new Profile();
 
         newProfile.setFirstName(view.firstNameField.getText());
         newProfile.setMiddleName("Strawberry"); // TODO: Add field to signup page
@@ -161,6 +162,14 @@ public class SignUpController extends BasicController{
         //newProfile.setAvailability(); // TODO: Add field to signup page
         //newProfile.setPhotoPath(); // TODO: Add field to signup page
 
+        // If the profile stored within the model doesn't exist we know that
+        // the volunteer is signing up on their own, so we update the model
+        // profile to the newly created one.
+        if(model.getProfile().getFirstName() == null) {
+            model.setProfile(newProfile);
+        }
+
+        // Add the profile to the database
         model.addProfile(newProfile);
     }
 
@@ -171,27 +180,27 @@ public class SignUpController extends BasicController{
      * landing page.
      */
     public void completePopUP(){
-        Stage popupwindow=new Stage();
+        Stage popupwindow = new Stage();
 
         popupwindow.initModality(Modality.APPLICATION_MODAL);
         popupwindow.setTitle("Volunteerize");
 
 
-        Label completeInformationLabel= new Label(model.getProfile().getFirstName() + "'s Profile Information Now Complete");
-        Button profileButton= new Button("Go to " + model.getProfile().getFirstName() + "'s profile");
+        Label completeInformationLabel = new Label(newProfile.getFirstName() + "'s Profile Information Now Complete");
+        Button profileButton = new Button("Go to " + newProfile.getFirstName() + "'s profile");
         profileButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 popupwindow.close();
-                ChangeToProfileView(stage);
 
+                ChangeToProfileView(stage);
             }
         });
 
-        VBox layout= new VBox(10);
+        VBox layout = new VBox(10);
         layout.getChildren().addAll(completeInformationLabel, profileButton);
         layout.setAlignment(Pos.CENTER);
-        Scene scene1= new Scene(layout, 300, 250);
+        Scene scene1 = new Scene(layout, 300, 250);
         popupwindow.setScene(scene1);
         popupwindow.showAndWait();
 
@@ -206,9 +215,4 @@ public class SignUpController extends BasicController{
         s.show();
 
     }
-
-
-
-
-
 }

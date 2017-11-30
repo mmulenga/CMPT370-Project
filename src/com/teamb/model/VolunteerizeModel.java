@@ -54,10 +54,10 @@ public class VolunteerizeModel {
 
         try {
             result.next();
-            user.setUsername("username");
+            user.setUsername(username);
             user.setProfileID(result.getInt("volunteer_id"));
             user.setIsStaff(result.getBoolean("is_staff"));
-            profile = getProfile(user.getProfileID());
+            profile = getProfile(result.getInt("volunteer_id"));
         } catch(SQLException exception) {
             exception.printStackTrace();
         }

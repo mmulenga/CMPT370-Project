@@ -28,11 +28,10 @@ public class VolunteerProfileView extends BasicView {
      * Creates the root pane, and adds the children with the CreateChildren() method.
      * May have parameters based on what information is needed from the controller
      *
-     * @param c
+     * @param
      */
     public VolunteerProfileView() {
         super();
-
     }
 
 
@@ -163,7 +162,7 @@ public class VolunteerProfileView extends BasicView {
         Label memberID = new Label(String.valueOf(profile.getMemberID()));
         Label medicalInfo = new Label(profile.getMedicalInformation());
 //        Label volGroup = new Label(profile.);
-        TableView<Shift> availability = profile.getAvailability().getAvailabilityTable(false);
+        //TableView<Shift> availability = profile.getAvailability().getAvailabilityTable(false);
         Label phonepref = new Label((profile.getContactByPhone())?"Yes":"No");
         Label emailpref = new Label((profile.getContactByEmail())?"Yes":"No");
         Label workedHour = new Label(String.valueOf(profile.getHoursWorked()));
@@ -183,7 +182,7 @@ public class VolunteerProfileView extends BasicView {
         gp.add(medicalInfo,1,13);
         gp.add(emergencyName,1,15);
         gp.add(emergencyNumber,1,16);
-        gp.add(availability,0,18,3,1);
+        //gp.add(availability,0,18,3,1);
         gp.add(workedHour,1,19);
     }
 }

@@ -75,8 +75,7 @@ public class StaffLandingController extends BasicController {
         ManageEventController mvc = new ManageEventController(stage, model);
 
         Scene scene = new Scene(mvc.GetView().GetRootPane(), 800, 600);
-//        scene.getStylesheets().add
-//                (Volunteerize.class.getResource("LoginStyle.css").toExternalForm());
+        //scene.getStylesheets().add(Volunteerize.class.getResource("LoginStyle.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
