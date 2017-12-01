@@ -18,6 +18,12 @@ import javafx.scene.text.FontWeight;
 public class VolunteerEventProfileView extends BasicView{
 
     public Button addButton;
+    public Label eventName;
+    public Label eventDate;
+    public Label eventLocation;
+    public Label eventDetail;
+    public Label eventDescription;
+    public Label eventMessageBoard;
 
     /**
      * Constructs the StaffEventProfile page.
@@ -35,12 +41,12 @@ public class VolunteerEventProfileView extends BasicView{
         /**
          * Labels for Volunteer Event Profile view
          */
-        Label eventName = new Label("[Event Name]");
-        Label eventDate = new Label("[Event Date]");
-        Label eventLocation = new Label("[Event Location]"); /**Change to Location */
-        Label eventDetail = new Label("[DETAILS]");
-        Label eventDescription = new Label ("[DESCRIPTION]");
-        Label eventMessageBoard = new Label("Message Board");
+        eventName = new Label("[Event Name]");
+        eventDate = new Label("[Event Date]");
+        eventLocation = new Label("[Event Location]"); /**Change to Location */
+        eventDetail = new Label("[DETAILS]");
+        eventDescription = new Label ("[DESCRIPTION]");
+        eventMessageBoard = new Label("Message Board");
 
 
 

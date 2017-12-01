@@ -21,12 +21,13 @@ public class EventController extends BasicController {
     EventController(Stage s, VolunteerizeModel m) {
         super(s, m);
 
-        this.eventModel = new ArrayList<Event>();
+        this.eventModel = model.getUpcomingEvents();
         //TODO: CALL Method that gets event list from database
 
         eventView = new EventView();
         eventView.backButton.setOnAction(new EventController.backButtonEventHandler());
-        eventView.PopulateEventList(model.getUpcomingEvents());
+        eventView.PopulateEventList(eventModel);
+        eventView.readMore.setOnAction(new EventController.readMoreButtonHandler());
 
     }
 
@@ -59,8 +60,25 @@ public class EventController extends BasicController {
         }
     }
 
+    class readMoreButtonHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            changeToVolunterEventProfileView(stage);
+
+        }
+    }
+
     public void ChangeToProfileView(Stage s){
         VolunteerLandingController vlc = new VolunteerLandingController(s, model);
+
+        Scene scene = new Scene(vlc.GetView().GetRootPane(), 720, 540);
+        s.setScene(scene);
+        s.show();
+
+    }
+
+    public void changeToVolunterEventProfileView(Stage s){
+        VolunteerEventProfileController vlc = new VolunteerEventProfileController(s, model);
 
         Scene scene = new Scene(vlc.GetView().GetRootPane(), 720, 540);
         s.setScene(scene);

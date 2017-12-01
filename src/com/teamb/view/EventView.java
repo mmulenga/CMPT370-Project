@@ -2,12 +2,17 @@ package com.teamb.view;
 
 import com.teamb.controller.BasicController;
 import com.teamb.controller.EventController;
+import com.teamb.controller.VolunteerEventProfileController;
 import com.teamb.model.Event;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +23,7 @@ public class EventView extends BasicView {
     public VBox outside;
     VBox eventListBox;
     public Button backButton;
+    public Button readMore;
 
     //Pane root;
     //EventController controller;
@@ -59,7 +65,7 @@ public class EventView extends BasicView {
             Label description = new Label();
             description.setWrapText(true);
             description.setText(eventList.get(i).getDescription());
-            Button readMore = new Button("Read More");
+            readMore = new Button("Read More");
             //TODO: Set on action for this button. It will redirect to the event page
             //TODO: Learn how to get images
 //            Image image = new Image(listFromDatabase.get(i).imagePath);
@@ -78,7 +84,7 @@ public class EventView extends BasicView {
         outside = new VBox(5);
 
         eventListBox = new VBox(5);
-        PopulateEventList(eventList);
+        //PopulateEventList(eventList);
         Label title = new Label("Upcoming Events");
         title.setId("scenetitle");
         outside.getChildren().add(backButton);
@@ -88,6 +94,7 @@ public class EventView extends BasicView {
 
         root.getChildren().add(outside);
     }
+
 
     @Override
     public Pane GetRootPane() {

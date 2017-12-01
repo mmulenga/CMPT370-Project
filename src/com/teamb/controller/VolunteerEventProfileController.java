@@ -9,6 +9,7 @@ import com.teamb.model.VolunteerizeModel;
 import com.teamb.view.BasicView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import com.teamb.view.VolunteerEventProfileView;
 
@@ -40,6 +41,15 @@ public class VolunteerEventProfileController extends BasicController {
         /**Method that calls event sign up page and adds this Volunteer
         * to Event
         */
+    }
+
+    public void setValues(int i){
+        volunteerView.eventName.setText(model.getUpcomingEvents().get(i).getEventName());
+        volunteerView.eventDate.setText(model.getUpcomingEvents().get(i).getStartDate());
+        volunteerView.eventLocation.setText(model.getUpcomingEvents().get(i).getLocation());
+        //volunteerView.eventDetail.setText(model.getUpcomingEvents().get().getDescription());
+        volunteerView.eventDescription.setText(model.getUpcomingEvents().get(i).getDescription());
+       // volunteerView.eventMessageBoard.setText(model.getUpcomingEvents().get().());
     }
 
 
