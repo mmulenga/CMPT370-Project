@@ -80,9 +80,13 @@ public class SignUpController extends BasicController{
                     }
                 }
             }
+            if (view.header.getText().equals("Edit Profile"))
+                model.editProfile(editProfile);
+            else{
             createNewProfile();
             // ((SignUpController) controller).actionPerformed();
             completePopUP();
+            }
         }
     }
 
@@ -169,6 +173,7 @@ public class SignUpController extends BasicController{
      */
     public void editProfile() {
         view.header.setText("Edit Profile");
+        view.memberIDField.setEditable(false);
         view.memberIDField.setText( "" +editProfile.getMemberID());
         view.firstNameField.setText(editProfile.getFirstName());
         view.middleNameField.setText(editProfile.getMiddleName()); // TODO: Add field to signup page

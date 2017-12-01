@@ -156,7 +156,8 @@ public abstract class BasicController {
     }
 
     public void ChangeToEditProfileView(){
-        SignUpController editlc = new SignUpController(stage, model);
+        SignUpController editlc = new SignUpController(stage, model, model.getProfile());
+
 
         Scene scene = new Scene(editlc.GetView().GetRootPane(), 720, 540);
         stage.setScene(scene);
