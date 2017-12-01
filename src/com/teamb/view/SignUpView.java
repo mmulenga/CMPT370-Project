@@ -27,6 +27,8 @@ import java.util.Objects;
 
 public class SignUpView extends BasicView {
 
+
+    public Label header;
     public Button submit;
     public Button clear;
     public Button backButton;
@@ -89,7 +91,7 @@ public class SignUpView extends BasicView {
         gp.getColumnConstraints().addAll(columnOneConstraints, columnTwoConstrains, columnThreeConstrains);
 
         //Add Header
-        Label header = new Label("Sign Up Form");
+        header = new Label("Sign Up Form");
         header.setFont(Font.font("Arial", FontWeight.BOLD, 24));
         gp.add(header, 0,0,3,1);
         gp.setHalignment(header, HPos.CENTER);
@@ -174,7 +176,7 @@ public class SignUpView extends BasicView {
 
         /************Create Availability Table************/
 
-        TableView<Shift> availabilityTable = new TableView<>();
+        availabilityTable = new TableView<>();
         availability = new Availability();
         availabilityTable = availability.getAvailabilityTable(true);
 

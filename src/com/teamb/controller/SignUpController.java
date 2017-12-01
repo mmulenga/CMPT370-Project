@@ -1,7 +1,7 @@
 package com.teamb.controller;
 
-import com.teamb.model.Shift;
 import com.teamb.model.Profile;
+import com.teamb.model.Shift;
 import com.teamb.view.BasicView;
 import com.teamb.view.SignUpView;
 import javafx.event.EventHandler;
@@ -35,6 +35,7 @@ public class SignUpController extends BasicController{
 
     SignUpView view;
     Profile newProfile;
+    Profile editProfile;
 
     public SignUpController(Stage s, VolunteerizeModel m){
         super(s, m);
@@ -44,8 +45,19 @@ public class SignUpController extends BasicController{
         view.backButton.setOnAction(new backButtonEventHandler());
     }
 
+    public SignUpController(Stage s, VolunteerizeModel m, Profile profile){
+        super(s, m);
+        view = new SignUpView();
+        editProfile = profile;
+        view.submit.setOnAction(new submitEventHandler());
+        view.clear.setOnAction(new clearEventHandler());
+        view.backButton.setOnAction(new backButtonEventHandler());
+        editProfile();
+    }
+
+
     @Override
-    public BasicView GetView() {
+    public SignUpView GetView() {
         return view;
     }
 
@@ -68,7 +80,6 @@ public class SignUpController extends BasicController{
                     }
                 }
             }
-
             createNewProfile();
             // ((SignUpController) controller).actionPerformed();
             completePopUP();
@@ -147,9 +158,36 @@ public class SignUpController extends BasicController{
      * with the information gotten from textfields and radio
      * buttons.
      */
-    public void createNewProfile() {
-        newProfile = new Profile();
+    public void editProfile() {
+        view.header.setText("Edit Profile");
+        view.memberIDField.setText(Integer.toString(editProfile.getMemberID()));
+        view.firstNameField.setText(editProfile.getFirstName());
+        view.middleNameField.setText(editProfile.getMiddleName()); // TODO: Add field to signup page
+        view.lastNameField.setText(editProfile.getLastName());
+        view.addressField.setText(editProfile.getAddress());
+        view.phoneNumberField.setText(editProfile.getPhoneNumber());
+        view.emailField.setText(editProfile.getEmail());
+        //newProfile.setcontactByEmail (convertStringToBoolean(
+        //(((RadioButton)(view.emailYes.getToggleGroup().getSelectedToggle())).getText())));
+        //newProfile.setCriminalReccordCheck(convertStringToBoolean(
+              // (((RadioButton)(view.checked.getToggleGroup().getSelectedToggle())).getText())));
+        view.emergencyFirstNameField.setText(editProfile.getEmergencyContactFirst());
+        view.emergencyMiddleNameField.setText(editProfile.getEmergencyContactMiddle()); // TODO: Add field to signup page
+        view.emergencyLastNameField.setText(editProfile.getEmergencyContactLast()); // TODO: Add field to signup page
+        view.emergencyNumberField.setText(editProfile.getEmergencyContactPhoneNumber());
+        view.emergencyPostalCodeField.setText(editProfile.getEmergencyContactPostalCode()); // TODO: Add field to signup page
+        view.emergencyAddressField.setText(editProfile.getEmergencyContactAddress()); // TODO: Add field to signup page
+        view.medicalInformationField.setText(editProfile.getMedicalInformation()); // TODO: Add field to signup page
+//        newProfile.setHoursWorked(view.workingHours.getValue()); // TODO: Add field to signup page
+        System.out.print(view.workingHours.getValue());
+        //newProfile.setAvailability(view.availability); // TODO: Add field to signup page
+        //newProfile.setPhotoPath(); // TODO: Add field to signup page
+    }
 
+
+    public void createNewProfile() {
+
+        newProfile = new Profile();
         newProfile.setFirstName(view.firstNameField.getText());
         newProfile.setMiddleName(view.middleNameField.getText());
         newProfile.setLastName(view.lastNameField.getText());
@@ -157,9 +195,9 @@ public class SignUpController extends BasicController{
         newProfile.setPhoneNumber(view.phoneNumberField.getText());
         newProfile.setEmail(view.emailField.getText());
         newProfile.setcontactByEmail (convertStringToBoolean(
-        (((RadioButton)(view.emailYes.getToggleGroup().getSelectedToggle())).getText())));
+                (((RadioButton)(view.emailYes.getToggleGroup().getSelectedToggle())).getText())));
         newProfile.setCriminalReccordCheck(convertStringToBoolean(
-               (((RadioButton)(view.checked.getToggleGroup().getSelectedToggle())).getText())));
+                (((RadioButton)(view.checked.getToggleGroup().getSelectedToggle())).getText())));
         newProfile.setEmergencyContactFirstName(view.emergencyFirstNameField.getText());
         newProfile.setEmergencyContactMiddleName(view.emergencyMiddleNameField.getText());
         newProfile.setEmergencyContactLastName(view.emergencyLastNameField.getText());
@@ -172,6 +210,7 @@ public class SignUpController extends BasicController{
         newProfile.setAvailability(view.availability);
         //newProfile.setPhotoPath();
 
+        System.out.print(view.availability);
         // If the profile stored within the model doesn't exist we know that
         // the volunteer is signing up on their own, so we update the model
         // profile to the newly created one.
@@ -217,12 +256,4 @@ public class SignUpController extends BasicController{
     }
 
 
-    public void ChangeToProfileView(Stage s){
-        VolunteerLandingController vlc = new VolunteerLandingController(s, model);
-
-        Scene scene = new Scene(vlc.GetView().GetRootPane(), 720, 540);
-        s.setScene(scene);
-        s.show();
-
-    }
 }

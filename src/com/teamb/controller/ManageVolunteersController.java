@@ -71,18 +71,11 @@ public class ManageVolunteersController extends BasicController{
 
 
     @Override
-    public BasicView GetView() {
+    public ManageVolunteersView GetView() {
         return view;
     }
 
 
-    public void ChangeToSignUpView(){
-        SignUpController c = new SignUpController(stage, model);
-        Scene scene = new Scene(c.GetView().GetRootPane(),600,600);
-        stage.setScene(scene);
-        stage.show();
-
-    }
 
     public void SendEmails(/*TODO*/){
         //TODO will send Emails to given Volunteers (use volunteer id)

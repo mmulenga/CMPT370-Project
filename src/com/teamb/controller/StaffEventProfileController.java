@@ -44,13 +44,7 @@ public class StaffEventProfileController extends BasicController{
         return staffView;
     }
 
-    public void ChangeToSearchReturnView(){
-        //TODO
-    }
 
-    public void ChangeToEditEventView(){
-        //TODO
-    }
 
 
 

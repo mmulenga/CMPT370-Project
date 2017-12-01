@@ -31,17 +31,8 @@ public class VolunteerProfileController extends BasicController {
 
 
     @Override
-    public BasicView GetView() {
+    public VolunteerProfileView GetView() {
         return view;
-    }
-
-    public void changeToHomePageView(Stage s){
-        VolunteerLandingController slc = new VolunteerLandingController(s, model);
-
-        Scene scene = new Scene(slc.GetView().GetRootPane(), 720, 540);
-        s.setScene(scene);
-        s.show();
-
     }
 
 }

@@ -22,6 +22,7 @@ public class Profile {
     private String medicalInformation;
     private String postalCode;
 
+
     private int emergencyContactID;
     private int memberNumber; // set by WDM
     private int memberID; // set by dataBase
@@ -69,7 +70,7 @@ public class Profile {
      * @param medicalInformation short paragraph outlining any relevant medical information
      * @param hoursWorked
      * @param photoPath file path to the volunteer photo
-     * @param availability availability in the morning and afternoon of each weekday
+     * @param availabilityArray availability in the morning and afternoon of each weekday
      */
     public void setAllBaseInformation(String firstName, String middleName, String lastName, String address, String phoneNumber,
                                       String postalCode,
@@ -78,7 +79,7 @@ public class Profile {
                                       String emergencyContactPostalCode, String emergencyContactAddress,
                                       String email, boolean contactByPhone, boolean contactByEmail,
                                       int memberID, boolean criminalRecordCheck, String medicalInformation,
-                                      int hoursWorked, String photoPath, Availability availability){
+                                      int hoursWorked, String photoPath, Availability availabilityArray){
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -101,8 +102,7 @@ public class Profile {
         this.medicalInformation = medicalInformation;
         this.hoursWorked = hoursWorked;
         this.photoPath = photoPath;
-        this.availability = new Availability();
-
+        this.availability = availabilityArray;
     }
 
     //////////////////////////////////////////////////////////
@@ -181,11 +181,11 @@ public class Profile {
     /**
      * @param postalCode
      */
-    public void setEmergencyContactPostalCode(String postalCode){this.emergencyContactPostalCode = emergencyContactPostalCode;}
+    public void setEmergencyContactPostalCode(String postalCode){this.emergencyContactPostalCode = postalCode;}
     /**
      * @param address
      */
-    public void setEmergencyContactAddress(String address){this.emergencyContactAddress = emergencyContactAddress;}
+    public void setEmergencyContactAddress(String address){this.emergencyContactAddress = address;}
     /**
      *
      * @param emailAddress (eg. foo@bar.com)
@@ -241,7 +241,7 @@ public class Profile {
 
     /**
      *
-     * @param ID - int, event ID
+     * @param ID - int, event IDl
      */
     public void addEventID(int ID){
         this.registeredEventIDs.add(ID);
@@ -289,9 +289,6 @@ public class Profile {
     public String getEmergencyContactPhoneNumber(){return this.emergencyContactPhoneNumber;}
     public String getEmergencyContactPostalCode(){return this.emergencyContactPostalCode;}
     public String getEmergencyContactAddress(){return  this.emergencyContactAddress;}
-    public String getEmergencyContactNumber(){
-        return this.emergencyContactPhoneNumber;
-    }
     public int getEmergencyContactID(){return this.emergencyContactID;}
     public String getEmail(){
         return this.email;
@@ -305,7 +302,7 @@ public class Profile {
     public int getMemberID(){
         return this.memberID;
     }
-    public boolean getCriminalReccordCheck(){
+    public boolean getCriminalRecordCheck(){
         return this.criminalRecordCheck;
     }
     public String getMedicalInformation(){

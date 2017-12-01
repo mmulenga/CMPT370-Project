@@ -54,36 +54,7 @@ public class LoginViewController extends BasicController {
     }
 
 
-    private void ChangeToLandingView(Stage s){
 
-        if(model.getUser().getIsStaff()){
-
-            StaffLandingController slc = new StaffLandingController(s, model);
-
-            Scene scene = new Scene(slc.GetView().GetRootPane(), 720, 540);
-//        scene.getStylesheets().add
-//                (Volunteerize.class.getResource("LoginStyle.css").toExternalForm());
-            s.setScene(scene);
-            s.show();
-        }
-        else{
-            VolunteerLandingController vlc = new VolunteerLandingController(s, model);
-
-            Scene scene = new Scene(vlc.GetView().GetRootPane(), 720, 540);
-//        scene.getStylesheets().add
-//                (Volunteerize.class.getResource("LoginStyle.css").toExternalForm());
-            s.setScene(scene);
-            s.show();
-        }
-
-    }
-
-    public void ChangeToSignUpView() {
-        SignUpController suc = new SignUpController(stage, model);
-        Scene scene = new Scene(suc.GetView().GetRootPane(), 600, 600);
-        stage.setScene(scene);
-        stage.show();
-    }
 
     public LoginView GetView() {
         return loginView;

@@ -11,10 +11,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -32,17 +29,19 @@ public class CreateEventView extends BasicView {
     public Button submit;
     public Button clear;
     public Button home;
-    public ObservableList<String> startTimeList;
-    public ObservableList<String> endTimeList;
+    public Spinner<Integer> startHour;
+    public Spinner<Integer> startMin;
+    public Spinner<Integer> endHour;
+    public Spinner<Integer> endMin;
     public DatePicker startDatePicker, endDatePicker;
-    public ComboBox  endTimeBox, startTimeBox;
+
 
     /**
      * Constructor.
      * Creates the root pane, and adds the children with the CreateChildren() method.
      * May have parameters based on what information is needed from the controller
      *
-     * @param c
+     * @param
      */
     public CreateEventView() {
         super();
@@ -106,20 +105,24 @@ public class CreateEventView extends BasicView {
         descriptionArea = new TextArea();
 
         //Create Dorpdown box
-        startTimeList =
-                FXCollections.observableArrayList(
-                        "00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00",
-                        "10:00","11:00","12:00","13:00", "14:00","15:00","16:00","17:00","18:00","19:00",
-                        "20:00","21:00","22:00","23:00");
-        startTimeBox = new ComboBox(startTimeList);
-        startTimeBox.getSelectionModel().select(0);
-        endTimeList =
-                FXCollections.observableArrayList(
-                        "00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00",
-                        "10:00","11:00","12:00","13:00", "14:00","15:00","16:00","17:00","18:00","19:00",
-                        "20:00","21:00","22:00","23:00");
-        endTimeBox = new ComboBox(endTimeList);
-        endTimeBox.getSelectionModel().select(0);
+        startHour = new Spinner<>(0,23,0);
+        endHour = new Spinner<>(0,23,0);
+        startMin = new Spinner<>(0,59,0);
+        endMin = new Spinner<>(0,59,0);
+        startHour.setEditable(true);
+        startMin.setEditable(true);
+        endHour.setEditable(true);
+        endMin.setEditable(true);
+        HBox startTime = new HBox();
+        Label semicolen = new Label(" : ");
+        semicolen.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+        HBox endTime = new HBox();
+        Label semicolen2 = new Label(" : ");
+        semicolen2.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+
+        startTime.getChildren().addAll(startHour,semicolen,startMin);
+        endTime.getChildren().addAll(endHour,semicolen2,endMin);
+
         //Create Buttons
         submit = new Button("Submit");
         clear = new Button("Clear");
@@ -132,10 +135,10 @@ public class CreateEventView extends BasicView {
         gp.add(locationField,1,2,2,1);
 
         gp.add(startTimeLabel,0,3);
-        gp.add(startTimeBox,1,3);
+        gp.add(startTime,1,3);
 
         gp.add(endTimeLabel,0,4);
-        gp.add(endTimeBox,1,4);
+        gp.add(endTime,1,4);
 
         gp.add(startDateLabel,0,5);
         gp.add(endDateLabel,1,5);

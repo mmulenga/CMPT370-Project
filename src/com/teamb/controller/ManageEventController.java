@@ -17,6 +17,7 @@ public class ManageEventController extends BasicController {
         view = new ManageEventView();
         view.deleteEventsBtn.setOnAction(new deleteEventsBtnEventHandler());
         view.createNewEventBtn.setOnAction(new createNewEventBtnEventHandler());
+        view.backButton.setOnAction(new backButtonEventHandler());
     }
 
     class deleteEventsBtnEventHandler implements EventHandler<ActionEvent> {
@@ -37,9 +38,15 @@ public class ManageEventController extends BasicController {
         }
     }
 
+    class backButtonEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            ChangeToMainLandingView(stage);
+        }
+    }
 
     @Override
-    public BasicView GetView() {
+    public ManageEventView GetView() {
         return view;
     }
 
