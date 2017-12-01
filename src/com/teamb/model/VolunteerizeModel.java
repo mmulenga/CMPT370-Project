@@ -142,7 +142,7 @@ public class VolunteerizeModel {
 
         // Insert all emergency contact information.
         database.update("emergency_contact SET \n " +
-                "id = " + volunteer.getEmergencyContactID() + ", \n" +
+             //   "id = " + volunteer.getEmergencyContactID() + ", \n" +
                 "first_name = " + wrap(volunteer.getEmergencyContactFirst()) + ", \n" +
                 "middle_name = " + wrap(volunteer.getEmergencyContactMiddle()) + ", \n" +
                 "last_name = " + wrap(volunteer.getEmergencyContactLast()) + ", \n" +
