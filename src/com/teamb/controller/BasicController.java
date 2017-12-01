@@ -45,10 +45,6 @@ public abstract class BasicController {
     }
 
 
-
-
-
-
     /*TODO these two methods seem to be the same*/
     public void ChangeToMainLandingView(Stage s){
         StaffLandingController vlc = new StaffLandingController(s, model);
