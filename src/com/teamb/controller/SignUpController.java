@@ -176,7 +176,7 @@ public class SignUpController extends BasicController{
         view.emailField.setText(editProfile.getEmail());
         view.emailYes.setSelected(editProfile.getContactByEmail());
         view.phoneYes.setSelected(editProfile.getContactByPhone());
-        view.checked.setSelected(editProfile.getCriminalReccordCheck());
+        view.checked.setSelected(editProfile.getCriminalRecordCheck());
         view.emergencyFirstNameField.setText(editProfile.getEmergencyContactFirst());
         view.emergencyMiddleNameField.setText(editProfile.getEmergencyContactMiddle()); // TODO: Add field to signup page
         view.emergencyLastNameField.setText(editProfile.getEmergencyContactLast()); // TODO: Add field to signup page

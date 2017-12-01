@@ -46,7 +46,7 @@ public class EventView extends BasicView {
     //gets list from database and formats it
     public void PopulateEventList(ArrayList<Event> upcomingEvent){
         eventList = upcomingEvent;
-        setEventList(eventList);
+       // setEventList(eventList);
 
        for(int i = 0; i < eventList.size(); i++){
            GridPane gp = new GridPane();

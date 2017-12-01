@@ -1,6 +1,7 @@
 package com.teamb.model;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class VolunteerizeModel {
     private DatabaseInterface database;
@@ -575,29 +576,21 @@ public class VolunteerizeModel {
     }
 
     public ArrayList<Event> getUpcomingEvents(){
-        int sizeOfArray = 0;
 
-        ResultSet count = database.select("COUNT(id) from events e where e.start_time > now()");
+        Event e = new Event();
+        ArrayList<Event> eventsToReturn = new ArrayList<>();
         try {
-            sizeOfArray = count.getInt("count");
+            ResultSet events = database.select("* from events e where e.start_time > now();");
+            while(events.next()){
+                e.setEventID(events.getInt("id"));
+                e.setEventName(events.getString("name"));
+                e.setLocation(events.getString("location_id"));
+                e.setDescription(events.getString("description"));
+                eventsToReturn.add(e);
+                System.out.println(eventsToReturn.get(0).getEventName());
+            }
         }catch(SQLException exception) {
-            System.out.println("get upcoming events count failed.1");
-            exception.printStackTrace();
-        }
-            ArrayList<Event> eventsToReturn = new ArrayList<Event>();
-        try {
-            ResultSet events = database.select("* from events e where e.start_time > now()");
-
-                Event e = new Event();
-                        e.setEventID(events.getInt("id"));
-                        e.setEventName(events.getString("name"));
-                        e.setLocation(events.getString( "location_name"));
-                        e.setDescription(events.getString("description"));
-                        eventsToReturn.add(e);
-
-
-        }catch(SQLException exception) {
-            System.out.println("get upcoming events failed.2");
+            System.out.println("get upcoming events failed.");
             exception.printStackTrace();
         }
         return eventsToReturn;
