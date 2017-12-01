@@ -1,7 +1,10 @@
 package com.teamb.model;
+import com.sun.jmx.snmp.Timestamp;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 
 public class VolunteerizeModel {
     private DatabaseInterface database;
@@ -608,17 +611,29 @@ public class VolunteerizeModel {
         return rs;
     }
 
+
     public ArrayList<Event> getUpcomingEvents(){
 
         Event e = new Event();
         ArrayList<Event> eventsToReturn = new ArrayList<>();
         try {
             ResultSet events = database.select("* from events e where e.start_time > now();");
+            ResultSet eventTimesDates = database.select ("to_char(e.start_time, 'YYYY:MM:DD') as start_date, " +
+                    "to_char(e.start_time, 'HH24MI') as start_time, " +
+                    "to_char(e.end_time, 'YYYY:MM:DD') as end_date, " +
+                    "to_char(e.end_time, 'HH24MI') as end_time FROM events e where e.start_time > now();");
             while(events.next()){
+                eventTimesDates.next(); // should be in while condition?
                 e.setEventID(events.getInt("id"));
                 e.setEventName(events.getString("name"));
                 e.setLocation(events.getString("location_id"));
                 e.setDescription(events.getString("description"));
+
+                e.setStartTime(eventTimesDates.getInt("start_time"));
+                e.setStartDate(eventTimesDates.getString("start_date"));
+                e.setEndTime(eventTimesDates.getInt("end_time"));
+                e.setEndDate(eventTimesDates.getString("end_date"));
+
                 eventsToReturn.add(e);
                 System.out.println(eventsToReturn.get(0).getEventName());
             }
@@ -629,6 +644,38 @@ public class VolunteerizeModel {
         return eventsToReturn;
     }
 
+    public ArrayList<Event> getMyEvents(Profile p){
+        Event e = new Event();
+        ArrayList<Event> profileEventsToReturn = new ArrayList<>();
+        Calendar calendar = Calendar.getInstance();
+
+        try {
+            ResultSet events = database.select("* FROM events e where e.id = '" + p.getMemberID() + "';");
+            ResultSet eventTimesDates = database.select ("to_char(e.start_time, 'YYYY:MM:DD') as start_date, " +
+                    "to_char(e.start_time, 'HH24MI') as start_time, " +
+                    "to_char(e.end_time, 'YYYY:MM:DD') as end_date, " +
+                    "to_char(e.end_time, 'HH24MI') as end_time FROM events e where e.id = '" + p.getMemberID() + "';");
+            while(events.next()){
+                eventTimesDates.next();  // Should be in while conditional?
+                e.setEventID(events.getInt("id"));
+                e.setEventName(events.getString("name"));
+
+                e.setStartTime(eventTimesDates.getInt("start_time"));
+                e.setStartDate(eventTimesDates.getString("start_date"));
+                e.setEndTime(eventTimesDates.getInt("end_time"));
+                e.setEndDate(eventTimesDates.getString("end_date"));
+
+                e.setLocation(events.getString("location_id"));
+                e.setDescription(events.getString("description"));
+                profileEventsToReturn.add(e);
+            }
+        }catch(SQLException exception) {
+            System.out.println("get my events failed.");
+            exception.printStackTrace();
+        }
+        return profileEventsToReturn;
+
+    }
     /**
      * returns an array of events containing all mwatching instances
      * @param query - String with the data that is being looked for.
