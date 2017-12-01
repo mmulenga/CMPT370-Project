@@ -439,37 +439,70 @@ public class VolunteerizeModel {
         return rs;
     }
 
-    public Profile searchProfileName(String query) {
+    public ArrayList<Profile> searchProfileName(String query) {
 
-        Profile toReturn = new Profile();
+        Profile profileToAdd = new Profile();
+        ArrayList<Profile> toReturn = new ArrayList<>();
+
         try{
-            ResultSet rs = database.select( "* FROM " +   // can this be just users u?
-                    "volunteers v " +
-                    "WHERE v.first_name = '" + query + "'");
-            toReturn.setAllBaseInformation(rs.getString("first_name"),
-                    rs.getString( "middle_name"),
-                    rs.getString("last_name"),
-                    rs.getString("address"),
-                    rs.getString("phone_number"),
-                    rs.getString( "postal_code"),
-                    rs.getString("emergency_contact_phone_number"),
-                    rs.getString("emergency_contact_first_name"),
-                    rs.getString("emergency_contact_middle_name"),
-                    rs.getString("emergency_contact_last_name"),
-                    rs.getInt("emergency_contact_id"),
-                    rs.getString("emergency_contact_adress"),
-                    rs.getString("emergency_contact_postal_code"),
-                    rs.getString("email"),
-                    rs.getBoolean("prefer_phone"),
-                    rs.getBoolean("prefer_email"),
-                    rs.getInt("id"),
-                    rs.getBoolean("criminal_check"),
-                    rs.getString("medical_info"),
-                    rs.getInt("hours_worked"),
-                    rs.getString("photo_path"),
-                    null); // availability must be updated
+            ResultSet rs = database.select( "v.id, " +
+                    "u.type, " +
+                    "v.first_name, " +
+                    "v.middle_name, " +
+                    "v.last_name, " +
+                    "v.email, " +
+                    "v.hours_worked, " +
+                    "v.criminal_check, " +
+                    "v.medical_info, " +
+                    "v.photo_path, " +
+                    "c.prefer_phone, " +
+                    "c.prefer_email, " +
+                    "c.phone_number, " +
+                    "c.address, " +
+                    "c.postal_code, " +
+                    "e.first_name as emergency_contact_first_name, " +
+                    "e.middle_name as emergency_contact_middle_name, " +
+                    "e.last_name as emergency_contact_last_name, " +
+                    "e.id as emergency_contact_id, " +
+                    "e.phone_number as emergency_contact_phone_number, " +
+                    "e.address as emergency_contact_address, " +
+                    "e.postal_code as emergency_contact_postal_code " +
+                    "FROM users u, " +
+                    "volunteers v, " +
+                    "contact_information c, " +
+                    "emergency_contact e, " +
+                    "WHERE u.volunteer_id = v.id " +
+                    "and c.volunteer_id = v.id " +
+                    "and c.emergency_contact_id = e.id " +
+                    "and (v.first_name = '" + query + "' OR v.last_name = '" + query +"'");
+         while(rs.next()) {
+             profileToAdd.setAllBaseInformation(rs.getString("first_name"),
+                     rs.getString("middle_name"),
+                     rs.getString("last_name"),
+                     rs.getString("address"),
+                     rs.getString("phone_number"),
+                     rs.getString("postal_code"),
+                     rs.getString("emergency_contact_phone_number"),
+                     rs.getString("emergency_contact_first_name"),
+                     rs.getString("emergency_contact_middle_name"),
+                     rs.getString("emergency_contact_last_name"),
+                     rs.getInt("emergency_contact_id"),
+                     rs.getString("emergency_contact_adress"),
+                     rs.getString("emergency_contact_postal_code"),
+                     rs.getString("email"),
+                     rs.getBoolean("prefer_phone"),
+                     rs.getBoolean("prefer_email"),
+                     rs.getInt("id"),
+                     rs.getBoolean("criminal_check"),
+                     rs.getString("medical_info"),
+                     rs.getInt("hours_worked"),
+                     rs.getString("photo_path"),
+                     null); // availability must be updated
+             toReturn.add(profileToAdd);
+         }
+
         }catch(SQLException exception) {
-            System.out.println("Search query failed.");
+            System.out.println("Search profile query failed.");
 
             exception.printStackTrace();
         }
@@ -597,7 +630,7 @@ public class VolunteerizeModel {
     }
 
     /**
-     * returns an array of events containing all matching instances
+     * returns an array of events containing all mwatching instances
      * @param query - String with the data that is being looked for.
      * @param dataType - String with data type of query.
      */

@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 
 /**
@@ -92,7 +93,8 @@ public class ManageVolunteersController extends BasicController{
 
     public void Search(String s){
 
-        Profile profileFound = model.searchProfileName(s);
+        ArrayList<Profile> profileFound = model.searchProfileName(s);
+
         //TODO Given a string, search for volunteers
         //TODO Display new list of volunteers in view (create new view?)
         //Get input from input field
