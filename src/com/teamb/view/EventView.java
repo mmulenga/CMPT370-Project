@@ -44,7 +44,8 @@ public class EventView extends BasicView {
         //TODO Actually get the List of events from database. Currently using a Dummy list for testing
     }
     //gets list from database and formats it
-    public void PopulateEventList(){
+    public void PopulateEventList(ArrayList<Event> upcomingEvent){
+        eventList = upcomingEvent;
         setEventList(eventList);
 
        for(int i = 0; i < eventList.size(); i++){
@@ -77,7 +78,7 @@ public class EventView extends BasicView {
         outside = new VBox(5);
 
         eventListBox = new VBox(5);
-        PopulateEventList();
+        PopulateEventList(eventList);
         Label title = new Label("Upcoming Events");
         title.setId("scenetitle");
         outside.getChildren().add(backButton);

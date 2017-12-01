@@ -26,6 +26,7 @@ public class EventController extends BasicController {
 
         eventView = new EventView();
         eventView.backButton.setOnAction(new EventController.backButtonEventHandler());
+        eventView.PopulateEventList(model.getUpcomingEvents());
 
     }
 
