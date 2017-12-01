@@ -1,5 +1,6 @@
 package com.teamb.model;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class VolunteerizeModel {
     private DatabaseInterface database;
@@ -520,7 +521,7 @@ public class VolunteerizeModel {
         return rs;
     }
 
-    public Event[] getUpcomingEvents(){
+    public ArrayList<Event> getUpcomingEvents(){
         int sizeOfArray = 0;
 
         ResultSet count = database.select("COUNT(id) from events e where e.start_time > now();");
@@ -530,13 +531,13 @@ public class VolunteerizeModel {
             System.out.println("get upcoming events failed.");
             exception.printStackTrace();
         }
-            Event [] eventsToReturn = new Event[sizeOfArray];
+            ArrayList<Event> eventsToReturn = new ArrayList<Event>();
         try {
             ResultSet events = database.select("* from events e where e.start_time > now();");
 
             for(int i = 0; i < sizeOfArray; i++){
                 Event e = new Event();
-                eventsToReturn[i].setEventFields(events.getInt("id"),
+                        e.setEventFields(events.getInt("id"),
                         events.getString("name"),
                         events.getInt( "start_time"),
                         events.getInt( "end_time"), // may need to format times properly.
@@ -544,7 +545,7 @@ public class VolunteerizeModel {
                         events.getString( "end_date"),
                         events.getString( "location_name"),
                         events.getString("description"));
-                events.next();
+                        eventsToReturn.add(e);
             }
 
         }catch(SQLException exception) {
