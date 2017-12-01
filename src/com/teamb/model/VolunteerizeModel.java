@@ -526,31 +526,25 @@ public class VolunteerizeModel {
 
         ResultSet count = database.select("COUNT(id) from events e where e.start_time > now();");
         try {
-            count.next();
             sizeOfArray = count.getInt("count");
         }catch(SQLException exception) {
-            System.out.println("get upcoming events failed1.");
+            System.out.println("get upcoming events count failed.");
             exception.printStackTrace();
         }
             ArrayList<Event> eventsToReturn = new ArrayList<Event>();
         try {
             ResultSet events = database.select("* from events e where e.start_time > now();");
 
-            for(int i = 0; i < sizeOfArray; i++){
                 Event e = new Event();
-                        e.setEventFields(events.getInt("id"),
-                        events.getString("name"),
-                        events.getInt( "start_time"),
-                        events.getInt( "end_time"), // may need to format times properly.
-                        events.getString( "start_date"),
-                        events.getString( "end_date"),
-                        events.getString( "location_name"),
-                        events.getString("description"));
+                        e.setEventID(events.getInt("id"));
+                        e.setEventName(events.getString("name"));
+                        e.setLocation(events.getString( "location_name"));
+                        e.setDescription(events.getString("description"));
                         eventsToReturn.add(e);
-            }
+
 
         }catch(SQLException exception) {
-            System.out.println("get upcoming events failed.2");
+            System.out.println("get upcoming events failed.");
             exception.printStackTrace();
         }
         return eventsToReturn;
