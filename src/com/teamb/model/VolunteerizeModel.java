@@ -524,16 +524,16 @@ public class VolunteerizeModel {
     public ArrayList<Event> getUpcomingEvents(){
         int sizeOfArray = 0;
 
-        ResultSet count = database.select("COUNT(id) from events e where e.start_time > now();");
+        ResultSet count = database.select("COUNT(id) from events e where e.start_time > now()");
         try {
             sizeOfArray = count.getInt("count");
         }catch(SQLException exception) {
-            System.out.println("get upcoming events count failed.");
+            System.out.println("get upcoming events count failed.1");
             exception.printStackTrace();
         }
             ArrayList<Event> eventsToReturn = new ArrayList<Event>();
         try {
-            ResultSet events = database.select("* from events e where e.start_time > now();");
+            ResultSet events = database.select("* from events e where e.start_time > now()");
 
                 Event e = new Event();
                         e.setEventID(events.getInt("id"));
@@ -544,7 +544,7 @@ public class VolunteerizeModel {
 
 
         }catch(SQLException exception) {
-            System.out.println("get upcoming events failed.");
+            System.out.println("get upcoming events failed.2");
             exception.printStackTrace();
         }
         return eventsToReturn;
