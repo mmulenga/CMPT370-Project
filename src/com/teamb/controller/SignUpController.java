@@ -176,17 +176,16 @@ public class SignUpController extends BasicController{
     public void editProfile() {
         view.header.setText("Edit Profile");
         view.memberIDField.setEditable(false);
-        view.memberIDField.setText( "" +editProfile.getMemberID());
+        view.memberIDField.setText(Integer.toString(editProfile.getMemberID()));
         view.firstNameField.setText(editProfile.getFirstName());
-        view.middleNameField.setText(editProfile.getMiddleName()); // TODO: Add field to signup page
+        view.middleNameField.setText(editProfile.getMiddleName());
         view.lastNameField.setText(editProfile.getLastName());
         view.addressField.setText(editProfile.getAddress());
         view.phoneNumberField.setText(editProfile.getPhoneNumber());
         view.emailField.setText(editProfile.getEmail());
-        //newProfile.setcontactByEmail (convertStringToBoolean(
-        //(((RadioButton)(view.emailYes.getToggleGroup().getSelectedToggle())).getText())));
-        //newProfile.setCriminalReccordCheck(convertStringToBoolean(
-              // (((RadioButton)(view.checked.getToggleGroup().getSelectedToggle())).getText())));
+        view.emailYes.setSelected(editProfile.getContactByEmail());
+        view.phoneYes.setSelected(editProfile.getContactByPhone());
+        view.checked.setSelected(editProfile.getCriminalReccordCheck());
         view.emergencyFirstNameField.setText(editProfile.getEmergencyContactFirst());
         view.emergencyMiddleNameField.setText(editProfile.getEmergencyContactMiddle()); // TODO: Add field to signup page
         view.emergencyLastNameField.setText(editProfile.getEmergencyContactLast()); // TODO: Add field to signup page
@@ -194,9 +193,9 @@ public class SignUpController extends BasicController{
         view.emergencyPostalCodeField.setText(editProfile.getEmergencyContactPostalCode()); // TODO: Add field to signup page
         view.emergencyAddressField.setText(editProfile.getEmergencyContactAddress()); // TODO: Add field to signup page
         view.medicalInformationField.setText(editProfile.getMedicalInformation()); // TODO: Add field to signup page
-//        newProfile.setHoursWorked(view.workingHours.getValue()); // TODO: Add field to signup page
+        view.workingHours.getValueFactory().setValue(editProfile.getHoursWorked()); // TODO: Add field to signup page
         System.out.print(view.workingHours.getValue());
-        //newProfile.setAvailability(view.availability); // TODO: Add field to signup page
+      //  view.availability.; // TODO: Add field to signup page
         //newProfile.setPhotoPath(); // TODO: Add field to signup page
         //createNewProfile1(editProfile);
     }
