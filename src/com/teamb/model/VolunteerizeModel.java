@@ -1,5 +1,9 @@
 package com.teamb.model;
+import com.oracle.javafx.jmx.json.JSONFactory;
+import jdk.nashorn.internal.runtime.JSONFunctions;
+
 import java.sql.*;
+import java.util.Arrays;
 
 public class VolunteerizeModel {
     private DatabaseInterface database;
@@ -80,13 +84,15 @@ public class VolunteerizeModel {
      */
     public void addProfile(Profile volunteer) {
         // Insert all relevant volunteer table information.
-        database.insert("volunteers (id, first_name, last_name, email, hours_worked, criminal_check)\n" +
+        database.insert("volunteers (id, first_name, last_name, email, hours_worked, criminal_check, availability)\n" +
                 "VALUES (DEFAULT, " +
                 wrap(volunteer.getFirstName()) + ", " +
                 wrap(volunteer.getLastName()) + ", " +
                 wrap(volunteer.getEmail()) + ", " +
                 volunteer.getHoursWorked() + ", " +
-                "'YES'" +
+                "'YES'" + ", " +
+                // Good men died writing this line.
+                wrap(Arrays.deepToString(volunteer.getAvailability().availablility)).replaceAll("\\]", "}").replaceAll("\\[", "{") +
                 ");");
 
         // Insert all emergency contact information.
@@ -294,23 +300,20 @@ public class VolunteerizeModel {
     }
 
     public Profile[] retrieveAllProfiles() {
+        Profile[] profileList;
+        ResultSet volunteer;
+
         int count;
 
-        Profile[] profileList;
-
-        ResultSet volunteer;
-        ResultSet contactInformation;
-        ResultSet emergencyContact;
-        ResultSet volunteerCount;
-
         volunteer = database.select(" * FROM volunteers;");
-        contactInformation = database.select(" * FROM contact_information;");
-        emergencyContact = database.select(" * FROM emergency_contact;");
-        volunteerCount = database.select(" COUNT(*) FROM volunteers");
+
+        // Get the total number of volunteers
         try {
-            // Retrieve the count of all the volunteers.
-            volunteerCount.next();
-            count = volunteerCount.getInt("count");
+            volunteer.last();
+
+            count = volunteer.getRow();
+
+            volunteer.beforeFirst();
         } catch(SQLException exception) {
             exception.printStackTrace();
 
@@ -319,17 +322,11 @@ public class VolunteerizeModel {
 
         profileList = new Profile[count];
 
-        try {
-            for(int i = 0; i < count; i++) {
-                volunteer.next();
-                contactInformation.next();
-                emergencyContact.next();
 
-                profileList[i] = getProfile(i);
-            }
-        } catch(SQLException exception) {
-            exception.printStackTrace();
-        } 
+        for(int i = 0; i < count; i++) {
+
+            profileList[i] = getProfile(i);
+        }
 
         return profileList;
     }
@@ -593,40 +590,12 @@ public class VolunteerizeModel {
 */
         public static void main(String args[]) {
         VolunteerizeModel model = new VolunteerizeModel();
-        Profile newProfile = new Profile();
-        Users newUser = new Users();
 
-        newUser.setProfileID(1);
-        newUser.setUsername("Jimmy");
-        newUser.setPassword("jam");
-        newUser.setIsStaff(true);
+        Profile[] listOfProfiles = model.retrieveAllProfiles();
 
-        newProfile.setAllBaseInformation("Matt",
-                null,
-                "Mulenga",
-                "1 Evergreen Blvd",
-                "5551234",
-                "S7S 7S7",
-                "5551234",
-                "Ernie",
-                "B.",
-                "Bond",
-                100001,
-                "SES AME",
-                "1 Sesame Street",
-                "bert@sesamestreet.com",
-                true,
-                true,
-                100001,
-                true,
-                "N/A",
-                40,
-                "C:/Photos",
-                null);
+        for(int i = 0; i < listOfProfiles.length; i++) {
+            System.out.println(listOfProfiles[i].getFirstName());
+        }
 
-        model.addUser(newUser);
-        model.login("Matt", "beans");
-
-        model.deleteProfile(newProfile);
     }
 }

@@ -1,5 +1,6 @@
 package com.teamb.controller;
 
+import com.teamb.model.Shift;
 import com.teamb.model.Profile;
 import com.teamb.view.BasicView;
 import com.teamb.view.SignUpView;
@@ -51,6 +52,23 @@ public class SignUpController extends BasicController{
     class submitEventHandler implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
+            for (Shift shift: view.availabilityTable.getItems()) {
+                for (int i = 0; i < 7; i++) {
+                    if (shift.getWeekdayAvailability(i)) {
+                        if (Objects.equals(shift.getShift(), "Morning")) {
+                            view.availability.ChangeAvailability(i, 0, true);
+                            System.out.println("Day " + i + " morning is available");
+                        } else if (Objects.equals(shift.getShift(), "Afternoon")) {
+                            view.availability.ChangeAvailability(i, 1, true);
+                            System.out.println("Day " + i + " afternoon is available");
+                        } else {
+                            view.availability.ChangeAvailability(i, 2, true);
+                            System.out.println("Day " + i + " evening is available");
+                        }
+                    }
+                }
+            }
+
             createNewProfile();
             // ((SignUpController) controller).actionPerformed();
             completePopUP();
@@ -73,10 +91,9 @@ public class SignUpController extends BasicController{
             view.phoneYes.setSelected(true);
             view.emailYes.setSelected(true);
             view.checked.setSelected(true);
-//                for (Shift shift: availabilityTable.getItems()
-//                     ) {
-//                    shift.reset();
-//                }
+//            for (Shift shift: availabilityTable.getItems()) {
+//                shift.reset();
+//            }
         }
 
     }
@@ -110,14 +127,6 @@ public class SignUpController extends BasicController{
                 }
             }
         }
-        System.out.print(view.a);
-        System.out.println(profile.getFirstName());
-        System.out.println(profile.getLastName());
-        System.out.println(profile.getAddress());
-        System.out.println(((RadioButton)(view.emailYes.getToggleGroup().getSelectedToggle())).getText());
-        System.out.println(((RadioButton)(view.phoneYes.getToggleGroup().getSelectedToggle())).getText());
-
-
     }*/
 
     /**

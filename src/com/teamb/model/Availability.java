@@ -6,8 +6,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import jdk.nashorn.internal.objects.NativeJSON;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by Sarah on 2017-10-10.
@@ -193,5 +195,9 @@ public class Availability {
         return col;
     }
 
+    public static void main(String[] args) {
+        Availability newAvailability = new Availability();
 
+        System.out.println(Arrays.deepToString(newAvailability.availablility));
+    }
 }
