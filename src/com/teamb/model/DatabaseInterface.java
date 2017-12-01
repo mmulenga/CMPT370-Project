@@ -69,7 +69,7 @@ public class DatabaseInterface {
 
         try {
             // Execute the select statement and return the result.
-            dbStatement = dbConnection.createStatement();
+            dbStatement = dbConnection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
             return dbStatement.executeQuery("SELECT " + query);
         } catch(SQLException exception) {
@@ -95,7 +95,7 @@ public class DatabaseInterface {
 
         try {
             // Execute the insert statement.
-            dbStatement = dbConnection.createStatement();
+            dbStatement = dbConnection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
             dbStatement.execute("INSERT INTO " + query);
         } catch(SQLException exception) {
@@ -119,7 +119,7 @@ public class DatabaseInterface {
         connect();
 
         try {
-            dbStatement = dbConnection.createStatement();
+            dbStatement = dbConnection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
             dbStatement.execute("UPDATE " + query);
         } catch(SQLException exception) {

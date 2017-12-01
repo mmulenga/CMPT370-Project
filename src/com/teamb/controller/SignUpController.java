@@ -108,10 +108,9 @@ public class SignUpController extends BasicController{
             view.phoneYes.setSelected(true);
             view.emailYes.setSelected(true);
             view.checked.setSelected(true);
-//                for (Shift shift: availabilityTable.getItems()
-//                     ) {
-//                    shift.reset();
-//                }
+//            for (Shift shift: availabilityTable.getItems()) {
+//                shift.reset();
+//            }
         }
 
     }
@@ -145,14 +144,6 @@ public class SignUpController extends BasicController{
                 }
             }
         }
-        System.out.print(view.a);
-        System.out.println(profile.getFirstName());
-        System.out.println(profile.getLastName());
-        System.out.println(profile.getAddress());
-        System.out.println(((RadioButton)(view.emailYes.getToggleGroup().getSelectedToggle())).getText());
-        System.out.println(((RadioButton)(view.phoneYes.getToggleGroup().getSelectedToggle())).getText());
-
-
     }*/
 
     /**

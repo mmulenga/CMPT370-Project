@@ -55,7 +55,7 @@ public class VolunteerizeModel {
 
         try {
             result.next();
-            user.setUsername(username);
+            user.setUsername(result.getString("username"));
             user.setProfileID(result.getInt("volunteer_id"));
             user.setIsStaff(result.getBoolean("is_staff"));
             profile = getProfile(result.getInt("volunteer_id"));
@@ -81,13 +81,21 @@ public class VolunteerizeModel {
      */
     public void addProfile(Profile volunteer) {
         // Insert all relevant volunteer table information.
-        database.insert("volunteers (id, first_name, last_name, email, hours_worked, criminal_check)\n" +
+        database.insert("volunteers (id, first_name, middle_name, last_name, email," +
+                " hours_worked, criminal_check, medical_info, availability)\n" +
                 "VALUES (DEFAULT, " +
                 wrap(volunteer.getFirstName()) + ", " +
+                wrap(volunteer.getMiddleName()) + ", " +
                 wrap(volunteer.getLastName()) + ", " +
                 wrap(volunteer.getEmail()) + ", " +
                 volunteer.getHoursWorked() + ", " +
-                "'YES'" +
+                "'" + volunteer.getCriminalRecordCheck() + "'" + ", " +
+                wrap(volunteer.getMedicalInformation()) + ", " +
+                // Good men died writing this line.
+                // Converts 2D array into "bracket notation"
+                // ie. {{1, 2, 3}, {4, 5, 6}}
+                wrap(Arrays.deepToString(volunteer.getAvailability()
+                        .availablilityArray)).replaceAll("\\]", "}").replaceAll("\\[", "{") +
                 ");");
 
         // Insert all emergency contact information.
@@ -184,6 +192,12 @@ public class VolunteerizeModel {
             contactInformation.next();
             emergencyContact.next();
 
+            Availability availability = new Availability();
+
+            // Grab the 2D array from the database and cast it as a 2D boolean array and assign that
+            // hot mess to the availability object availabilityArray property.
+            availability.availablilityArray = (boolean[][])volunteer.getArray("availability").getArray();
+
             newProfile.setAllBaseInformation(volunteer.getString("first_name"),
                     volunteer.getString("middle_name"),
                     volunteer.getString("last_name"),
@@ -205,7 +219,7 @@ public class VolunteerizeModel {
                     volunteer.getString("medical_info"),
                     volunteer.getInt("hours_worked"),
                     volunteer.getString("photo_path"),
-                    null
+                    availability
             );
         } catch(SQLException exception) {
             exception.printStackTrace();
@@ -294,6 +308,45 @@ public class VolunteerizeModel {
                 "0);");
     }
 
+    public Profile[] retrieveAllProfiles() {
+        Profile[] profileList;
+        ResultSet volunteer;
+
+        int count;
+
+        volunteer = database.select(" * FROM volunteers;");
+
+        // Get the total number of volunteers
+        try {
+            count = 0;
+            while(volunteer.next()) {
+
+                count++;
+            }
+
+            System.out.println(count);
+
+            volunteer.beforeFirst();
+        } catch(SQLException exception) {
+            exception.printStackTrace();
+
+            return null;
+        }
+
+        profileList = new Profile[count];
+
+
+        for(int i = 0; i < count; i++) {
+
+            profileList[i] = getProfile(i);
+        }
+
+        return profileList;
+    }
+
+//    public Event[] retrieveAllEvents() {
+//
+//    }
 
 
     /**
@@ -465,7 +518,7 @@ public class VolunteerizeModel {
             for(int i = 0; i < numOfValues; i++){
                 Event e = new Event();
                 profilesToReturn[i].setAllBaseInformation(profilesSearched.getString("first_name"),
-                        profilesSearched.getString( "middle_name"),
+                        profilesSearched.getString("middle_name"),
                         profilesSearched.getString("last_name"),
                         profilesSearched.getString("address"),
                         profilesSearched.getString("phone_number"),
@@ -475,7 +528,7 @@ public class VolunteerizeModel {
                         profilesSearched.getString("emergency_contact_middle_name"),
                         profilesSearched.getString("emergency_contact_last_name"),
                         profilesSearched.getInt("emergency_contact_id"),
-                        profilesSearched.getString("emergency_contact_adress"),
+                        profilesSearched.getString("emergency_contact_address"),
                         profilesSearched.getString("emergency_contact_postal_code"),
                         profilesSearched.getString("email"),
                         profilesSearched.getBoolean("prefer_phone"),
@@ -626,40 +679,12 @@ public class VolunteerizeModel {
 */
         public static void main(String args[]) {
         VolunteerizeModel model = new VolunteerizeModel();
-        Profile newProfile = new Profile();
-        Users newUser = new Users();
 
-        newUser.setProfileID(1);
-        newUser.setUsername("Jimmy");
-        newUser.setPassword("jam");
-        newUser.setIsStaff(true);
+        Profile[] listOfProfiles = model.retrieveAllProfiles();
 
-        newProfile.setAllBaseInformation("Matt",
-                null,
-                "Mulenga",
-                "1 Evergreen Blvd",
-                "5551234",
-                "S7S 7S7",
-                "5551234",
-                "Ernie",
-                "B.",
-                "Bond",
-                100001,
-                "SES AME",
-                "1 Sesame Street",
-                "bert@sesamestreet.com",
-                true,
-                true,
-                100001,
-                true,
-                "N/A",
-                40,
-                "C:/Photos",
-                null);
+        for(int i = 0; i < listOfProfiles.length; i++) {
+            System.out.println(listOfProfiles[i].getFirstName());
+        }
 
-        model.addUser(newUser);
-        model.login("Matt", "beans");
-
-        model.deleteProfile(newProfile);
     }
 }
