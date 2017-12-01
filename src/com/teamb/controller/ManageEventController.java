@@ -46,7 +46,7 @@ public class ManageEventController extends BasicController {
     }
 
     @Override
-    public BasicView GetView() {
+    public ManageEventView GetView() {
         return view;
     }
 

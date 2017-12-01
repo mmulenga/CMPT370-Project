@@ -131,7 +131,7 @@ public class VolunteerLandingController extends BasicController {
     }
 
     @Override
-    protected BasicView GetView() {
+    protected VolunteerLandingView GetView() {
         return view;
     }
 }

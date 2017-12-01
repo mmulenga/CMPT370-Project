@@ -57,7 +57,7 @@ public class SignUpController extends BasicController{
 
 
     @Override
-    public BasicView GetView() {
+    public SignUpView GetView() {
         return view;
     }
 
