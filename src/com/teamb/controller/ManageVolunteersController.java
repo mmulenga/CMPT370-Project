@@ -2,6 +2,7 @@ package com.teamb.controller;
 
 
 import com.teamb.model.VolunteerizeModel;
+import com.teamb.model.Profile;
 import com.teamb.view.BasicView;
 import com.teamb.view.ManageVolunteersView;
 import javafx.event.ActionEvent;
@@ -90,6 +91,8 @@ public class ManageVolunteersController extends BasicController{
     }
 
     public void Search(String s){
+
+        Profile profileFound = model.searchProfileName(s);
         //TODO Given a string, search for volunteers
         //TODO Display new list of volunteers in view (create new view?)
         //Get input from input field

@@ -1,10 +1,6 @@
 package com.teamb.model;
-
-import org.omg.CORBA.Object;
-import sun.security.x509.AVA;
-
 import java.sql.*;
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class VolunteerizeModel {
     private DatabaseInterface database;
@@ -155,7 +151,7 @@ public class VolunteerizeModel {
 
         // Insert all emergency contact information.
         database.update("emergency_contact SET \n " +
-                "id = " + volunteer.getEmergencyContactID() + ", \n" +
+             //   "id = " + volunteer.getEmergencyContactID() + ", \n" +
                 "first_name = " + wrap(volunteer.getEmergencyContactFirst()) + ", \n" +
                 "middle_name = " + wrap(volunteer.getEmergencyContactMiddle()) + ", \n" +
                 "last_name = " + wrap(volunteer.getEmergencyContactLast()) + ", \n" +
@@ -361,13 +357,13 @@ public class VolunteerizeModel {
         String dataType;
 
         if (choice.equals("Id"))
-            dataType = "v.id  ";
+            dataType = "v.id";
         else if (choice.equals("First Name"))
-            dataType = "v.first_name  ";
+            dataType = "v.first_name";
         else if (choice.equals("Last Name"))
-            dataType = "v.last_name ";
+            dataType = "v.last_name";
         else if (choice.equals("Availability")) // Place holder while we wait for more options
-            dataType = "LIST ";  // What else can be searched by?
+            dataType = "LIST";  // What else can be searched by?
         else
             dataType = "fail"; // meaning you can't search by this data type
         return dataType;
@@ -432,12 +428,54 @@ public class VolunteerizeModel {
                     "volunteer_group g, " +
                     "volunteer_group_members m " +
                     "where u.volunteer_id = v.id " +
-                    "and c.volunteer_id = v.id " +
+                    "and c.volunteer_id = v.idw " +
                     "and c.emergency_contact_id = e.id " +
                     "and m.volunteer_id = v.id " +
                     "and m.group_id = g.id " +
                     "and " + dataType + " = " + query);
+
+
         return rs;
+    }
+
+    public Profile searchProfileName(String query) {
+
+        Profile toReturn = new Profile();
+        try{
+            ResultSet rs = database.select( "* FROM " +   // can this be just users u?
+                    "volunteers v " +
+                    "WHERE v.first_name = '" + query + "'");
+            toReturn.setAllBaseInformation(rs.getString("first_name"),
+                    rs.getString( "middle_name"),
+                    rs.getString("last_name"),
+                    rs.getString("address"),
+                    rs.getString("phone_number"),
+                    rs.getString( "postal_code"),
+                    rs.getString("emergency_contact_phone_number"),
+                    rs.getString("emergency_contact_first_name"),
+                    rs.getString("emergency_contact_middle_name"),
+                    rs.getString("emergency_contact_last_name"),
+                    rs.getInt("emergency_contact_id"),
+                    rs.getString("emergency_contact_adress"),
+                    rs.getString("emergency_contact_postal_code"),
+                    rs.getString("email"),
+                    rs.getBoolean("prefer_phone"),
+                    rs.getBoolean("prefer_email"),
+                    rs.getInt("id"),
+                    rs.getBoolean("criminal_check"),
+                    rs.getString("medical_info"),
+                    rs.getInt("hours_worked"),
+                    rs.getString("photo_path"),
+                    null); // availability must be updated
+        }catch(SQLException exception) {
+            System.out.println("Search query failed.");
+
+            exception.printStackTrace();
+        }
+
+
+        return toReturn;
+
     }
 
     public Profile[] searchProfiles(String query, String dataType ) {
@@ -460,7 +498,8 @@ public class VolunteerizeModel {
                             "and c.emergency_contact_id = e.id " +
                             "and m.volunteer_id = v.id " +
                             "and m.group_id = g.id " +
-                            "and " + dataType + " = " + query);
+                            "and " + dbDataType + " = '" + query + "'");
+
 
             //sets the number of results so we can create an array of necessary length
             numOfValues = rs.getInt("count");
@@ -535,7 +574,34 @@ public class VolunteerizeModel {
         return rs;
     }
 
+    public ArrayList<Event> getUpcomingEvents(){
+        int sizeOfArray = 0;
 
+        ResultSet count = database.select("COUNT(id) from events e where e.start_time > now();");
+        try {
+            sizeOfArray = count.getInt("count");
+        }catch(SQLException exception) {
+            System.out.println("get upcoming events count failed.");
+            exception.printStackTrace();
+        }
+            ArrayList<Event> eventsToReturn = new ArrayList<Event>();
+        try {
+            ResultSet events = database.select("* from events e where e.start_time > now();");
+
+                Event e = new Event();
+                        e.setEventID(events.getInt("id"));
+                        e.setEventName(events.getString("name"));
+                        e.setLocation(events.getString( "location_name"));
+                        e.setDescription(events.getString("description"));
+                        eventsToReturn.add(e);
+
+
+        }catch(SQLException exception) {
+            System.out.println("get upcoming events failed.");
+            exception.printStackTrace();
+        }
+        return eventsToReturn;
+    }
 
     /**
      * returns an array of events containing all matching instances

@@ -80,9 +80,15 @@ public class SignUpController extends BasicController{
                     }
                 }
             }
+            if (view.header.getText().equals("Edit Profile")) {
+                setProfileValues(editProfile);
+                model.editProfile(editProfile);
+            }
+            else{
             createNewProfile();
             // ((SignUpController) controller).actionPerformed();
             completePopUP();
+            }
         }
     }
 
@@ -160,17 +166,17 @@ public class SignUpController extends BasicController{
      */
     public void editProfile() {
         view.header.setText("Edit Profile");
+        view.memberIDField.setEditable(false);
         view.memberIDField.setText(Integer.toString(editProfile.getMemberID()));
         view.firstNameField.setText(editProfile.getFirstName());
-        view.middleNameField.setText(editProfile.getMiddleName()); // TODO: Add field to signup page
+        view.middleNameField.setText(editProfile.getMiddleName());
         view.lastNameField.setText(editProfile.getLastName());
         view.addressField.setText(editProfile.getAddress());
         view.phoneNumberField.setText(editProfile.getPhoneNumber());
         view.emailField.setText(editProfile.getEmail());
-        //newProfile.setcontactByEmail (convertStringToBoolean(
-        //(((RadioButton)(view.emailYes.getToggleGroup().getSelectedToggle())).getText())));
-        //newProfile.setCriminalReccordCheck(convertStringToBoolean(
-              // (((RadioButton)(view.checked.getToggleGroup().getSelectedToggle())).getText())));
+        view.emailYes.setSelected(editProfile.getContactByEmail());
+        view.phoneYes.setSelected(editProfile.getContactByPhone());
+        view.checked.setSelected(editProfile.getCriminalReccordCheck());
         view.emergencyFirstNameField.setText(editProfile.getEmergencyContactFirst());
         view.emergencyMiddleNameField.setText(editProfile.getEmergencyContactMiddle()); // TODO: Add field to signup page
         view.emergencyLastNameField.setText(editProfile.getEmergencyContactLast()); // TODO: Add field to signup page
@@ -178,37 +184,41 @@ public class SignUpController extends BasicController{
         view.emergencyPostalCodeField.setText(editProfile.getEmergencyContactPostalCode()); // TODO: Add field to signup page
         view.emergencyAddressField.setText(editProfile.getEmergencyContactAddress()); // TODO: Add field to signup page
         view.medicalInformationField.setText(editProfile.getMedicalInformation()); // TODO: Add field to signup page
-//        newProfile.setHoursWorked(view.workingHours.getValue()); // TODO: Add field to signup page
+        view.workingHours.getValueFactory().setValue(editProfile.getHoursWorked()); // TODO: Add field to signup page
         System.out.print(view.workingHours.getValue());
-        //newProfile.setAvailability(view.availability); // TODO: Add field to signup page
+      //  view.availability.; // TODO: Add field to signup page
         //newProfile.setPhotoPath(); // TODO: Add field to signup page
+        //createNewProfile1(editProfile);
     }
 
 
+    public void setProfileValues(Profile profile) {
+        profile.setFirstName(view.firstNameField.getText());
+        profile.setMiddleName(view.middleNameField.getText()); // TODO: Add field to signup page
+        profile.setLastName(view.lastNameField.getText());
+        profile.setAddress(view.addressField.getText());
+        profile.setPhoneNumber(view.phoneNumberField.getText());
+        profile.setEmail(view.emailField.getText());
+        profile.setcontactByEmail (convertStringToBoolean(
+                (((RadioButton)(view.emailYes.getToggleGroup().getSelectedToggle())).getText())));
+        profile.setCriminalReccordCheck(convertStringToBoolean(
+                (((RadioButton)(view.checked.getToggleGroup().getSelectedToggle())).getText())));
+        profile.setEmergencyContactFirstName(view.emergencyFirstNameField.getText());
+        profile.setEmergencyContactMiddleName(view.emergencyMiddleNameField.getText()); // TODO: Add field to signup page
+        profile.setEmergencyContactLastName(view.emergencyLastNameField.getText()); // TODO: Add field to signup page
+        profile.setEmergencyContactPhoneNumber(view.emergencyNumberField.getText());
+        profile.setEmergencyContactPostalCode(view.emergencyPostalCodeField.getText()); // TODO: Add field to signup page
+        profile.setEmergencyContactAddress(view.emergencyAddressField.getText()); // TODO: Add field to signup page
+        profile.setMedicalInformation(view.medicalInformationField.getText()); // TODO: Add field to signup page
+        profile.setHoursWorked(view.workingHours.getValue()); // TODO: Add field to signup page
+        System.out.print(view.workingHours.getValue());
+        profile.setAvailability(view.availability); // TODO: Add field to signup page
+        //profile.setPhotoPath(); // TODO: Add field to signup page
+    }
     public void createNewProfile() {
 
         newProfile = new Profile();
-        newProfile.setFirstName(view.firstNameField.getText());
-        newProfile.setMiddleName(view.middleNameField.getText());
-        newProfile.setLastName(view.lastNameField.getText());
-        newProfile.setAddress(view.addressField.getText());
-        newProfile.setPhoneNumber(view.phoneNumberField.getText());
-        newProfile.setEmail(view.emailField.getText());
-        newProfile.setcontactByEmail (convertStringToBoolean(
-                (((RadioButton)(view.emailYes.getToggleGroup().getSelectedToggle())).getText())));
-        newProfile.setCriminalReccordCheck(convertStringToBoolean(
-                (((RadioButton)(view.checked.getToggleGroup().getSelectedToggle())).getText())));
-        newProfile.setEmergencyContactFirstName(view.emergencyFirstNameField.getText());
-        newProfile.setEmergencyContactMiddleName(view.emergencyMiddleNameField.getText());
-        newProfile.setEmergencyContactLastName(view.emergencyLastNameField.getText());
-        newProfile.setEmergencyContactPhoneNumber(view.emergencyNumberField.getText());
-        newProfile.setEmergencyContactPostalCode(view.emergencyPostalCodeField.getText());
-        newProfile.setEmergencyContactAddress(view.emergencyAddressField.getText());
-        newProfile.setMedicalInformation(view.medicalInformationField.getText());
-        newProfile.setHoursWorked(view.workingHours.getValue());
-        System.out.print(view.workingHours.getValue());
-        newProfile.setAvailability(view.availability);
-        //newProfile.setPhotoPath();
+        setProfileValues(newProfile);
 
         System.out.print(view.availability);
         // If the profile stored within the model doesn't exist we know that
