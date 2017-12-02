@@ -1,12 +1,15 @@
 package com.teamb.view;
 
 
+import com.teamb.model.Event;
+import com.teamb.model.Shift;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -19,7 +22,10 @@ public class VolunteerEventProfileView extends BasicView{
 
     public Button addButton;
     public Label eventName;
-    public Label eventDate;
+    public Label eventStartDate;
+    public Label eventEndDate;
+    public Label eventStartTime;
+    public Label eventEndTime;
     public Label eventLocation;
     public Label eventDetail;
     public Label eventDescription;
@@ -32,22 +38,39 @@ public class VolunteerEventProfileView extends BasicView{
         super();
     }
 
+
+
+    public void displayEvent(Event event){
+        eventName.setText(event.getEventName());
+        eventStartDate.setText(event.getStartDate());
+        eventEndDate.setText(event.getEndDate());
+        eventStartTime.setText(Integer.toString(event.getStartTime()));
+        eventEndTime.setText(Integer.toString(event.getEndTime()));
+        eventLocation.setText(event.getLocation());
+        eventDescription.setText(event.getDescription());
+
+    }
+
     @Override
     protected void CreateChildren() {
 
-        //when this button is pressed view changes to event sign up page
-        Button addButton = new Button("Sign Up For Event");
-
-        /**
-         * Labels for Volunteer Event Profile view
-         */
-        eventName = new Label("[Event Name]");
-        eventDate = new Label("[Event Date]");
-        eventLocation = new Label("[Event Location]"); /**Change to Location */
+        eventName = new Label();
+        Label eventStartDateLabel = new Label("START DATE:");
+        eventStartDate = new Label();
+        Label eventEndDateLabel = new Label("END DATE:");
+        eventEndDate = new Label();
+        Label eventStartTimeLabel = new Label("START TIME:");
+        eventStartTime = new Label();
+        Label eventEndTimeLabel = new Label("END TIME:");
+        eventEndTime = new Label();
+        Label eventLocationLabel = new Label("LOCATION");
+        eventLocation = new Label();
+        eventDescription = new Label ();
         eventDetail = new Label("[DETAILS]");
-        eventDescription = new Label ("[DESCRIPTION]");
         eventMessageBoard = new Label("Message Board");
 
+        //when this button is pressed view changes to event sign up page
+        addButton = new Button("Sign Up For Event");
 
 
         GridPane gp = new GridPane();
@@ -77,17 +100,35 @@ public class VolunteerEventProfileView extends BasicView{
         gp.setMargin(eventName, new Insets(20,0,20,0));
 
 
-        gp.add(eventDate,0,1,3,1);
-        gp.add(eventLocation,0,2,3,1);
+        eventStartDateLabel.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+        gp.add(eventStartDateLabel,0,1,3,1);
+        gp.add(eventStartDate,1,1,3,1);
+
+        eventEndDateLabel.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+        gp.add(eventEndDateLabel,0,2,3,1);
+        gp.add(eventEndDate,1,2,3,1);
+
+        eventStartTimeLabel.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+        gp.add(eventStartTimeLabel,0,3,3,1);
+        gp.add(eventStartTime,1,3,3,1);
+
+        eventEndTimeLabel.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+        gp.add(eventEndTimeLabel,0,4,3,1);
+        gp.add(eventEndTime,1,4,3,1);
+
+        eventLocationLabel.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+        gp.add(eventLocationLabel,0,5,3,1);
+        gp.add(eventLocation,1,5,3,1);
+
 
         eventDetail.setFont(Font.font("Arial", FontWeight.BOLD, 18));
-        gp.add(eventDetail,0,3,3,1);
+        gp.add(eventDetail,0,6,3,1);
+        gp.add(eventDescription,0,7,3,1);
 
-        gp.add(eventDescription,0,4,3,1);
-        gp.add(addButton,1,5,3,1);
+        gp.add(addButton,1,8,3,1);
 
         eventMessageBoard.setFont(Font.font("Arial", FontWeight.BOLD, 24));
-        gp.add(eventMessageBoard,0,6,3,1);
+        gp.add(eventMessageBoard,0,9,3,1);
         gp.setHalignment(eventMessageBoard, HPos.LEFT);
         gp.setMargin(eventMessageBoard, new Insets(20,0,20,0));
 

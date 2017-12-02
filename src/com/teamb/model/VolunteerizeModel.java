@@ -614,7 +614,7 @@ public class VolunteerizeModel {
 
     public ArrayList<Event> getUpcomingEvents(){
 
-        Event e = new Event();
+        //Event e = new Event();
         ArrayList<Event> eventsToReturn = new ArrayList<>();
         try {
             ResultSet events = database.select("* from events e where e.start_time > now();");
@@ -623,6 +623,7 @@ public class VolunteerizeModel {
                     "to_char(e.end_time, 'YYYY:MM:DD') as end_date, " +
                     "to_char(e.end_time, 'HH24MI') as end_time FROM events e where e.start_time > now();");
             while(events.next()){
+                Event e = new Event();
                 eventTimesDates.next(); // should be in while condition?
                 e.setEventID(events.getInt("id"));
                 e.setEventName(events.getString("name"));

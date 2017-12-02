@@ -16,9 +16,10 @@ import com.teamb.view.VolunteerEventProfileView;
 public class VolunteerEventProfileController extends BasicController {
     VolunteerEventProfileView volunteerView;
 
-    public VolunteerEventProfileController(Stage s, VolunteerizeModel m){
+    public VolunteerEventProfileController(Stage s, VolunteerizeModel m, Event event){
         super(s, m);
         volunteerView = new VolunteerEventProfileView();
+        volunteerView.displayEvent(event);
         volunteerView.addButton.setOnAction(new addButtonEventHandler());
 
     }
@@ -41,15 +42,6 @@ public class VolunteerEventProfileController extends BasicController {
         /**Method that calls event sign up page and adds this Volunteer
         * to Event
         */
-    }
-
-    public void setValues(int i){
-        volunteerView.eventName.setText(model.getUpcomingEvents().get(i).getEventName());
-        volunteerView.eventDate.setText(model.getUpcomingEvents().get(i).getStartDate());
-        volunteerView.eventLocation.setText(model.getUpcomingEvents().get(i).getLocation());
-        //volunteerView.eventDetail.setText(model.getUpcomingEvents().get().getDescription());
-        volunteerView.eventDescription.setText(model.getUpcomingEvents().get(i).getDescription());
-       // volunteerView.eventMessageBoard.setText(model.getUpcomingEvents().get().());
     }
 
 

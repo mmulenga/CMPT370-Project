@@ -21,9 +21,10 @@ public class EventView extends BasicView {
 
     int eventCount;
     public VBox outside;
-    VBox eventListBox;
+    public VBox eventListBox;
     public Button backButton;
     public Button readMore;
+    public GridPane gp;
 
     //Pane root;
     //EventController controller;
@@ -37,46 +38,6 @@ public class EventView extends BasicView {
 
     }
 
-    public void setEventList(ArrayList<Event> e){
-        //TODO: DELETE BELOW
-        ArrayList<Event> dummyList = new ArrayList<Event>();
-        for (int i = 0; i<10; i++){
-            Event newEvent = new Event();
-            dummyList.add(newEvent);
-        }
-        eventList = dummyList;
-        //TODO: DELETE ABOVE
-        //eventList = e;
-        //TODO Actually get the List of events from database. Currently using a Dummy list for testing
-    }
-    //gets list from database and formats it
-    public void PopulateEventList(ArrayList<Event> upcomingEvent){
-        eventList = upcomingEvent;
-       // setEventList(eventList);
-
-       for(int i = 0; i < eventList.size(); i++){
-           GridPane gp = new GridPane();
-           ColumnConstraints column1 = new ColumnConstraints();
-           column1.setPercentWidth(33);
-           gp.getColumnConstraints().addAll(column1, column1, column1);
-           Label title = new Label();
-
-           title.setText(eventList.get(i).getEventName());
-            Label description = new Label();
-            description.setWrapText(true);
-            description.setText(eventList.get(i).getDescription());
-            readMore = new Button("Read More");
-            //TODO: Set on action for this button. It will redirect to the event page
-            //TODO: Learn how to get images
-//            Image image = new Image(listFromDatabase.get(i).imagePath);
-//            ImageView iv = new ImageView(image);
-//            gp.add(iv, 0, 0, 1, 3);
-            gp.add(title, 1, 0 );
-            gp.add(description, 1, 1, 2, 1);
-            gp.add(readMore, 2, 2 );
-            eventListBox.getChildren().add(gp);
-       }
-    }
 
     @Override
     protected void CreateChildren() {
@@ -89,6 +50,7 @@ public class EventView extends BasicView {
         title.setId("scenetitle");
         outside.getChildren().add(backButton);
         outside.getChildren().add(title);
+        
         outside.getChildren().add(eventListBox);
 
 
