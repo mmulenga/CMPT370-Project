@@ -1,5 +1,4 @@
 package com.teamb.model;
-import com.sun.jmx.snmp.Timestamp;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -643,6 +642,37 @@ public class VolunteerizeModel {
             exception.printStackTrace();
         }
         return eventsToReturn;
+    }
+
+    public Event getEvent(int id){
+        Event e = new Event();
+
+        try {
+            ResultSet events = database.select("* FROM events e where e.id = '" + id + "';");
+            ResultSet eventTimesDates = database.select ("to_char(e.start_time, 'YYYY:MM:DD') as start_date, " +
+                    "to_char(e.start_time, 'HH24MI') as start_time, " +
+                    "to_char(e.end_time, 'YYYY:MM:DD') as end_date, " +
+                    "to_char(e.end_time, 'HH24MI') as end_time FROM events e where e.id = '" + id + "';");
+
+                eventTimesDates.next();  // Should be in while conditional?
+                events.next();
+                e.setEventID(events.getInt("id"));
+                e.setEventName(events.getString("name"));
+
+                e.setStartTime(eventTimesDates.getInt("start_time"));
+                e.setStartDate(eventTimesDates.getString("start_date"));
+                e.setEndTime(eventTimesDates.getInt("end_time"));
+                e.setEndDate(eventTimesDates.getString("end_date"));
+
+                e.setLocation(events.getString("location_id"));
+                e.setDescription(events.getString("description"));
+
+        }catch(SQLException exception) {
+            System.out.println("Get event failed.");
+            exception.printStackTrace();
+        }
+        return e;
+
     }
 
     public ArrayList<Event> getMyEvents(Profile p){
