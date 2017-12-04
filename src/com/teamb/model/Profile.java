@@ -78,12 +78,9 @@ public class Profile {
                                       String emergencyContactMiddle, String emergencyContactLast, int emergencyContactID,
                                       String emergencyContactPostalCode, String emergencyContactAddress,
                                       String email, boolean contactByPhone, boolean contactByEmail,
-<<<<<<< HEAD
+
                                       int memberNumber, boolean criminalRecordCheck, String medicalInformation,
-=======
-                                      int memberID, boolean criminalRecordCheck, String medicalInformation,
->>>>>>> Development
-                                      int hoursWorked, String photoPath, Availability availabilityArray){
+                                      int memberID, int hoursWorked, String photoPath, Availability availabilityArray){
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -253,6 +250,7 @@ public class Profile {
     public String getAddress(){return this.address;}
     public String getPostalCode(){return this.postalCode;}
     public String getPhoneNumber(){return this.phoneNumber;}
+
     public String getEmergencyContactFirst(){ return this.emergencyContactFirst;}
     public String getEmergencyContactMiddle(){return this.emergencyContactMiddle;}
     public String getEmergencyContactLast(){return this.emergencyContactLast;}
@@ -260,7 +258,7 @@ public class Profile {
     public String getEmergencyContactPostalCode(){return this.emergencyContactPostalCode;}
     public String getEmergencyContactAddress(){return  this.emergencyContactAddress;}
     public int getEmergencyContactID(){return this.emergencyContactID;}
-<<<<<<< HEAD
+
     public String getEmail(){return this.email;}
     public boolean getContactByEmail(){return this.contactByEmail;}
     public boolean getContactByPhone() {return this.contactByPhone;}
@@ -270,35 +268,17 @@ public class Profile {
     public int getHoursWorked(){return this.hoursWorked;}
     public Availability getAvailability(){return this.availability;}
     public String getPhotoPath(){return this.photoPath;}
-=======
-    public String getEmail(){
-        return this.email;
-    }
-    public boolean getContactByEmail(){
-        return this.contactByEmail;
-    }
-    public boolean getContactByPhone() {
-        return this.contactByPhone;
-    }
-    public int getMemberID(){
-        return this.memberID;
-    }
-    public boolean getCriminalRecordCheck(){
-        return this.criminalRecordCheck;
-    }
-    public String getMedicalInformation(){
-        return this.medicalInformation;
-    }
-    public int getHoursWorked(){
-        return this.hoursWorked;
-    }
-    public Availability getAvailability(){
-        return this.availability;
-    }
-    public String getPhotoPath(){
-        return this.photoPath;
-    }
->>>>>>> Development
+
+    public String getEmail(){return this.email;}
+    public boolean getContactByEmail(){return this.contactByEmail;}
+    public boolean getContactByPhone() {return this.contactByPhone;}
+    public int getMemberID(){return this.memberID;}
+    public boolean getCriminalRecordCheck(){return this.criminalRecordCheck;}
+    public String getMedicalInformation(){return this.medicalInformation;}
+    public int getHoursWorked(){return this.hoursWorked;}
+    public Availability getAvailability(){return this.availability;}
+    public String getPhotoPath(){return this.photoPath;}
+
 
     //////////////////////////////////////////////
     // remove items
@@ -307,11 +287,7 @@ public class Profile {
     
     
 
-<<<<<<< HEAD
-    
-    
-=======
->>>>>>> Development
+
 
 
 }
