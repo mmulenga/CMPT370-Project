@@ -120,8 +120,10 @@ public class SignUpController extends BasicController{
         public void handle(ActionEvent event) {
             if(model.getProfile().getLastName()!=null) {
                 ChangeToProfileView(stage);
-            }else{
+            }else if(!model.getUser().getIsStaff()){
                 ChangeToLoginView(stage);
+            }else{
+                ChangeToManageVolunteersView();
             }
         }
     }
