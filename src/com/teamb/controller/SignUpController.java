@@ -33,8 +33,7 @@ import javax.swing.*;
 public class SignUpController extends BasicController{
 
     SignUpView view;
-    Profile newProfile;
-    Profile editProfile;
+
 
     public SignUpController(Stage s, VolunteerizeModel m){
         super(s, m);
@@ -47,11 +46,10 @@ public class SignUpController extends BasicController{
     public SignUpController(Stage s, VolunteerizeModel m, Profile profile){
         super(s, m);
         view = new SignUpView();
-        editProfile = profile;
         view.submit.setOnAction(new submitEventHandler());
         view.clear.setOnAction(new clearEventHandler());
         view.backButton.setOnAction(new backButtonEventHandler());
-        editProfile();
+        editProfile(profile);
     }
 
 
@@ -64,16 +62,10 @@ public class SignUpController extends BasicController{
         @Override
         public void handle(ActionEvent event) {
 
-            for(int day = 0; day < 7; day++) {
-                for(int shift = 0; shift < 3; shift++) {
-                    view.availability.ChangeAvailability(day,shift,view.shiftCheckbox[day][shift].isSelected());
-                }
-            }
 
 
             if (view.header.getText().equals("Edit Profile")) {
-                setProfileValues(editProfile);
-                model.editProfile(editProfile);
+                model.editProfile(getProfileFromView());
             }
             else{
             createNewProfile();
@@ -122,29 +114,6 @@ public class SignUpController extends BasicController{
     }
 
 
-
-
-
-
-    /*public void actionPerformed() {
-        for (Shift shift: view.availabilityTable.getItems()) {
-            for(int i=0;i<7;i++){
-                if(shift.getWeekdayAvailability(i)){
-                    if(Objects.equals(shift.getShift(), "Morning")){
-                        view.a.ChangeAvailability(i, 0, true);
-                        System.out.println("Day " + i + " morning is available");
-                    } else if (Objects.equals(shift.getShift(), "Afternoon")) {
-                        view.a.ChangeAvailability(i, 1, true);
-                        System.out.println("Day " + i + " afternoon is available");
-                    } else {
-                        view.a.ChangeAvailability(i, 2, true);
-                        System.out.println("Day " + i + " evening is available");
-                    }
-                }
-            }
-        }
-    }*/
-
     /**
      * method that converts radio buttons string value
      * to a boolean value
@@ -162,8 +131,10 @@ public class SignUpController extends BasicController{
      * Method that takes information from View and creates a new profile
      * with the information gotten from textfields and radio
      * buttons.
+     * @param editProfile
+     * @return profile with values from view, or NULL if required fields not filled
      */
-    public void editProfile() {
+    public void editProfile(Profile editProfile) {
         view.header.setText("Edit Profile");
         view.memberIDField.setEditable(false);
         view.memberIDField.setText(Integer.toString(editProfile.getMemberID()));
@@ -191,7 +162,19 @@ public class SignUpController extends BasicController{
     }
 
 
-    public void setProfileValues(Profile profile) {
+    /**
+     * Method returns a profile with fields set to values of components in
+     * the view input by the user
+     *
+     */
+    public Profile getProfileFromView() {
+        Profile profile = new Profile();
+
+        for(int day = 0; day < 7; day++) {
+            for(int shift = 0; shift < 3; shift++) {
+                view.availability.ChangeAvailability(day,shift,view.shiftCheckbox[day][shift].isSelected());
+            }
+        }
         profile.setFirstName(view.firstNameField.getText());
         profile.setMiddleName(view.middleNameField.getText()); // TODO: Add field to signup page
         profile.setLastName(view.lastNameField.getText());
@@ -213,22 +196,21 @@ public class SignUpController extends BasicController{
         System.out.print(view.workingHours.getValue());
         profile.setAvailability(view.availability); // TODO: Add field to signup page
         //profile.setPhotoPath(); // TODO: Add field to signup page
+        return profile;
     }
+
+
     public void createNewProfile() {
-
-        newProfile = new Profile();
-        setProfileValues(newProfile);
-
         System.out.print(view.availability);
         // If the profile stored within the model doesn't exist we know that
         // the volunteer is signing up on their own, so we update the model
         // profile to the newly created one.
         if(model.getProfile().getFirstName() == null) {
-            model.setProfile(newProfile);
+            model.setProfile(getProfileFromView());
         }
 
         // Add the profile to the database
-        model.addProfile(newProfile);
+        model.addProfile(getProfileFromView());
     }
 
 
@@ -244,8 +226,8 @@ public class SignUpController extends BasicController{
         popupwindow.setTitle("Volunteerize");
 
 
-        Label completeInformationLabel = new Label(newProfile.getFirstName() + "'s Profile Information Now Complete");
-        Button profileButton = new Button("Go to " + newProfile.getFirstName() + "'s profile");
+        Label completeInformationLabel = new Label(getProfileFromView().getFirstName() + "'s Profile Information Now Complete");
+        Button profileButton = new Button("Go to " + getProfileFromView().getFirstName() + "'s profile");
         profileButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
