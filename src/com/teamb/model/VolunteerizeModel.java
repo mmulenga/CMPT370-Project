@@ -166,11 +166,11 @@ public class VolunteerizeModel {
 
     /**
      * Deletes the all relevant entries for the given profile.
-     * @param volunteer - Profile with delete information.
+     * @param id - Profile with delete information.
      */
-    public void deleteProfile(Profile volunteer) {
+    public void deleteProfile(int id) {
         // TODO - Fix cascade, currently does not delete contact_information.
-        database.delete("volunteers WHERE id = " + volunteer.getMemberID() + ";");
+        database.delete("volunteers WHERE id = " + id + ";");
     }
 
 
