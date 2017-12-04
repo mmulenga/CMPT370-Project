@@ -325,6 +325,8 @@ public class Profile {
         volunteerGroups.removeGroup(groupName);
     }
 
-
+    public String toString(){
+        return getLastName();
+    }
 
 }

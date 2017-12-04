@@ -59,7 +59,7 @@ public class VolunteerEventProfileController extends BasicController {
             public void handle(ActionEvent event) {
                 popupwindow.close();
 
-                ChangeToProfileView(stage);
+                ChangeToProfileView();
             }
         });
     }
