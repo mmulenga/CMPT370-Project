@@ -1,5 +1,4 @@
 package com.teamb.model;
-import com.sun.jmx.snmp.Timestamp;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -304,9 +303,9 @@ public class VolunteerizeModel {
      * @param p - Profile of participant.
      * @param j - Job that they will do.
      */
-    public void addEventParticipants( Event e, Profile p, Jobs j) {
+    public void addEventParticipants( Event e, Profile p) {
         database.insert("event_participants (id, volunteer_id, event_id, job_id)\n " +
-                "VALUES (DEFAULT" +
+                "VALUES (DEFAULT, " +
                 e.getEventID() + ", " +
                 p.getMemberID() + ", " +
                 "0);");
