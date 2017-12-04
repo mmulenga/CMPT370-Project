@@ -17,4 +17,7 @@ public class AdvanceEventSearchController extends BasicController {
     public BasicView GetView() {
         return view;
     }
+
+
+
 }

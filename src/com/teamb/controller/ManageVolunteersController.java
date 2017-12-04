@@ -26,6 +26,8 @@ public class ManageVolunteersController extends BasicController{
     public ManageVolunteersController(Stage s, VolunteerizeModel m) {
         super(s, m);
         view = new ManageVolunteersView();
+        view.loadProfilesIntoTable(model.getProfiles());
+        //need to call "LoadProfileIntoTable" make the table show things
         view.createNewVolButton.setOnAction(new createNewVolButtonEventHandler());
         view.sendEmailButton.setOnAction(new sendEmailButtonEventHandler());
         view.printPhoneListButton.setOnAction(new printPhoneListButtonEventHandler());
@@ -65,7 +67,15 @@ public class ManageVolunteersController extends BasicController{
     class searchBtnEventHandler implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
-            Search(view.searchKeyField.getText());
+            ArrayList<Profile> temp;
+            String key = view.searchKeyField.getText();
+            if(key.compareTo("") == 0){
+                temp = model.getProfiles();
+            }else{
+                temp = model.searchProfileName(key);
+            }
+
+            view.loadProfilesIntoTable(temp);
         }
 
     }

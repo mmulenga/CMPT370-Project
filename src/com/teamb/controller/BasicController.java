@@ -31,27 +31,51 @@ public abstract class BasicController {
 
 
 
-    //public abstract void HelpPopUp(); //not sure if this will go here
-
     protected abstract BasicView GetView();
 
-    public void changeToHomePageView(Stage s){
-        VolunteerLandingController slc = new VolunteerLandingController(s, model);
 
-        Scene scene = new Scene(slc.GetView().GetRootPane(), 720, 540);
-        s.setScene(scene);
-        s.show();
+    /**
+     * Methods to Change to different view
+     * on the application.
+     */
+
+    public void ChangeToEditProfileView(){
+        SignUpController editlc = new SignUpController(stage, model, model.getProfile());
+        Scene scene = new Scene(editlc.GetView().GetRootPane(), 720, 540);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void ChangeToEventsView(){
+        EventController ec = new EventController(stage, model);
+        Scene scene = new Scene(ec.GetView().GetRootPane(), 600, 600);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void ChangeToLoginView(){
+        LoginViewController lic = new LoginViewController(stage, model);
+
+        Scene scene = new Scene(lic.GetView().GetRootPane(), 720, 540);
+        stage.setScene(scene);
+        stage.show();
 
     }
 
+    public void ChangeToLandingView(){
 
-    /*TODO these two methods seem to be the same*/
-    public void ChangeToMainLandingView(Stage s){
-        StaffLandingController vlc = new StaffLandingController(s, model);
-
-        Scene scene = new Scene(vlc.GetView().GetRootPane(), 720, 540);
-        s.setScene(scene);
-        s.show();
+        if(model.getUser().getIsStaff()){
+            StaffLandingController slc = new StaffLandingController(stage, model);
+            Scene scene = new Scene(slc.GetView().GetRootPane(), 720, 540);
+            stage.setScene(scene);
+            stage.show();
+        }
+        else{
+            VolunteerLandingController vlc = new VolunteerLandingController(stage, model);
+            Scene scene = new Scene(vlc.GetView().GetRootPane(), 720, 540);
+            stage.setScene(scene);
+            stage.show();
+        }
 
     }
 
@@ -62,41 +86,27 @@ public abstract class BasicController {
         stage.show();
     }
 
-
-
-
-
-
-
-
-
-    public void ChangeToLandingView(Stage s){
-
-        if(model.getUser().getIsStaff()){
-
-            StaffLandingController slc = new StaffLandingController(s, model);
-
-            Scene scene = new Scene(slc.GetView().GetRootPane(), 720, 540);
-//        scene.getStylesheets().add
-//                (Volunteerize.class.getResource("LoginStyle.css").toExternalForm());
-            s.setScene(scene);
-            s.show();
-        }
-        else{
-            VolunteerLandingController vlc = new VolunteerLandingController(s, model);
-
-            Scene scene = new Scene(vlc.GetView().GetRootPane(), 720, 540);
-//        scene.getStylesheets().add
-//                (Volunteerize.class.getResource("LoginStyle.css").toExternalForm());
-            s.setScene(scene);
-            s.show();
-        }
-
+    public void ChangeToManageEventsView(){
+        ManageEventController mvc = new ManageEventController(stage, model);
+        Scene scene = new Scene(mvc.GetView().GetRootPane(), 800, 600);
+        stage.setScene(scene);
+        stage.show();
     }
 
+    public void ChangeToManageVolunteersView(){
+        ManageVolunteersController mvc = new ManageVolunteersController(stage, model);
 
+        Scene scene = new Scene(mvc.GetView().GetRootPane(), 800, 600);
+        stage.setScene(scene);
+        stage.show();
+    }
 
-
+    public void ChangeToProfileView(){
+        VolunteerProfileController vlc = new VolunteerProfileController(stage, model);
+        Scene scene = new Scene(vlc.GetView().GetRootPane(), 600, 600);
+        stage.setScene(scene);
+        stage.show();
+    }
 
     public void ChangeToSignUpView(){
         SignUpController c = new SignUpController(stage, model);
@@ -106,16 +116,24 @@ public abstract class BasicController {
 
     }
 
-
-
-    public void ChangeToProfileView(Stage s){
-        VolunteerLandingController vlc = new VolunteerLandingController(s, model);
-
+    public void ChangeToStaffLandingView(){
+        StaffLandingController vlc = new StaffLandingController(stage, model);
         Scene scene = new Scene(vlc.GetView().GetRootPane(), 720, 540);
-        s.setScene(scene);
-        s.show();
+        stage.setScene(scene);
+        stage.show();
 
     }
+
+
+    public void changeToVolunteerLandingView(){
+        VolunteerLandingController slc = new VolunteerLandingController(stage, model);
+        Scene scene = new Scene(slc.GetView().GetRootPane(), 720, 540);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+
 
     public void ChangeToSearchReturnView(){
         //TODO
@@ -127,51 +145,9 @@ public abstract class BasicController {
 
 
 
-    public void ChangeToManageVolunteersView(){
-        ManageVolunteersController mvc = new ManageVolunteersController(stage, model);
-
-        Scene scene = new Scene(mvc.GetView().GetRootPane(), 800, 600);
-//        scene.getStylesheets().add
-//                (Volunteerize.class.getResource("LoginStyle.css").toExternalForm());
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void ChangeToManageEventsView(){
-        ManageEventController mvc = new ManageEventController(stage, model);
-
-        Scene scene = new Scene(mvc.GetView().GetRootPane(), 800, 600);
-        //scene.getStylesheets().add(Volunteerize.class.getResource("LoginStyle.css").toExternalForm());
-        stage.setScene(scene);
-        stage.show();
-    }
-
 
     public void ChangeToChangePasswordView(){
         //TODO
-    }
-
-    public void ChangeToEditProfileView(){
-        SignUpController editlc = new SignUpController(stage, model, model.getProfile());
-
-
-        Scene scene = new Scene(editlc.GetView().GetRootPane(), 720, 540);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void ChangeToBrowseEventsView(){
-        EventController ec = new EventController(stage, model);
-        Scene scene = new Scene(ec.GetView().GetRootPane(), 600, 600);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void ChangeToProfileView(){
-        VolunteerProfileController vlc = new VolunteerProfileController(stage, model);
-        Scene scene = new Scene(vlc.GetView().GetRootPane(), 600, 600);
-        stage.setScene(scene);
-        stage.show();
     }
 
 

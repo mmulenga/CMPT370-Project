@@ -2,7 +2,6 @@ package com.teamb.view;
 
 
 import com.teamb.model.Event;
-import com.teamb.model.Shift;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -21,6 +20,7 @@ import javafx.scene.text.FontWeight;
 public class VolunteerEventProfileView extends BasicView{
 
     public Button addButton;
+    public Button backButton;
     public Label eventName;
     public Label eventStartDate;
     public Label eventEndDate;
@@ -72,6 +72,8 @@ public class VolunteerEventProfileView extends BasicView{
         //when this button is pressed view changes to event sign up page
         addButton = new Button("Sign Up For Event");
 
+        backButton = new Button("<-Back");
+
 
         GridPane gp = new GridPane();
         gp.setAlignment(Pos.CENTER);
@@ -93,42 +95,44 @@ public class VolunteerEventProfileView extends BasicView{
         gp.getColumnConstraints().addAll(columnOneConstraints, columnTwoConstrains, columnThreeConstrains);
 
 
+        gp.add(backButton,0,0,3,1);
+
         //Add Header
         eventName.setFont(Font.font("Arial", FontWeight.BOLD, 32));
-        gp.add(eventName, 0,0,3,1);
+        gp.add(eventName, 0,1,3,1);
         gp.setHalignment(eventName, HPos.CENTER);
         gp.setMargin(eventName, new Insets(20,0,20,0));
 
 
         eventStartDateLabel.setFont(Font.font("Arial", FontWeight.BOLD, 18));
-        gp.add(eventStartDateLabel,0,1,3,1);
-        gp.add(eventStartDate,1,1,3,1);
+        gp.add(eventStartDateLabel,0,2,3,1);
+        gp.add(eventStartDate,1,2,3,1);
 
         eventEndDateLabel.setFont(Font.font("Arial", FontWeight.BOLD, 18));
-        gp.add(eventEndDateLabel,0,2,3,1);
-        gp.add(eventEndDate,1,2,3,1);
+        gp.add(eventEndDateLabel,0,3,3,1);
+        gp.add(eventEndDate,1,3,3,1);
 
         eventStartTimeLabel.setFont(Font.font("Arial", FontWeight.BOLD, 18));
-        gp.add(eventStartTimeLabel,0,3,3,1);
-        gp.add(eventStartTime,1,3,3,1);
+        gp.add(eventStartTimeLabel,0,4,3,1);
+        gp.add(eventStartTime,1,4,3,1);
 
         eventEndTimeLabel.setFont(Font.font("Arial", FontWeight.BOLD, 18));
-        gp.add(eventEndTimeLabel,0,4,3,1);
-        gp.add(eventEndTime,1,4,3,1);
+        gp.add(eventEndTimeLabel,0,5,3,1);
+        gp.add(eventEndTime,1,5,3,1);
 
         eventLocationLabel.setFont(Font.font("Arial", FontWeight.BOLD, 18));
-        gp.add(eventLocationLabel,0,5,3,1);
-        gp.add(eventLocation,1,5,3,1);
+        gp.add(eventLocationLabel,0,6,3,1);
+        gp.add(eventLocation,1,6,3,1);
 
 
         eventDetail.setFont(Font.font("Arial", FontWeight.BOLD, 18));
-        gp.add(eventDetail,0,6,3,1);
-        gp.add(eventDescription,0,7,3,1);
+        gp.add(eventDetail,0,7,3,1);
+        gp.add(eventDescription,0,8,3,1);
 
-        gp.add(addButton,1,8,3,1);
+        gp.add(addButton,1,9,3,1);
 
         eventMessageBoard.setFont(Font.font("Arial", FontWeight.BOLD, 24));
-        gp.add(eventMessageBoard,0,9,3,1);
+        gp.add(eventMessageBoard,0,10,3,1);
         gp.setHalignment(eventMessageBoard, HPos.LEFT);
         gp.setMargin(eventMessageBoard, new Insets(20,0,20,0));
 

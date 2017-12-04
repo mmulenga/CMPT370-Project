@@ -210,6 +210,11 @@ public class Profile {
     public void setHoursWorked(int value){this.hoursWorked = value;}
     /**
      *
+     * @param value - member id
+     */
+    public void setMemberID(int value) {this.memberID = value; }
+    /**
+     *
      * @param time - Availability matrix 7x2
      */
     public void setAvailability(Availability time){this.availability = time;}
@@ -288,6 +293,8 @@ public class Profile {
     
 
 
-
+    public String toString(){
+        return getLastName();
+    }
 
 }

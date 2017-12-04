@@ -1,14 +1,11 @@
 package com.teamb.view;
 
+import com.teamb.model.Availability;
 import com.teamb.model.Profile;
-import com.teamb.model.Shift;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -162,11 +159,25 @@ public class VolunteerProfileView extends BasicView {
         Label memberID = new Label(String.valueOf(profile.getMemberID()));
         Label medicalInfo = new Label(profile.getMedicalInformation());
 //        Label volGroup = new Label(profile.);
-        TableView<Shift> availability = profile.getAvailability().getAvailabilityTable(false);
         Label phonepref = new Label((profile.getContactByPhone())?"Yes":"No");
         Label emailpref = new Label((profile.getContactByEmail())?"Yes":"No");
         Label workedHour = new Label(String.valueOf(profile.getHoursWorked()));
 
+
+        GridPane availabilityGrid = new GridPane();
+        availabilityGrid.setHgap(4);
+        availabilityGrid.setVgap(2);
+        Availability availability = profile.getAvailability();
+        CheckBox[][] shiftCheckbox = new CheckBox[7][3];
+
+        for(int day = 0; day < 7; day++) {
+            for(int shift = 0; shift < 3; shift++) {
+                shiftCheckbox[day][shift] = new CheckBox();
+                shiftCheckbox[day][shift].setSelected(availability.GetAvailablity(day,shift));
+                shiftCheckbox[day][shift].setDisable(true);
+                availabilityGrid.add(shiftCheckbox[day][shift],day,shift);
+            }
+        }
 
 
 
@@ -182,7 +193,7 @@ public class VolunteerProfileView extends BasicView {
         gp.add(medicalInfo,1,13);
         gp.add(emergencyName,1,15);
         gp.add(emergencyNumber,1,16);
-        gp.add(availability,0,18,3,1);
+        gp.add(availabilityGrid,0,18,3,1);
         gp.add(workedHour,1,19);
     }
 }
