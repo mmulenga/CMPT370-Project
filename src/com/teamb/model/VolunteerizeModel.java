@@ -301,7 +301,6 @@ public class VolunteerizeModel {
      * Adds event Participants to table in Database
      * @param e - Event that participant will go to.
      * @param p - Profile of participant.
-     * @param j - Job that they will do.
      */
     public void addEventParticipants( Event e, Profile p) {
         database.insert("event_participants (id, volunteer_id, event_id, job_id)\n " +
@@ -495,6 +494,35 @@ public class VolunteerizeModel {
 
      */
 
+    public ArrayList<Profile> getProfiles() {
+        ArrayList<Profile> toReturn = new ArrayList<>();
+
+        try{
+            ResultSet rs = database.select( "* " +
+                    "FROM volunteers v ");
+
+            while(rs.next()) {
+                Profile profileToAdd = new Profile();
+
+                profileToAdd.setFirstName(rs.getString("first_name"));
+                profileToAdd.setLastName(rs.getString("last_name"));
+                profileToAdd.setMiddleName(rs.getString("middle_name"));
+
+                toReturn.add(profileToAdd);
+            }
+
+        }catch(SQLException exception) {
+            System.out.println("Get profiles failed.");
+
+            exception.printStackTrace();
+        }
+
+
+        return toReturn;
+
+    }
+
+
 
     public ArrayList<Profile> searchProfileName(String query) {
         ArrayList<Profile> toReturn = new ArrayList<>();
@@ -515,8 +543,12 @@ public class VolunteerizeModel {
          while(rs.next()) {
              Profile profileToAdd = new Profile();
 
+
+
              profileToAdd.setFirstName(rs.getString("first_name"));
              profileToAdd.setLastName(rs.getString("last_name"));
+             profileToAdd.setMiddleName(rs.getString("middle_name"));
+
 
              /*
              profileToAdd.setAllBaseInformation(rs.getString("first_name"),
