@@ -3,7 +3,6 @@ package com.teamb.view;
 
 import com.teamb.model.Availability;
 import com.teamb.model.Profile;
-import com.teamb.model.Shift;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -33,7 +32,8 @@ public class SignUpView extends BasicView {
     public Button clear;
     public Button backButton;
     public Availability a;
-    public TableView<Shift> availabilityTable;
+    public GridPane availabilityGrid;
+    public CheckBox[][] shiftCheckbox;
     public TextField firstNameField;
     public TextField middleNameField;
     public TextField lastNameField;
@@ -177,9 +177,19 @@ public class SignUpView extends BasicView {
 
         /************Create Availability Table************/
 
-        availabilityTable = new TableView<>();
+        availabilityGrid = new GridPane();
+        availabilityGrid.setHgap(4);
+        availabilityGrid.setVgap(2);
+
         availability = new Availability();
-        availabilityTable = availability.getAvailabilityTable(true);
+        shiftCheckbox = new CheckBox[7][3]; /*7 days each with 3 shifts:morning,afternoon,evening*/
+        for(int day = 0; day < 7; day++) {
+            for(int shift = 0; shift < 3; shift++) {
+                shiftCheckbox[day][shift] = new CheckBox();
+                shiftCheckbox[day][shift].setSelected(false);
+                availabilityGrid.add(shiftCheckbox[day][shift],day,shift);
+            }
+        }
 
         //Create Buttons
          submit = new Button("Submit");
@@ -257,7 +267,7 @@ public class SignUpView extends BasicView {
         gp.add(emergencyNumberField,1,21,2,1);
 
         gp.add(availabilityLabel,0,22);
-        gp.add(availabilityTable,0,23,3,1);
+        gp.add(availabilityGrid,0,23,3,1);
 
         gp.add(workingHourLabel,0,24);
         gp.add(workingHours,1,24);

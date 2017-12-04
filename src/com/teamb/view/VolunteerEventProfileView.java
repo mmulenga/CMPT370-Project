@@ -2,7 +2,6 @@ package com.teamb.view;
 
 
 import com.teamb.model.Event;
-import com.teamb.model.Shift;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
