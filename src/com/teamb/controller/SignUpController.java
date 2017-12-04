@@ -119,9 +119,9 @@ public class SignUpController extends BasicController{
         @Override
         public void handle(ActionEvent event) {
             if(model.getProfile().getLastName()!=null) {
-                ChangeToProfileView(stage);
+                ChangeToProfileView();
             }else if(!model.getUser().getIsStaff()){
-                ChangeToLoginView(stage);
+                ChangeToLoginView();
             }else{
                 ChangeToManageVolunteersView();
             }
@@ -258,7 +258,7 @@ public class SignUpController extends BasicController{
             public void handle(ActionEvent event) {
                 popupwindow.close();
 
-                ChangeToProfileView(stage);
+                ChangeToProfileView();
             }
         });
 
