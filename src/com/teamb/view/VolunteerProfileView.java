@@ -165,6 +165,8 @@ public class VolunteerProfileView extends BasicView {
 
 
         GridPane availabilityGrid = new GridPane();
+        availabilityGrid.setHgap(4);
+        availabilityGrid.setVgap(2);
         Availability availability = profile.getAvailability();
         CheckBox[][] shiftCheckbox = new CheckBox[7][3];
 
