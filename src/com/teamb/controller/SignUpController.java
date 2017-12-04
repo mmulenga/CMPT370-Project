@@ -118,7 +118,11 @@ public class SignUpController extends BasicController{
     class backButtonEventHandler implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
-            ChangeToProfileView(stage);
+            if(model.getProfile().getLastName()!=null) {
+                ChangeToProfileView(stage);
+            }else{
+                ChangeToLoginView(stage);
+            }
         }
     }
 
