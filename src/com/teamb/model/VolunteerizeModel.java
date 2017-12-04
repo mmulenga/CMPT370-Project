@@ -504,10 +504,28 @@ public class VolunteerizeModel {
             while(rs.next()) {
                 Profile profileToAdd = new Profile();
 
-                profileToAdd.setFirstName(rs.getString("first_name"));
-                profileToAdd.setLastName(rs.getString("last_name"));
-                profileToAdd.setMiddleName(rs.getString("middle_name"));
-
+                profileToAdd.setAllBaseInformation(rs.getString("first_name"),
+                        rs.getString("middle_name"),
+                        rs.getString("last_name"),
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        0,
+                        null,
+                       null,
+                        rs.getString("email"),
+                        rs.getBoolean("prefer_phone"),
+                        rs.getBoolean("prefer_email"),
+                        rs.getInt("id"),
+                        rs.getBoolean("criminal_check"),
+                        rs.getString("medical_info"),
+                        rs.getInt("hours_worked"),
+                        rs.getString("photo_path"),
+                        null);
                 toReturn.add(profileToAdd);
             }
 
@@ -543,27 +561,19 @@ public class VolunteerizeModel {
          while(rs.next()) {
              Profile profileToAdd = new Profile();
 
-
-
-             profileToAdd.setFirstName(rs.getString("first_name"));
-             profileToAdd.setLastName(rs.getString("last_name"));
-             profileToAdd.setMiddleName(rs.getString("middle_name"));
-
-
-             /*
              profileToAdd.setAllBaseInformation(rs.getString("first_name"),
                      rs.getString("middle_name"),
                      rs.getString("last_name"),
-                     rs.getString("address"),
-                     rs.getString("phone_number"),
-                     rs.getString("postal_code"),
-                     rs.getString("emergency_contact_phone_number"),
-                     rs.getString("emergency_contact_first_name"),
-                     rs.getString("emergency_contact_middle_name"),
-                     rs.getString("emergency_contact_last_name"),
-                     rs.getInt("emergency_contact_id"),
-                     rs.getString("emergency_contact_adress"),
-                     rs.getString("emergency_contact_postal_code"),
+                     null,
+                     null,
+                     null,
+                     null,
+                     null,
+                     null,
+                     null,
+                     0,
+                     null,
+                     null,
                      rs.getString("email"),
                      rs.getBoolean("prefer_phone"),
                      rs.getBoolean("prefer_email"),
@@ -572,8 +582,8 @@ public class VolunteerizeModel {
                      rs.getString("medical_info"),
                      rs.getInt("hours_worked"),
                      rs.getString("photo_path"),
-                     null); // availability must be updated
-                     */
+                     null);
+
              toReturn.add(profileToAdd);
          }
 
