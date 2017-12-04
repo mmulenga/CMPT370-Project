@@ -156,7 +156,15 @@ public class SignUpController extends BasicController{
         view.medicalInformationField.setText(editProfile.getMedicalInformation()); // TODO: Add field to signup page
         view.workingHours.getValueFactory().setValue(editProfile.getHoursWorked()); // TODO: Add field to signup page
         System.out.print(view.workingHours.getValue());
-      //  view.availability.; // TODO: Add field to signup page
+
+        for(int day = 0; day < 7; day++) {
+            for(int shift = 0; shift < 3; shift++) {
+                view.shiftCheckbox[day][shift].setSelected( editProfile.getAvailability().GetAvailablity(day,shift));
+            }
+        }
+
+
+        //  view.availability.; // TODO: Add field to signup page
         //newProfile.setPhotoPath(); // TODO: Add field to signup page
         //createNewProfile1(editProfile);
     }
