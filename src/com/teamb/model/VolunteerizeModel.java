@@ -515,8 +515,8 @@ public class VolunteerizeModel {
          while(rs.next()) {
              Profile profileToAdd = new Profile();
 
-             profileToAdd.setFirstName("first_name");
-             profileToAdd.setLastName("last_name");
+             profileToAdd.setFirstName(rs.getString("first_name"));
+             profileToAdd.setLastName(rs.getString("last_name"));
 
              /*
              profileToAdd.setAllBaseInformation(rs.getString("first_name"),
