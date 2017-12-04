@@ -20,16 +20,14 @@ public abstract class BasicView {
 
 
     protected Pane root;
-    BasicController controller;
 
     /**
      * Constructor.
      * Creates the root pane, and adds the children with the CreateChildren() method.
      * May have parameters based on what information is needed from the controller
      */
-    public BasicView(BasicController c){
+    public BasicView(){
         root = new Pane();
-        controller = c;
         this.CreateChildren();
     }
 

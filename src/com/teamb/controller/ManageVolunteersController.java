@@ -1,18 +1,18 @@
 package com.teamb.controller;
 
-import com.teamb.model.Availability;
+
+import com.teamb.model.VolunteerizeModel;
 import com.teamb.model.Profile;
-import com.teamb.model.ProfileCheck;
-import com.teamb.model.VolunteerGroup;
 import com.teamb.view.BasicView;
 import com.teamb.view.ManageVolunteersView;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
-import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Observable;
+
 
 /**
  * Created by Sarah on 2017-11-19.
@@ -20,33 +20,83 @@ import java.util.Observable;
 public class ManageVolunteersController extends BasicController{
 
 
-    ArrayList<Profile> allProfiles;
-    ArrayList<Profile> filteredProfiles;
-    ObservableList<Profile> observableProfiles;
 
     ManageVolunteersView view;
 
-    public ManageVolunteersController(Stage s) {
-        super(s);
-        view = new ManageVolunteersView(this);
+    public ManageVolunteersController(Stage s, VolunteerizeModel m) {
+        super(s, m);
+        view = new ManageVolunteersView();
+        view.createNewVolButton.setOnAction(new createNewVolButtonEventHandler());
+        view.sendEmailButton.setOnAction(new sendEmailButtonEventHandler());
+        view.printPhoneListButton.setOnAction(new printPhoneListButtonEventHandler());
+        view.deleteProfilesButton.setOnAction(new deleteProfilesButtonEventHandler());
+        view.searchBtn.setOnAction(new searchBtnEventHandler());
     }
 
-    public ObservableList<ProfileCheck> CreateDummyList(){
-        //TODO: Create observable list of ProfileChecks from a list of Profiles instead
-        ObservableList<ProfileCheck> dummyList = FXCollections.observableArrayList();
-
-        for (int i = 0; i < 10; i++) {
-           Profile profile = new Profile();
-           ProfileCheck pc = new ProfileCheck(profile);
-           pc.SetActive(false);
-           dummyList.add(pc);
+    class createNewVolButtonEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            ChangeToSignUpView();
         }
-        return dummyList;
     }
+
+    class sendEmailButtonEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            SendEmails(/* TODO selected vol id's*/);
+        }
+    }
+
+    class printPhoneListButtonEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            PrintPhoneList();
+        }
+    }
+
+    class deleteProfilesButtonEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            DeleteProfiles();
+        }
+
+    }
+
+    class searchBtnEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            Search(view.searchKeyField.getText());
+        }
+
+    }
+
 
 
     @Override
-    protected BasicView GetView() {
+    public ManageVolunteersView GetView() {
         return view;
+    }
+
+
+
+    public void SendEmails(/*TODO*/){
+        //TODO will send Emails to given Volunteers (use volunteer id)
+    }
+
+    public void PrintPhoneList(/*TODO*/){
+        //TODO will get phone numbers of given Volunteers (use volunteer id)
+    }
+
+    public void DeleteProfiles(/*TODO*/){
+        //TODO will delete given profiles
+    }
+
+    public void Search(String s){
+
+        ArrayList<Profile> profileFound = model.searchProfileName(s);
+
+        //TODO Given a string, search for volunteers
+        //TODO Display new list of volunteers in view (create new view?)
+        //Get input from input field
     }
 }

@@ -1,8 +1,7 @@
 package com.teamb.view;
 
-import com.teamb.controller.VolunteerLandingController;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -19,11 +18,16 @@ import javafx.scene.layout.VBox;
  */
 public class VolunteerLandingView extends BasicView {
 
-    VolunteerLandingController controller;
 
-    public VolunteerLandingView(VolunteerLandingController c){
-        super(c);
-        controller = c;
+    public Button epButton;
+    public Button ueButton;
+    public Button cpassButton;
+    public Button helpButton;
+    public Button pButton;
+    public Button logOutButton;
+
+    public VolunteerLandingView(){
+        super();
     }
 
     /**
@@ -44,46 +48,24 @@ public class VolunteerLandingView extends BasicView {
 
         Label welcome = new Label("Welcome!" /* TODO get name only */);
         Label prompt = new Label("What would you like to do?");
-        Button epButton = new Button("Edit Profile");
-        epButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                controller.ChangeToEditProfileView();
-            }
-        });
-        Button ueButton = new Button("See upcoming events");
-        ueButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                controller.ChangeToBrowseEventsView();
-            }
-        });
-        Button cpassButton = new Button("Change Password");
-        cpassButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                controller.ChangeToChangePasswordView();
-            }
-        });
-        Button helpButton = new Button ("Help");
-        helpButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                controller.HelpPopUp();
-            }
-        });
+        epButton = new Button("Edit Profile");
 
-        Button pButton = new Button("Look at my profile");
-        pButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                controller.ChangeToProfileView();
-            }
-        });
+        ueButton = new Button("See upcoming events");
+
+        cpassButton = new Button("Change Password");
+
+        helpButton = new Button ("Help");
+
+        pButton = new Button("Look at my profile");
+
+        logOutButton = new Button ("LOG OUT");
+
 
         VBox mainContainer = new VBox();
+        mainContainer.setAlignment(Pos.CENTER);
 
-        mainContainer.getChildren().addAll(welcome, prompt, pButton, epButton, ueButton, cpassButton, helpButton);
+
+        mainContainer.getChildren().addAll(welcome, prompt, pButton, epButton, ueButton, cpassButton, helpButton, logOutButton);
         root.getChildren().add(mainContainer);
 
     }

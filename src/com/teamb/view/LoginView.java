@@ -22,7 +22,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import com.teamb.controller.LoginViewController;
 
 
 /**
@@ -34,13 +33,16 @@ import com.teamb.controller.LoginViewController;
 public class LoginView extends BasicView{
 
     public boolean loginOK = false; //what does this do?
-    LoginViewController controller;
+
+    public Button login;
+    public Button Signup;
+    public TextField userNameField;
+    public PasswordField pwField;
+    public GridPane gp;
 
 
-
-    public LoginView(LoginViewController c){
-        super(c);
-        controller = c;
+    public LoginView(){
+        super();
     }
 
     @Override
@@ -50,35 +52,22 @@ public class LoginView extends BasicView{
 
     @Override
     protected void CreateChildren() {
-        GridPane gp = new GridPane();
-        Text scenetitle = new Text("Welcome to Volunteerize!");
+        gp = new GridPane();
+        Text scenetitle = new Text("Welcome, Volunteer!");
         scenetitle.setId("scenetitle");
-        // why does this create it's controller? Why does it need the stage s?
-        Button login = new Button("Login");
-        Button Signup = new Button("Sign Up");
-        String username;
-        String password;
-        TextField userNameField = new TextField();
-        PasswordField pwField = new PasswordField();
+        login = new Button("Login");
+        Signup = new Button("Sign Up");
+        userNameField = new TextField();
+        pwField = new PasswordField();
         Label userName = new Label("Username:");
         Label pw = new Label("Password:");
 
-        login.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if (controller.checkCredentials(userNameField.getText(), pwField.getText())) {
-                    loginOK = true;
-                } else {
-                    Label loginError = new Label("username or password is wrong. Please try again.");
-                    gp.add(loginError, 0, 5, 3, 1);
-                }
-            }
-        });
+
 
         gp.setAlignment(Pos.CENTER);
         gp.setHgap(10);
         gp.setVgap(10);
-        gp.setPadding(new Insets(25, 25, 25, 25));
+        gp.setPadding(new Insets(200));
 
         gp.add(scenetitle, 0, 0, 2, 1);
         gp.add(userName, 0, 1);
@@ -87,10 +76,8 @@ public class LoginView extends BasicView{
         gp.add(pwField, 1, 2);
         gp.add(login, 1, 3);
         gp.add(Signup, 1, 4);
+
+
         root.getChildren().add(gp);
     }
-
-
-
-
 }
