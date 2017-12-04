@@ -118,12 +118,12 @@ public class CreateEventController extends BasicController {
 
 
         Label completeInformationLabel= new Label(event.getEventName() + " has now been created");
-        Button profileButton= new Button("Go to Upcoming Events");
+        Button profileButton= new Button("Go to Manage Events");
         profileButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 popupwindow.close();
-                changeToUpcomingEventPageView(stage);
+                ChangeToManageEventsView();
 
             }
         });
@@ -136,7 +136,6 @@ public class CreateEventController extends BasicController {
         popupwindow.showAndWait();
 
     }
-
 
     public void changeToHomePageView(Stage s){
         StaffLandingController slc = new StaffLandingController(s, model);

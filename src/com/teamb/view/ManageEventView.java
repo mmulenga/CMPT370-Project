@@ -47,12 +47,12 @@ public class ManageEventView extends BasicView {
 
 
     public void PopulateEventList(ArrayList<Event> events){
+        table.getItems().remove(0,table.getItems().size());
         for(int i = 0; i<events.size(); i++){
             EventSelection es = new EventSelection(events.get(i),false);
             table.getItems().add(es);
         }
-
-        }
+    }
 
 
     @Override
@@ -85,7 +85,7 @@ public class ManageEventView extends BasicView {
         deleteEventsBtn = new Button("Delete Events");
         searchBtn = new Button("Search");
         backButton = new Button("<- BACK");
-        
+
 
         Label label = new Label("Manage Events");
         label.setFont(Font.font("Arial", FontWeight.BOLD, 24));

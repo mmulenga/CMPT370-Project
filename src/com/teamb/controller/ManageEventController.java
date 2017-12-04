@@ -49,7 +49,7 @@ public class ManageEventController extends BasicController {
     class backButtonEventHandler implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
-            ChangeToMainLandingView();
+            ChangeToStaffLandingView();
         }
     }
 
