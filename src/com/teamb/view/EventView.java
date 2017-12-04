@@ -34,6 +34,7 @@ public class EventView extends BasicView {
     public EventView(){
 
         super();
+        buttons = new ArrayList<>();
         //eventList = c.GetEventModel();
 
 
@@ -53,15 +54,11 @@ public class EventView extends BasicView {
             description.setText(events.get(i).getDescription());
             readMore = new Button("Read More");
             buttons.add(readMore);
-            readMore.setId(Integer.toString(i));
-            //tempEvent = eventModel.get(i);
 
             gp.add(title, 1, 0 );
             gp.add(description, 1, 1, 2, 1);
             gp.add(readMore, 2, 2 );
             eventListBox.getChildren().add(gp);
-            //System.out.println(i + " " +title.getText());
-            System.out.println(readMore.getId());
         }
     }
 

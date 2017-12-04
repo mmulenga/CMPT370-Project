@@ -9,6 +9,7 @@ import com.teamb.model.VolunteerizeModel;
 import com.teamb.view.BasicView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
@@ -25,6 +26,7 @@ public class VolunteerEventProfileController extends BasicController {
         volunteerView = new VolunteerEventProfileView();
         volunteerView.displayEvent(event);
         volunteerView.addButton.setOnAction(new addButtonEventHandler());
+        volunteerView.backButton.setOnAction(new backButtonEventHandler());
 
     }
 
@@ -33,6 +35,13 @@ public class VolunteerEventProfileController extends BasicController {
         public void handle(ActionEvent e){
             model.addEventParticipants(event, model.getProfile());
             AddToEvent(/*editEventView*/);
+        }
+    }
+
+    class backButtonEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent e){
+            ChangeToEventView(stage);
         }
     }
 
@@ -53,6 +62,16 @@ public class VolunteerEventProfileController extends BasicController {
                 ChangeToProfileView(stage);
             }
         });
+    }
+
+
+    public void ChangeToEventView(Stage s){
+        EventController vlc = new EventController(s, model);
+
+        Scene scene = new Scene(vlc.GetView().GetRootPane(), 720, 540);
+        s.setScene(scene);
+        s.show();
+
     }
 
         @Override
