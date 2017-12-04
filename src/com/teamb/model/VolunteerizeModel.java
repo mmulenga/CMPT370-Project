@@ -386,7 +386,7 @@ public class VolunteerizeModel {
             dataType = "e.name  ";
         else if (choice.equals("StartTime"))
             dataType = "e.start_time ";
-        else if (choice.equals("End Time"))
+        else if (choice.equals("EndTime"))
             dataType = "e.end_time ";  // What else can be searched by?
         else
             dataType = "fail"; // meaning you can't search by this data type
@@ -437,13 +437,10 @@ public class VolunteerizeModel {
                     "and m.group_id = g.id " +
                     "and " + dataType + " = " + query);
 
-
         return rs;
     }
 
     public ArrayList<Profile> searchProfileName(String query) {
-
-        Profile profileToAdd = new Profile();
         ArrayList<Profile> toReturn = new ArrayList<>();
 
         try{
@@ -478,6 +475,7 @@ public class VolunteerizeModel {
                     "and c.emergency_contact_id = e.id " +
                     "and (v.first_name = '" + query + "' OR v.last_name = '" + query +"'");
          while(rs.next()) {
+             Profile profileToAdd = new Profile();
              profileToAdd.setAllBaseInformation(rs.getString("first_name"),
                      rs.getString("middle_name"),
                      rs.getString("last_name"),
@@ -542,7 +540,6 @@ public class VolunteerizeModel {
 
         }catch(SQLException exception) {
             System.out.println("Count query failed.");
-
             exception.printStackTrace();
         }
         // create array of profiles to hold all results
@@ -582,7 +579,6 @@ public class VolunteerizeModel {
 
         }catch(SQLException exception) {
             System.out.println("Count query failed.");
-
             exception.printStackTrace();
         }
 
@@ -613,7 +609,6 @@ public class VolunteerizeModel {
 
     public ArrayList<Event> getUpcomingEvents(){
 
-        //Event e = new Event();
         ArrayList<Event> eventsToReturn = new ArrayList<>();
         try {
             ResultSet events = database.select("* from events e where e.start_time > now();");
@@ -644,6 +639,7 @@ public class VolunteerizeModel {
         return eventsToReturn;
     }
 
+
     public Event getEvent(int id){
         Event e = new Event();
 
@@ -654,7 +650,7 @@ public class VolunteerizeModel {
                     "to_char(e.end_time, 'YYYY:MM:DD') as end_date, " +
                     "to_char(e.end_time, 'HH24MI') as end_time FROM events e where e.id = '" + id + "';");
 
-                eventTimesDates.next();  // Should be in while conditional?
+                eventTimesDates.next();
                 events.next();
                 e.setEventID(events.getInt("id"));
                 e.setEventName(events.getString("name"));
@@ -675,18 +671,53 @@ public class VolunteerizeModel {
 
     }
 
-    public ArrayList<Event> getMyEvents(Profile p){
-        Event e = new Event();
-        ArrayList<Event> profileEventsToReturn = new ArrayList<>();
-        Calendar calendar = Calendar.getInstance();
+    public ArrayList<Event> searchEvents(String query, String dataType){
+        ArrayList<Event> eventstoReturn = new ArrayList<>();
+        String dbDataType = getEventDataType(dataType);
 
         try {
-            ResultSet events = database.select("* FROM events e where e.id = '" + p.getMemberID() + "';");
+            ResultSet events = database.select("* FROM events WHERE " + dbDataType + " = '" +query + "';");
+            ResultSet eventTimesDates = database.select ("to_char(e.start_time, 'YYYY:MM:DD') as start_date, " +
+                    "to_char(e.start_time, 'HH24MI') as start_time, " +
+                    "to_char(e.end_time, 'YYYY:MM:DD') as end_date, " +
+                    "to_char(e.end_time, 'HH24MI') as end_time FROM events e WHERE " + dbDataType +" = '"+  query + "';");
+            while(events.next()) {
+                Event e = new Event();
+                eventTimesDates.next();
+                e.setEventID(events.getInt("id"));
+                e.setEventName(events.getString("name"));
+
+                e.setStartTime(eventTimesDates.getInt("start_time"));
+                e.setStartDate(eventTimesDates.getString("start_date"));
+                e.setEndTime(eventTimesDates.getInt("end_time"));
+                e.setEndDate(eventTimesDates.getString("end_date"));
+
+                e.setLocation(events.getString("location_id"));
+                e.setDescription(events.getString("description"));
+                eventstoReturn.add(e);
+            }
+
+        }catch(SQLException exception) {
+            System.out.println("Search events failed.");
+            exception.printStackTrace();
+        }
+
+        return eventstoReturn;
+    }
+
+
+    public ArrayList<Event> getMyEvents(Profile p){
+        ArrayList<Event> profileEventsToReturn = new ArrayList<>();
+
+        try {
+            ResultSet events = database.select("* FROM events WHERE events.id IN " +
+                    "(SELECT ep.event_id FROM  event_participants ep WHERE ep.volunteer_id = '" + p.getMemberID() + "';");
             ResultSet eventTimesDates = database.select ("to_char(e.start_time, 'YYYY:MM:DD') as start_date, " +
                     "to_char(e.start_time, 'HH24MI') as start_time, " +
                     "to_char(e.end_time, 'YYYY:MM:DD') as end_date, " +
                     "to_char(e.end_time, 'HH24MI') as end_time FROM events e where e.id = '" + p.getMemberID() + "';");
             while(events.next()){
+                Event e = new Event();
                 eventTimesDates.next();  // Should be in while conditional?
                 e.setEventID(events.getInt("id"));
                 e.setEventName(events.getString("name"));
@@ -707,80 +738,7 @@ public class VolunteerizeModel {
         return profileEventsToReturn;
 
     }
-    /**
-     * returns an array of events containing all mwatching instances
-     * @param query - String with the data that is being looked for.
-     * @param dataType - String with data type of query.
-     */
-    public Event[] searchEvents(String query, String dataType ) {
 
-        // converts dataType to Postgres friendly data Type
-        String dbDataType = getEventDataType(dataType);
-        //will be number of values in array
-        int numOfValues = 0;
-
-        //counts number of values in result set. // repeated work?
-        try{
-            ResultSet rs = database.count( "events e, locations l " +
-                "WHERE l.id = e.location.id " +
-                "and " + dbDataType + " = " + query);
-                numOfValues = rs.getInt("count");
-
-        }catch(SQLException exception) {
-            System.out.println("Count query failed.");
-            exception.printStackTrace();
-        }
-
-        // new array of Events the size of NumOfValues
-        Event [] eventsToReturn = new Event[numOfValues];
-        //generate result set with query
-        ResultSet eventsSearched = getEventSet(query,dbDataType);
-
-        try {
-            // assigns values to all the events in the array.
-            for(int i = 0; i < numOfValues; i++){
-                Event e = new Event();
-
-                eventsToReturn[i].setEventFields(eventsSearched.getInt("id"),
-                        eventsSearched.getString("name"),
-                        eventsSearched.getInt( "start_time"),
-                        eventsSearched.getInt( "end_time"), // may need to format times properly.
-                        eventsSearched.getString( "start_date"),
-                        eventsSearched.getString( "end_date"),
-                        eventsSearched.getString( "location_name"),
-                        eventsSearched.getString("description"));
-                eventsSearched.next();
-
-            }
-
-        }catch(SQLException exception) {
-            System.out.println("Count query failed.");
-            exception.printStackTrace();
-        }
-        return eventsToReturn;
-    }
-
-/*
-    public Event[] searchMultipleEventValues (String query, String dataType, ResultSet rs ) {
-
-        do {
-
-        }
-        while( rs.next())
-
-    }
-
-
-   Maybe better to have string concact operations? that way the query is run once rather than several times...
-
-*/
-
-/*
-    public Event[] searchMultipleVolunteerValues (String query, String dataType, ResultSet rs ) {
-
-
-    }
-*/
         public static void main(String args[]) {
         VolunteerizeModel model = new VolunteerizeModel();
 
