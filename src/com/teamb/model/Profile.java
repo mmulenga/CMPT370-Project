@@ -223,6 +223,11 @@ public class Profile {
     }
     /**
      *
+     * @param value - member id
+     */
+    public void setMemberID(int value) {this.memberID = value; }
+    /**
+     *
      * @param time - Availability matrix 7x2
      */
     public void setAvailability(Availability time){
