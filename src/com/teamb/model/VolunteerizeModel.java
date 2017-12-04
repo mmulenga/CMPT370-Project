@@ -386,7 +386,7 @@ public class VolunteerizeModel {
             dataType = "e.name  ";
         else if (choice.equals("StartTime"))
             dataType = "e.start_time ";
-        else if (choice.equals("End Time"))
+        else if (choice.equals("EndTime"))
             dataType = "e.end_time ";  // What else can be searched by?
         else
             dataType = "fail"; // meaning you can't search by this data type
