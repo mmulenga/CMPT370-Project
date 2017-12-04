@@ -34,7 +34,8 @@ public class ManageVolunteersView extends BasicView {
     public Button deleteProfilesButton;
     public Button searchBtn;
     public TextField searchKeyField;
-    TableView<ProfileSelection> table;
+
+    public TableView<ProfileSelection> table;
     /**
      * Constructor.
      * Creates the root pane, and adds the children with the CreateChildren() method.

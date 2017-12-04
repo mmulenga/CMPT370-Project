@@ -1,6 +1,7 @@
 package com.teamb.controller;
 
 
+import com.teamb.model.ProfileSelection;
 import com.teamb.model.VolunteerizeModel;
 import com.teamb.model.Profile;
 import com.teamb.view.BasicView;
@@ -27,7 +28,6 @@ public class ManageVolunteersController extends BasicController{
         super(s, m);
         view = new ManageVolunteersView();
         view.loadProfilesIntoTable(model.getProfiles());
-        //need to call "LoadProfileIntoTable" make the table show things
         view.createNewVolButton.setOnAction(new createNewVolButtonEventHandler());
         view.sendEmailButton.setOnAction(new sendEmailButtonEventHandler());
         view.printPhoneListButton.setOnAction(new printPhoneListButtonEventHandler());
@@ -98,7 +98,14 @@ public class ManageVolunteersController extends BasicController{
     }
 
     public void DeleteProfiles(/*TODO*/){
-        //TODO will delete given profiles
+        int s = view.table.getItems().size();
+        for(int i=0;i<s;i++){
+            ProfileSelection ps = view.table.getItems().get(i);
+           if(ps.isActive()) {
+               model.deleteProfile(ps.getvolunteerID());
+           }
+        }
+        view.loadProfilesIntoTable(model.getProfiles());
     }
 
     public void Search(String s){
@@ -109,4 +116,6 @@ public class ManageVolunteersController extends BasicController{
         //TODO Display new list of volunteers in view (create new view?)
         //Get input from input field
     }
+
+
 }
