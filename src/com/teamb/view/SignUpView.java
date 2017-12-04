@@ -37,7 +37,7 @@ public class SignUpView extends BasicView {
     public TextField firstNameField;
     public TextField middleNameField;
     public TextField lastNameField;
-    //public TextField passwordField;
+    public PasswordField passwordField;
     public TextField addressField;
     public TextField phoneNumberField;
     public TextField emergencyNumberField;
@@ -101,6 +101,7 @@ public class SignUpView extends BasicView {
         Label firstNameLabel = new Label("First Name:");
         Label lastNameLabel = new Label("Last Name:");
         Label middleNameLabel = new Label("Middle Name:");
+        Label passwordLabel = new Label("Password:");
         Label addressLabel = new Label("Home Address:");
         Label phoneNumberLabel = new Label("Phone Number:");
         Label emergencyContact = new Label("Emergency Contact Information:");
@@ -126,7 +127,7 @@ public class SignUpView extends BasicView {
         firstNameField = new TextField();
         middleNameField = new TextField();
         lastNameField  = new TextField();
-        //passwordField = new TextField();
+        passwordField = new PasswordField();
         addressField  = new TextField();
         phoneNumberField = new TextField();
         emergencyNumberField  = new TextField();
@@ -202,64 +203,67 @@ public class SignUpView extends BasicView {
         gp.add(lastNameLabel, 0,4);
         gp.add(lastNameField, 1,4,2,1);
 
-        gp.add(addressLabel,0,5);
-        gp.add(addressField,1,5,2,1);
+        gp.add(passwordLabel, 0,5);
+        gp.add(passwordField, 1,5,2,1);
 
-        gp.add(phoneNumberLabel,0,6);
-        gp.add(phoneNumberField,1,6,2,1);
+        gp.add(addressLabel,0,6);
+        gp.add(addressField,1,6,2,1);
 
-        gp.add(emailLabel,0,7);
-        gp.add(emailField,1,7,2,1);
+        gp.add(phoneNumberLabel,0,7);
+        gp.add(phoneNumberField,1,7,2,1);
 
-        gp.add(contactPreference,0,8);
+        gp.add(emailLabel,0,8);
+        gp.add(emailField,1,8,2,1);
 
-        gp.add(phonePref,0,9);
-        gp.add(phoneYes, 1,9);
-        gp.add(phoneNo,2,9);
+        gp.add(contactPreference,0,9);
 
-        gp.add(emailPref,0,10);
-        gp.add(emailYes, 1,10);
-        gp.add(emailNo,2,10);
+        gp.add(phonePref,0,10);
+        gp.add(phoneYes, 1,10);
+        gp.add(phoneNo,2,10);
 
-        gp.add(criminalRecordCheck,0,11);
-        gp.add(checked, 1,11);
-        gp.add(uncheck,2,11);
+        gp.add(emailPref,0,11);
+        gp.add(emailYes, 1,11);
+        gp.add(emailNo,2,11);
 
-        gp.add(volunteerGroup,0,12);
-        gp.add(volGroupBox,1,12);
+        gp.add(criminalRecordCheck,0,12);
+        gp.add(checked, 1,12);
+        gp.add(uncheck,2,12);
 
-        gp.add(medicalInformationLabel,0,13);
+        gp.add(volunteerGroup,0,13);
+        gp.add(volGroupBox,1,13);
+
+        gp.add(medicalInformationLabel,0,14);
         medicalInformationField.setMinHeight(50);
-        gp.add(medicalInformationField,1,13,2,1);
+        gp.add(medicalInformationField,1,14,2,1);
 
-        gp.add(emergencyContact,0,14);
+        gp.add(emergencyContact,0,15);
 
-        gp.add(emergencyNameLabel,0,15);
-        gp.add(emergencyFirstNameField,1,15,2,1);
+        gp.add(emergencyNameLabel,0,16);
+        gp.add(emergencyFirstNameField,1,16,2,1);
 
-        gp.add(emergencyMiddleNameLabel,0,16);
-        gp.add(emergencyMiddleNameField,1,16,2,1);
+        gp.add(emergencyMiddleNameLabel,0,17);
+        gp.add(emergencyMiddleNameField,1,17,2,1);
 
-        gp.add(emergencyLastNameLabel,0,17);
-        gp.add(emergencyLastNameField,1,17,2,1);
+        gp.add(emergencyLastNameLabel,0,18);
+        gp.add(emergencyLastNameField,1,18,2,1);
 
-        gp.add(emergencyAddressLabel,0,18);
-        gp.add(emergencyAddressField,1,18,2,1);
+        gp.add(emergencyAddressLabel,0,19);
+        gp.add(emergencyAddressField,1,19,2,1);
 
-        gp.add(emergencyPostalCodeLabel,0,19);
-        gp.add(emergencyPostalCodeField,1,19,2,1);
+        gp.add(emergencyPostalCodeLabel,0,20);
+        gp.add(emergencyPostalCodeField,1,20,2,1);
 
-        gp.add(emergencyNumberLabel,0,20);
-        gp.add(emergencyNumberField,1,20,2,1);
+        gp.add(emergencyNumberLabel,0,21);
+        gp.add(emergencyNumberField,1,21,2,1);
 
-        gp.add(availabilityLabel,0,21);
-        gp.add(availabilityTable,0,22,3,1);
+        gp.add(availabilityLabel,0,22);
+        gp.add(availabilityTable,0,23,3,1);
 
-        gp.add(workingHourLabel,0,23);
-        gp.add(workingHours,1,23);
+        gp.add(workingHourLabel,0,24);
+        gp.add(workingHours,1,24);
 
-        gp.add(submit,1,25);
-        gp.add(clear,2,25);
+        gp.add(submit,1,26);
+        gp.add(clear,2,26);
         gp.add(backButton, 0,0 );
         //gp.setHalignment(backButton, HPos.LEFT);
         //gp.setMargin(backButton, new Insets(20,0,20,0));

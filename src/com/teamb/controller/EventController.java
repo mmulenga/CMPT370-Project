@@ -28,9 +28,12 @@ public class EventController extends BasicController {
         this.eventModel = model.getUpcomingEvents();
         //TODO: CALL Method that gets event list from database
 
+
         eventView = new EventView();
+        eventView.PopulateEventList(eventModel);
         eventView.backButton.setOnAction(new EventController.backButtonEventHandler());
-        PopulateEventList();
+        //eventView.readMore.setOnAction(new EventController.readMoreButtonEventHandler());
+
 
 
     }
@@ -57,7 +60,20 @@ public class EventController extends BasicController {
 
     }
 
-    public void PopulateEventList(){
+    /*public void loadButtons(){
+        for(int i = 0; i < eventView.buttons.size(); i++){
+            int temp = 1;
+            eventView.buttons.get(i).setOnAction((ActionEvent)->{
+                changeToVolunterEventProfileView(temp);
+                System.out.println(eventView.readMore.getId());
+                //eventView.readMore.
+            })
+
+
+        }
+    }*/
+
+    /*public void PopulateEventList(){
         for(int i = 0; i < eventModel.size(); i++){
             eventView.gp = new GridPane();
             ColumnConstraints column1 = new ColumnConstraints();
@@ -70,17 +86,21 @@ public class EventController extends BasicController {
             description.setWrapText(true);
             description.setText(eventModel.get(i).getDescription());
             eventView.readMore = new Button("Read More");
-            tempEvent = eventModel.get(i);
+            eventView.readMore.setId(Integer.toString(i));
+            //tempEvent = eventModel.get(i);
             eventView.readMore.setOnAction((ActionEvent)->{
-                changeToVolunterEventProfileView(tempEvent);
+                changeToVolunterEventProfileView(eventView.readMore.getId());
+                System.out.println(eventView.readMore.getId());
+                //eventView.readMore.
             });
             eventView.gp.add(title, 1, 0 );
             eventView.gp.add(description, 1, 1, 2, 1);
             eventView.gp.add(eventView.readMore, 2, 2 );
             eventView.eventListBox.getChildren().add(eventView.gp);
-            System.out.println(i + " " +title.getText());
+            //System.out.println(i + " " +title.getText());
+            System.out.println(eventView.readMore.getId());
         }
-    }
+    }*/
 
     class backButtonEventHandler implements EventHandler<ActionEvent> {
         @Override
@@ -89,6 +109,12 @@ public class EventController extends BasicController {
         }
     }
 
+    /*class readMoreButtonEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            changeToVolunterEventProfileView(eventView.readMore.getId());
+        }
+    }*/
 
     public void ChangeToProfileView(Stage s){
         VolunteerLandingController vlc = new VolunteerLandingController(s, model);
@@ -99,7 +125,9 @@ public class EventController extends BasicController {
 
     }
 
-    public void changeToVolunterEventProfileView(Event event){
+    public void changeToVolunterEventProfileView(int id){
+        //int temp = Integer.parseInt(id);
+        Event event = eventModel.get(id);
         VolunteerEventProfileController vlc = new VolunteerEventProfileController(stage, model, event);
 
         Scene scene = new Scene(vlc.GetView().GetRootPane(), 720, 540);
