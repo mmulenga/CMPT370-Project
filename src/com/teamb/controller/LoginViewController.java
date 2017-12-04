@@ -46,7 +46,7 @@ public class LoginViewController extends BasicController {
             // Check to see if a user was returned, if so, credentials were
             // OK, return true.
             if(model.getUser().getUsername() != null) {
-                this.ChangeToLandingView(stage);
+                this.ChangeToLandingView();
                 return true;
             } else {
                 return false;

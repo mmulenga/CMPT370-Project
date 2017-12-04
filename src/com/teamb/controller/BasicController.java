@@ -46,12 +46,12 @@ public abstract class BasicController {
 
 
     /*TODO these two methods seem to be the same*/
-    public void ChangeToMainLandingView(Stage s){
-        StaffLandingController vlc = new StaffLandingController(s, model);
+    public void ChangeToStaffLandingView(){
+        StaffLandingController vlc = new StaffLandingController(stage, model);
 
         Scene scene = new Scene(vlc.GetView().GetRootPane(), 720, 540);
-        s.setScene(scene);
-        s.show();
+        stage.setScene(scene);
+        stage.show();
 
     }
 
@@ -70,31 +70,38 @@ public abstract class BasicController {
 
 
 
-    public void ChangeToLandingView(Stage s){
+    public void ChangeToLandingView(){
 
         if(model.getUser().getIsStaff()){
 
-            StaffLandingController slc = new StaffLandingController(s, model);
+            StaffLandingController slc = new StaffLandingController(stage, model);
 
             Scene scene = new Scene(slc.GetView().GetRootPane(), 720, 540);
 //        scene.getStylesheets().add
 //                (Volunteerize.class.getResource("LoginStyle.css").toExternalForm());
-            s.setScene(scene);
-            s.show();
+            stage.setScene(scene);
+            stage.show();
         }
         else{
-            VolunteerLandingController vlc = new VolunteerLandingController(s, model);
+            VolunteerLandingController vlc = new VolunteerLandingController(stage, model);
 
             Scene scene = new Scene(vlc.GetView().GetRootPane(), 720, 540);
 //        scene.getStylesheets().add
 //                (Volunteerize.class.getResource("LoginStyle.css").toExternalForm());
-            s.setScene(scene);
-            s.show();
+            stage.setScene(scene);
+            stage.show();
         }
 
     }
 
+    public void ChangeToLoginView(){
+        LoginViewController lic = new LoginViewController(stage, model);
 
+        Scene scene = new Scene(lic.GetView().GetRootPane(), 720, 540);
+        stage.setScene(scene);
+        stage.show();
+
+    }
 
 
 
@@ -108,14 +115,6 @@ public abstract class BasicController {
 
 
 
-    public void ChangeToProfileView(Stage s){
-        VolunteerLandingController vlc = new VolunteerLandingController(s, model);
-
-        Scene scene = new Scene(vlc.GetView().GetRootPane(), 720, 540);
-        s.setScene(scene);
-        s.show();
-
-    }
 
     public void ChangeToSearchReturnView(){
         //TODO

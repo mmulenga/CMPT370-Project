@@ -18,6 +18,8 @@ import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+import java.util.ArrayList;
+
 public class ManageEventView extends BasicView {
 
     public Button deleteEventsBtn;
@@ -34,6 +36,7 @@ public class ManageEventView extends BasicView {
      * @param
      */
     public ManageEventView() {
+
         super();
     }
 
@@ -42,9 +45,19 @@ public class ManageEventView extends BasicView {
         return root;
     }
 
+
+    public void PopulateEventList(ArrayList<Event> events){
+        for(int i = 0; i<events.size(); i++){
+            EventSelection es = new EventSelection(events.get(i),false);
+            table.getItems().add(es);
+        }
+
+        }
+
+
     @Override
     public void CreateChildren() {
-        TableView<EventSelection> table = new TableView<>();
+        table = new TableView<>();
         table.setEditable(true);
 
         TableColumn<EventSelection, Boolean> activeCol = createColumn("Selection","active");
@@ -72,14 +85,7 @@ public class ManageEventView extends BasicView {
         deleteEventsBtn = new Button("Delete Events");
         searchBtn = new Button("Search");
         backButton = new Button("<- BACK");
-
-        //fake event data TODO get real data instead
-        for(int i = 0; i<5;i++){
-            Event e = new Event();
-            e.setEventName("Event "+i);
-            EventSelection es = new EventSelection(e,false);
-            table.getItems().add(es);
-        }
+        
 
         Label label = new Label("Manage Events");
         label.setFont(Font.font("Arial", FontWeight.BOLD, 24));

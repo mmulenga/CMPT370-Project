@@ -109,7 +109,13 @@ public class SignUpController extends BasicController{
     class backButtonEventHandler implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
-            ChangeToProfileView(stage);
+            if(model.getProfile().getLastName()!=null) {
+                ChangeToProfileView();
+            }else if(!model.getUser().getIsStaff()){
+                ChangeToLoginView();
+            }else{
+                ChangeToManageVolunteersView();
+            }
         }
     }
 
@@ -243,7 +249,7 @@ public class SignUpController extends BasicController{
             public void handle(ActionEvent event) {
                 popupwindow.close();
 
-                ChangeToProfileView(stage);
+                ChangeToProfileView();
             }
         });
 
