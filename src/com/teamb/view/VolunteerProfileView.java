@@ -170,6 +170,7 @@ public class VolunteerProfileView extends BasicView {
 
         for(int day = 0; day < 7; day++) {
             for(int shift = 0; shift < 3; shift++) {
+                shiftCheckbox[day][shift] = new CheckBox();
                 shiftCheckbox[day][shift].setSelected(availability.GetAvailablity(day,shift));
                 shiftCheckbox[day][shift].setDisable(true);
                 availabilityGrid.add(shiftCheckbox[day][shift],day,shift);
