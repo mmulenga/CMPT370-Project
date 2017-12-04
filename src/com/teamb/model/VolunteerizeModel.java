@@ -301,7 +301,6 @@ public class VolunteerizeModel {
      * Adds event Participants to table in Database
      * @param e - Event that participant will go to.
      * @param p - Profile of participant.
-     * @param j - Job that they will do.
      */
     public void addEventParticipants( Event e, Profile p) {
         database.insert("event_participants (id, volunteer_id, event_id, job_id)\n " +
@@ -346,10 +345,6 @@ public class VolunteerizeModel {
 
         return profileList;
     }
-
-//    public Event[] retrieveAllEvents() {
-//
-//    }
 
 
     /**
@@ -440,11 +435,9 @@ public class VolunteerizeModel {
         return rs;
     }
 
-    public ArrayList<Profile> searchProfileName(String query) {
-        ArrayList<Profile> toReturn = new ArrayList<>();
+    /*
 
-        try{
-            ResultSet rs = database.select( "v.id, " +
+    "v.id, " +
                     "u.type, " +
                     "v.first_name, " +
                     "v.middle_name, " +
@@ -474,8 +467,90 @@ public class VolunteerizeModel {
                     "and c.volunteer_id = v.id " +
                     "and c.emergency_contact_id = e.id " +
                     "and (v.first_name = '" + query + "' OR v.last_name = '" + query +"'");
+
+
+                    profileToAdd.setAllBaseInformation(rs.getString("first_name"),
+                     rs.getString("middle_name"),
+                     rs.getString("last_name"),
+                     rs.getString("address"),
+                     rs.getString("phone_number"),
+                     rs.getString("postal_code"),
+                     rs.getString("emergency_contact_phone_number"),
+                     rs.getString("emergency_contact_first_name"),
+                     rs.getString("emergency_contact_middle_name"),
+                     rs.getString("emergency_contact_last_name"),
+                     rs.getInt("emergency_contact_id"),
+                     rs.getString("emergency_contact_adress"),
+                     rs.getString("emergency_contact_postal_code"),
+                     rs.getString("email"),
+                     rs.getBoolean("prefer_phone"),
+                     rs.getBoolean("prefer_email"),
+                     rs.getInt("id"),
+                     rs.getBoolean("criminal_check"),
+                     rs.getString("medical_info"),
+                     rs.getInt("hours_worked"),
+                     rs.getString("photo_path"),
+                     null); // availability must be updated
+
+     */
+
+    public ArrayList<Profile> getProfiles() {
+        ArrayList<Profile> toReturn = new ArrayList<>();
+
+        try{
+            ResultSet rs = database.select( "* " +
+                    "FROM volunteers v ");
+
+            while(rs.next()) {
+                Profile profileToAdd = new Profile();
+
+                profileToAdd.setFirstName(rs.getString("first_name"));
+                profileToAdd.setLastName(rs.getString("last_name"));
+                profileToAdd.setMiddleName(rs.getString("middle_name"));
+
+                toReturn.add(profileToAdd);
+            }
+
+        }catch(SQLException exception) {
+            System.out.println("Get profiles failed.");
+
+            exception.printStackTrace();
+        }
+
+
+        return toReturn;
+
+    }
+
+
+
+    public ArrayList<Profile> searchProfileName(String query) {
+        ArrayList<Profile> toReturn = new ArrayList<>();
+
+        try{
+            ResultSet rs = database.select( "v.id, " +
+                    "v.first_name, " +
+                    "v.middle_name, " +
+                    "v.last_name, " +
+                    "v.email, " +
+                    "v.hours_worked, " +
+                    "v.criminal_check, " +
+                    "v.medical_info, " +
+                    "v.photo_path " +
+                    "FROM volunteers v " +
+                    "WHERE v.first_name = '" + query + "' OR v.last_name = '" + query +"'");
+
          while(rs.next()) {
              Profile profileToAdd = new Profile();
+
+
+
+             profileToAdd.setFirstName(rs.getString("first_name"));
+             profileToAdd.setLastName(rs.getString("last_name"));
+             profileToAdd.setMiddleName(rs.getString("middle_name"));
+
+
+             /*
              profileToAdd.setAllBaseInformation(rs.getString("first_name"),
                      rs.getString("middle_name"),
                      rs.getString("last_name"),
@@ -498,6 +573,7 @@ public class VolunteerizeModel {
                      rs.getInt("hours_worked"),
                      rs.getString("photo_path"),
                      null); // availability must be updated
+                     */
              toReturn.add(profileToAdd);
          }
 
@@ -512,6 +588,8 @@ public class VolunteerizeModel {
 
     }
 
+
+    /*
     public Profile[] searchProfiles(String query, String dataType ) {
 
         // Converts desired data type to Postgres terminology
@@ -583,7 +661,10 @@ public class VolunteerizeModel {
         }
 
         return profilesToReturn;
+
     }
+
+    */
 
     /**
      * Finds the requested event and returns a set with all instances of it.
