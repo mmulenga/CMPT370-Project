@@ -49,7 +49,7 @@ public class VolunteerLandingController extends BasicController {
     class ueButtonEventHandler implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
-            ChangeToBrowseEventsView();
+            //ChangeToBrowseEventsView();
         }
     }
 
