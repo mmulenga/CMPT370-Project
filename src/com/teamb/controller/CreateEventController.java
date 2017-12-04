@@ -23,11 +23,24 @@ import java.time.LocalDate;
 import java.time.LocalDate;
 import java.util.Date;
 
-public class CreateEventController extends BasicController {
 
+/**
+ * This CreateEventController displays a page that
+ * allows the user input details needed to create
+ * new events
+ *
+ * @author  Irene
+ * @version 1.0
+ * @since   2017-12-04
+ */
+public class CreateEventController extends BasicController {
     CreateEventView view;
     Event event;
 
+
+    /**
+     * Class constructor.
+     */
     public CreateEventController(Stage s, VolunteerizeModel m) {
         super(s, m);
         view = new CreateEventView();
@@ -35,6 +48,13 @@ public class CreateEventController extends BasicController {
         view.clear.setOnAction(new clearEventHandler());
         view.home.setOnAction(new homeEventHandler());
     }
+
+    /**
+     * EventHandler methods to handle button clicks
+     * Each event handler handles a button click
+     * and has its
+     *
+     */
 
     class submitEventHandler implements EventHandler<ActionEvent> {
         @Override
@@ -44,32 +64,23 @@ public class CreateEventController extends BasicController {
         }
     }
 
-
-    class homeEventHandler implements EventHandler<ActionEvent> {
-        @Override
-        public void handle(ActionEvent event) {
-            changeToHomePageView(stage);
-
-        }
-    }
-
     class clearEventHandler implements EventHandler<ActionEvent>{
         @Override
         public void handle(ActionEvent event) {
             view.eventTitleField.clear();
             view.locationField.clear();
             view.descriptionArea.clear();
-
-
             view.startDatePicker.setValue(LocalDate.now());
             view.endDatePicker.setValue(view.startDatePicker.getValue().plusDays(1));
         }
     }
 
+    class homeEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            ChangeToStaffLandingView();
 
-    @Override
-    public BasicView GetView() {
-        return view;
+        }
     }
 
 
@@ -107,7 +118,7 @@ public class CreateEventController extends BasicController {
 
     /**
      * Pop up box to alert user of newly created Event
-     * and a button that goes to the upcoming events
+     * and a button that goes back to Manage events
      *
      */
     public void completePopUP(){
@@ -137,33 +148,10 @@ public class CreateEventController extends BasicController {
 
     }
 
-    public void changeToHomePageView(Stage s){
-        StaffLandingController slc = new StaffLandingController(s, model);
 
-        Scene scene = new Scene(slc.GetView().GetRootPane(), 720, 540);
-        s.setScene(scene);
-        s.show();
-
-    }
-
-
-    /*public String CreateDate(String date){
-        String day = date.substring(0, 2);
-        String month = date.substring(3, 4);
-        String year= date.substring(4, 5);
-
-        //Date tempDate = new Date();
-        String tempDate = ("" + day + "" + month + "" + year);
-        return tempDate;
-    }*/
-
-    public void changeToUpcomingEventPageView(Stage s){
-        EventController evPageView = new EventController(s, model);
-
-        Scene scene = new Scene(evPageView.GetView().GetRootPane(), 720, 540);
-        s.setScene(scene);
-        s.show();
-
+    @Override
+    public BasicView GetView() {
+        return view;
     }
 
 }
