@@ -169,7 +169,7 @@ public class DatabaseInterface {
         try {
             dbStatement = dbConnection.createStatement();
 
-            return dbStatement.executeQuery("COUNT (*) FROM " + query);
+            return dbStatement.executeQuery("SELECT COUNT (*) FROM " + query);
         } catch(SQLException exception) {
             System.out.println("Count query failed.");
 

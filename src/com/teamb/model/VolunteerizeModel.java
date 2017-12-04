@@ -1,6 +1,7 @@
 package com.teamb.model;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class VolunteerizeModel {
     private DatabaseInterface database;
@@ -310,35 +311,38 @@ public class VolunteerizeModel {
 
     public Profile[] retrieveAllProfiles() {
         Profile[] profileList;
-        ResultSet volunteer;
+        ResultSet id;
 
-        int count;
+        id = database.select(" id FROM volunteers;");
 
-        volunteer = database.select(" * FROM volunteers;");
+        int count = 0;
 
-        // Get the total number of volunteers
-        try {
-            count = 0;
-            while(volunteer.next()) {
+        //counts number of values in result set. // repeated work?
+        try{
+            ResultSet counter = database.count("volunteers");
 
-                count++;
-            }
+            counter.next();
+            count = counter.getInt("count");
 
-            System.out.println(count);
-
-            volunteer.beforeFirst();
         } catch(SQLException exception) {
+            System.out.println("Count query failed.");
             exception.printStackTrace();
-
-            return null;
         }
 
         profileList = new Profile[count];
 
 
-        for(int i = 0; i < count; i++) {
+        try {
+            int i = 0;
 
-            profileList[i] = getProfile(i);
+            while(i < count) {
+                id.next();
+
+                profileList[i] = getProfile(id.getInt("id"));
+                i++;
+            }
+        } catch(SQLException exception) {
+            exception.printStackTrace();
         }
 
         return profileList;

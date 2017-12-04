@@ -62,8 +62,6 @@ public class LoginView extends BasicView{
         Label userName = new Label("Username:");
         Label pw = new Label("Password:");
 
-
-
         gp.setAlignment(Pos.CENTER);
         gp.setHgap(10);
         gp.setVgap(10);
@@ -76,7 +74,6 @@ public class LoginView extends BasicView{
         gp.add(pwField, 1, 2);
         gp.add(login, 1, 3);
         gp.add(Signup, 1, 4);
-
 
         root.getChildren().add(gp);
     }

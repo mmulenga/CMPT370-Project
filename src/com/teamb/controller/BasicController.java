@@ -77,8 +77,7 @@ public abstract class BasicController {
             StaffLandingController slc = new StaffLandingController(s, model);
 
             Scene scene = new Scene(slc.GetView().GetRootPane(), 720, 540);
-//        scene.getStylesheets().add
-//                (Volunteerize.class.getResource("LoginStyle.css").toExternalForm());
+            //scene.getStylesheets().add("LoginStyle.css");
             s.setScene(scene);
             s.show();
         }
