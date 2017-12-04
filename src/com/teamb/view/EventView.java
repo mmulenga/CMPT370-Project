@@ -25,6 +25,7 @@ public class EventView extends BasicView {
     public Button backButton;
     public Button readMore;
     public GridPane gp;
+    public ArrayList<Button> buttons;
 
     //Pane root;
     //EventController controller;
@@ -36,6 +37,32 @@ public class EventView extends BasicView {
         //eventList = c.GetEventModel();
 
 
+    }
+
+    public void PopulateEventList(ArrayList<Event> events){
+        for(int i = 0; i < events.size(); i++){
+            gp = new GridPane();
+            ColumnConstraints column1 = new ColumnConstraints();
+            column1.setPercentWidth(33);
+            gp.getColumnConstraints().addAll(column1, column1, column1);
+            Label title = new Label();
+
+            title.setText(events.get(i).getEventName());
+            Label description = new Label();
+            description.setWrapText(true);
+            description.setText(events.get(i).getDescription());
+            readMore = new Button("Read More");
+            buttons.add(readMore);
+            readMore.setId(Integer.toString(i));
+            //tempEvent = eventModel.get(i);
+
+            gp.add(title, 1, 0 );
+            gp.add(description, 1, 1, 2, 1);
+            gp.add(readMore, 2, 2 );
+            eventListBox.getChildren().add(gp);
+            //System.out.println(i + " " +title.getText());
+            System.out.println(readMore.getId());
+        }
     }
 
 
@@ -50,7 +77,7 @@ public class EventView extends BasicView {
         title.setId("scenetitle");
         outside.getChildren().add(backButton);
         outside.getChildren().add(title);
-        
+
         outside.getChildren().add(eventListBox);
 
 
