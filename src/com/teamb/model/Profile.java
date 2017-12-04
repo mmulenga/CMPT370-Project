@@ -6,9 +6,6 @@ import java.util.ArrayList;
  * Represents all the information and functions of the volunteer profile.
  */
 public class Profile {
-
-
-
     private String firstName;
     private String middleName;
     private String lastName;
@@ -24,6 +21,7 @@ public class Profile {
     private String photoPath;
     private String medicalInformation;
     private String postalCode;
+
 
     private int emergencyContactID;
     private int memberNumber; // set by WDM
@@ -67,12 +65,12 @@ public class Profile {
      * @param email
      * @param contactByPhone true if the volunteer wants to be contacted by phone
      * @param contactByEmail true if the volunteer wants to be contacted by email
-     * @param memberID
+     * @param memberNumber
      * @param criminalRecordCheck
      * @param medicalInformation short paragraph outlining any relevant medical information
      * @param hoursWorked
      * @param photoPath file path to the volunteer photo
-     * @param availability availability in the morning and afternoon of each weekday
+     * @param availabilityArray availability in the morning and afternoon of each weekday
      */
     public void setAllBaseInformation(String firstName, String middleName, String lastName, String address, String phoneNumber,
                                       String postalCode,
@@ -80,8 +78,8 @@ public class Profile {
                                       String emergencyContactMiddle, String emergencyContactLast, int emergencyContactID,
                                       String emergencyContactPostalCode, String emergencyContactAddress,
                                       String email, boolean contactByPhone, boolean contactByEmail,
-                                      int memberID, boolean criminalRecordCheck, String medicalInformation,
-                                      int hoursWorked, String photoPath, Availability availability){
+                                      int memberNumber, boolean criminalRecordCheck, String medicalInformation,
+                                      int hoursWorked, String photoPath, Availability availabilityArray){
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -99,13 +97,12 @@ public class Profile {
         this.email = email;
         this.contactByEmail = contactByEmail;
         this.contactByPhone = contactByPhone;
-        this.memberID = memberID;
+        this.memberNumber = memberNumber;
         this.criminalRecordCheck = criminalRecordCheck;
         this.medicalInformation = medicalInformation;
         this.hoursWorked = hoursWorked;
         this.photoPath = photoPath;
-        //this.availability = new Availability();
-        //this.availability = availability;
+        this.availability = availabilityArray;
     }
 
     //////////////////////////////////////////////////////////
@@ -115,9 +112,7 @@ public class Profile {
     * setFirstName(name)
     * @param name - first name
     */
-    public void setFirstName(String name){
-        this.firstName = name;
-    }
+    public void setFirstName(String name){this.firstName = name;}
     /**
      * setMiddleName(name)
      * @param name - String, middle name
@@ -127,16 +122,12 @@ public class Profile {
      *
      * @param last - last name
      */
-    public void setLastName(String last){
-        this.lastName = last;
-    }
+    public void setLastName(String last){this.lastName = last;}
     /**
      *
      * @param streetAddress (eg. 1234 Albert.Ave)
      */
-    public void setAddress(String streetAddress){
-        this.address = streetAddress;
-    }
+    public void setAddress(String streetAddress){this.address = streetAddress;}
     /**
      * setPostalCode(String code)
      * @param code - String postal code
@@ -146,37 +137,27 @@ public class Profile {
      *
      * @param number - phone number
      */
-    public void setPhoneNumber(String number){
-        this.phoneNumber = number;
-    }
+    public void setPhoneNumber(String number){this.phoneNumber = number;}
     /**
      *
      * @param name - first name of emergency contact
      */
-    public void setEmergencyContactFirstName(String name){
-        this.emergencyContactFirst = name;
-    }
+    public void setEmergencyContactFirstName(String name){this.emergencyContactFirst = name;}
     /**
      *
      * @param name - middle name of emergency contact
      */
-    public void setEmergencyContactMiddleName(String name){
-        this.emergencyContactMiddle = name;
-    }
+    public void setEmergencyContactMiddleName(String name){this.emergencyContactMiddle = name;}
     /**
      *
      * @param name - last name of emergency contact
      */
-    public void setEmergencyContactLastName(String name){
-        this.emergencyContactLast = name;
-    }
+    public void setEmergencyContactLastName(String name){this.emergencyContactLast = name;}
     /**
      *
      * @param number - phone number of emergency contact
      */
-    public void setEmergencyContactPhoneNumber(String number){
-        this.emergencyContactPhoneNumber = number;
-    }
+    public void setEmergencyContactPhoneNumber(String number){this.emergencyContactPhoneNumber = number;}
     /**
      * @param ID
      */
@@ -184,156 +165,116 @@ public class Profile {
     /**
      * @param postalCode
      */
-    public void setEmergencyContactPostalCode(String postalCode){this.emergencyContactPostalCode = emergencyContactPostalCode;}
+    public void setEmergencyContactPostalCode(String postalCode){this.emergencyContactPostalCode = postalCode;}
     /**
      * @param address
      */
-    public void setEmergencyContactAddress(String address){this.emergencyContactAddress = emergencyContactAddress;}
+    public void setEmergencyContactAddress(String address){this.emergencyContactAddress = address;}
     /**
      *
      * @param emailAddress (eg. foo@bar.com)
      */
-    public void setEmail(String emailAddress){
-        this.email = emailAddress;
-    }
+    public void setEmail(String emailAddress){this.email = emailAddress;}
     /**
      *
      * @param value if the prefer to be contacted by email
      */
-    public void setcontactByEmail(boolean value){
-        this.contactByEmail = value;
-    }
+    public void setcontactByEmail(boolean value){this.contactByEmail = value;}
+    /**
+     * @param value - boolean
+     */
+    public void setContactByPhone(boolean value){this.contactByPhone = value;}
     /**
      *
      * @param value - if they have a criminal record check
      */
-    public void setCriminalReccordCheck(boolean value){
-        this.criminalRecordCheck = value;
-    }
+    public void setCriminalReccordCheck(boolean value){this.criminalRecordCheck = value;}
     /**
      *
      * @param info - applicable medical information
      */
-    public void setMedicalInformation(String info){
-        this.medicalInformation = info;
-    }
+    public void setMedicalInformation(String info){this.medicalInformation = info;}
+    /**
+     * @param value - int
+     */
+    public void setMemberNumber(int value){this.memberNumber = value;}
+    /**
+     * @param value - int
+     */
+    public void setMemeberID(int value){this.memberID = value;}
     /**
      *
      * @param value - current hours worked
      */
-    public void setHoursWorked(int value){
-        this.hoursWorked = value;
-    }
+    public void setHoursWorked(int value){this.hoursWorked = value;}
     /**
      *
      * @param time - Availability matrix 7x2
      */
-    public void setAvailability(Availability time){
-        this.availability = time;
-    }
+    public void setAvailability(Availability time){this.availability = time;}
     /**
      *
      * @param path - location of image
      */
-    public void setPhotoPath(String path){
-        this.photoPath = path;
-    }
+    public void setPhotoPath(String path){this.photoPath = path;}
 
     //////////////////////////////////////////////////////
     // add to specific fields of info
 
     /**
      *
-     * @param ID - int, event ID
+     * @param ID - int, event IDl
      */
-    public void addEventID(int ID){
-        this.registeredEventIDs.add(ID);
-    }
+    public void addEventID(int ID){this.registeredEventIDs.add(ID);}
     /**
      *
      * @param value - int, additional hours worked
      */
-    public void addHoursWorked(int value){
-        this.hoursWorked += value;
-    }
+    public void addHoursWorked(int value){this.hoursWorked += value;}
     /**
      *
      * @param groupName
      */
-    public void addToGroup(String groupName){
-        volunteerGroups.addGroup(groupName);
-    }
+    public void addToGroup(String groupName){volunteerGroups.addGroup(groupName);}
 
 
     //////////////////////////////////////////////////////
     //get info in the specified field
 
 
-    public String getFirstName(){
-        return this.firstName;
-    }
+    public String getFirstName(){return this.firstName;}
     public String getMiddleName(){return this.middleName;}
-    public String getLastName(){
-        return this.lastName;
-    }
-    public boolean getContactByMail(){
-        return this.contactByEmail;
-    }
-    public String getAddress(){
-        return this.address;
-    }
+    public String getLastName(){return this.lastName;}
+    public boolean getContactByMail(){return this.contactByEmail;}
+    public String getAddress(){return this.address;}
     public String getPostalCode(){return this.postalCode;}
-    public String getPhoneNumber(){
-        return this.phoneNumber;
-    }
+    public String getPhoneNumber(){return this.phoneNumber;}
     public String getEmergencyContactFirst(){ return this.emergencyContactFirst;}
     public String getEmergencyContactMiddle(){return this.emergencyContactMiddle;}
     public String getEmergencyContactLast(){return this.emergencyContactLast;}
     public String getEmergencyContactPhoneNumber(){return this.emergencyContactPhoneNumber;}
     public String getEmergencyContactPostalCode(){return this.emergencyContactPostalCode;}
     public String getEmergencyContactAddress(){return  this.emergencyContactAddress;}
-    public String getEmergencyContactNumber(){
-        return this.emergencyContactPhoneNumber;
-    }
     public int getEmergencyContactID(){return this.emergencyContactID;}
-    public String getEmail(){
-        return this.email;
-    }
-    public boolean getContactByEmail(){
-        return this.contactByEmail;
-    }
-    public boolean getContactByPhone() {
-        return this.contactByPhone;
-    }
-    public int getMemberID(){
-        return this.memberID;
-    }
-    public boolean getCriminalReccordCheck(){
-        return this.criminalRecordCheck;
-    }
-    public String getMedicalInformation(){
-        return this.medicalInformation;
-    }
-    public int getHoursWorked(){
-        return this.hoursWorked;
-    }
-    public Availability getAvailability(){
-        return this.availability;
-    }
-    public String getPhotoPath(){
-        return this.photoPath;
-    }
+    public String getEmail(){return this.email;}
+    public boolean getContactByEmail(){return this.contactByEmail;}
+    public boolean getContactByPhone() {return this.contactByPhone;}
+    public int getMemberID(){return this.memberID;}
+    public boolean getCriminalRecordCheck(){return this.criminalRecordCheck;}
+    public String getMedicalInformation(){return this.medicalInformation;}
+    public int getHoursWorked(){return this.hoursWorked;}
+    public Availability getAvailability(){return this.availability;}
+    public String getPhotoPath(){return this.photoPath;}
 
     //////////////////////////////////////////////
     // remove items
 
-    public void removeFromGroup(String groupName){
-        volunteerGroups.removeGroup(groupName);
-    }
+    public void removeFromGroup(String groupName){volunteerGroups.removeGroup(groupName);}
+    
+    
 
-    public static void main(String args[]){
-        System.out.println("Profile.java");
-    }
+    
+    
 
 
 }
