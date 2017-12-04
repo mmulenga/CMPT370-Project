@@ -1,7 +1,6 @@
 package com.teamb.controller;
 
 import com.teamb.model.Profile;
-import com.teamb.model.Shift;
 import com.teamb.view.BasicView;
 import com.teamb.view.SignUpView;
 import javafx.event.EventHandler;
@@ -64,22 +63,14 @@ public class SignUpController extends BasicController{
     class submitEventHandler implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
-            for (Shift shift: view.availabilityTable.getItems()) {
-                for (int i = 0; i < 7; i++) {
-                    if (shift.getWeekdayAvailability(i)) {
-                        if (Objects.equals(shift.getShift(), "Morning")) {
-                            view.availability.ChangeAvailability(i, 0, true);
-                            System.out.println("Day " + i + " morning is available");
-                        } else if (Objects.equals(shift.getShift(), "Afternoon")) {
-                            view.availability.ChangeAvailability(i, 1, true);
-                            System.out.println("Day " + i + " afternoon is available");
-                        } else {
-                            view.availability.ChangeAvailability(i, 2, true);
-                            System.out.println("Day " + i + " evening is available");
-                        }
-                    }
+
+            for(int day = 0; day < 7; day++) {
+                for(int shift = 0; shift < 3; shift++) {
+                    view.availability.ChangeAvailability(day,shift,view.shiftCheckbox[day][shift].isSelected());
                 }
             }
+
+
             if (view.header.getText().equals("Edit Profile")) {
                 setProfileValues(editProfile);
                 model.editProfile(editProfile);
