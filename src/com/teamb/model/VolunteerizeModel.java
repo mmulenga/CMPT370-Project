@@ -347,10 +347,6 @@ public class VolunteerizeModel {
         return profileList;
     }
 
-//    public Event[] retrieveAllEvents() {
-//
-//    }
-
 
     /**
      * Discovers type of data sought, and returns a formatted type for PostgreSQL.
@@ -440,11 +436,9 @@ public class VolunteerizeModel {
         return rs;
     }
 
-    public ArrayList<Profile> searchProfileName(String query) {
-        ArrayList<Profile> toReturn = new ArrayList<>();
+    /*
 
-        try{
-            ResultSet rs = database.select( "v.id, " +
+    "v.id, " +
                     "u.type, " +
                     "v.first_name, " +
                     "v.middle_name, " +
@@ -474,8 +468,57 @@ public class VolunteerizeModel {
                     "and c.volunteer_id = v.id " +
                     "and c.emergency_contact_id = e.id " +
                     "and (v.first_name = '" + query + "' OR v.last_name = '" + query +"'");
+
+
+                    profileToAdd.setAllBaseInformation(rs.getString("first_name"),
+                     rs.getString("middle_name"),
+                     rs.getString("last_name"),
+                     rs.getString("address"),
+                     rs.getString("phone_number"),
+                     rs.getString("postal_code"),
+                     rs.getString("emergency_contact_phone_number"),
+                     rs.getString("emergency_contact_first_name"),
+                     rs.getString("emergency_contact_middle_name"),
+                     rs.getString("emergency_contact_last_name"),
+                     rs.getInt("emergency_contact_id"),
+                     rs.getString("emergency_contact_adress"),
+                     rs.getString("emergency_contact_postal_code"),
+                     rs.getString("email"),
+                     rs.getBoolean("prefer_phone"),
+                     rs.getBoolean("prefer_email"),
+                     rs.getInt("id"),
+                     rs.getBoolean("criminal_check"),
+                     rs.getString("medical_info"),
+                     rs.getInt("hours_worked"),
+                     rs.getString("photo_path"),
+                     null); // availability must be updated
+
+     */
+
+
+    public ArrayList<Profile> searchProfileName(String query) {
+        ArrayList<Profile> toReturn = new ArrayList<>();
+
+        try{
+            ResultSet rs = database.select( "v.id, " +
+                    "v.first_name, " +
+                    "v.middle_name, " +
+                    "v.last_name, " +
+                    "v.email, " +
+                    "v.hours_worked, " +
+                    "v.criminal_check, " +
+                    "v.medical_info, " +
+                    "v.photo_path " +
+                    "FROM volunteers v " +
+                    "WHERE v.first_name = '" + query + "' OR v.last_name = '" + query +"'");
+
          while(rs.next()) {
              Profile profileToAdd = new Profile();
+
+             profileToAdd.setFirstName("first_name");
+             profileToAdd.setLastName("last_name");
+
+             /*
              profileToAdd.setAllBaseInformation(rs.getString("first_name"),
                      rs.getString("middle_name"),
                      rs.getString("last_name"),
@@ -498,6 +541,7 @@ public class VolunteerizeModel {
                      rs.getInt("hours_worked"),
                      rs.getString("photo_path"),
                      null); // availability must be updated
+                     */
              toReturn.add(profileToAdd);
          }
 
@@ -512,6 +556,8 @@ public class VolunteerizeModel {
 
     }
 
+
+    /*
     public Profile[] searchProfiles(String query, String dataType ) {
 
         // Converts desired data type to Postgres terminology
@@ -583,7 +629,10 @@ public class VolunteerizeModel {
         }
 
         return profilesToReturn;
+
     }
+
+    */
 
     /**
      * Finds the requested event and returns a set with all instances of it.
