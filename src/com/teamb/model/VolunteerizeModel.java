@@ -682,7 +682,8 @@ public class VolunteerizeModel {
         Calendar calendar = Calendar.getInstance();
 
         try {
-            ResultSet events = database.select("* FROM events e where e.id = '" + p.getMemberID() + "';");
+            ResultSet events = database.select("* FROM events WHERE events.id IN " +
+                    "(SELECT ep.event_id FROM  event_participants ep WHERE ep.volunteer_id = '" + p.getMemberID() + "';");
             ResultSet eventTimesDates = database.select ("to_char(e.start_time, 'YYYY:MM:DD') as start_date, " +
                     "to_char(e.start_time, 'HH24MI') as start_time, " +
                     "to_char(e.end_time, 'YYYY:MM:DD') as end_date, " +
