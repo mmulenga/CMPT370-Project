@@ -94,7 +94,14 @@ public abstract class BasicController {
 
     }
 
+    public void ChangeToLoginView(Stage s){
+        LoginViewController lic = new LoginViewController(s, model);
 
+        Scene scene = new Scene(lic.GetView().GetRootPane(), 720, 540);
+        s.setScene(scene);
+        s.show();
+
+    }
 
 
 
