@@ -141,6 +141,7 @@ public class ManageVolunteersView extends BasicView {
     }
 
     public void loadProfilesIntoTable(ArrayList<Profile> profiles){
+        table.getItems().remove(0,table.getItems().size());
         for(Profile p:profiles){
             ProfileSelection ps = new ProfileSelection(p, false);
             table.getItems().add(ps);

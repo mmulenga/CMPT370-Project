@@ -99,9 +99,11 @@ public class SignUpController extends BasicController{
             view.phoneYes.setSelected(true);
             view.emailYes.setSelected(true);
             view.checked.setSelected(true);
-//            for (Shift shift: availabilityTable.getItems()) {
-//                shift.reset();
-//            }
+            for(int day = 0; day < 7; day++) {
+                for(int shift = 0; shift < 3; shift++) {
+                    view.shiftCheckbox[day][shift].setSelected(false);
+                }
+            }
         }
 
     }
