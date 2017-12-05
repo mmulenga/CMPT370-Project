@@ -43,6 +43,12 @@ public class CreateEventView extends BasicView {
         return root;
     }
 
+    /**
+     * Method used to create all objects
+     * displayed on the view.
+     *
+     * Then formats the view nicely.
+     */
     @Override
     protected void CreateChildren() {
         GridPane gp = new GridPane();

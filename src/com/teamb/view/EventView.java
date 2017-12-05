@@ -1,45 +1,46 @@
 package com.teamb.view;
 
-import com.teamb.controller.BasicController;
-import com.teamb.controller.EventController;
-import com.teamb.controller.VolunteerEventProfileController;
+
 import com.teamb.model.Event;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
-
 import java.util.ArrayList;
-import java.util.List;
 
+
+/**
+ * This EventView displays Upcoming Events
+ *
+ *
+ * @author Irene
+ * @version 1.0
+ * @since   2017-12-04
+ */
 public class EventView extends BasicView {
 
-    int eventCount;
-    public VBox outside;
-    public VBox eventListBox;
+    //Instance Variables.
+    private VBox outside;
+    private VBox eventListBox;
     public Button backButton;
-    public Button readMore;
+    private Button readMore;
     public GridPane gp;
     public ArrayList<Button> buttons;
 
-    //Pane root;
-    //EventController controller;
-    ArrayList<Event> eventList; //TODO:LIST OF EVENTS FROM DATABASE
-
+    /**
+     * Class constructor.
+     */
     public EventView(){
-
         super();
         buttons = new ArrayList<>();
-        //eventList = c.GetEventModel();
-
-
     }
 
+    /**
+     * Information gotten from the parameter
+     * is used to display results.
+     *
+     * @param events;
+     *
+     */
     public void PopulateEventList(ArrayList<Event> events){
         for(int i = 0; i < events.size(); i++){
             gp = new GridPane();
@@ -63,20 +64,23 @@ public class EventView extends BasicView {
     }
 
 
+    /**
+     * Method used to create all objects used in
+     * displaying the view.
+     *
+     * Then formats the view nicely.
+     */
     @Override
     protected void CreateChildren() {
         backButton = new Button("<-Back");
         outside = new VBox(5);
 
         eventListBox = new VBox(5);
-        //PopulateEventList(eventList);
         Label title = new Label("Upcoming Events");
         title.setId("scenetitle");
         outside.getChildren().add(backButton);
         outside.getChildren().add(title);
-
         outside.getChildren().add(eventListBox);
-
 
         root.getChildren().add(outside);
     }

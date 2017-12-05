@@ -24,7 +24,7 @@ public class VolunteerProfileController extends BasicController {
     class homeEventHandler implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
-            changeToVolunteerLandingView();
+            ChangeToVolunteerLandingView();
 
         }
     }

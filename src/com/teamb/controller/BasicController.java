@@ -125,7 +125,7 @@ public abstract class BasicController {
     }
 
 
-    public void changeToVolunteerLandingView(){
+    public void ChangeToVolunteerLandingView(){
         VolunteerLandingController slc = new VolunteerLandingController(stage, model);
         Scene scene = new Scene(slc.GetView().GetRootPane(), 720, 540);
         stage.setScene(scene);
