@@ -59,49 +59,49 @@ public class modelTest{
     		"foo@bar.com", false, true, 321, false, "med", 543, 10, "path", avail);
 
 
-    	assertEquals("bill",pro.getFirstName());
+    	assertEquals("it broke!!!!!", "bill",pro.getFirstName());
     	System.out.println("first name");
-    	assertEquals("bob",pro.getMiddleName());
+    	assertEquals("it broke!!!!!", "bob",pro.getMiddleName());
     	System.out.println("middle name");
-    	assertEquals("johnson",pro.getLastName());
+    	assertEquals("it broke!!!!!", "johnson",pro.getLastName());
     	System.out.println("last name");
-    	assertEquals("seventh.ave",pro.getAddress());
+    	assertEquals("it broke!!!!!", "seventh.ave",pro.getAddress());
     	System.out.println("address");
-		assertEquals("234-3433",pro.getPhoneNumber());
+		assertEquals("it broke!!!!!", "234-3433",pro.getPhoneNumber());
     	System.out.println("phone number");
-    	assertEquals("e3e3e3",pro.getPostalCode());
+    	assertEquals("it broke!!!!!", "e3e3e3",pro.getPostalCode());
     	System.out.println("postal code");
-    	assertEquals("num",pro.getEmergencyContactPhoneNumber());
+    	assertEquals("it broke!!!!!", "num",pro.getEmergencyContactPhoneNumber());
     	System.out.println("emerg contact phone number");
-    	assertEquals("jim",pro.getEmergencyContactFirst());
+    	assertEquals("it broke!!!!!", "jim",pro.getEmergencyContactFirst());
     	System.out.println("emerg contact first");
-    	assertEquals("jack",pro.getEmergencyContactMiddle());
+    	assertEquals("it broke!!!!!", "jack",pro.getEmergencyContactMiddle());
     	System.out.println("emerg contact middle");
-    	assertEquals("jill",pro.getEmergencyContactLast());
+    	assertEquals("it broke!!!!!", "jill",pro.getEmergencyContactLast());
     	System.out.println("emerg contact last");
-    	assertEquals("1234",pro.getEmergencyContactID());
+    	assertEquals("it broke!!!!!", "1234",pro.getEmergencyContactID());
     	System.out.println("emerg contact ID");
-    	assertEquals("fudge",pro.getEmergencyContactPostalCode());
+    	assertEquals("it broke!!!!!", "fudge",pro.getEmergencyContactPostalCode());
     	System.out.println("emerg postal code");
-    	assertEquals("foobar.st",pro.getEmergencyContactAddress());
+    	assertEquals("it broke!!!!!", "foobar.st",pro.getEmergencyContactAddress());
     	System.out.println("emerg contact address");
-    	assertEquals("foo@bar.com",pro.getEmail());
+    	assertEquals("it broke!!!!!", "foo@bar.com",pro.getEmail());
     	System.out.println("email");
-    	assertEquals(false,pro.getContactByPhone());
+    	assertEquals("it broke!!!!!", false,pro.getContactByPhone());
     	System.out.println("contact by phone");
-    	assertEquals(true,pro.getContactByEmail());
+    	assertEquals("it broke!!!!!", true,pro.getContactByEmail());
     	System.out.println("contact by email");
-    	assertEquals(321,pro.getMemberNumber());
+    	assertEquals("it broke!!!!!", 321,pro.getMemberNumber());
     	System.out.println("member number");
-    	assertEquals(false,pro.getCriminalRecordCheck());
+    	assertEquals("it broke!!!!!", false,pro.getCriminalRecordCheck());
     	System.out.println("criminal rec check");
-    	assertEquals("med",pro.getMedicalInformation());
+    	assertEquals("it broke!!!!!", "med",pro.getMedicalInformation());
     	System.out.println("med info");
-    	assertEquals(534,pro.getMemberID());
+    	assertEquals("it broke!!!!!", 534,pro.getMemberID());
     	System.out.println("member id");
-    	assertEquals(10,pro.getHoursWorked());
+    	assertEquals("it broke!!!!!", 10,pro.getHoursWorked());
     	System.out.println("hours worked");
-    	assertEquals("path",pro.getPhotoPath());
+    	assertEquals("it broke!!!!!", "path",pro.getPhotoPath());
     	System.out.println("photoPath");
 
 
@@ -113,25 +113,25 @@ public class modelTest{
     	Event ev = new Event();
 
     	ev.setEventID(123);
-    	assertEquals(123,ev.getEventID());
+    	assertEquals("it broke!!!!!", 123,ev.getEventID());
     	System.out.println("event id");
     	ev.setEventName("nope");
-    	assertEquals("nope",pro.getEventName());
+    	assertEquals("it broke!!!!!", "nope",pro.getEventName());
     	System.out.println("event name");
     	ev.setEventStartTime(200);
-    	assertEquals(200,pro.getEventStartTime());
+    	assertEquals("it broke!!!!!", 200,pro.getEventStartTime());
     	System.out.println("event start time");
     	ev.setEventEndTime(1200);
-    	assertEquals(1200,pro.getEventEndTime());
+    	assertEquals("it broke!!!!!", 1200,pro.getEventEndTime());
     	System.out.println("event end time");
     	ev.setEventStartDate("time");
-    	assertEquals("time",pro.getEventStartDate());
+    	assertEquals("it broke!!!!!", "time",pro.getEventStartDate());
     	System.out.println("event start date");
     	ev.setEventEndDate("over");
-    	assertEquals("over",pro.getEventEndDate());
+    	assertEquals("it broke!!!!!", "over",pro.getEventEndDate());
     	System.out.println("event end date");
     	ev.setEventLocation("here");
-    	assertEquals("here",pro.getEventLocation());
+    	assertEquals("it broke!!!!!", "here",pro.getEventLocation());
     	System.out.println("event location");
 
     	System.out.println("done event test.\n");
@@ -146,10 +146,10 @@ public class modelTest{
     	u.setIsStaff(true);
     	u.setprofileID(12345);
 
-    	assertEquals("jim",u.getUsername());
-    	assertEquals("pass",u.getPassword());
-    	assertEquals(true,u.getIsStaff());
-    	assertEquals(12345,u.getProfileID());
+    	assertEquals("it broke!!!!!", "jim",u.getUsername());
+    	assertEquals("it broke!!!!!", "pass",u.getPassword());
+    	assertEquals("it broke!!!!!", true,u.getIsStaff());
+    	assertEquals("it broke!!!!!", 12345,u.getProfileID());
 
     	System.out.println("done users Test.\n");
     }
@@ -169,23 +169,23 @@ public class modelTest{
 
     	vol.login("staff","staff"); // should login
     	temp = vol.getUser();
-    	assertEquals("staff",temp.getUsername());
+    	assertEquals("it broke!!!!!", "staff",temp.getUsername());
 
     	vol.login("volunteer","volunteer"); // should login
     	temp = vol.getUser();
-    	assertEquals(temp.getUsername(),"volunteer");
+    	assertEquals("it broke!!!!!", temp.getUsername(),"volunteer");
 
     	vol.login("bill", "turd"); // should not login
     	temp = vol.getUser();
-    	assertEquals(temp.getUsername(),"volunteer");
+    	assertEquals("it broke!!!!!", temp.getUsername(),"volunteer");
 
     	vol.login("staff", "Staff"); // should not login
     	temp = vol.getUser();
-    	assertEquals(temp.getUsername(),"volunteer");
+    	assertEquals("it broke!!!!!", temp.getUsername(),"volunteer");
 
     	vol.login("Staff", "staff"); // should not login
     	temp = vol.getUser();
-    	assertEquals(temp.getUsername(),"volunteer"); 
+    	assertEquals("it broke!!!!!", temp.getUsername(),"volunteer"); 
 
     	System.out.println("login is correct");
 
