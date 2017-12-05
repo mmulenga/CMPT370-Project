@@ -1,12 +1,5 @@
 package com.teamb.view;
 
-import com.teamb.controller.BasicController;
-import com.teamb.controller.CreateEventController;
-import com.teamb.controller.SignUpController;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -14,8 +7,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.Locale;
 
@@ -29,6 +20,7 @@ public class CreateEventView extends BasicView {
     public Button submit;
     public Button clear;
     public Button home;
+    public Button back;
     public Spinner<Integer> startHour;
     public Spinner<Integer> startMin;
     public Spinner<Integer> endHour;
@@ -41,7 +33,6 @@ public class CreateEventView extends BasicView {
      * Creates the root pane, and adds the children with the CreateChildren() method.
      * May have parameters based on what information is needed from the controller
      *
-     * @param
      */
     public CreateEventView() {
         super();
@@ -52,6 +43,12 @@ public class CreateEventView extends BasicView {
         return root;
     }
 
+    /**
+     * Method used to create all objects
+     * displayed on the view.
+     *
+     * Then formats the view nicely.
+     */
     @Override
     protected void CreateChildren() {
         GridPane gp = new GridPane();
@@ -80,15 +77,14 @@ public class CreateEventView extends BasicView {
         startDatePicker.setValue(LocalDate.now());
         endDatePicker.setValue(startDatePicker.getValue().plusDays(1));
 
-        //Time
 
 
         //Add Header
         Label header = new Label("Create New Event");
         header.setFont(Font.font("Arial", FontWeight.BOLD, 24));
         gp.add(header, 0,0,3,1);
-        gp.setHalignment(header, HPos.CENTER);
-        gp.setMargin(header, new Insets(20,0,20,0));
+        GridPane.setHalignment(header, HPos.CENTER);
+        GridPane.setMargin(header, new Insets(20,0,20,0));
 
         //Create Labels
         Label startDateLabel = new Label("Start Date : ");
@@ -103,6 +99,12 @@ public class CreateEventView extends BasicView {
         eventTitleField = new TextField();
         locationField = new TextField();
         descriptionArea = new TextArea();
+
+        //Create Buttons
+        submit = new Button("Submit");
+        clear = new Button("Clear");
+        home = new Button("Homepage");
+        back = new Button("<- BACK");
 
         //Create Dorpdown box
         startHour = new Spinner<>(0,23,0);
@@ -123,10 +125,9 @@ public class CreateEventView extends BasicView {
         startTime.getChildren().addAll(startHour,semicolen,startMin);
         endTime.getChildren().addAll(endHour,semicolen2,endMin);
 
-        //Create Buttons
-        submit = new Button("Submit");
-        clear = new Button("Clear");
-        home = new Button("Homepage");
+
+        //Formatting Event View
+        gp.add(back,0,0);
 
         gp.add(eventTitleLabel,0,1);
         gp.add(eventTitleField,1,1,2,1);
@@ -151,22 +152,17 @@ public class CreateEventView extends BasicView {
 
         gp.add(home,0,9);
         gp.add(submit,1,9);
-        gp.setHalignment(submit,HPos.RIGHT);
+        GridPane.setHalignment(submit,HPos.RIGHT);
         gp.add(clear,2,9);
 
-        //How to convert localDate into Timestamp here.
-        System.out.println(Timestamp.valueOf(startDatePicker.getValue().atStartOfDay()));
-
-
         //Add Scroll Bar
-
         ScrollPane sp = new ScrollPane();
         sp.setContent(gp);
-
         sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         sp.setPrefSize(600,600);
 
+        //Adding all newly created Children to the root
         root.getChildren().add(sp);
     }
 }

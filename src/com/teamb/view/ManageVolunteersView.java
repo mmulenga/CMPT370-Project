@@ -35,12 +35,13 @@ public class ManageVolunteersView extends BasicView {
     public Button searchBtn;
     public TextField searchKeyField;
 
+    public TableView<ProfileSelection> table;
     /**
      * Constructor.
      * Creates the root pane, and adds the children with the CreateChildren() method.
      * May have parameters based on what information is needed from the controller
      *
-     * @param c
+     * @param
      */
     public ManageVolunteersView() {
         super();
@@ -61,7 +62,7 @@ public class ManageVolunteersView extends BasicView {
      */
     @Override
     protected void CreateChildren() {
-        TableView<ProfileSelection> table = new TableView<>();
+        table = new TableView<>();
         table.setEditable(true);
 
         TableColumn<ProfileSelection, Boolean> activeCol = createColumn("Selection", "active");
@@ -92,14 +93,14 @@ public class ManageVolunteersView extends BasicView {
         searchBtn = new Button("Search");
 
 
-        //TODO GET REAL DATA
-        for(int i = 0; i < 5; i++){
-            Profile p = new Profile();
-            p.setFirstName("first name" + i);
-            p.setLastName("last name" + i);
-            ProfileSelection ps = new ProfileSelection(p, false);
-            table.getItems().add(ps);
-        }
+//        //TODO GET REAL DATA
+//        for(int i = 0; i < 5; i++){
+//            Profile p = new Profile();
+//            p.setFirstName("first name" + i);
+//            p.setLastName("last name" + i);
+//            ProfileSelection ps = new ProfileSelection(p, false);
+//            table.getItems().add(ps);
+//        }
 
         Label label = new Label("Manage Volunteers");
         label.setFont(Font.font("Arial", FontWeight.BOLD, 24));
@@ -138,5 +139,13 @@ public class ManageVolunteersView extends BasicView {
         TableColumn<S,T> col = new TableColumn<>(title);
         col.setCellValueFactory(new PropertyValueFactory<>(propertyName));
         return col;
+    }
+
+    public void loadProfilesIntoTable(ArrayList<Profile> profiles){
+        table.getItems().remove(0,table.getItems().size());
+        for(Profile p:profiles){
+            ProfileSelection ps = new ProfileSelection(p, false);
+            table.getItems().add(ps);
+        }
     }
 }

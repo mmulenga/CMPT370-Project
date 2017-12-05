@@ -228,6 +228,7 @@ public class Profile {
     public void setHoursWorked(int value){
         this.hoursWorked = value;
     }
+
     /**
      *
      * @param time - Availability matrix 7x2
@@ -332,6 +333,8 @@ public class Profile {
         volunteerGroups.removeGroup(groupName);
     }
 
-
+    public String toString(){
+        return getLastName();
+    }
 
 }
