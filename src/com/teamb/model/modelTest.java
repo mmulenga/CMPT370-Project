@@ -3,7 +3,9 @@ package com.teamb.model;
 import java.util.ArrayList;
 import org.junit.*;
 
-public class modelTest(){
+public class modelTest{
+
+	public modelTest(){}
 
 	public Profile setProfile(){
 		Profile pro = Profile();
@@ -19,29 +21,29 @@ public class modelTest(){
     	u.setUsername("jim");
     	u.setPassword("pass");
     	u.setIsStaff(true);
-    	u.setprofileID(12345);
+    	u.setProfileID(12345);
     	return u;
 	}
 	public void setValidStaffUsers(Users u){
     	u.setUsername("staff");
     	u.setPassword("staff");
     	u.setIsStaff(true);
-    	u.setprofileID(12345);
+    	u.setProfileID(12345);
     	return u;
 	}
 
-	public void setInvalidVolunteerUsers(Users u){
+	public Users setInvalidVolunteerUsers(Users u){
     	u.setUsername("jim");
     	u.setPassword("pass");
     	u.setIsStaff(false);
-    	u.setprofileID(12345);
+    	u.setProfileID(12345);
     	return u;
 	}
 	public void setValidVolunteerUsers(Users u){
     	u.setUsername("volunteer");
     	u.setPassword("volunteer");
     	u.setIsStaff(false);
-    	u.setprofileID(12345);
+    	u.setProfileID(12345);
     	return u;
 	}
 
@@ -199,7 +201,7 @@ public class modelTest(){
 
 
 
-    static public int main(String[]){
+	public static void main(String[] args){
         System.out.println("Starting model testing.\n");
 
         profileTest();
