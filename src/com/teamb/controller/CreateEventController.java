@@ -1,27 +1,19 @@
 package com.teamb.controller;
 
 import com.teamb.model.Event;
-import com.teamb.model.Profile;
 import com.teamb.model.VolunteerizeModel;
 import com.teamb.view.BasicView;
 import com.teamb.view.CreateEventView;
-import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import javax.swing.*;
 import java.time.LocalDate;
-import java.time.LocalDate;
-import java.util.Date;
 
 
 /**
@@ -41,21 +33,21 @@ public class CreateEventController extends BasicController {
     /**
      * Class constructor.
      */
-    public CreateEventController(Stage s, VolunteerizeModel m) {
+    CreateEventController(Stage s, VolunteerizeModel m) {
         super(s, m);
         view = new CreateEventView();
         view.submit.setOnAction(new submitEventHandler());
         view.clear.setOnAction(new clearEventHandler());
         view.home.setOnAction(new homeEventHandler());
+        view.back.setOnAction(new backEventHandler());
     }
 
     /**
-     * EventHandler methods to handle button clicks
-     * Each event handler handles a button click
-     * and has its
+     * EventHandler methods to handle button clicks.
+     * Each event handler does a special property on a
+     * button click
      *
      */
-
     class submitEventHandler implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent event) {
@@ -83,8 +75,21 @@ public class CreateEventController extends BasicController {
         }
     }
 
+    class backEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            ChangeToManageEventsView();
+        }
+    }
 
-    public void createNewEvent() {
+    /**
+     * This method gets the value from the fields of
+     * the CreateEventView.
+     *
+     * Creates a new Event based on the values
+     * gotten from the fields.
+     */
+    private void createNewEvent() {
         if(view.startHour.getValue()>23){
             view.startHour.getValueFactory().setValue(23);
         }
@@ -104,8 +109,6 @@ public class CreateEventController extends BasicController {
         System.out.println(endTime);
 
         event = new Event();
-        model = new VolunteerizeModel();
-       // event.setEventID();
         event.setEventName(view.eventTitleField.getText());
         event.setStartTime(startTime);
         event.setEndTime(endTime);
@@ -121,24 +124,17 @@ public class CreateEventController extends BasicController {
      * and a button that goes back to Manage events
      *
      */
-    public void completePopUP(){
+    private void completePopUP(){
         Stage popupwindow=new Stage();
 
         popupwindow.initModality(Modality.APPLICATION_MODAL);
         popupwindow.setTitle("Volunteerize");
-
-
         Label completeInformationLabel= new Label(event.getEventName() + " has now been created");
         Button profileButton= new Button("Go to Manage Events");
-        profileButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                popupwindow.close();
-                ChangeToManageEventsView();
-
-            }
+        profileButton.setOnAction(event -> {
+            popupwindow.close();
+            ChangeToManageEventsView();
         });
-
         VBox layout= new VBox(10);
         layout.getChildren().addAll(completeInformationLabel, profileButton);
         layout.setAlignment(Pos.CENTER);
