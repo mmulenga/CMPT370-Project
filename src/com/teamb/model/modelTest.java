@@ -5,6 +5,50 @@ import org.junit.*;
 
 public class modelTest(){
 
+	public Profile setProfile(){
+		Profile pro = Profile();
+		Availability avail = new Availability();
+		pro.setAllBaseInformation("bill","bob","johnson","seventh.ave", "234-3433", 
+    		"e3e3e3", "num", "jim", "jack", "jill", 1234, "fudge", "foobar.st", 
+    		"foo@bar.com", false, true, 321, false, "med", 543, 10, "path", avail);
+
+		return pro;
+	}
+
+	public void setInvalidStaffUsers(Users u){
+    	u.setUsername("jim");
+    	u.setPassword("pass");
+    	u.setIsStaff(true);
+    	u.setprofileID(12345);
+    	return u;
+	}
+	public void setValidStaffUsers(Users u){
+    	u.setUsername("staff");
+    	u.setPassword("staff");
+    	u.setIsStaff(true);
+    	u.setprofileID(12345);
+    	return u;
+	}
+
+	public void setInvalidVolunteerUsers(Users u){
+    	u.setUsername("jim");
+    	u.setPassword("pass");
+    	u.setIsStaff(false);
+    	u.setprofileID(12345);
+    	return u;
+	}
+	public void setValidVolunteerUsers(Users u){
+    	u.setUsername("volunteer");
+    	u.setPassword("volunteer");
+    	u.setIsStaff(false);
+    	u.setprofileID(12345);
+    	return u;
+	}
+
+
+
+
+
     public void profileTest(){
     	System.out.println("starting profile Test\n");
     	Profile pro = new Profile();
@@ -14,85 +58,142 @@ public class modelTest(){
     		"foo@bar.com", false, true, 321, false, "med", 543, 10, "path", avail);
 
 
-    	assert("bill",pro.getFirstName());
+    	assertEquals("bill",pro.getFirstName());
     	System.out.println("first name");
-    	assert("bob",pro.getMiddleName());
+    	assertEquals("bob",pro.getMiddleName());
     	System.out.println("middle name");
-    	assert("johnson",pro.getLastName());
+    	assertEquals("johnson",pro.getLastName());
     	System.out.println("last name");
-    	assert("seventh.ave",pro.getAddress());
+    	assertEquals("seventh.ave",pro.getAddress());
     	System.out.println("address");
-		assert("234-3433",pro.getPhoneNumber());
+		assertEquals("234-3433",pro.getPhoneNumber());
     	System.out.println("phone number");
-    	assert("e3e3e3",pro.getPostalCode());
+    	assertEquals("e3e3e3",pro.getPostalCode());
     	System.out.println("postal code");
-    	assert("num",pro.getEmergencyContactPhoneNumber());
+    	assertEquals("num",pro.getEmergencyContactPhoneNumber());
     	System.out.println("emerg contact phone number");
-    	assert("jim",pro.getEmergencyContactFirst());
+    	assertEquals("jim",pro.getEmergencyContactFirst());
     	System.out.println("emerg contact first");
-    	assert("jack",pro.getEmergencyContactMiddle());
+    	assertEquals("jack",pro.getEmergencyContactMiddle());
     	System.out.println("emerg contact middle");
-    	assert("jill",pro.getEmergencyContactLast());
+    	assertEquals("jill",pro.getEmergencyContactLast());
     	System.out.println("emerg contact last");
-    	assert("1234",pro.getEmergencyContactID());
+    	assertEquals("1234",pro.getEmergencyContactID());
     	System.out.println("emerg contact ID");
-    	assert("fudge",pro.getEmergencyContactPostalCode());
+    	assertEquals("fudge",pro.getEmergencyContactPostalCode());
     	System.out.println("emerg postal code");
-    	assert("foobar.st",pro.getEmergencyContactAddress());
+    	assertEquals("foobar.st",pro.getEmergencyContactAddress());
     	System.out.println("emerg contact address");
-    	assert("foo@bar.com",pro.getEmail());
+    	assertEquals("foo@bar.com",pro.getEmail());
     	System.out.println("email");
-    	assert(false,pro.getContactByPhone());
+    	assertEquals(false,pro.getContactByPhone());
     	System.out.println("contact by phone");
-    	assert(true,pro.getContactByEmail());
+    	assertEquals(true,pro.getContactByEmail());
     	System.out.println("contact by email");
-    	assert(321,pro.getMemberNumber());
+    	assertEquals(321,pro.getMemberNumber());
     	System.out.println("member number");
-    	assert(false,pro.getCriminalRecordCheck());
+    	assertEquals(false,pro.getCriminalRecordCheck());
     	System.out.println("criminal rec check");
-    	assert("med",pro.getMedicalInformation());
+    	assertEquals("med",pro.getMedicalInformation());
     	System.out.println("med info");
-    	assert(534,pro.getMemberID());
+    	assertEquals(534,pro.getMemberID());
     	System.out.println("member id");
-    	assert(10,pro.getHoursWorked());
+    	assertEquals(10,pro.getHoursWorked());
     	System.out.println("hours worked");
-    	assert("path",pro.getPhotoPath());
+    	assertEquals("path",pro.getPhotoPath());
     	System.out.println("photoPath");
 
 
-    	System.out.println("Done profile check");
+    	System.out.println("Done profile check\n");
     }
 
     public void eventTest(){
+    	System.out.println("starting event Test.\n");
     	Event ev = new Event();
 
     	ev.setEventID(123);
-    	assert(123,ev.getEventID());
+    	assertEquals(123,ev.getEventID());
     	System.out.println("event id");
     	ev.setEventName("nope");
-    	assert("nope",pro.getEventName());
+    	assertEquals("nope",pro.getEventName());
     	System.out.println("event name");
     	ev.setEventStartTime(200);
-    	assert(200,pro.getEventStartTime());
+    	assertEquals(200,pro.getEventStartTime());
     	System.out.println("event start time");
     	ev.setEventEndTime(1200);
-    	assert(1200,pro.getEventEndTime());
+    	assertEquals(1200,pro.getEventEndTime());
     	System.out.println("event end time");
     	ev.setEventStartDate("time");
-    	assert("time",pro.getEventStartDate());
+    	assertEquals("time",pro.getEventStartDate());
     	System.out.println("event start date");
     	ev.setEventEndDate("over");
-    	assert("over",pro.getEventEndDate());
+    	assertEquals("over",pro.getEventEndDate());
     	System.out.println("event end date");
     	ev.setEventLocation("here");
-    	assert("here",pro.getEventLocation());
+    	assertEquals("here",pro.getEventLocation());
     	System.out.println("event location");
 
+    	System.out.println("done event test.\n");
     }
 
 
+    public void usersTest(){
+    	System.out.println("starting users Test.\n");
+    	Users u;
+    	u.setUsername("jim");
+    	u.setPassword("pass");
+    	u.setIsStaff(true);
+    	u.setprofileID(12345);
+
+    	assertEquals("jim",u.getUsername());
+    	assertEquals("pass",u.getPassword());
+    	assertEquals(true,u.getIsStaff());
+    	assertEquals(12345,u.getProfileID());
+
+    	System.out.println("done users Test.\n");
+    }
+
+    public void volunteerizeModelTest(){
+    	System.out.println("starting volunteerize model Test.\n");
+    	 
+    	VolunteerizeModel vol = new VolunteerizeModel();
+    	Users user;
+    	Users temp;
+    	setUsers(user);
+    	Profile pro = setProfile();
+
+    	vol.setProfile(pro);
+    	vol.setUser(user);
+    	pro = new Profile();
+
+    	vol.login("staff","staff"); // should login
+    	temp = vol.getUser();
+    	assertEquals("staff",temp.getUsername());
+
+    	vol.login("volunteer","volunteer"); // should login
+    	temp = vol.getUser();
+    	assertEquals(temp.getUsername(),"volunteer");
+
+    	vol.login("bill", "turd"); // should not login
+    	temp = vol.getUser();
+    	assertEquals(temp.getUsername(),"volunteer");
+
+    	vol.login("staff", "Staff"); // should not login
+    	temp = vol.getUser();
+    	assertEquals(temp.getUsername(),"volunteer");
+
+    	vol.login("Staff", "staff"); // should not login
+    	temp = vol.getUser();
+    	assertEquals(temp.getUsername(),"volunteer"); 
+
+    	System.out.println("login is correct");
 
 
+    	
+
+
+    	System.out.println("done volunteerize model Test.\n");
+    }
 
 
 
@@ -102,7 +203,8 @@ public class modelTest(){
         System.out.println("Starting model testing.\n");
 
         profileTest();
-
+        eventTest();
+        usersTest();
 
         return 1;
     }
