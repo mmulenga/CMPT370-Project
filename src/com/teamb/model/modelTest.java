@@ -1,6 +1,5 @@
 package com.teamb.model;
 
-import java.util.ArrayList;
 import org.junit.*;
 
 public class modelTest{
