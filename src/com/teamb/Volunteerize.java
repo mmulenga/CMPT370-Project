@@ -5,6 +5,12 @@
  */
 package com.teamb;
 
+import com.teamb.controller.*;
+import com.teamb.model.Availability;
+import com.teamb.model.Profile;
+import com.teamb.model.VolunteerizeModel;
+import com.teamb.view.MainLandingView;
+import com.teamb.view.VolunteerProfileView;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -25,16 +31,21 @@ import javafx.stage.Stage;
  * @author irene
  */
 public class Volunteerize extends Application {
-    
+
     @Override
     public void start(Stage primaryStage) {
-        LoginView lginView = new LoginView();
-        
-        Scene scene = new Scene(lginView.root, 400, 350);
-        
+        //LoginView loginView = new LoginView();
+
+        //VolunteerProfileController mainController = new VolunteerProfileController(primaryStage);
+       //CreateEventController mainController = new CreateEventController(primaryStage);
+        VolunteerizeModel model = new VolunteerizeModel();
+        LoginViewController mainController = new LoginViewController(primaryStage, model);
+        Scene scene = new Scene(mainController.GetView().GetRootPane(), 600, 600);
+
         primaryStage.setTitle("Volunteerize");
         primaryStage.setScene(scene);
         primaryStage.show();
+
     }
 
     /**
@@ -43,5 +54,5 @@ public class Volunteerize extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

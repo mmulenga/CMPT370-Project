@@ -1,150 +1,120 @@
 package com.teamb.controller;
 
-import java.sql.*;
+import com.teamb.model.VolunteerizeModel;
+import com.teamb.view.EventView;
+import com.teamb.model.Event;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import java.util.ArrayList;
 
-public class EventController {
-    /* ------- Instance Variables ------- */
-    private int id;
-    private int startTime;
-    private int endTime;
-    private int startDate;
-    private int endDate;
-    private int location;
-    private int type;
+/**
+ * This EventController gets Upcoming events from
+ * the database.
+ *
+ * Then calls EventView to display the information
+ * from database.
+ *
+ * @author Irene
+ * @version 1.0
+ * @since   2017-12-04
+ */
+public class EventController extends BasicController {
 
-    private String name;
-    private String description;
+    //Instance Variables
+    private ArrayList<Event> events;
+    private EventView eventView;
 
 
-    /* ------- Getters and Setters ------- */
-
-    public int getId() {
-        return id;
+    /**
+     * Class constructor.
+     */
+    EventController(Stage s, VolunteerizeModel m) {
+        super(s, m);
+        events = model.getUpcomingEvents();
+        eventView = new EventView();
+        eventView.PopulateEventList(events);
+        eventView.backButton.setOnAction(new backButtonEventHandler());
+        loadButtons();
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public void editEvent(Event event) {
+        //TODO: CAll method that changes event in database
 
-    public int getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(int startTime) {
-        this.startTime = startTime;
-    }
-
-    public int getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(int endTime) {
-        this.endTime = endTime;
-    }
-
-    public int getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(int startDate) {
-        this.startDate = startDate;
-    }
-
-    public int getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(int endDate) {
-        this.endDate = endDate;
-    }
-
-    public int getLocation() {
-        return location;
-    }
-
-    public void setLocation(int location) {
-        this.location = location;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    /* ------- Methods ------- */
-    public void createEvent(int eventId, String eventName, String eventComments, int locationId, int typeId) {
+        VolunteerizeModel model = new VolunteerizeModel();
+        //event passed in must already be altered.
+        model.editEvent(event);
 
     }
 
-    public void editEvent() {
+    public void deleteEvent(Event event) {
+        //TODO:Call method that deletes event from database
+
+        VolunteerizeModel model = new VolunteerizeModel();
+        //event passed in is one to be deleted.
+        model.deleteEvent(event);
+    }
+
+    /**
+     * Method that returns an arrayList
+     * of type Event for all
+     * upcoming events.
+     */
+    public ArrayList<Event> getEvents() {
+        return events;
 
     }
 
-    public void deleteEvent() {
-
-    }
-
-
-    public void viewEvent(Startup database, String eventId) {
-        try {
-            ResultSet result = database.createQuery("SELECT * FROM Events e WHERE e.id = " + eventId);
-
-            while(result.next()) {
-                setId(result.getInt("id"));
-                setName(result.getString("name"));
-                setDescription(result.getString("comments"));
-                setLocation(result.getInt("location_id"));
-                setType(result.getInt("type_id"));
-
-                System.out.println("ID: " + getId() +
-                        " Event Name: " + getName() +
-                        " Description: " + getDescription() +
-                        " Location ID: " + getLocation() +
-                        " Type ID: " + getType());
-            }
-        } catch(Exception e) {
-            System.out.println("Event view failed.");
+    /**
+     * Method that creates a "readMore" button
+     * for all upcoming events gotten from the
+     * database.
+     *
+     * setOnAction to know what button was clicked.
+     * once button clicked it then changes to
+     * VolunteerEventProfileView for that event.
+     */
+    private void loadButtons(){
+        for(int i = 0; i < eventView.buttons.size(); i++){
+            int temp = i;
+            eventView.buttons.get(i).setOnAction((ActionEvent) -> {
+                changeToVolunterEventProfileView(temp);
+            });
         }
     }
 
-    public void viewAllEvents(Startup database) {
-        try {
-            ResultSet result = database.createQuery("SELECT * FROM Events e");
 
-            while(result.next()) {
-                setId(result.getInt("id"));
-                setName(result.getString("name"));
-                setDescription(result.getString("comments"));
-                setLocation(result.getInt("location_id"));
-                setType(result.getInt("type_id"));
-
-                System.out.println("ID: " + getId() +
-                        " Event Name: " + getName() +
-                        " Description: " + getDescription() +
-                        " Location ID: " + getLocation() +
-                        " Type ID: " + getType());
-            }
-        } catch(Exception e) {
-            System.out.println("Event view failed.");
+    /**
+     * Event handler method that handles back button action
+     * and goes back to the previous page.
+     */
+    class backButtonEventHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent event) {
+            ChangeToVolunteerLandingView();
         }
     }
+
+
+    /**
+     * Method takes in a unique number
+     * to identify what button was clicked.
+     * It then uses these ID to identify the event
+     * and display the Event page.
+     * @param id;
+     */
+    private void changeToVolunterEventProfileView(int id){
+        Event event = events.get(id);
+        VolunteerEventProfileController vlc = new VolunteerEventProfileController(stage, model, event);
+        Scene scene = new Scene(vlc.GetView().GetRootPane(), 720, 540);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    public EventView GetView(){
+        return eventView;
+    }
+
 }
