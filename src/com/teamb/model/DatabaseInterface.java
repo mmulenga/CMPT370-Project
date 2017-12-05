@@ -163,7 +163,7 @@ public class DatabaseInterface {
      */
     public ResultSet count(String query) {
         System.out.println(query);
-        // Connect to the databse.
+        // Connect to the database.
         connect();
 
         try {

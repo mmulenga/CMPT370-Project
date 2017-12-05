@@ -2,6 +2,7 @@ package com.teamb.controller;
 
 import com.teamb.model.Profile;
 import com.teamb.model.Shift;
+import com.teamb.model.Users;
 import com.teamb.view.BasicView;
 import com.teamb.view.SignUpView;
 import javafx.event.EventHandler;
@@ -37,6 +38,8 @@ public class SignUpController extends BasicController{
 
     private Profile newProfile;
     private Profile editProfile;
+    private Users newUser;
+    private Users editUser;
 
     public SignUpController(Stage s, VolunteerizeModel m){
         super(s, m);
@@ -46,10 +49,11 @@ public class SignUpController extends BasicController{
         view.backButton.setOnAction(new backButtonEventHandler());
     }
 
-    public SignUpController(Stage s, VolunteerizeModel m, Profile profile){
+    public SignUpController(Stage s, VolunteerizeModel m, Profile profile, Users user){
         super(s, m);
         view = new SignUpView();
         editProfile = profile;
+        editUser = user;
         view.submit.setOnAction(new submitEventHandler());
         view.clear.setOnAction(new clearEventHandler());
         view.backButton.setOnAction(new backButtonEventHandler());
@@ -82,7 +86,7 @@ public class SignUpController extends BasicController{
                 }
             }
             if (view.header.getText().equals("Edit Profile")) {
-                setProfileValues(editProfile);
+                setProfileValues(editProfile, editUser);
                 model.editProfile(editProfile);
             }
             else{
@@ -98,7 +102,7 @@ public class SignUpController extends BasicController{
         public void handle(ActionEvent event) {
             view.firstNameField.clear();
             view.lastNameField.clear();
-            //view.passwordField.clear();
+            view.passwordField.clear();
             view.addressField.clear();
             view.phoneNumberField.clear();
             view.emergencyNumberField.clear();
@@ -193,7 +197,13 @@ public class SignUpController extends BasicController{
     }
 
 
-    public void setProfileValues(Profile profile) {
+    public void setProfileValues(Profile profile, Users user) {
+        user.setUsername(view.memberIDField.getText());
+        user.setPassword(view.passwordField.getText());
+        user.setIsStaff(false);
+        user.setProfileID(Integer.parseInt(user.getUsername()));
+
+        profile.setMemberID(Integer.parseInt(view.memberIDField.getText()));
         profile.setFirstName(view.firstNameField.getText());
         profile.setMiddleName(view.middleNameField.getText());
         profile.setLastName(view.lastNameField.getText());
@@ -219,18 +229,21 @@ public class SignUpController extends BasicController{
     public void createNewProfile() {
 
         newProfile = new Profile();
-        setProfileValues(newProfile);
+        newUser = new Users();
+        setProfileValues(newProfile, newUser);
 
-        System.out.print(view.availability);
+        //System.out.print(view.availability);
         // If the profile stored within the model doesn't exist we know that
         // the volunteer is signing up on their own, so we update the model
         // profile to the newly created one.
         if(model.getProfile().getFirstName() == null) {
             model.setProfile(newProfile);
+            model.setUser(newUser);
         }
 
         // Add the profile to the database
         model.addProfile(newProfile);
+        model.addUser(newUser);
     }
 
 

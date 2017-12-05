@@ -13,13 +13,14 @@ import java.util.ArrayList;
  * Created by Sarah on 2017-10-10.
  */
 public class Availability {
-    public boolean[][] availablilityArray;
+    public boolean[][] availabilityArray;
+
     public Availability()
     {
-        availablilityArray = new boolean[7][3];
+        availabilityArray = new boolean[7][3];
         for(int i=0;i<7;i++){
             for(int j=0;j<3;j++){
-                availablilityArray[i][j] = false;
+                availabilityArray[i][j] = false;
             }
         }
     }
@@ -27,24 +28,24 @@ public class Availability {
     //0 = monday, 1 = tuesday etc
     //0 = morning, 1 = afternoon
     public void ChangeAvailability(int day, int shift, boolean isAvailable){
-        availablilityArray[day][shift] = isAvailable;
+        availabilityArray[day][shift] = isAvailable;
     }
 
     public boolean  GetAvailablity(int day, int  shift){
-        return availablilityArray[day-1][shift];
+        return availabilityArray[day-1][shift];
    }
 
    public ArrayList<Shift> fetchAvailabiliity(){
         ArrayList<Shift> sList = new ArrayList<Shift>();
-       Shift morningShift = new Shift("Morning", availablilityArray[0][0], availablilityArray[1][0], availablilityArray[2][0],
-               availablilityArray[3][0], availablilityArray[4][0], availablilityArray[5][0],
-               availablilityArray[6][0]);
-       Shift afternoonShift = new Shift("Afternoon", availablilityArray[0][1], availablilityArray[1][1], availablilityArray[2][1],
-               availablilityArray[3][1], availablilityArray[4][1], availablilityArray[5][1],
-               availablilityArray[6][1]);
-       Shift eveningShift = new Shift("Evening", availablilityArray[0][2], availablilityArray[1][2], availablilityArray[2][2],
-               availablilityArray[3][2], availablilityArray[4][2], availablilityArray[5][2],
-               availablilityArray[6][2]);
+       Shift morningShift = new Shift("Morning", availabilityArray[0][0], availabilityArray[1][0], availabilityArray[2][0],
+               availabilityArray[3][0], availabilityArray[4][0], availabilityArray[5][0],
+               availabilityArray[6][0]);
+       Shift afternoonShift = new Shift("Afternoon", availabilityArray[0][1], availabilityArray[1][1], availabilityArray[2][1],
+               availabilityArray[3][1], availabilityArray[4][1], availabilityArray[5][1],
+               availabilityArray[6][1]);
+       Shift eveningShift = new Shift("Evening", availabilityArray[0][2], availabilityArray[1][2], availabilityArray[2][2],
+               availabilityArray[3][2], availabilityArray[4][2], availabilityArray[5][2],
+               availabilityArray[6][2]);
        sList.add(morningShift);
        sList.add(afternoonShift);
        sList.add(eveningShift);
@@ -56,17 +57,17 @@ public class Availability {
        System.out.println("Day  |  Morning  |  Afternon  |  Evening");
        for(int i=0; i<7;i++){
            temp += (i+1) + "          ";
-           if(availablilityArray[i][0]){
+           if(availabilityArray[i][0]){
                temp += "true       ";
            }else{
                temp += "false       ";
            }
-           if(availablilityArray[i][1]){
+           if(availabilityArray[i][1]){
                temp += "true       ";
            }else{
                temp += "false       ";
            }
-           if(availablilityArray[i][2]){
+           if(availabilityArray[i][2]){
                temp += "true       ";
            }else{
                temp += "false       ";
