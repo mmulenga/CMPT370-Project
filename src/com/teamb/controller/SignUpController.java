@@ -1,34 +1,19 @@
 package com.teamb.controller;
 
 import com.teamb.model.Profile;
-import com.teamb.view.BasicView;
 import com.teamb.view.SignUpView;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import java.util.Objects;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.HPos;
-import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.CheckBoxTableCell;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import sun.security.x509.AVA;
 
-import java.util.Objects;
 import com.teamb.model.VolunteerizeModel;
 
-import javax.swing.*;
+
 
 public class SignUpController extends BasicController{
 
