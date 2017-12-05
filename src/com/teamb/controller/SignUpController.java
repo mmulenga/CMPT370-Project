@@ -62,15 +62,14 @@ public class SignUpController extends BasicController{
         @Override
         public void handle(ActionEvent event) {
 
-
-
+            /*editing a profile*/
             if (view.header.getText().equals("Edit Profile")) {
+                if(null == getProfileFromView()) return;
                 model.editProfile(getProfileFromView());
             }
+            /*creating a new profile*/
             else{
-            createNewProfile();
-            // ((SignUpController) controller).actionPerformed();
-            completePopUP();
+                createNewProfile();
             }
         }
     }
@@ -132,7 +131,7 @@ public class SignUpController extends BasicController{
      * with the information gotten from textfields and radio
      * buttons.
      * @param editProfile
-     * @return profile with values from view, or NULL if required fields not filled
+     *
      */
     public void editProfile(Profile editProfile) {
         view.header.setText("Edit Profile");
@@ -173,10 +172,33 @@ public class SignUpController extends BasicController{
     /**
      * Method returns a profile with fields set to values of components in
      * the view input by the user
+     * @return profile with values from view, or null if required fields not filled
      *
      */
     public Profile getProfileFromView() {
         Profile profile = new Profile();
+
+
+        /*check if required fields are not empty*/
+        if(view.firstNameField.getText().isEmpty()) return null;
+        if(view.middleNameField.getText().isEmpty()) return null;
+        if(view.lastNameField.getText().isEmpty()) return null;
+        if(view.addressField.getText().isEmpty()) return null;
+        if(view.phoneNumberField.getText().isEmpty()) return null;
+        if(view.emailField.getText().isEmpty()) return null;
+        if(view.emergencyFirstNameField.getText().isEmpty()) return null;
+        if(view.emergencyMiddleNameField.getText().isEmpty()) return null;
+        if(view.emergencyLastNameField.getText().isEmpty()) return null;
+        if(view.emergencyNumberField.getText().isEmpty()) return null;
+        if(view.emergencyPostalCodeField.getText().isEmpty()) return null;
+        if(view.emergencyAddressField.getText().isEmpty()) return null;
+        if(view.medicalInformationField.getText().isEmpty()) return null;
+
+
+
+
+
+
 
         for(int day = 0; day < 7; day++) {
             for(int shift = 0; shift < 3; shift++) {
@@ -214,11 +236,14 @@ public class SignUpController extends BasicController{
         // the volunteer is signing up on their own, so we update the model
         // profile to the newly created one.
         if(model.getProfile().getFirstName() == null) {
+            if(null == getProfileFromView()) return;
             model.setProfile(getProfileFromView());
         }
 
         // Add the profile to the database
+        if(null == getProfileFromView()) return;
         model.addProfile(getProfileFromView());
+        completePopUP();
     }
 
 
