@@ -298,6 +298,15 @@ public class VolunteerizeModel {
     }
 
     /**
+     * Deletes the all relevant entries for the given profile.
+     * @param id - is the id of the event you would like to delete
+     */
+    public void deleteEventid(int id) {
+        database.delete("events WHERE id = " + id + ";");
+    }
+
+
+    /**
      * Adds event Participants to table in Database
      * @param e - Event that participant will go to.
      * @param p - Profile of participant.
@@ -518,8 +527,8 @@ public class VolunteerizeModel {
                         null,
                        null,
                         rs.getString("email"),
-                        rs.getBoolean("prefer_phone"),
-                        rs.getBoolean("prefer_email"),
+                        true,
+                        true,
                         rs.getInt("id"),
                         rs.getBoolean("criminal_check"),
                         rs.getString("medical_info"),
@@ -575,8 +584,8 @@ public class VolunteerizeModel {
                      null,
                      null,
                      rs.getString("email"),
-                     rs.getBoolean("prefer_phone"),
-                     rs.getBoolean("prefer_email"),
+                     true,
+                     true,
                      rs.getInt("id"),
                      rs.getBoolean("criminal_check"),
                      rs.getString("medical_info"),

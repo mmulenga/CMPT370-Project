@@ -14,6 +14,7 @@ public class ProfileSelection {
 
         firstName = p.getFirstName();
         lastName = p.getLastName();
+        volunteerID = p.getMemberID();
         active = act;
 
     }
