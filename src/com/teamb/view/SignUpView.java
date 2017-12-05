@@ -291,11 +291,6 @@ public class SignUpView extends BasicView {
 
         root.getChildren().add(sp);
     }
-    private <S,T> TableColumn<S,T> createColumn(String title, String propertyName) {
-        TableColumn<S,T> col = new TableColumn<>(title);
-        col.setCellValueFactory(new PropertyValueFactory<>(propertyName));
-        return col;
-    }
 
 
 }
