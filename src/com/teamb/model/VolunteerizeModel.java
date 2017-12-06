@@ -1,9 +1,10 @@
 package com.teamb.model;
 
+import org.postgresql.jdbc.PgArray;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 
 public class VolunteerizeModel {
     private DatabaseInterface database;
@@ -86,7 +87,7 @@ public class VolunteerizeModel {
         // Insert all relevant volunteer table information.
         database.insert("volunteers (id, first_name, middle_name, last_name, email," +
                 " hours_worked, criminal_check, medical_info, availability)\n" +
-                "VALUES (DEFAULT, " +
+                "VALUES (" + volunteer.getMemberID() + ", " +
                 wrap(volunteer.getFirstName()) + ", " +
                 wrap(volunteer.getMiddleName()) + ", " +
                 wrap(volunteer.getLastName()) + ", " +
@@ -98,13 +99,13 @@ public class VolunteerizeModel {
                 // Converts 2D array into "bracket notation"
                 // ie. {{1, 2, 3}, {4, 5, 6}}
                 wrap(Arrays.deepToString(volunteer.getAvailability()
-                        .availablilityArray)).replaceAll("\\]", "}").replaceAll("\\[", "{") +
+                        .availabilityArray)).replaceAll("\\]", "}").replaceAll("\\[", "{") +
                 ");");
 
         // Insert all emergency contact information.
         database.insert("emergency_contact (id, first_name, middle_name, last_name," +
                 " phone_number, address, postal_code, volunteer_id)\n " +
-                "VALUES (DEFAULT, " +
+                "VALUES (" + volunteer.getMemberID() + ", " +
                 wrap(volunteer.getEmergencyContactFirst()) + ", " +
                 wrap(volunteer.getEmergencyContactMiddle()) + ", " +
                 wrap(volunteer.getEmergencyContactLast()) + ", " +
@@ -185,6 +186,7 @@ public class VolunteerizeModel {
         ResultSet emergencyContact;
 
         Profile newProfile = new Profile();
+        Availability availability = new Availability();
 
         volunteer = database.select(" * FROM volunteers WHERE id = " + id + ";");
         contactInformation = database.select(" * FROM contact_information WHERE volunteer_id = " + id + ";");
@@ -195,11 +197,37 @@ public class VolunteerizeModel {
             contactInformation.next();
             emergencyContact.next();
 
-            Availability availability = new Availability();
+            PgArray array = (PgArray)volunteer.getArray("availability");
 
+            // So turns out JDBC doesn't facilitate multi-dimensional arrays.
+            // And I'm super sick of this, so we're about to get really gross. Sorry everyone.
+            // I will explain this though because I'm not a monster.
+            // So. When we get an array back from the volunteer ResultSet we cast it to
+            // PgArray so we can use the toString function. This gives us a string in the following
+            // format. {{f,f,f},{f,t,f},{f,f,f},{f,f,t},{f,f,f},{f,f,f},{f,f,f}}
+            // We parse that string and convert all the f's and t's to boolean values and store
+            // those in conversionArray. Yeah. I know.
+            boolean[][] conversionArray = new boolean[7][3];
+
+            int charIndex = 2;
+
+            for(int i = 0; i < 7; i++) {
+                for(int j = 0; j < 3; j++) {
+                    if(array.toString().charAt(charIndex) == 't') {
+                        conversionArray[i][j] = true;
+                    } else {
+                        conversionArray[i][j] = false;
+                    }
+                    charIndex += 2;
+                }
+
+                charIndex += 2;
+            }
+
+            availability.availabilityArray = conversionArray;
             // Grab the 2D array from the database and cast it as a 2D boolean array and assign that
             // hot mess to the availability object availabilityArray property.
-            availability.availablilityArray = (boolean[][])volunteer.getArray("availability").getArray();
+            // availability.availabilityArray = (boolean[][])array.getArray();
 
             newProfile.setAllBaseInformation(volunteer.getString("first_name"),
                     volunteer.getString("middle_name"),
@@ -321,35 +349,38 @@ public class VolunteerizeModel {
 
     public Profile[] retrieveAllProfiles() {
         Profile[] profileList;
-        ResultSet volunteer;
+        ResultSet id;
 
-        int count;
+        id = database.select(" id FROM volunteers;");
 
-        volunteer = database.select(" * FROM volunteers;");
+        int count = 0;
 
-        // Get the total number of volunteers
-        try {
-            count = 0;
-            while(volunteer.next()) {
+        //counts number of values in result set. // repeated work?
+        try{
+            ResultSet counter = database.count("volunteers");
 
-                count++;
-            }
+            counter.next();
+            count = counter.getInt("count");
 
-            System.out.println(count);
-
-            volunteer.beforeFirst();
         } catch(SQLException exception) {
+            System.out.println("Count query failed.");
             exception.printStackTrace();
-
-            return null;
         }
 
         profileList = new Profile[count];
 
 
-        for(int i = 0; i < count; i++) {
+        try {
+            int i = 0;
 
-            profileList[i] = getProfile(i);
+            while(i < count) {
+                id.next();
+
+                profileList[i] = getProfile(id.getInt("id"));
+                i++;
+            }
+        } catch(SQLException exception) {
+            exception.printStackTrace();
         }
 
         return profileList;

@@ -163,13 +163,13 @@ public class DatabaseInterface {
      */
     public ResultSet count(String query) {
         System.out.println(query);
-        // Connect to the databse.
+        // Connect to the database.
         connect();
 
         try {
             dbStatement = dbConnection.createStatement();
 
-            return dbStatement.executeQuery("COUNT (*) FROM " + query);
+            return dbStatement.executeQuery("SELECT COUNT (*) FROM " + query);
         } catch(SQLException exception) {
             System.out.println("Count query failed.");
 

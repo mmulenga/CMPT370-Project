@@ -13,13 +13,14 @@ import java.util.ArrayList;
  * Created by Sarah on 2017-10-10.
  */
 public class Availability {
-    public boolean[][] availablilityArray;
+    public boolean[][] availabilityArray;
+
     public Availability()
     {
-        availablilityArray = new boolean[7][3];
+        availabilityArray = new boolean[7][3];
         for(int i=0;i<7;i++){
             for(int j=0;j<3;j++){
-                availablilityArray[i][j] = false;
+                availabilityArray[i][j] = false;
             }
         }
     }
@@ -27,11 +28,11 @@ public class Availability {
     //0 = monday, 1 = tuesday etc
     //0 = morning, 1 = afternoon
     public void ChangeAvailability(int day, int shift, boolean isAvailable){
-        availablilityArray[day][shift] = isAvailable;
+        availabilityArray[day][shift] = isAvailable;
     }
 
-    public boolean  GetAvailablity(int day, int  shift){
-        return availablilityArray[day-1][shift];
+    public boolean GetAvailability(int day, int shift){
+        return availabilityArray[day][shift];
    }
 
 
@@ -40,17 +41,17 @@ public class Availability {
        System.out.println("Day  |  Morning  |  Afternon  |  Evening");
        for(int i=0; i<7;i++){
            temp += (i+1) + "          ";
-           if(availablilityArray[i][0]){
+           if(availabilityArray[i][0]){
                temp += "true       ";
            }else{
                temp += "false       ";
            }
-           if(availablilityArray[i][1]){
+           if(availabilityArray[i][1]){
                temp += "true       ";
            }else{
                temp += "false       ";
            }
-           if(availablilityArray[i][2]){
+           if(availabilityArray[i][2]){
                temp += "true       ";
            }else{
                temp += "false       ";

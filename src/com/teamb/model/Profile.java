@@ -24,8 +24,7 @@ public class Profile {
 
 
     private int emergencyContactID;
-    private int memberNumber; // set by WDM
-    private int memberID; // set by dataBase
+    private int memberID;
     private int hoursWorked;
 
     private boolean contactByEmail;
@@ -107,6 +106,14 @@ public class Profile {
 
     //////////////////////////////////////////////////////////
     // set specific fields of info
+
+    /**
+     * setMemberID(id)
+     * @param  id - Member ID
+     */
+    public void setMemberID(int id) {
+        this.memberID = id;
+    }
 
     /**
     * setFirstName(name)
@@ -221,11 +228,7 @@ public class Profile {
     public void setHoursWorked(int value){
         this.hoursWorked = value;
     }
-    /**
-     *
-     * @param value - member id
-     */
-    public void setMemberID(int value) {this.memberID = value; }
+
     /**
      *
      * @param time - Availability matrix 7x2
