@@ -41,11 +41,11 @@ public class LoginViewController extends BasicController {
 
 
     public boolean checkCredentials(String username, String password) {
-            model.login(username, password);
+
 
             // Check to see if a user was returned, if so, credentials were
             // OK, return true.
-            if(model.getUser().getUsername() != null) {
+            if(model.login(username, password)) {
                 this.ChangeToLandingView();
                 return true;
             } else {

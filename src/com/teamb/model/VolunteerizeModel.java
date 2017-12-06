@@ -53,7 +53,7 @@ public class VolunteerizeModel {
      * @param password
      * @return
      */
-    public void login(String username, String password) {
+    public boolean login(String username, String password) {
         ResultSet result = database.select("* FROM users u WHERE u.username = " +
                 wrap(username) + " AND password = " + wrap(password) + ";");
 
@@ -65,7 +65,9 @@ public class VolunteerizeModel {
             profile = getProfile(result.getInt("volunteer_id"));
         } catch(SQLException exception) {
             exception.printStackTrace();
+            return false;
         }
+        return true;
     }
 
     public void addUser(Users user) {
