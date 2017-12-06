@@ -2,12 +2,14 @@ package com.teamb.model;
 
 import org.junit.*;
 
+import static org.junit.Assert.assertEquals;
+
 public class modelTest{
 
 	public modelTest(){}
 
-	public Profile setProfile(){
-		Profile pro = Profile();
+	static public Profile setProfile(){
+		Profile pro = new Profile();
 		Availability avail = new Availability();
 		pro.setAllBaseInformation("bill","bob","johnson","seventh.ave", "234-3433", 
     		"e3e3e3", "num", "jim", "jack", "jill", 1234, "fudge", "foobar.st", 
@@ -16,41 +18,37 @@ public class modelTest{
 		return pro;
 	}
 
-	public void setInvalidStaffUsers(Users u){
+	static public void setInvalidStaffUsers(Users u){
     	u.setUsername("jim");
     	u.setPassword("pass");
     	u.setIsStaff(true);
     	u.setProfileID(12345);
-    	return u;
 	}
-	public void setValidStaffUsers(Users u){
+	static public void setValidStaffUsers(Users u){
     	u.setUsername("staff");
     	u.setPassword("staff");
     	u.setIsStaff(true);
     	u.setProfileID(12345);
-    	return u;
 	}
 
-	public Users setInvalidVolunteerUsers(Users u){
+	static public void setInvalidVolunteerUsers(Users u){
     	u.setUsername("jim");
     	u.setPassword("pass");
     	u.setIsStaff(false);
     	u.setProfileID(12345);
-    	return u;
 	}
-	public void setValidVolunteerUsers(Users u){
+	static public void setValidVolunteerUsers(Users u){
     	u.setUsername("volunteer");
     	u.setPassword("volunteer");
     	u.setIsStaff(false);
     	u.setProfileID(12345);
-    	return u;
 	}
 
 
 
 
 
-    public void profileTest(){
+    static public void profileTest(){
     	System.out.println("starting profile Test\n");
     	Profile pro = new Profile();
     	Availability avail = new Availability();
@@ -108,7 +106,7 @@ public class modelTest{
     	System.out.println("Done profile check\n");
     }
 
-    public void eventTest(){
+	static public void eventTest(){
     	System.out.println("starting event Test.\n");
     	Event ev = new Event();
 
@@ -116,35 +114,35 @@ public class modelTest{
     	assertEquals("it broke!!!!!", 123,ev.getEventID());
     	System.out.println("event id");
     	ev.setEventName("nope");
-    	assertEquals("it broke!!!!!", "nope",pro.getEventName());
+    	assertEquals("it broke!!!!!", "nope",ev.getEventName());
     	System.out.println("event name");
-    	ev.setEventStartTime(200);
-    	assertEquals("it broke!!!!!", 200,pro.getEventStartTime());
+    	ev.setStartTime(200);
+    	assertEquals("it broke!!!!!", 200,ev.getStartTime());
     	System.out.println("event start time");
-    	ev.setEventEndTime(1200);
-    	assertEquals("it broke!!!!!", 1200,pro.getEventEndTime());
+    	ev.setEndTime(1200);
+    	assertEquals("it broke!!!!!", 1200,ev.getEndTime());
     	System.out.println("event end time");
-    	ev.setEventStartDate("time");
-    	assertEquals("it broke!!!!!", "time",pro.getEventStartDate());
+    	ev.setStartDate("time");
+    	assertEquals("it broke!!!!!", "time",ev.getStartDate());
     	System.out.println("event start date");
-    	ev.setEventEndDate("over");
-    	assertEquals("it broke!!!!!", "over",pro.getEventEndDate());
+    	ev.setEndDate("over");
+    	assertEquals("it broke!!!!!", "over",ev.getEndDate());
     	System.out.println("event end date");
-    	ev.setEventLocation("here");
-    	assertEquals("it broke!!!!!", "here",pro.getEventLocation());
+    	ev.setLocation("here");
+    	assertEquals("it broke!!!!!", "here",ev.getLocation());
     	System.out.println("event location");
 
     	System.out.println("done event test.\n");
     }
 
 
-    public void usersTest(){
+	static public void usersTest(){
     	System.out.println("starting users Test.\n");
-    	Users u;
+    	Users u = new Users();
     	u.setUsername("jim");
     	u.setPassword("pass");
     	u.setIsStaff(true);
-    	u.setprofileID(12345);
+    	u.setProfileID(12345);
 
     	assertEquals("it broke!!!!!", "jim",u.getUsername());
     	assertEquals("it broke!!!!!", "pass",u.getPassword());
@@ -154,13 +152,13 @@ public class modelTest{
     	System.out.println("done users Test.\n");
     }
 
-    public void volunteerizeModelTest(){
+	static public void volunteerizeModelTest(){
     	System.out.println("starting volunteerize model Test.\n");
     	 
     	VolunteerizeModel vol = new VolunteerizeModel();
-    	Users user;
-    	Users temp;
-    	setUsers(user);
+    	Users user = new Users();
+    	Users temp = new Users();
+    	setValidVolunteerUsers(user);
     	Profile pro = setProfile();
 
     	vol.setProfile(pro);
@@ -207,7 +205,6 @@ public class modelTest{
         eventTest();
         usersTest();
 
-        return 1;
     }
 
 }

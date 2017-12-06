@@ -273,16 +273,7 @@ public class Profile {
     public int getHoursWorked(){return this.hoursWorked;}
     public Availability getAvailability(){return this.availability;}
     public String getPhotoPath(){return this.photoPath;}
-
-    public String getEmail(){return this.email;}
-    public boolean getContactByEmail(){return this.contactByEmail;}
-    public boolean getContactByPhone() {return this.contactByPhone;}
-    public int getMemberID(){return this.memberID;}
-    public boolean getCriminalRecordCheck(){return this.criminalRecordCheck;}
-    public String getMedicalInformation(){return this.medicalInformation;}
-    public int getHoursWorked(){return this.hoursWorked;}
-    public Availability getAvailability(){return this.availability;}
-    public String getPhotoPath(){return this.photoPath;}
+    public int getMemberNumber(){return this.memberNumber;}
 
 
     //////////////////////////////////////////////
