@@ -33,9 +33,12 @@ public class ManageEventController extends BasicController {
         public void handle(ActionEvent event) {
             for (EventSelection es:view.table.getItems()) {
                 if(es.isActive()){
+                    model.deleteEventid(es.getEventID());
                     System.out.println(es.getEventTitle()+" is deleted.");
                 }
             }
+            events = model.getUpcomingEvents();
+            view.PopulateEventList(events);
         }
     }
 
